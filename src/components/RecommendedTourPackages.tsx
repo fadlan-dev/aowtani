@@ -42,12 +42,12 @@ const RecommendedTourPackages = (props: Props) => {
         <div
           className={`grid ${
             matches ? 'grid-cols-4 grid-rows-2' : 'grid-cols-1 grid-rows-1'
-          } gap-4 h-96 mt-4`}
+          } gap-4 h-96 mt-4 overflow-hidden`}
         >
-          {TOUR.map((item, idx) => (
+          {TOUR.slice(0, matches ? 5 : 1).map((item, idx) => (
             <div
               key={idx}
-              className={`bg-primary-100 grid place-content-center ${
+              className={`h-full bg-primary-100 grid place-content-center ${
                 idx === 0
                   ? matches
                     ? 'col-start-1 col-end-3 row-start-1 row-end-3'
@@ -56,11 +56,10 @@ const RecommendedTourPackages = (props: Props) => {
               } overflow-hidden rounded`}
             >
               <Image
-                className='w-full object-cover'
                 src={item.image}
                 alt={item.title}
-                width={500}
-                height={500}
+                width={idx === 0 ? 616 : 300}
+                height={idx === 0 ? 616 : 300}
               />
             </div>
           ))}

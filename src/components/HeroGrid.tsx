@@ -13,7 +13,7 @@ const HeroGrid = (props: Props) => {
       } gap-1 h-96`}
     >
       {new Array(5)
-        .splice(0, matches ? 5 : 1)
+        .slice(0, matches ? 5 : 1)
         .fill('')
         .map((item, idx) => (
           <div
