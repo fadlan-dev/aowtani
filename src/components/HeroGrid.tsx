@@ -17,6 +17,7 @@ const HeroGrid = (props: Props) => {
         .fill('')
         .map((item, idx) => (
           <div
+            key={idx}
             className={`bg-primary-100 grid place-content-center ${
               idx === 0
                 ? matches

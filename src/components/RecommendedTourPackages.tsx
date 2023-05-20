@@ -1,5 +1,5 @@
 import { useMediaQuery } from '@mantine/hooks';
-import React from 'react';
+import Image from 'next/image';
 
 type Props = {};
 
@@ -45,6 +45,7 @@ const RecommendedTourPackages = (props: Props) => {
         >
           {TOUR.map((item, idx) => (
             <div
+              key={idx}
               className={`bg-primary-100 grid place-content-center ${
                 idx === 0
                   ? matches
@@ -53,10 +54,12 @@ const RecommendedTourPackages = (props: Props) => {
                   : ''
               } overflow-hidden rounded`}
             >
-              <img
+              <Image
                 className='w-full object-cover'
                 src={item.image}
                 alt={item.title}
+                width={500}
+                height={500}
               />
             </div>
           ))}

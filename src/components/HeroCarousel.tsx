@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from '@mantine/carousel';
 import { rem } from '@mantine/core';
+import Image from 'next/image';
 
 type Props = {
   className?: string;
@@ -24,7 +25,13 @@ const data = [
 const Hero = ({ className }: Props) => {
   const slides = data.map((item) => (
     <Carousel.Slide key={item.title} className='h-96'>
-      <img src={item.image} className='w-full object-cover' />
+      <Image
+        src={item.image}
+        alt={item.title}
+        className='w-full object-cover'
+        width={500}
+        height={500}
+      />
     </Carousel.Slide>
   ));
   return (

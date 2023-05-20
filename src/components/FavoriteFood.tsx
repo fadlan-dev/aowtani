@@ -1,5 +1,6 @@
 import { Carousel } from '@mantine/carousel';
-import { Card, Divider, rem, Text, useMantineTheme } from '@mantine/core';
+import { Divider, Text, useMantineTheme } from '@mantine/core';
+import Image from 'next/image';
 import React from 'react';
 
 type Props = {};
@@ -77,10 +78,12 @@ const TravelTrending = (props: Props) => {
             {data.map((item) => (
               <Carousel.Slide key={item.title}>
                 <div className='flex flex-col'>
-                  <img
+                  <Image
                     className='flex-1 w-full aspect-square object-cover rounded overflow-hidden'
                     src={item.image}
                     alt={item.title}
+                    width={500}
+                    height={500}
                   />
                   <div className='flex-auto pb-4 mt-2 text-start'>
                     <Text className='font-semibold line-clamp-1'>
