@@ -45,7 +45,6 @@ const Hero = ({ className }: Props) => {
         slidesToScroll={1}
         withIndicators
         loop
-        dragFree
       >
         {slides}
       </Carousel>
