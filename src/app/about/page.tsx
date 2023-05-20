@@ -29,8 +29,8 @@ const About = (props: Props) => {
           </div>
         </div>
         <div className='flex flex-col md:flex-row gap-4 mt-6'>
-          <div className='flex-[50%] aspect-video bg-primary-100' />
-          <div className='flex-[50%] aspect-video bg-primary-100' />
+          <div className='flex-[50%] aspect-video bg-zinc-100' />
+          <div className='flex-[50%] aspect-video bg-zinc-100' />
         </div>
       </div>
     </div>

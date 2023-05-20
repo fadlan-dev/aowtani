@@ -18,7 +18,7 @@ const HeroGrid = (props: Props) => {
         .map((item, idx) => (
           <div
             key={idx}
-            className={`bg-primary-100 grid place-content-center ${
+            className={`bg-zinc-100 grid place-content-center ${
               idx === 0
                 ? matches
                   ? 'col-start-1 col-end-3 row-start-1 row-end-3'
