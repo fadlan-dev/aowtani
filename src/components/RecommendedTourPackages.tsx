@@ -1,3 +1,4 @@
+'use client';
 import { useMediaQuery } from '@mantine/hooks';
 import Image from 'next/image';
 

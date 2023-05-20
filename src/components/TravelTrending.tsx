@@ -1,5 +1,6 @@
+'use client';
 import { Carousel } from '@mantine/carousel';
-import { Card, Divider, rem, Text, useMantineTheme } from '@mantine/core';
+import { Divider, Text, useMantineTheme } from '@mantine/core';
 import Image from 'next/image';
 
 type Props = {};

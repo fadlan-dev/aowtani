@@ -1,10 +1,11 @@
-'use client';
-import { Button } from '@mantine/core';
-import Image from 'next/image';
 import HeroCarousel from '../components/HeroCarousel';
 import TravelTrending from '@/components/TravelTrending';
 import FavoriteFood from '@/components/FavoriteFood';
 import RecommendedTourPackages from '@/components/RecommendedTourPackages';
+
+export const metadata = {
+  title: 'Pattani smart tourism',
+};
 
 export default function Home() {
   return (

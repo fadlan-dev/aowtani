@@ -1,3 +1,4 @@
+'use client';
 import { Carousel } from '@mantine/carousel';
 import { Divider, Text, useMantineTheme } from '@mantine/core';
 import Image from 'next/image';
