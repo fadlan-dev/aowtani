@@ -166,7 +166,15 @@ export function HeaderMegaMenu() {
         onClose={closeDrawer}
         size='100%'
         padding='md'
-        title='Navigation'
+        title={
+          <Link
+            onClick={closeDrawer}
+            href='/'
+            className='no-underline text-black'
+          >
+            Logo
+          </Link>
+        }
         className='block sm:hidden'
         zIndex={1000000}
       >
@@ -177,7 +185,12 @@ export function HeaderMegaMenu() {
           />
 
           {MENUS.map((menu: IMenu) => (
-            <Link href={menu.path} key={menu.key} className={linkClass}>
+            <Link
+              href={menu.path}
+              key={menu.key}
+              className={linkClass}
+              onFocus={closeDrawer}
+            >
               {menu.title}
             </Link>
           ))}
