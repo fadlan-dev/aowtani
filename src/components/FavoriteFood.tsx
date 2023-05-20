@@ -30,19 +30,19 @@ const TravelTrending = (props: Props) => {
     {
       image:
         'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      title: 'พื้นบ้าน',
+      title: 'Title 5',
       count: 5,
     },
     {
       image:
         'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=820&q=80',
-      title: 'อาหรับ',
+      title: 'Title 6',
       count: 5,
     },
     {
       image:
         'https://images.unsplash.com/photo-1529042410759-befb1204b468?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80',
-      title: 'ทะเล',
+      title: 'Title 7',
       count: 5,
     },
   ];
