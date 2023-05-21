@@ -38,7 +38,7 @@ const RegisterForm = (props: Props) => {
           fontWeight: 900,
         })}
       >
-        Welcome back!
+        Register
       </Title>
       <Text color='dimmed' size='sm' align='center' mt={5}>
         Already have an account?{' '}
