@@ -82,7 +82,11 @@ const LoginForm = (props: Props) => {
           />
           <Group position='apart' mt='lg'>
             <Checkbox label='Remember me' />
-            <Anchor component='button' size='sm'>
+            <Anchor
+              component='button'
+              size='sm'
+              onClick={() => router.push('/forgotpassword')}
+            >
               Forgot password?
             </Anchor>
           </Group>
