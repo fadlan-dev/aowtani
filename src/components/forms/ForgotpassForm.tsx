@@ -42,7 +42,7 @@ const ForgotpasswordForm = (props: Props) => {
         Forgot Password
       </Title>
       <Text color='dimmed' size='sm' align='center' mt={5}>
-        Enter your email and we'll send you a link to reset your password
+        Enter your email and we&apos;ll send you a link to reset your password
       </Text>
 
       <Paper withBorder shadow='md' p={30} mt={30} radius='md'>
