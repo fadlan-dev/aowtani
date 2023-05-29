@@ -4,6 +4,7 @@ import { Anuphan } from 'next/font/google';
 import Header from '../components/header';
 import Footer from '../components/footer';
 import { MantineProvider } from '@mantine/core';
+import CookieConsent from '@/components/CookieConsent';
 
 const inter = Anuphan({ subsets: ['thai'] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={inter.className}>
         <RootStyleRegistry>
+          <CookieConsent />
           <Header />
           <main style={{ minHeight: 'calc(100vh - 143px)' }}>{children}</main>
           <Footer />
