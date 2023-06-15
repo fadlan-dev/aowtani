@@ -116,7 +116,7 @@ const MENUS: IMenu[] = [
 const linkClass =
   'flex items-center h-11 sm:h-full px-4 text-black font-medium no-underline hover:bg-primary-100';
 
-export function Header() {
+const Header = () => {
   const pathname = usePathname();
   console.log('pathname', pathname);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -205,6 +205,6 @@ export function Header() {
       </Drawer>
     </Box>
   );
-}
+};
 
 export default Header;
