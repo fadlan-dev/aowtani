@@ -1,12 +1,12 @@
 import RootStyleRegistry from './emotion';
 import './globals.css';
+import './base.css';
 import { Anuphan } from 'next/font/google';
-import Header from '../components/header';
-import Footer from '../components/footer';
-import { MantineProvider } from '@mantine/core';
-import CookieConsent from '@/components/CookieConsent';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Providers from '@/components/Providers';
 
-const inter = Anuphan({ subsets: ['thai'] });
+const anuphan = Anuphan({ subsets: ['thai'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -20,11 +20,19 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body className={anuphan.className}>
         <RootStyleRegistry>
-          <CookieConsent />
           <Header />
-          <main style={{ minHeight: 'calc(100vh - 143px)' }}>{children}</main>
+          <Providers>
+            <main
+              style={{
+                minHeight: 'calc(100vh - 143px)',
+                backgroundColor: 'rgb(248, 249, 250)',
+              }}
+            >
+              {children}
+            </main>
+          </Providers>
           <Footer />
         </RootStyleRegistry>
       </body>

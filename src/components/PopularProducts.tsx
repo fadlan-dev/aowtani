@@ -16,13 +16,13 @@ type Props = {
   className?: string;
 };
 
-const RecommendedTourPackages = ({ className }: Props) => {
+const PopularProducts = ({ className }: Props) => {
   const router = useRouter();
   return (
     <div className={cn(className)}>
       <div className='text-center'>
-        <Title>แพ็กเกจทัวร์แนะนำ</Title>
-        <Text>ตอบโจทย์ทุกไลฟ์สไตล์</Text>
+        <Title>สินค้ายอดนิยม</Title>
+        <Text>ช้อปปิ้งได้ทุกเวลา</Text>
       </div>
       <div
         className={'gap-4 px-4 mt-4'}
@@ -42,26 +42,29 @@ const RecommendedTourPackages = ({ className }: Props) => {
               </AspectRatio>
             </Card.Section>
             <Text size='lg' weight={500} mt={8}>
-              แหลมตาชี
+              กือโป๊ะบีฟีช - Befish
             </Text>
             <Group>
-              <Badge>Badge</Badge>
+              <Badge>ชุมชนบ้านบูดี</Badge>
             </Group>
             <Text lineClamp={3}>
               คงจะมีไม่กี่คนที่เคยไปเที่ยว ปัตตานี หนึ่งในจังหวัดของ ภาคใต้
               วันนี้เราเลยจะพาทุกคนไปดูหนึ่งที่เที่ยวสวยๆ อันซีนของจังหวัดนี้กัน
             </Text>
             <Text weight={600} align='end'>
-              {numberFormat(1900)} ฿/ท่าน
+              {numberFormat(35)} ฿
             </Text>
             <Button variant='light' fullWidth mt='md' radius='md'>
               ดูรายละเอียด
+            </Button>
+            <Button variant='filled' fullWidth mt='md' radius='md'>
+              ซื้อ
             </Button>
           </Card>
         ))}
       </div>
       <div className='text-center mt-4'>
-        <Button variant='subtle' onClick={() => router.push('destination')}>
+        <Button variant='subtle' onClick={() => router.push('souvenir')}>
           ดูเพิ่มเติม
         </Button>
       </div>
@@ -69,4 +72,4 @@ const RecommendedTourPackages = ({ className }: Props) => {
   );
 };
 
-export default RecommendedTourPackages;
+export default PopularProducts;

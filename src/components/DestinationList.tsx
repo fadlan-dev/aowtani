@@ -1,28 +1,57 @@
 'use client';
-import { cn, numberFormat } from '@/libs/utils';
+import { cn } from '@/libs/utils';
 import {
-  AspectRatio,
-  Badge,
+  Image,
   Button,
   Card,
-  Group,
   Text,
-  Image,
+  AspectRatio,
   Title,
+  TextInput,
+  ActionIcon,
+  useMantineTheme,
 } from '@mantine/core';
+import { IconSearch } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 
 type Props = {
   className?: string;
+  title: string;
 };
 
-const RecommendedTourPackages = ({ className }: Props) => {
+type Destination = {
+  completed: boolean;
+  id: number;
+  title: string;
+  userId: number;
+};
+
+const DestinationList = ({ className, title = 'สถานที่ท่องเที่ยว' }: Props) => {
   const router = useRouter();
+  const theme = useMantineTheme();
   return (
     <div className={cn(className)}>
-      <div className='text-center'>
-        <Title>แพ็กเกจทัวร์แนะนำ</Title>
-        <Text>ตอบโจทย์ทุกไลฟ์สไตล์</Text>
+      <div className='text-center '>
+        <Title weight='bold'>{title}</Title>
+        <Text>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</Text>
+        <TextInput
+          className='max-w-md m-auto mt-1'
+          icon={<IconSearch size='1.1rem' stroke={1.5} />}
+          radius='xl'
+          size='md'
+          rightSection={
+            <ActionIcon
+              size={32}
+              radius='xl'
+              color={theme.primaryColor}
+              variant='filled'
+            >
+              <IconSearch size='1.1rem' stroke={1.5} />
+            </ActionIcon>
+          }
+          placeholder='ค้นหาสถานที่ชอบ'
+          rightSectionWidth={42}
+        />
       </div>
       <div
         className={'gap-4 px-4 mt-4'}
@@ -31,8 +60,12 @@ const RecommendedTourPackages = ({ className }: Props) => {
           gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
         }}
       >
-        {new Array(3).fill('').map((item: any, idx: number) => (
-          <Card>
+        {new Array(8).fill('').map((data: Destination, idx: number) => (
+          <Card
+            padding='md'
+            withBorder
+            onClick={() => router.push(`destination/${idx + 1}`)}
+          >
             <Card.Section>
               <AspectRatio ratio={16 / 9}>
                 <Image
@@ -44,15 +77,12 @@ const RecommendedTourPackages = ({ className }: Props) => {
             <Text size='lg' weight={500} mt={8}>
               แหลมตาชี
             </Text>
-            <Group>
-              <Badge>Badge</Badge>
-            </Group>
+            <Text size='xs' className='text-primary'>
+              ปน.2062 ตำบล แหลมโพธิ์ อำเภอ ยะหริ่ง ปัตตานี 94150
+            </Text>
             <Text lineClamp={3}>
               คงจะมีไม่กี่คนที่เคยไปเที่ยว ปัตตานี หนึ่งในจังหวัดของ ภาคใต้
               วันนี้เราเลยจะพาทุกคนไปดูหนึ่งที่เที่ยวสวยๆ อันซีนของจังหวัดนี้กัน
-            </Text>
-            <Text weight={600} align='end'>
-              {numberFormat(1900)} ฿/ท่าน
             </Text>
             <Button variant='light' fullWidth mt='md' radius='md'>
               ดูรายละเอียด
@@ -69,4 +99,4 @@ const RecommendedTourPackages = ({ className }: Props) => {
   );
 };
 
-export default RecommendedTourPackages;
+export default DestinationList;

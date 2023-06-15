@@ -1,38 +1,31 @@
 'use client';
-import { cn, numberFormat } from '@/libs/utils';
-import {
-  AspectRatio,
-  Badge,
-  Button,
-  Card,
-  Group,
-  Text,
-  Image,
-  Title,
-} from '@mantine/core';
-import { useRouter } from 'next/navigation';
+import { cn } from '@/libs/utils';
+import { AspectRatio, Card, Text, Image, Button } from '@mantine/core';
 
 type Props = {
   className?: string;
 };
 
-const RecommendedTourPackages = ({ className }: Props) => {
-  const router = useRouter();
+const NearbyAttractions = ({ className }: Props) => {
   return (
     <div className={cn(className)}>
-      <div className='text-center'>
-        <Title>แพ็กเกจทัวร์แนะนำ</Title>
-        <Text>ตอบโจทย์ทุกไลฟ์สไตล์</Text>
-      </div>
-      <div
-        className={'gap-4 px-4 mt-4'}
+      <Text size='lg' weight={600}>
+        สถานที่ท่องเที่ยวใกล้เคียง
+      </Text>
+      <ol
+        className='mt-2'
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
+          gap: 8,
+          gridTemplateColumns: 'repeat(auto-fill,minmax(280px, 1fr))',
         }}
       >
-        {new Array(3).fill('').map((item: any, idx: number) => (
-          <Card>
+        {new Array(3).fill('').map((dest: any) => (
+          <Card
+            padding='md'
+            withBorder
+            // onClick={() => router.push(`destination/${idx + 1}`)}
+          >
             <Card.Section>
               <AspectRatio ratio={16 / 9}>
                 <Image
@@ -44,29 +37,21 @@ const RecommendedTourPackages = ({ className }: Props) => {
             <Text size='lg' weight={500} mt={8}>
               แหลมตาชี
             </Text>
-            <Group>
-              <Badge>Badge</Badge>
-            </Group>
+            <Text size='xs' className='text-primary'>
+              ปน.2062 ตำบล แหลมโพธิ์ อำเภอ ยะหริ่ง ปัตตานี 94150
+            </Text>
             <Text lineClamp={3}>
               คงจะมีไม่กี่คนที่เคยไปเที่ยว ปัตตานี หนึ่งในจังหวัดของ ภาคใต้
               วันนี้เราเลยจะพาทุกคนไปดูหนึ่งที่เที่ยวสวยๆ อันซีนของจังหวัดนี้กัน
-            </Text>
-            <Text weight={600} align='end'>
-              {numberFormat(1900)} ฿/ท่าน
             </Text>
             <Button variant='light' fullWidth mt='md' radius='md'>
               ดูรายละเอียด
             </Button>
           </Card>
         ))}
-      </div>
-      <div className='text-center mt-4'>
-        <Button variant='subtle' onClick={() => router.push('destination')}>
-          ดูเพิ่มเติม
-        </Button>
-      </div>
+      </ol>
     </div>
   );
 };
 
-export default RecommendedTourPackages;
+export default NearbyAttractions;

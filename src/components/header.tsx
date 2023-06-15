@@ -88,29 +88,29 @@ const useStyles = createStyles((theme) => ({
 
 const MENUS: IMenu[] = [
   {
-    title: 'ท่องเที่ยว',
-    key: 'travel',
-    path: '/travel',
+    title: 'สถานที่ท่องเที่ยว',
+    key: 'destination',
+    path: '/destination',
   },
   {
-    title: 'อาหาร',
-    key: 'food',
-    path: '/food',
+    title: 'ของฝาก',
+    key: 'souvenir',
+    path: '/souvenir',
   },
   {
-    title: 'ช้อปปิ้ง',
-    key: 'shopping',
-    path: '/shopping',
+    title: 'ชุมชน',
+    key: 'community',
+    path: '/community',
   },
   {
-    title: 'ประชาสัมพันธ์',
-    key: 'news',
-    path: '/news',
+    title: 'ผู้ประกอบการ',
+    key: 'entrepreneurs',
+    path: '/entrepreneurs',
   },
   {
-    title: 'เกี่ยวกับเรา',
-    key: 'about',
-    path: '/about',
+    title: 'ไกด์ท้องถิ่น',
+    key: 'local guides',
+    path: '/local-guides',
   },
 ];
 
