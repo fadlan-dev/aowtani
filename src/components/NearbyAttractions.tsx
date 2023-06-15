@@ -20,8 +20,9 @@ const NearbyAttractions = ({ className }: Props) => {
           gridTemplateColumns: 'repeat(auto-fill,minmax(280px, 1fr))',
         }}
       >
-        {new Array(3).fill('').map((dest: any) => (
+        {new Array(3).fill('').map((dest: any, idx: number) => (
           <Card
+            key={idx}
             padding='md'
             withBorder
             // onClick={() => router.push(`destination/${idx + 1}`)}

@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 
 type Props = {
   className?: string;
-  title: string;
+  title?: string;
 };
 
 type Destination = {
@@ -62,6 +62,7 @@ const DestinationList = ({ className, title = 'สถานที่ท่อง
       >
         {new Array(8).fill('').map((data: Destination, idx: number) => (
           <Card
+            key={idx}
             padding='md'
             withBorder
             onClick={() => router.push(`destination/${idx + 1}`)}

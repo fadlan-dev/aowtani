@@ -32,7 +32,7 @@ const PopularProducts = ({ className }: Props) => {
         }}
       >
         {new Array(3).fill('').map((item: any, idx: number) => (
-          <Card>
+          <Card key={idx}>
             <Card.Section>
               <AspectRatio ratio={16 / 9}>
                 <Image
