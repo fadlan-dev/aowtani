@@ -6,6 +6,29 @@ import {
   IconBrandInstagram,
 } from '@tabler/icons-react';
 
+const Index = () => {
+  const { classes } = useStyles();
+
+  return (
+    <div className={classes.footer}>
+      <Container className={classes.inner}>
+        Logo
+        <Group spacing={0} className={classes.links} position='right' noWrap>
+          <ActionIcon size='lg'>
+            <IconBrandTwitter size='1.05rem' stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size='lg'>
+            <IconBrandYoutube size='1.05rem' stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon size='lg'>
+            <IconBrandInstagram size='1.05rem' stroke={1.5} />
+          </ActionIcon>
+        </Group>
+      </Container>
+    </div>
+  );
+};
+
 const useStyles = createStyles((theme) => ({
   footer: {
     backgroundColor: '#fff',
@@ -33,28 +56,4 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
-const Footer = () => {
-  const { classes } = useStyles();
-
-  return (
-    <div className={classes.footer}>
-      <Container className={classes.inner}>
-        Logo
-        <Group spacing={0} className={classes.links} position='right' noWrap>
-          <ActionIcon size='lg'>
-            <IconBrandTwitter size='1.05rem' stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size='lg'>
-            <IconBrandYoutube size='1.05rem' stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size='lg'>
-            <IconBrandInstagram size='1.05rem' stroke={1.5} />
-          </ActionIcon>
-        </Group>
-      </Container>
-    </div>
-  );
-};
-
-export default Footer;
+export default Index;
