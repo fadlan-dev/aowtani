@@ -57,7 +57,7 @@ const Index = () => {
   return (
     <Box>
       <Header height={60} px='md' fixed>
-        {/* <Group position='apart' className='h-full'>
+        <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
             <div>Logo</div>
           </Link>
@@ -85,7 +85,7 @@ const Index = () => {
             onClick={toggleDrawer}
             className='block sm:hidden'
           />
-        </Group> */}
+        </Group>
       </Header>
       <Drawer
         opened={drawerOpened}

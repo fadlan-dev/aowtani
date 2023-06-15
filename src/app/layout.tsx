@@ -3,7 +3,7 @@ import './globals.css';
 import './base.css';
 import { Anuphan } from 'next/font/google';
 import Header from '../components/Header';
-// import Footer from '../components/Footer';
+import Footer from '../components/Footer';
 import Providers from '@/components/Providers';
 
 const anuphan = Anuphan({ subsets: ['thai'] });
@@ -33,7 +33,7 @@ export default function RootLayout({
               {children}
             </main>
           </Providers>
-          {/* <Footer /> */}
+          <Footer />
         </RootStyleRegistry>
       </body>
     </html>
