@@ -8,7 +8,6 @@ import {
 
 const useStyles = createStyles((theme) => ({
   footer: {
-    // marginTop: rem(120),
     backgroundColor: '#fff',
     borderTop: `${rem(1)} solid ${
       theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
@@ -35,14 +34,11 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function Footer() {
+const Footer = () => {
   const { classes } = useStyles();
 
   return (
-    <div
-      className={classes.footer}
-      // style={{ backgroundColor: 'rgb(248, 249, 250)' }}
-    >
+    <div className={classes.footer}>
       <Container className={classes.inner}>
         Logo
         <Group spacing={0} className={classes.links} position='right' noWrap>
@@ -59,6 +55,6 @@ export function Footer() {
       </Container>
     </div>
   );
-}
+};
 
 export default Footer;

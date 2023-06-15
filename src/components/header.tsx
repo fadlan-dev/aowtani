@@ -2,7 +2,7 @@
 import { IMenu } from '@/types';
 import {
   createStyles,
-  Header,
+  Header as MHeader,
   Group,
   Button,
   Divider,
@@ -12,7 +12,6 @@ import {
   ScrollArea,
   rem,
 } from '@mantine/core';
-
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -117,7 +116,7 @@ const MENUS: IMenu[] = [
 const linkClass =
   'flex items-center h-11 sm:h-full px-4 text-black font-medium no-underline hover:bg-primary-100';
 
-export function HeaderMegaMenu() {
+export function Header() {
   const pathname = usePathname();
   console.log('pathname', pathname);
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -129,7 +128,7 @@ export function HeaderMegaMenu() {
 
   return (
     <Box>
-      <Header height={60} px='md' fixed>
+      <MHeader height={60} px='md' fixed>
         <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
             <div>Logo</div>
@@ -159,8 +158,7 @@ export function HeaderMegaMenu() {
             className='block sm:hidden'
           />
         </Group>
-      </Header>
-
+      </MHeader>
       <Drawer
         opened={drawerOpened}
         onClose={closeDrawer}
@@ -209,4 +207,4 @@ export function HeaderMegaMenu() {
   );
 }
 
-export default HeaderMegaMenu;
+export default Header;
