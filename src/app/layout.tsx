@@ -3,7 +3,7 @@ import './globals.css';
 import './base.css';
 import { Anuphan } from 'next/font/google';
 import Header from './Header';
-import Footer from '../components/Footer';
+import Footer from './Footer';
 import Providers from '@/components/Providers';
 
 const anuphan = Anuphan({ subsets: ['thai'] });
