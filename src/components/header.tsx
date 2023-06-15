@@ -1,7 +1,6 @@
 'use client';
 import { IMenu } from '@/types';
 import {
-  createStyles,
   Header,
   Group,
   Button,
@@ -52,14 +51,13 @@ const Index = () => {
   const pathname = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
-
   const router = useRouter();
   const theme = useMantineTheme();
 
   return (
     <Box>
       <Header height={60} px='md' fixed>
-        <Group position='apart' className='h-full'>
+        {/* <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
             <div>Logo</div>
           </Link>
@@ -87,7 +85,7 @@ const Index = () => {
             onClick={toggleDrawer}
             className='block sm:hidden'
           />
-        </Group>
+        </Group> */}
       </Header>
       <Drawer
         opened={drawerOpened}
