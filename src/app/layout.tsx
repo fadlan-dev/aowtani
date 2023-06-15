@@ -2,7 +2,7 @@ import RootStyleRegistry from './emotion';
 import './globals.css';
 import './base.css';
 import { Anuphan } from 'next/font/google';
-// import Header from '../components/Header';
+import Header from '../components/Header';
 // import Footer from '../components/Footer';
 import Providers from '@/components/Providers';
 
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={anuphan.className}>
         <RootStyleRegistry>
-          {/* <Header /> */}
+          <Header />
           <Providers>
             <main
               style={{
