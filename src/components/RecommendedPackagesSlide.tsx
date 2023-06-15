@@ -14,7 +14,7 @@ import {
 
 type Props = {};
 
-const index = (props: Props) => {
+const Index = (props: Props) => {
   const theme = useMantineTheme();
   return (
     <div className='pb-6'>
@@ -74,4 +74,4 @@ const index = (props: Props) => {
   );
 };
 
-export default index;
+export default Index;
