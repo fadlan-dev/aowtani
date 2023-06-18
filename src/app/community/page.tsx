@@ -1,14 +1,15 @@
+import CommunityList from '@/components/CommunityList';
 import React from 'react';
 
 type Props = {};
 export const metadata = {
-  title: 'Shopping',
+  title: 'ชุมชน',
 };
 
 const Page = (props: Props) => {
   return (
-    <div className=''>
-      <h1 className='text-center mt-24'>ชุมชน</h1>
+    <div className='mt-24 mb-24'>
+      <CommunityList title='ชุมชน' subTitle='สัมผัสวิถีชีวิต' showSearch />
     </div>
   );
 };

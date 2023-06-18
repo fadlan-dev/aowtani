@@ -9,7 +9,7 @@ type Props = {
 
 const page = ({ params }: Props) => {
   return (
-    <div className='mt-24 mb-24'>
+    <div className='mt-[60px] mb-24'>
       <div className='container'>
         <div className='h-96'>
           <img
@@ -20,7 +20,7 @@ const page = ({ params }: Props) => {
           />
         </div>
         <div className='flex gap-4 mt-4'>
-          <div className='flex-auto'>
+          <div className='flex-1'>
             <h1>แหลมชาตี</h1>
             <p className='text-primary'>
               ปน.2062 ตำบล แหลมโพธิ์ อำเภอ ยะหริ่ง ปัตตานี 94150

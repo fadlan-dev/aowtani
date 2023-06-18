@@ -24,7 +24,6 @@ const NearbyAttractions = ({ className }: Props) => {
           <Card
             key={idx}
             padding='md'
-            withBorder
             // onClick={() => router.push(`destination/${idx + 1}`)}
           >
             <Card.Section>

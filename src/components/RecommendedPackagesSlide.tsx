@@ -30,10 +30,13 @@ const Index = (props: Props) => {
         align='start'
         styles={{
           indicator: {
+            width: 10,
             position: 'relative',
             bottom: -28,
             '&[data-active]': {
               backgroundColor: theme.primaryColor,
+              background: theme.primaryColor,
+              color: theme.primaryColor,
             },
           },
         }}

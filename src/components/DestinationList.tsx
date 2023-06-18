@@ -10,11 +10,14 @@ import {
   TextInput,
   ActionIcon,
   useMantineTheme,
+  SegmentedControl,
+  Pagination,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 
 type Props = {
+  showSearch?: boolean;
   className?: string;
   title?: string;
 };
@@ -26,31 +29,48 @@ type Destination = {
   userId: number;
 };
 
-const DestinationList = ({ className, title = 'สถานที่ท่องเที่ยว' }: Props) => {
+const DestinationList = ({
+  className,
+  showSearch,
+  title = 'สถานที่ท่องเที่ยว',
+}: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
   return (
     <div className={cn(className)}>
       <div className='text-center '>
         <Title weight='bold'>{title}</Title>
-        <Text>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</Text>
-        <TextInput
-          className='max-w-md m-auto mt-1'
-          icon={<IconSearch size='1.1rem' stroke={1.5} />}
-          radius='xl'
-          size='md'
-          rightSection={
-            <ActionIcon
-              size={32}
-              radius='xl'
-              color={theme.primaryColor}
-              variant='filled'
-            >
-              <IconSearch size='1.1rem' stroke={1.5} />
-            </ActionIcon>
-          }
-          placeholder='ค้นหาสถานที่ชอบ'
-          rightSectionWidth={42}
+        <Text className='mt-2'>
+          เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ
+        </Text>
+        {showSearch && (
+          <TextInput
+            className='max-w-md m-auto mt-4'
+            icon={<IconSearch size='1.1rem' stroke={1.5} />}
+            radius='xl'
+            size='md'
+            rightSection={
+              <ActionIcon
+                size={32}
+                radius='xl'
+                color={theme.primaryColor}
+                variant='filled'
+              >
+                <IconSearch size='1.1rem' stroke={1.5} />
+              </ActionIcon>
+            }
+            placeholder='ค้นหาสถานที่ชอบ'
+            rightSectionWidth={42}
+          />
+        )}
+      </div>
+      <div className='p-4 text-end'>
+        <SegmentedControl
+          data={[
+            { label: 'ทั้งหมด', value: 'all' },
+            { label: 'สถานที่', value: 'location' },
+            { label: 'ประเภท', value: 'type' },
+          ]}
         />
       </div>
       <div
@@ -64,8 +84,8 @@ const DestinationList = ({ className, title = 'สถานที่ท่อง
           <Card
             key={idx}
             padding='md'
-            withBorder
             onClick={() => router.push(`destination/${idx + 1}`)}
+            className='cursor-pointer'
           >
             <Card.Section>
               <AspectRatio ratio={16 / 9}>
@@ -91,10 +111,8 @@ const DestinationList = ({ className, title = 'สถานที่ท่อง
           </Card>
         ))}
       </div>
-      <div className='text-center mt-4'>
-        <Button variant='subtle' onClick={() => router.push('destination')}>
-          ดูเพิ่มเติม
-        </Button>
+      <div className='px-4 mt-4 text-end'>
+        <Pagination total={10} className='w-fit m-auto' />
       </div>
     </div>
   );
