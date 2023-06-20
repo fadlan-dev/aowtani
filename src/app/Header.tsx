@@ -45,7 +45,7 @@ const MENUS: IMenu[] = [
 ];
 
 const linkClass =
-  'flex items-center h-11 sm:h-full px-4 text-black font-medium no-underline hover:bg-primary-100';
+  'flex items-center h-11 sm:h-full px-2 text-black font-medium no-underline hover:bg-primary-100';
 
 const Index = () => {
   const pathname = usePathname();
@@ -62,7 +62,7 @@ const Index = () => {
             <div>Logo</div>
           </Link>
 
-          <Group className='h-full hidden sm:flex gap-0'>
+          <Group className='h-full hidden sm:flex gap-px'>
             {MENUS.map((menu: IMenu) => (
               <Link
                 href={menu.path}
@@ -126,8 +126,7 @@ const Index = () => {
           />
 
           <Group position='center' grow pb='xl' px='md'>
-            <Button variant='default'>Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant='filled'>Log in</Button>
           </Group>
         </ScrollArea>
       </Drawer>

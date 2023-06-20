@@ -9,7 +9,7 @@ type Props = {
 
 const page = ({ params }: Props) => {
   return (
-    <div className='mt-[60px] mb-24'>
+    <div className='mt-20 mb-24'>
       <div className='container'>
         <div className='h-96'>
           <img

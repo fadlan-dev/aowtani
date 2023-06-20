@@ -1,5 +1,26 @@
 import React from 'react';
-import PackageItem from './PackageItem';
+import {
+  Card,
+  Text,
+  Title,
+  TextInput,
+  ActionIcon,
+  useMantineTheme,
+  SegmentedControl,
+  Pagination,
+  Group,
+  Avatar,
+  Flex,
+} from '@mantine/core';
+import { useRouter } from 'next/navigation';
+import {
+  IconBrandFacebook,
+  IconBriefcase,
+  IconDiscountCheckFilled,
+  IconMapPin,
+  IconPhone,
+} from '@tabler/icons-react';
+import PackageCard from './PackageCard';
 
 type Props = {};
 
@@ -31,20 +52,19 @@ const PACKAGES = [
 ];
 
 const PackageList = (props: Props) => {
+  const router = useRouter();
   return (
-    <ul className='list-none p-0 m-0 flex flex-col gap-4'>
-      {PACKAGES.map((item) => (
-        <PackageItem
-          key={item.id}
-          id={item.id}
-          guide={item.guide}
-          name={item.name}
-          status={item.status}
-          price={item.price}
-          total={item.total}
-        />
+    <div
+      className={'gap-4 mt-4'}
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
+      }}
+    >
+      {new Array(8).fill('').map((data: any, idx: number) => (
+        <PackageCard key={idx} />
       ))}
-    </ul>
+    </div>
   );
 };
 

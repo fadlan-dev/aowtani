@@ -9,7 +9,7 @@ export const metadata = {
 const page = (props: Props) => {
   return (
     <div className='mt-24'>
-      <DestinationList showSearch className='mt-6 mb-6' />
+      <DestinationList showSearch showPagination className='mt-6 mb-6' />
     </div>
   );
 };

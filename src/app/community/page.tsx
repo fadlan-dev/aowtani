@@ -8,7 +8,7 @@ export const metadata = {
 
 const Page = (props: Props) => {
   return (
-    <div className='mt-24 mb-24'>
+    <div className='mt-20 mb-24'>
       <CommunityList title='ชุมชน' subTitle='สัมผัสวิถีชีวิต' showSearch />
     </div>
   );

@@ -9,14 +9,21 @@ import {
   Text,
   Image,
   Title,
+  Pagination,
 } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 
 type Props = {
+  showPagination?: boolean;
+  showMore?: boolean;
   className?: string;
 };
 
-const RecommendedTourPackages = ({ className }: Props) => {
+const RecommendedTourPackages = ({
+  className,
+  showPagination,
+  showMore,
+}: Props) => {
   const router = useRouter();
   return (
     <div className={cn(className)}>
@@ -60,11 +67,17 @@ const RecommendedTourPackages = ({ className }: Props) => {
           </Card>
         ))}
       </div>
-      <div className='text-center mt-4'>
+      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
+        {showPagination && (
+          <Pagination total={10} size='sm' className='w-fit m-auto' />
+        )}
+        {showMore && <Button variant='subtle'>ดูเพิ่มเติม</Button>}
+      </div>
+      {/* <div className='text-center mt-4'>
         <Button variant='subtle' onClick={() => router.push('destination')}>
           ดูเพิ่มเติม
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

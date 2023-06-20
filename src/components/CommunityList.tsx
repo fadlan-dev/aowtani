@@ -105,7 +105,7 @@ const CommunityList = ({ className, title, subTitle, showSearch }: Props) => {
         })}
       </div>
       <div className='px-4 mt-4 text-end'>
-        <Pagination total={10} className='w-fit m-auto' />
+        <Pagination total={10} size='sm' className='w-fit m-auto' />
       </div>
     </div>
   );

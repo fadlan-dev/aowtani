@@ -12,6 +12,7 @@ import {
   Group,
   Avatar,
   Flex,
+  Button,
 } from '@mantine/core';
 import {
   IconBrandFacebook,
@@ -25,9 +26,11 @@ import { useRouter } from 'next/navigation';
 
 type Props = {
   showSearch?: boolean;
+  showPagination?: boolean;
+  showMore?: boolean;
   className?: string;
   title?: string;
-  subTitle: string;
+  subTitle?: string;
 };
 
 type Destination = {
@@ -37,16 +40,21 @@ type Destination = {
   userId: number;
 };
 
-const SouvenirList = ({ className, showSearch, title }: Props) => {
+const EntrepreneursList = ({
+  className,
+  showSearch,
+  showPagination,
+  showMore,
+  title,
+  subTitle,
+}: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
   return (
     <div className={cn(className)}>
       <div className='text-center '>
         <Title weight='bold'>{title}</Title>
-        <Text className='mt-2'>
-          เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ
-        </Text>
+        {subTitle && <Text className='mt-2'>{subTitle}</Text>}
         {showSearch && (
           <TextInput
             className='max-w-md m-auto mt-4'
@@ -63,7 +71,7 @@ const SouvenirList = ({ className, showSearch, title }: Props) => {
                 <IconSearch size='1.1rem' stroke={1.5} />
               </ActionIcon>
             }
-            placeholder='ค้นหาสถานทที่ต้องการ'
+            placeholder='ค้นหาสถานที่ต้องการ'
             rightSectionWidth={42}
           />
         )}
@@ -72,8 +80,10 @@ const SouvenirList = ({ className, showSearch, title }: Props) => {
         <SegmentedControl
           data={[
             { label: 'ทั้งหมด', value: 'all' },
-            { label: 'สถานที่', value: 'location' },
-            { label: 'ประเภท', value: 'type' },
+            { label: 'กิจกรรมทัวร์', value: 'activity' },
+            { label: 'ที่พัก', value: 'resort' },
+            { label: 'ร้านอาหาร', value: 'restaurant' },
+            { label: 'ร้านค้า', value: 'shop' },
           ]}
         />
       </div>
@@ -84,11 +94,11 @@ const SouvenirList = ({ className, showSearch, title }: Props) => {
           gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
         }}
       >
-        {new Array(8).fill('').map((data: Destination, idx: number) => (
+        {new Array(8).fill('').map((data: any, idx: number) => (
           <Card
             key={idx}
             padding='md'
-            onClick={() => router.push(`destination/${idx + 1}`)}
+            onClick={() => router.push(`entrepreneurs/${idx + 1}`)}
             className='cursor-pointer'
           >
             <Group position='apart'>
@@ -138,11 +148,21 @@ const SouvenirList = ({ className, showSearch, title }: Props) => {
           </Card>
         ))}
       </div>
-      <div className='px-4 mt-4 text-end'>
-        <Pagination total={10} className='w-fit m-auto' />
+      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
+        {showPagination && (
+          <Pagination total={10} size='sm' className='w-fit m-auto' />
+        )}
+        {showMore && (
+          <Button
+            variant='subtle'
+            onClick={() => router.push('/entrepreneurs')}
+          >
+            ดูเพิ่มเติม
+          </Button>
+        )}
       </div>
     </div>
   );
 };
 
-export default SouvenirList;
+export default EntrepreneursList;

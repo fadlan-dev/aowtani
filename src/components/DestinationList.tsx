@@ -18,6 +18,8 @@ import { useRouter } from 'next/navigation';
 
 type Props = {
   showSearch?: boolean;
+  showPagination?: boolean;
+  showMore?: boolean;
   className?: string;
   title?: string;
 };
@@ -32,6 +34,8 @@ type Destination = {
 const DestinationList = ({
   className,
   showSearch,
+  showPagination,
+  showMore,
   title = 'สถานที่ท่องเที่ยว',
 }: Props) => {
   const router = useRouter();
@@ -111,8 +115,15 @@ const DestinationList = ({
           </Card>
         ))}
       </div>
-      <div className='px-4 mt-4 text-end'>
-        <Pagination total={10} className='w-fit m-auto' />
+      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
+        {showPagination && (
+          <Pagination total={10} size='sm' className='w-fit m-auto' />
+        )}
+        {showMore && (
+          <Button variant='subtle' onClick={() => router.push('/destination')}>
+            ดูเพิ่มเติม
+          </Button>
+        )}
       </div>
     </div>
   );

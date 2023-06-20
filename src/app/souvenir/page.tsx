@@ -1,15 +1,14 @@
-import SouvenirList from '@/components/SouvenirList';
 import React from 'react';
 
 type Props = {};
 export const metadata = {
-  title: 'ผู้ประกอบการ',
+  title: 'ของฝาก',
 };
 
 const page = (props: Props) => {
   return (
     <div className='mt-24 mb-24'>
-      <SouvenirList showSearch title='ผู้ประกอบการ' subTitle='subTitle' />
+      <h1 className='text-center'>???</h1>
     </div>
   );
 };

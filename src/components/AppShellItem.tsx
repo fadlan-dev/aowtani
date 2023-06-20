@@ -62,8 +62,9 @@ const Index = (props: Props) => {
         <DestinationList
           title={MENUS.find((menu) => menu.key === t)?.title || ''}
           className='mt-6 mb-6'
+          showMore
         />
-        <RecommendedTourPackages className='mt-10' />
+        <RecommendedTourPackages className='mt-10' showMore />
         <PopularProducts className='mt-10' />
       </div>
     </div>

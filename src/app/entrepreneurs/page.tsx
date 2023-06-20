@@ -1,21 +1,20 @@
-import NewsList from '@/components/NewsList';
+import EntrepreneursList from '@/components/EntrepreneursList';
 import React from 'react';
 
 type Props = {};
 
 export const metadata = {
-  title: 'News',
+  title: 'ผู้ประกอบการ',
 };
 
 const Page = (props: Props) => {
   return (
-    <div className='mt-[60px]'>
-      <div className='h-80 grid place-content-center bg-banner-news bg-no-repeat bg-cover bg-center'>
-        <p className='text-white text-5xl font-bold'>Entrepreneurs</p>
-      </div>
-      <div className='container'>
-        <NewsList className='mt-6' />
-      </div>
+    <div className='mt-20 mb-20'>
+      <EntrepreneursList
+        showSearch
+        title='ผู้ประกอบการ'
+        subTitle='เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ'
+      />
     </div>
   );
 };
