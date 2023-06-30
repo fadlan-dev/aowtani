@@ -2,20 +2,20 @@ import React from 'react';
 
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
-import LoginForm from '@/components/forms/LoginForm';
+import SignInForm from '@/components/forms/SignInForm';
 
 type Props = {};
 
 export const metadata = {
-  title: 'Login',
+  title: 'Sign In',
 };
 
-const Login = (props: Props) => {
+const page = (props: Props) => {
   return (
     <div className='h-screen flex items-center justify-center'>
-      <LoginForm />
+      <SignInForm withBorder />
     </div>
   );
 };
 
-export default Login;
+export default page;

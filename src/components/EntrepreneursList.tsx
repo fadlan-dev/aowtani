@@ -20,6 +20,7 @@ import {
   IconDiscountCheckFilled,
   IconMapPin,
   IconPhone,
+  IconPlus,
   IconSearch,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
@@ -76,7 +77,14 @@ const EntrepreneursList = ({
           />
         )}
       </div>
-      <div className='p-4 text-end'>
+      <Flex mt='md' px='md' justify='space-between'>
+        <Button
+          variant='gradient'
+          leftIcon={<IconPlus />}
+          onClick={() => router.push('/entrepreneurs/create')}
+        >
+          สมัครเป็นผู้ประกอบการ
+        </Button>
         <SegmentedControl
           data={[
             { label: 'ทั้งหมด', value: 'all' },
@@ -86,7 +94,7 @@ const EntrepreneursList = ({
             { label: 'ร้านค้า', value: 'shop' },
           ]}
         />
-      </div>
+      </Flex>
       <div
         className={'gap-4 px-4 mt-4'}
         style={{

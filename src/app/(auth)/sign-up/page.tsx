@@ -1,4 +1,4 @@
-import RegisterForm from '@/components/forms/RegisterForm';
+import SignUpForm from '@/components/forms/SignUpForm';
 
 type Props = {};
 
@@ -6,12 +6,12 @@ export const metadata = {
   title: 'Register',
 };
 
-const Register = (props: Props) => {
+const page = (props: Props) => {
   return (
     <div className='h-screen flex items-center justify-center'>
-      <RegisterForm />
+      <SignUpForm />
     </div>
   );
 };
 
-export default Register;
+export default page;

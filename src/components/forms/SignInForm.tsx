@@ -15,9 +15,11 @@ import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-type Props = {};
+type Props = {
+  withBorder?: boolean;
+};
 
-const LoginForm = (props: Props) => {
+const SignInForm = ({ withBorder }: Props) => {
   const router = useRouter();
   const form = useForm({
     initialValues: {
@@ -55,7 +57,13 @@ const LoginForm = (props: Props) => {
         </Anchor>
       </Text>
 
-      <Paper withBorder shadow='md' p={30} mt={30} radius='md'>
+      <Paper
+        withBorder={withBorder}
+        shadow={withBorder ? 'md' : ''}
+        p={30}
+        mt={30}
+        radius='md'
+      >
         <form
           onSubmit={form.onSubmit((e) => {
             console.log('onSubmit', e);
@@ -99,4 +107,4 @@ const LoginForm = (props: Props) => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;

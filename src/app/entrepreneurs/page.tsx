@@ -1,5 +1,4 @@
 import EntrepreneursList from '@/components/EntrepreneursList';
-import React from 'react';
 
 type Props = {};
 

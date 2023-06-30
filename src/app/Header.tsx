@@ -56,7 +56,7 @@ const Index = () => {
 
   return (
     <Box>
-      <Header height={60} px='md' fixed>
+      <Header height={60} px='md' fixed zIndex={10}>
         <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
             <div>Logo</div>
@@ -76,8 +76,12 @@ const Index = () => {
                 {menu.title}
               </Link>
             ))}
-            <Button ml='xs' onClick={() => router.push('/login')}>
-              Log in
+            <Button
+              ml='xs'
+              variant='gradient'
+              onClick={() => router.push('/sign-in')}
+            >
+              Sign In
             </Button>
           </Group>
           <Burger
