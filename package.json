@@ -25,6 +25,7 @@
     "autoprefixer": "10.4.14",
     "cookies-next": "^2.1.1",
     "embla-carousel-autoplay": "^8.0.0-rc03",
+    "embla-carousel-react": "^8.0.0-rc07",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.3",
     "next": "13.4.3",
