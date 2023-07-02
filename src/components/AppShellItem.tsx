@@ -1,11 +1,19 @@
 'use client';
-import { Group, Navbar, Text, ThemeIcon, useMantineTheme } from '@mantine/core';
+import {
+  Box,
+  Group,
+  Navbar,
+  Text,
+  ThemeIcon,
+  useMantineTheme,
+} from '@mantine/core';
 import DestinationList from './DestinationList';
 import { FoodIcon, ResortIcon, TravelIcon } from './Icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/libs/utils';
 import RecommendedTourPackages from './RecommendedTourPackages';
 import PopularProducts from './PopularProducts';
+import Image from 'next/image';
 
 type Props = {};
 
@@ -20,6 +28,7 @@ const Index = (props: Props) => {
       title: 'สถานที่ท่องเที่ยว',
       icon: <TravelIcon />,
       color: 'blue',
+      img: '/destination.png',
       active: theme.colors.blue[0],
     },
     {
@@ -39,7 +48,7 @@ const Index = (props: Props) => {
   ];
   return (
     <div className='flex mt-[60px]'>
-      <div className='w-72 hidden md:block'>
+      <div className='w-72 min-w-[288px] hidden md:block'>
         <Navbar hiddenBreakpoint='sm' className='h-full'>
           {MENUS.map((menu) => (
             <Navbar.Section
@@ -54,6 +63,19 @@ const Index = (props: Props) => {
                 </ThemeIcon>
                 <Text>{menu.title}</Text>
               </Group>
+              {menu.img && (
+                <Box h={138} mt='xs' className='relative'>
+                  <Image
+                    src={menu.img}
+                    alt={menu.title}
+                    fill
+                    className=' object-contain'
+                    sizes='(max-width: 768px) 50vw,
+              (max-width: 1200px) 20vw,
+              10vw'
+                  />
+                </Box>
+              )}
             </Navbar.Section>
           ))}
         </Navbar>

@@ -1,4 +1,3 @@
-import React from 'react';
 import DestinationList from '@/components/DestinationList';
 type Props = {};
 
@@ -9,7 +8,13 @@ export const metadata = {
 const page = (props: Props) => {
   return (
     <div className='mt-24'>
-      <DestinationList showSearch showPagination className='mt-6 mb-6' />
+      <DestinationList
+        showSearch
+        showPagination
+        title='สถานที่ท่องเที่ยว'
+        subTitle='เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ'
+        className='mt-6 mb-6'
+      />
     </div>
   );
 };

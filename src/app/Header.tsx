@@ -130,7 +130,15 @@ const Index = () => {
           />
 
           <Group position='center' grow pb='xl' px='md'>
-            <Button variant='filled'>Log in</Button>
+            <Button
+              variant='filled'
+              onClick={() => {
+                closeDrawer();
+                router.push('/sign-in');
+              }}
+            >
+              Sign In
+            </Button>
           </Group>
         </ScrollArea>
       </Drawer>
