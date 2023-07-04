@@ -77,14 +77,14 @@ const EntrepreneursList = ({
           />
         )}
       </div>
-      <Flex mt='md' px='md' justify='space-between'>
-        <Button
+      <Flex mt='md' px='md' justify='end'>
+        {/* <Button
           variant='gradient'
           leftIcon={<IconPlus />}
           onClick={() => router.push('/entrepreneurs/create')}
         >
           สมัครเป็นผู้ประกอบการ
-        </Button>
+        </Button> */}
         <SegmentedControl
           data={[
             { label: 'ทั้งหมด', value: 'all' },

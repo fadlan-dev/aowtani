@@ -80,13 +80,13 @@ const LocalGuidList = ({
         )}
       </div>
       <div className='p-4'>
-        <Button
+        {/* <Button
           variant='gradient'
           leftIcon={<IconPlus />}
           onClick={() => router.push('/local-guides/create')}
         >
           สมัครเป็นไกด์ท้องถิ่น
-        </Button>
+        </Button> */}
       </div>
       <div
         className={'gap-4 px-4 mt-4'}
