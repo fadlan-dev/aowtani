@@ -7,11 +7,11 @@ import {
   Card,
   Group,
   Text,
-  Image,
   Title,
   Pagination,
 } from '@mantine/core';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 type Props = {
   showPagination?: boolean;

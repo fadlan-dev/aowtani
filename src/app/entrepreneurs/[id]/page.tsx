@@ -4,22 +4,19 @@ import {
   Card,
   Group,
   Text,
-  Badge,
   Avatar,
   Flex,
   Title,
   AspectRatio,
-  Image,
 } from '@mantine/core';
 import {
-  IconBaguette,
   IconBrandFacebook,
   IconBriefcase,
   IconDiscountCheckFilled,
   IconMapPin,
   IconPhone,
 } from '@tabler/icons-react';
-import React from 'react';
+import Image from 'next/image';
 
 type Props = {
   params: { id: string };
@@ -84,6 +81,8 @@ const Page = ({ params }: Props) => {
                 <Image
                   src='https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
                   alt='Norway'
+                  width={380}
+                  fill
                 />
               </AspectRatio>
             </Card.Section>
