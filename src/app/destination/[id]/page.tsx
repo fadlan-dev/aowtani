@@ -14,9 +14,12 @@ export async function generateMetadata({ params }: Props) {
   return {
     title: dest.name,
     description: dest.description,
-    image: dest.banners[0]?.asset
-      ? `${process.env.NEXT_PUBLIC_URL}${dest.banners[0].asset}`
-      : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80',
+    openGraph: {
+      images: [
+        `${process.env.NEXT_PUBLIC_URL}${dest.banners[0].asset}`,
+        'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80',
+      ],
+    },
   };
 }
 
