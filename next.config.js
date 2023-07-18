@@ -5,6 +5,7 @@ const nextConfig = {
       {
         hostname: 'images.unsplash.com',
       },
+      { hostname: 'api.budu.triple-i.in' },
     ],
   },
 };

@@ -83,8 +83,7 @@ const TravelTrending = (props: Props) => {
                     className='flex-1 w-full aspect-square object-cover rounded overflow-hidden'
                     src={item.image}
                     alt={item.title}
-                    width={500}
-                    height={500}
+                    fill
                   />
                   <div className='flex-auto pb-4 mt-2 text-start'>
                     <Text className='font-semibold line-clamp-1'>

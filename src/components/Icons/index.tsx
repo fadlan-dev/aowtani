@@ -9,20 +9,20 @@ const TravelIcon = () => (
     <path
       d='M13.5 9.26L9.71 4.26C9.61704 4.16627 9.50644 4.09188 9.38458 4.04111C9.26272 3.99034 9.13201 3.9642 9 3.9642C8.86799 3.9642 8.73728 3.99034 8.61542 4.04111C8.49356 4.09188 8.38296 4.16627 8.29 4.26L0.5 13.5H13.5'
       stroke='currentColor'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
     <path
       d='M4.69 8.5L6.16 9.5C6.32936 9.62058 6.5321 9.68538 6.74 9.68538C6.94791 9.68538 7.15064 9.62058 7.32 9.5L8.21 8.83C8.3831 8.70018 8.59363 8.63 8.81 8.63C9.02637 8.63 9.23691 8.70018 9.41 8.83L10.3 9.5C10.4684 9.61834 10.6692 9.68185 10.875 9.68185C11.0808 9.68185 11.2816 9.61834 11.45 9.5L12.93 8.5'
       stroke='currentColor'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
     <path
       d='M3 5.5C4.38071 5.5 5.5 4.38071 5.5 3C5.5 1.61929 4.38071 0.5 3 0.5C1.61929 0.5 0.5 1.61929 0.5 3C0.5 4.38071 1.61929 5.5 3 5.5Z'
       stroke='currentColor'
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 );

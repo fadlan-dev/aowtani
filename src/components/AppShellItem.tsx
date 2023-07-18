@@ -14,10 +14,13 @@ import { cn } from '@/libs/utils';
 import RecommendedTourPackages from './RecommendedTourPackages';
 import PopularProducts from './PopularProducts';
 import Image from 'next/image';
+import { IDestination } from '@/types';
 
-type Props = {};
+type Props = {
+  destinations: IDestination[];
+};
 
-const Index = (props: Props) => {
+const Index = ({ destinations }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = searchParams.get('t') || 'travel';
@@ -69,7 +72,7 @@ const Index = (props: Props) => {
                     src={menu.img}
                     alt={menu.title}
                     fill
-                    className=' object-contain'
+                    className='object-contain'
                     sizes='(max-width: 768px) 50vw,
               (max-width: 1200px) 20vw,
               10vw'
@@ -82,6 +85,7 @@ const Index = (props: Props) => {
       </div>
       <div className='flex-auto overflow-auto mb-10'>
         <DestinationList
+          data={destinations}
           title={MENUS.find((menu) => menu.key === t)?.title || ''}
           className='mt-6 mb-6'
           showMore

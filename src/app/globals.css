@@ -6,3 +6,14 @@ html,
 body {
   background-color: rgb(248, 249, 250) !important;
 }
+
+@layer utilities {
+  /* Add utility class for the iframe styles */
+  .iframe-custom {
+    @apply w-full h-full;
+  }
+}
+
+#embed-map iframe {
+  @apply iframe-custom;
+}

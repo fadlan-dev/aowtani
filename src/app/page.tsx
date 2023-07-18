@@ -1,9 +1,20 @@
 import AppShellItem from '@/components/AppShellItem';
+import { IDestination } from '@/types';
 
 export const metadata = {
   title: 'Pattani smart tourism',
 };
 
-export default function Home() {
-  return <AppShellItem />;
+const getDestinations = async (): Promise<IDestination[]> => {
+  const data = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/destination_visits.json`
+  );
+  const destinations = await data.json();
+
+  return destinations;
+};
+
+export default async function Home() {
+  const destinations = await getDestinations();
+  return <AppShellItem destinations={destinations.slice(0, 6)} />;
 }
