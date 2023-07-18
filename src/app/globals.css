@@ -12,8 +12,16 @@ body {
   .iframe-custom {
     @apply w-full h-full;
   }
+
+  .img-w-full {
+    @apply w-full;
+  }
 }
 
 #embed-map iframe {
   @apply iframe-custom;
+}
+
+#ck-editor img {
+  @apply img-w-full;
 }

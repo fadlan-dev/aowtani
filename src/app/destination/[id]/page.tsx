@@ -77,6 +77,7 @@ const page = async ({ params }: Props) => {
             </div>
             <p className='mt-4'>{dest.description}</p>
             <div
+              id='ck-editor'
               className='mt-4 relative'
               dangerouslySetInnerHTML={{ __html: dest.content }}
             />
