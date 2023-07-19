@@ -13,7 +13,6 @@ import {
   useMantineTheme,
   Avatar,
   Popover,
-  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
