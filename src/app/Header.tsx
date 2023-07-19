@@ -11,10 +11,15 @@ import {
   ScrollArea,
   rem,
   useMantineTheme,
+  Avatar,
+  Popover,
+  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { signOut, useSession } from 'next-auth/react';
+import { IconLogout } from '@tabler/icons-react';
 
 const MENUS: IMenu[] = [
   {
@@ -54,6 +59,9 @@ const Index = () => {
   const router = useRouter();
   const theme = useMantineTheme();
 
+  const { data: session } = useSession();
+  console.log('session', session);
+
   return (
     <Box>
       <Header height={60} px='md' fixed zIndex={10}>
@@ -76,13 +84,32 @@ const Index = () => {
                 {menu.title}
               </Link>
             ))}
-            <Button
-              ml='xs'
-              variant='gradient'
-              onClick={() => router.push('/sign-in')}
-            >
-              Sign In
-            </Button>
+            {session ? (
+              <Popover position='bottom-end' shadow='md'>
+                <Popover.Target>
+                  <Avatar
+                    radius='xl'
+                    src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'
+                  />
+                </Popover.Target>
+                <Popover.Dropdown>
+                  <Button
+                    variant='light'
+                    className='cursor-pointer'
+                    onClick={() => signOut()}
+                    leftIcon={<IconLogout />}
+                  >
+                    Sign Out
+                  </Button>
+                </Popover.Dropdown>
+              </Popover>
+            ) : (
+              <Link href='/sign-in'>
+                <Button ml='xs' variant='gradient'>
+                  Sign In
+                </Button>
+              </Link>
+            )}
           </Group>
           <Burger
             opened={drawerOpened}

@@ -14,6 +14,7 @@ import {
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { signIn } from 'next-auth/react';
 
 type Props = {
   withBorder?: boolean;
@@ -23,16 +24,14 @@ const SignInForm = ({ withBorder }: Props) => {
   const router = useRouter();
   const form = useForm({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'fadlan.8291@gmail.com',
+      password: 'Fadlan_8291',
     },
 
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) =>
-        val.length <= 6
-          ? 'Password should include at least 6 characters'
-          : null,
+        val.length < 6 ? 'Password should include at least 6 characters' : null,
     },
   });
   return (
@@ -65,14 +64,16 @@ const SignInForm = ({ withBorder }: Props) => {
         radius='md'
       >
         <form
-          onSubmit={form.onSubmit((e) => {
-            console.log('onSubmit', e);
+          onSubmit={form.onSubmit((values) => {
+            console.log('onSubmit', values);
+            signIn('credentials', values);
           })}
         >
           <TextInput
             label='Email'
             placeholder='you@mantine.dev'
             value={form.values.email}
+            name='email'
             onChange={(event) =>
               form.setFieldValue('email', event.currentTarget.value)
             }
@@ -82,6 +83,7 @@ const SignInForm = ({ withBorder }: Props) => {
             label='Password'
             placeholder='Your password'
             mt='md'
+            name='password'
             value={form.values.password}
             onChange={(event) =>
               form.setFieldValue('password', event.currentTarget.value)
