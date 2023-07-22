@@ -87,3 +87,15 @@ export interface IPartner {
   created_at: string;
   updated_at: string;
 }
+
+export interface IProduct {
+  id: number;
+  name: string;
+  images: Image[];
+  sku: string;
+  stock: number;
+  price: any;
+  created_at: string;
+  updated_at: string;
+  details: string;
+}

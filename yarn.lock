@@ -345,7 +345,7 @@
   dependencies:
     "@mantine/utils" "6.0.17"
 
-"@mantine/core@^6.0.17", "@mantine/core@6.0.11", "@mantine/core@6.0.17":
+"@mantine/core@^6.0.17", "@mantine/core@6.0.17":
   version "6.0.17"
   resolved "https://registry.npmjs.org/@mantine/core/-/core-6.0.17.tgz"
   integrity sha512-g3EDxcTJKisvEGTsGJPCGXiDumwr4O0nGNXwoGLnrg19nh3FAMfEIq18sJJLtRrBuarSbrvgMVYvKx1R6rTOWg==
@@ -372,7 +372,7 @@
     fast-deep-equal "^3.1.3"
     klona "^2.0.5"
 
-"@mantine/hooks@^6.0.17", "@mantine/hooks@6.0.11", "@mantine/hooks@6.0.17":
+"@mantine/hooks@^6.0.17", "@mantine/hooks@6.0.17":
   version "6.0.17"
   resolved "https://registry.npmjs.org/@mantine/hooks/-/hooks-6.0.17.tgz"
   integrity sha512-7vf2w1NlzKlUynSuyI2DAIKoEOYKYC8k+tlSsk3BRdbzhbJAiWxcYzJy5seg5dFW1WIpKAZ0wiVdHXf/WRlRgg==
@@ -384,13 +384,6 @@
   dependencies:
     "@mantine/ssr" "6.0.11"
     "@mantine/styles" "6.0.11"
-
-"@mantine/nprogress@^6.0.11":
-  version "6.0.11"
-  resolved "https://registry.npmjs.org/@mantine/nprogress/-/nprogress-6.0.11.tgz"
-  integrity sha512-D0VRlw3rTYZrzQf2fqjDf81J0sblJyPj9p1PqxIpelwoJl5s+X2D6nwtCZvI6fwAY9eFDfNtPOMzYxwxVVNoUg==
-  dependencies:
-    "@mantine/utils" "6.0.11"
 
 "@mantine/ssr@6.0.11":
   version "6.0.11"
@@ -415,11 +408,6 @@
   dependencies:
     clsx "1.1.1"
     csstype "3.0.9"
-
-"@mantine/utils@6.0.11":
-  version "6.0.11"
-  resolved "https://registry.npmjs.org/@mantine/utils/-/utils-6.0.11.tgz"
-  integrity sha512-ijkEAaKEhZCw7HSWsGMQZsvfmQKmJXmPoQ1LeEwcH3vjZalPk9pQjSPPfUdTeX9ZAv095XWmfVMiNV8+xvM0OQ==
 
 "@mantine/utils@6.0.17":
   version "6.0.17"
@@ -1879,11 +1867,6 @@ electron-to-chromium@^1.4.284:
   resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.401.tgz"
   integrity sha512-AswqHsYyEbfSn0x87n31Na/xttUqEAg7NUjpiyxC20MaWKLyadOYHMzyLdF78N1iw+FK8/2KHLpZxRdyRILgtA==
 
-embla-carousel-autoplay@^8.0.0-rc03:
-  version "8.0.0-rc03"
-  resolved "https://registry.npmjs.org/embla-carousel-autoplay/-/embla-carousel-autoplay-8.0.0-rc03.tgz"
-  integrity sha512-AEMoMAsOG5mpL2TidI6CfbfS9MSF0oQFoyy69s77HZVkTs2jmkP4TFxjsplFX0URjYsvsTL0jc67MMacrpP2jw==
-
 embla-carousel-react@^7.0.0, embla-carousel-react@^8.0.0-rc07:
   version "8.0.0-rc11"
   resolved "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-8.0.0-rc11.tgz"
@@ -1896,11 +1879,6 @@ embla-carousel-reactive-utils@8.0.0-rc11:
   version "8.0.0-rc11"
   resolved "https://registry.npmjs.org/embla-carousel-reactive-utils/-/embla-carousel-reactive-utils-8.0.0-rc11.tgz"
   integrity sha512-pDNVJNCn0dybLkHw93My+cMfkRQ5oLZff6ZCwgmrw+96aPiZUyo5ANywz8Lb70SWWgD/TNBRrtQCquvjHS31Sg==
-
-embla-carousel@8.0.0-rc03:
-  version "8.0.0-rc03"
-  resolved "https://registry.npmjs.org/embla-carousel/-/embla-carousel-8.0.0-rc03.tgz"
-  integrity sha512-2goVwmTYZdGFcRejbYJlaC/iWDPv/VAsASE60uLQYLSKpuQRTxq/huu548OozLsH/2uSelVszvmzfinZnnk/iw==
 
 embla-carousel@8.0.0-rc11:
   version "8.0.0-rc11"
