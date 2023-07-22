@@ -14,13 +14,14 @@ import { cn } from '@/libs/utils';
 import RecommendedTourPackages from './RecommendedTourPackages';
 import PopularProducts from './PopularProducts';
 import Image from 'next/image';
-import { IDestination } from '@/types';
+import { IDestination, IPackage } from '@/types';
 
 type Props = {
   destinations: IDestination[];
+  pkgs: IPackage[];
 };
 
-const Index = ({ destinations }: Props) => {
+const Index = ({ destinations, pkgs }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = searchParams.get('t') || 'travel';
@@ -90,7 +91,7 @@ const Index = ({ destinations }: Props) => {
           className='mt-6 mb-6'
           showMore
         />
-        <RecommendedTourPackages className='mt-10' showMore />
+        <RecommendedTourPackages className='mt-10' pkgs={pkgs} showMore />
         <PopularProducts className='mt-10' />
       </div>
     </div>

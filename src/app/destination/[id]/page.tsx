@@ -52,13 +52,11 @@ function DestinationType({
 
 const page = async ({ params }: Props) => {
   const dest: IDestination = await getDestination(params.id);
-  console.log(dest.name);
   return (
     <div className='mt-20 mb-24'>
       <div className='container'>
         <div className='h-96 overflow-hidden relative'>
           <Image
-            fill
             className='object-cover'
             src={
               dest.banners[0]?.asset
@@ -66,9 +64,10 @@ const page = async ({ params }: Props) => {
                 : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
             }
             alt={dest.name}
+            fill
           />
         </div>
-        <div className='flex gap-4 mt-4'>
+        <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1'>
             <h1 className='capitalize'>{dest.name}</h1>
             <p className='text-primary'>{dest.address}</p>
@@ -83,7 +82,7 @@ const page = async ({ params }: Props) => {
             />
             <NearbyAttractions className='mt-4' />
           </div>
-          <div className='hidden lg:block w-80'>
+          <div className='w-full lg:w-80'>
             {dest.embed_map && (
               <div
                 id='embed-map'

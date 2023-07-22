@@ -1,3 +1,5 @@
+'use client';
+import { cn } from '@/libs/utils';
 import { Avatar, Card, Flex, Group, Text } from '@mantine/core';
 import {
   IconBrandFacebook,
@@ -6,17 +8,18 @@ import {
   IconPhone,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
-type Props = {};
+type Props = {
+  className?: string;
+};
 
-const LocalGuidCard = (props: Props) => {
+const LocalGuidCard = ({ className }: Props) => {
   const router = useRouter();
   return (
     <Card
       padding='md'
       onClick={() => router.push(`local-guides/${1}`)}
-      className='cursor-pointer'
+      className={cn(className, 'cursor-pointer')}
     >
       <Flex justify='space-between'>
         <Group>

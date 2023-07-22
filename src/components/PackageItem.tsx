@@ -1,42 +1,49 @@
-import { numberFormat } from '@/libs/utils';
-import React from 'react';
-import PackegeStatus from './PackegeStatus';
+'use client';
+import { IPackage } from '@/types';
+import { AspectRatio, Badge, Button, Card, Group, Text } from '@mantine/core';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
 type Props = {
-  id: number | string;
-  guide: string;
-  name: string;
-  status: string;
-  price: number | string;
-  total: number | string;
+  pkg: IPackage;
 };
 
-const PackageItem = ({ id, guide, name, status, price, total }: Props) => {
+const PackageCard = ({ pkg }: Props) => {
   const router = useRouter();
   return (
-    <li
-      className='border border-zinc-200 border-solid rounded p-4 cursor-pointer hover:shadow'
-      onClick={() => router.push(`/travel/${id}`)}
-    >
-      <div className='flex justify-between border-0 border-b border-zinc-200 border-solid pb-4'>
-        <p>{guide}</p>
-        <p className=' text-zinc-500'>
-          สถานะ <PackegeStatus status={status} />
-        </p>
-      </div>
-      <div className='flex flex-row justify-between gap-2 py-4'>
-        <div className='flex flex-row gap-2'>
-          <div className=' w-28 aspect-video bg-zinc-200' />
-          <p>{name}</p>
-        </div>
-        <p className=''>{numberFormat(price)}</p>
-      </div>
-      <div className='text-end border-0 border-t border-zinc-200 border-solid pt-4'>
-        <p>ยอดสั้งซื้อทั้งหมด {numberFormat(total)}</p>
-      </div>
-    </li>
+    <Card>
+      <Card.Section>
+        <AspectRatio ratio={16 / 9}>
+          <Image
+            className='bg-zinc-200 object-contain'
+            src={pkg.images[0]?.thumbUrl || './image.svg'}
+            alt={pkg.name}
+            fill
+          />
+        </AspectRatio>
+      </Card.Section>
+      <Text size='lg' weight={500} mt={8}>
+        {pkg.name}
+      </Text>
+      <Group spacing={4}>
+        {pkg.types.map((type: string) => (
+          <Badge key={type}>{type}</Badge>
+        ))}
+      </Group>
+      <Text lineClamp={3}>{pkg.desciption}</Text>
+      <Text weight={600} align='end'>
+        {pkg.price.toLocaleString()} ฿/ท่าน
+      </Text>
+      <Button
+        variant='light'
+        fullWidth
+        mt='md'
+        radius='md'
+        onClick={() => router.push(`/package/${pkg.id}`)}
+      >
+        ดูรายละเอียด
+      </Button>
+    </Card>
   );
 };
 
-export default PackageItem;
+export default PackageCard;

@@ -2,9 +2,7 @@
 import { cn } from '@/libs/utils';
 import {
   Button,
-  Card,
   Text,
-  AspectRatio,
   Title,
   TextInput,
   ActionIcon,
@@ -14,8 +12,8 @@ import {
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import Image from 'next/image';
 import { IDestination } from '@/types';
+import DestinationCard from './DestinationItem';
 
 type Props = {
   showSearch?: boolean;
@@ -96,43 +94,8 @@ const DestinationList = ({
           gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
         }}
       >
-        {data?.map((dest: IDestination, idx: number) => (
-          <Card
-            key={idx}
-            padding='md'
-            onClick={() => router.push(`destination/${dest.id}`)}
-            className='cursor-pointer'
-          >
-            <Card.Section>
-              <AspectRatio ratio={16 / 9}>
-                <Image
-                  src={
-                    dest.banners[0]?.asset
-                      ? `${process.env.NEXT_PUBLIC_URL}${dest.banners[0].asset}`
-                      : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-                  }
-                  alt={dest.name}
-                  fill
-                />
-              </AspectRatio>
-            </Card.Section>
-            <Text size='lg' weight={500} mt={8} lineClamp={1}>
-              {dest.name}
-            </Text>
-            <Text size='xs' className='text-primary' lineClamp={1}>
-              {dest.address}
-            </Text>
-            <Text lineClamp={2}>{dest.description}</Text>
-            <Button
-              variant='light'
-              fullWidth
-              mt='md'
-              radius='md'
-              onClick={() => router.push(`destination/${dest.id}`)}
-            >
-              ดูรายละเอียด
-            </Button>
-          </Card>
+        {data?.map((dest: IDestination) => (
+          <DestinationCard key={dest.id} destination={dest} />
         ))}
       </div>
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>

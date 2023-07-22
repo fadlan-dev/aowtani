@@ -1,17 +1,7 @@
 'use client';
-import { numberFormat } from '@/libs/utils';
 import { Carousel } from '@mantine/carousel';
-import {
-  AspectRatio,
-  Card,
-  Group,
-  Image,
-  Text,
-  Badge,
-  Button,
-  useMantineTheme,
-} from '@mantine/core';
-import PackageCard from './PackageCard';
+import { Text, useMantineTheme } from '@mantine/core';
+import PackageCard from './PackageItem';
 
 type Props = {};
 
@@ -44,7 +34,7 @@ const Index = (props: Props) => {
       >
         {new Array(3).fill('').map((item: any, idx: number) => (
           <Carousel.Slide key={idx}>
-            <PackageCard />
+            {/* <PackageCard pkg={null} /> */}
           </Carousel.Slide>
         ))}
       </Carousel>

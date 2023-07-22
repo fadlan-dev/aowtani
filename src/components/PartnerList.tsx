@@ -1,11 +1,8 @@
 'use client';
 import { cn } from '@/libs/utils';
+import { IPartner } from '@/types';
 import {
-  Image,
-  Button,
-  Card,
   Text,
-  AspectRatio,
   Title,
   TextInput,
   ActionIcon,
@@ -13,21 +10,14 @@ import {
   SegmentedControl,
   Pagination,
   Flex,
-  Group,
-  Avatar,
+  Button,
 } from '@mantine/core';
-import {
-  IconBrandFacebook,
-  IconDiscountCheckFilled,
-  IconMapPin,
-  IconPhone,
-  IconPlus,
-  IconSearch,
-} from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
-import LocalGuidCard from './LocalGuidItem';
+import { IconSearch } from '@tabler/icons-react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import PartnerCard from './PartnerItem';
 
 type Props = {
+  data: IPartner[];
   showSearch?: boolean;
   showPagination?: boolean;
   showMore?: boolean;
@@ -36,27 +26,23 @@ type Props = {
   subTitle?: string;
 };
 
-type Destination = {
-  completed: boolean;
-  id: number;
-  title: string;
-  userId: number;
-};
-
-const LocalGuidList = ({
+const PartnerList = ({
+  data,
   className,
   showSearch,
   showPagination,
   showMore,
-  title = 'สถานที่ท่องเที่ยว',
+  title,
   subTitle,
 }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
+  const searchParams = useSearchParams();
+
   return (
     <div className={cn(className)}>
       <div className='text-center '>
-        {title && <Title weight='bold'>{title}</Title>}
+        <Title weight='bold'>{title}</Title>
         {subTitle && <Text className='mt-2'>{subTitle}</Text>}
         {showSearch && (
           <TextInput
@@ -74,20 +60,31 @@ const LocalGuidList = ({
                 <IconSearch size='1.1rem' stroke={1.5} />
               </ActionIcon>
             }
-            placeholder='ค้นหาสถานที่ชอบ'
+            placeholder='ค้นหาสถานที่ต้องการ'
             rightSectionWidth={42}
           />
         )}
       </div>
-      <div className='p-4'>
+      <Flex mt='md' px='md' justify='end'>
         {/* <Button
           variant='gradient'
           leftIcon={<IconPlus />}
-          onClick={() => router.push('/local-guides/create')}
+          onClick={() => router.push('/partner/create')}
         >
-          สมัครเป็นไกด์ท้องถิ่น
+          สมัครเป็นผู้ประกอบการ
         </Button> */}
-      </div>
+        <SegmentedControl
+          defaultValue={searchParams.get('type') || ''}
+          onChange={(e) => router.push(e ? `/partner?type=${e}` : '/partner')}
+          data={[
+            { label: 'ทั้งหมด', value: '' },
+            { label: 'กิจกรรมทัวร์', value: 'TourActivity' },
+            { label: 'ที่พัก', value: 'Hotel' },
+            { label: 'ร้านอาหาร', value: 'Restaurant' },
+            { label: 'ร้านค้า', value: 'Shop' },
+          ]}
+        />
+      </Flex>
       <div
         className={'gap-4 px-4 mt-4'}
         style={{
@@ -95,8 +92,8 @@ const LocalGuidList = ({
           gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
         }}
       >
-        {new Array(8).fill('').map((data: Destination, idx: number) => (
-          <LocalGuidCard key={idx} />
+        {data.map((partner: IPartner) => (
+          <PartnerCard key={partner.id} partner={partner} />
         ))}
       </div>
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
@@ -104,7 +101,7 @@ const LocalGuidList = ({
           <Pagination total={10} size='sm' className='w-fit m-auto' />
         )}
         {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/destination')}>
+          <Button variant='subtle' onClick={() => router.push('/partner')}>
             ดูเพิ่มเติม
           </Button>
         )}
@@ -113,4 +110,4 @@ const LocalGuidList = ({
   );
 };
 
-export default LocalGuidList;
+export default PartnerList;

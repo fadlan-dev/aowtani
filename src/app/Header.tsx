@@ -13,6 +13,7 @@ import {
   useMantineTheme,
   Avatar,
   Popover,
+  Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
@@ -38,8 +39,8 @@ const MENUS: IMenu[] = [
   },
   {
     title: 'ผู้ประกอบการ',
-    key: 'entrepreneurs',
-    path: '/entrepreneurs',
+    key: 'partner',
+    path: '/partner',
   },
   {
     title: 'ไกด์ท้องถิ่น',
@@ -59,7 +60,6 @@ const Index = () => {
   const theme = useMantineTheme();
 
   const { data: session } = useSession();
-  console.log('session', session);
 
   return (
     <Box>
@@ -87,11 +87,18 @@ const Index = () => {
               <Popover position='bottom-end' shadow='md'>
                 <Popover.Target>
                   <Avatar
+                    size='md'
                     radius='xl'
                     src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'
                   />
                 </Popover.Target>
                 <Popover.Dropdown>
+                  <Link href='/account' className='text-black'>
+                    <Box w={124} className=' overflow-hidden cu'>
+                      <Text className='truncate'>{session.user?.email}</Text>
+                    </Box>
+                  </Link>
+                  <Divider my='xs' />
                   <Button
                     variant='light'
                     className='cursor-pointer'

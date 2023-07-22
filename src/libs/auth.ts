@@ -24,7 +24,6 @@ export const authOptions: NextAuthOptions = {
           id: '1',
           name: 'ManDo',
           email: 'fadlan.8291@gmial.com',
-          username: 'fadlan.8291@gmail.com',
         };
 
         if (user) {
@@ -45,7 +44,8 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
-        session.user.username = token.username;
+        session.user.phone = token.phone;
+        session.user.address = token.address;
       }
 
       return session;
@@ -55,8 +55,9 @@ export const authOptions: NextAuthOptions = {
       return {
         id: '1997',
         name: 'ManDo',
-        email: 'fadlan.8291@gmail.com',
-        username: 'fadlan.8291@gmail.com',
+        email: 'mando@gmail.com',
+        phone: '0808734357',
+        address: 'Moon',
       };
     },
     redirect() {

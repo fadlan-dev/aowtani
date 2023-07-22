@@ -1,11 +1,12 @@
-import React from 'react';
+'use client';
+import { LoadingOverlay } from '@mantine/core';
 
 type Props = {};
 
 const Loading = (props: Props) => {
   return (
     <div className='h-screen flex items-center justify-center'>
-      <p>Loading...</p>
+      <LoadingOverlay visible overlayBlur={0.2} />
     </div>
   );
 };
