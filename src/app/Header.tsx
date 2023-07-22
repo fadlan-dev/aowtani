@@ -29,8 +29,8 @@ const MENUS: IMenu[] = [
   },
   {
     title: 'ของฝาก',
-    key: 'souvenir',
-    path: '/souvenir',
+    key: 'product',
+    path: '/product',
   },
   {
     title: 'ชุมชน',
