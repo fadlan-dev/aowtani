@@ -8,7 +8,7 @@ type Props = {
 const PackageList = ({ pkgs }: Props) => {
   return (
     <div
-      className={'gap-4 mt-4'}
+      className={'gap-4 px-4 mt-4'}
       style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',

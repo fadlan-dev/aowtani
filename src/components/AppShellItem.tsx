@@ -11,17 +11,19 @@ import DestinationList from './DestinationList';
 import { FoodIcon, ResortIcon, TravelIcon } from './Icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/libs/utils';
-import RecommendedTourPackages from './RecommendedTourPackages';
-import PopularProducts from './PopularProducts';
 import Image from 'next/image';
-import { IDestination, IPackage } from '@/types';
+import { IDestination, IPackage, IProduct } from '@/types';
+import ProductList from './ProductList';
+import PackageList from './PackageList';
+import ExploreButton from './ExploreButton';
 
 type Props = {
   destinations: IDestination[];
   pkgs: IPackage[];
+  products: IProduct[];
 };
 
-const Index = ({ destinations, pkgs }: Props) => {
+const Index = ({ destinations, pkgs, products }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = searchParams.get('t') || 'travel';
@@ -87,12 +89,22 @@ const Index = ({ destinations, pkgs }: Props) => {
       <div className='flex-auto overflow-auto mb-10'>
         <DestinationList
           data={destinations}
+          subTitle='และพื้นที่ใกล้เคียง'
           title={MENUS.find((menu) => menu.key === t)?.title || ''}
           className='mt-6 mb-6'
           showMore
         />
-        <RecommendedTourPackages className='mt-10' pkgs={pkgs} showMore />
-        <PopularProducts className='mt-10' />
+        <div className='mt-10'>
+          <h2 className='text-center text-3xl'>แพ็กเกจทัวร์แนะนำ</h2>
+          <p className='text-center'>ตอบโจทย์ทุกไลฟ์สไตล์</p>
+          <PackageList pkgs={pkgs} />
+        </div>
+        <div className='mt-10'>
+          <h2 className='text-center text-3xl'>สินค้ายอดนิยม</h2>
+          <p className='text-center'>ช้อปปิ้งได้ทุกเวลา</p>
+          <ProductList data={products} />
+          <ExploreButton className='mt-2' to='product' />
+        </div>
       </div>
     </div>
   );
