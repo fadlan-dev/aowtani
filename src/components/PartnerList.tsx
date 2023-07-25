@@ -15,6 +15,7 @@ import {
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PartnerCard from './PartnerItem';
+import Empty from './Empty';
 
 type Props = {
   data: IPartner[];
@@ -85,17 +86,21 @@ const PartnerList = ({
           ]}
         />
       </Flex>
-      <div
-        className={'gap-4 px-4 mt-4'}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
-        }}
-      >
-        {data.map((partner: IPartner) => (
-          <PartnerCard key={partner.id} partner={partner} />
-        ))}
-      </div>
+      {data.length === 0 ? (
+        <Empty />
+      ) : (
+        <div
+          className={'gap-4 px-4 mt-4'}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
+          }}
+        >
+          {data.map((partner: IPartner) => (
+            <PartnerCard key={partner.id} partner={partner} />
+          ))}
+        </div>
+      )}
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
         {showPagination && (
           <Pagination total={10} size='sm' className='w-fit m-auto' />
