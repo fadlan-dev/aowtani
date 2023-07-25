@@ -103,7 +103,9 @@ const Index = ({ destinations, pkgs, products }: Props) => {
           <h2 className='text-center text-3xl'>สินค้ายอดนิยม</h2>
           <p className='text-center'>ช้อปปิ้งได้ทุกเวลา</p>
           <ProductList data={products} />
-          <ExploreButton className='mt-2' to='product' />
+          {products.length != 0 && (
+            <ExploreButton className='mt-2' to='product' />
+          )}
         </div>
       </div>
     </div>

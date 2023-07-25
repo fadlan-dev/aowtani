@@ -40,11 +40,10 @@ async function page({ params }: pageProps) {
         <div className='h-96 overflow-hidden relative'>
           <Image
             fill
-            id={`${process.env.NEXT_PUBLIC_URL}${pkg.images[0].asset}`}
             className='object-cover'
             src={
               pkg.images[0]?.asset
-                ? `${process.env.NEXT_PUBLIC_URL}${pkg.images[0].asset}`
+                ? `${process.env.NEXT_PUBLIC_URL}${pkg.images[0]?.asset}`
                 : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
             }
             alt={pkg.name}
@@ -78,7 +77,7 @@ async function page({ params }: pageProps) {
               dangerouslySetInnerHTML={{ __html: pkg.conditions }}
             />
           </div>
-          <div className='w-full lg:w-80 '>
+          <div className='w-full lg:w-80'>
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
             <LocalGuidCard />
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
