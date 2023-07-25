@@ -12,6 +12,7 @@ import {
 import { DateInput } from '@mantine/dates';
 import { z } from 'zod';
 import { useSession } from 'next-auth/react';
+import { useParams, useRouter } from 'next/navigation';
 
 interface BookingProps {
   price: number;
@@ -32,17 +33,19 @@ const schema = z.object({
 
 const Booking: FunctionComponent<BookingProps> = ({ price }) => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const params = useParams();
   const form = useForm({
     validate: zodResolver(schema),
     initialValues: {
       date: '',
       prefix: 'Mr',
-      fname: '',
-      sname: '',
-      email: '',
-      tel: '',
-      note: '',
-      people: '',
+      fname: 'Sir',
+      sname: 'Lancelot',
+      email: 'sir@gmail.com',
+      tel: '2322392389',
+      note: 'Note',
+      people: 1,
     },
   });
   return (
@@ -50,7 +53,7 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
       <form
         className='flex flex-col gap-2'
         onSubmit={form.onSubmit((e) => {
-          console.log('onSubmit', e);
+          router.push(`booking/${params.id}`);
         })}
       >
         <DateInput
