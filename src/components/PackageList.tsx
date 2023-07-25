@@ -1,3 +1,4 @@
+import Empty from './Empty';
 import PackageCard from './PackageItem';
 import { IPackage } from '@/types';
 
@@ -6,6 +7,10 @@ type Props = {
 };
 
 const PackageList = ({ pkgs }: Props) => {
+  if (pkgs?.length === 0) {
+    return <Empty className='px-4 mt-10 md:mt-4' />;
+  }
+
   return (
     <div
       className={'gap-4 px-4 mt-4'}

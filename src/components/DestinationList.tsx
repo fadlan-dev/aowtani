@@ -14,6 +14,7 @@ import { IconSearch } from '@tabler/icons-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { IDestination } from '@/types';
 import DestinationCard from './DestinationItem';
+import Empty from './Empty';
 
 type Props = {
   showSearch?: boolean;
@@ -87,27 +88,38 @@ const DestinationList = ({
           </>
         )}
       </div>
-      <div
-        className={'gap-4 px-4 mt-4'}
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
-        }}
-      >
-        {data?.map((dest: IDestination) => (
-          <DestinationCard key={dest.id} destination={dest} />
-        ))}
-      </div>
-      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
-        {showPagination && (
-          <Pagination total={10} size='sm' className='w-fit m-auto' />
-        )}
-        {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/destination')}>
-            ดูเพิ่มเติม
-          </Button>
-        )}
-      </div>
+      {data?.length === 0 ? (
+        <Empty className='px-4 mt-10 md:mt-4' />
+      ) : (
+        <>
+          <div
+            className={'gap-4 px-4 mt-4'}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
+            }}
+          >
+            {data?.map((dest: IDestination) => (
+              <DestinationCard key={dest.id} destination={dest} />
+            ))}
+          </div>
+          <div
+            className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}
+          >
+            {showPagination && (
+              <Pagination total={10} size='sm' className='w-fit m-auto' />
+            )}
+            {showMore && (
+              <Button
+                variant='subtle'
+                onClick={() => router.push('/destination')}
+              >
+                ดูเพิ่มเติม
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
