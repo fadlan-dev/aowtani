@@ -7,7 +7,7 @@ type Props = {
   pkg: IPackage;
 };
 
-const PackageCard = ({ pkg }: Props) => {
+const PackageItem = ({ pkg }: Props) => {
   const router = useRouter();
   return (
     <Card>
@@ -46,4 +46,4 @@ const PackageCard = ({ pkg }: Props) => {
   );
 };
 
-export default PackageCard;
+export default PackageItem;
