@@ -45,6 +45,7 @@ const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
       <div className={cn('grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2')}>
         {data.map((d) => (
           <div
+            key={d.value}
             className={cn(
               'flex flex-col items-center border-[3px] border-solid p-4 rounded cursor-pointer'
             )}
