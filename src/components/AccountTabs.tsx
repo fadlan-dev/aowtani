@@ -32,7 +32,7 @@ const TravelTabs = ({ className }: Props) => {
         <PersonalInfo className='m-auto' />
       </Tabs.Panel>
       <Tabs.Panel value='booking' pt='xs'>
-        <PackageList />
+        <PackageList data={[]} />
       </Tabs.Panel>
       <Tabs.Panel value='order' pt='xs'>
         order
