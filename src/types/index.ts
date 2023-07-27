@@ -99,3 +99,35 @@ export interface IProduct {
   updated_at: string;
   details: string;
 }
+
+export interface ILocalGuide {
+  id: number;
+  name: string;
+  phone: string;
+  facebook: string;
+  detail: any;
+  address: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  experience: string;
+  profile: Profile;
+  id_card_pdf: IdCardPdf;
+  house_registration_pdf: HouseRegistrationPdf;
+  certificate_pdf: any;
+}
+
+export interface Profile {
+  id: number;
+  asset: string;
+}
+
+export interface IdCardPdf {
+  id: number;
+  asset: string;
+}
+
+export interface HouseRegistrationPdf {
+  id: number;
+  asset: string;
+}
