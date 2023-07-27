@@ -46,7 +46,7 @@ const Page = async ({ params }: Props) => {
       <div className='px-4'>
         <div className='flex-1'>
           <h3>แพ็กเกจทัวร์</h3>
-          <PackageList pkgs={pkgs} />
+          <PackageList data={pkgs} />
         </div>
         <div className='hidden lg:block w-80'>
           <h3>สังกัดชุมชน</h3>

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { IPackage } from '@/types';
 import PackageType from '@/components/PackageType';
 import DestinationVisit from '@/components/DestinationVisit';
-import LocalGuidCard from '@/components/LocalGuidItem';
+import LocalGuideItem from '@/components/LocalGuideItem';
 import Booking from '@/components/Booking';
 
 interface pageProps {
@@ -79,9 +79,9 @@ async function page({ params }: pageProps) {
           </div>
           <div className='w-full lg:w-80'>
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
-            <LocalGuidCard />
+            {/* <LocalGuidItem /> */}
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
-            <LocalGuidCard />
+            {/* <LocalGuidItem /> */}
             <h3 className='mb-2'>การจอง</h3>
             <Booking price={pkg.price} />
           </div>
