@@ -25,9 +25,11 @@ import {
   IconSearch,
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
-import LocalGuidCard from './LocalGuidItem';
+import LocalGuideItem from './LocalGuideItem';
+import { ILocalGuide } from '@/types';
 
 type Props = {
+  data: ILocalGuide[];
   showSearch?: boolean;
   showPagination?: boolean;
   showMore?: boolean;
@@ -44,6 +46,7 @@ type Destination = {
 };
 
 const LocalGuidList = ({
+  data,
   className,
   showSearch,
   showPagination,
@@ -95,8 +98,8 @@ const LocalGuidList = ({
           gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
         }}
       >
-        {new Array(8).fill('').map((data: Destination, idx: number) => (
-          <LocalGuidCard key={idx} />
+        {data.map((guide: ILocalGuide) => (
+          <LocalGuideItem data={guide} key={guide.id} />
         ))}
       </div>
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
