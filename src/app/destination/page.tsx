@@ -1,18 +1,9 @@
 import DestinationList from '@/components/DestinationList';
-import { IDestination } from '@/types';
+import { getDestinations } from '@/libs/services/getDestinations';
 type Props = {};
 
 export const metadata = {
   title: 'สถานที่ท่องเที่ยว',
-};
-
-const getDestinations = async (): Promise<IDestination[]> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/destination_visits.json`
-  );
-  const destinations = await data.json();
-
-  return destinations;
 };
 
 const page = async (props: Props) => {
