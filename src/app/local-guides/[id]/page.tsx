@@ -1,5 +1,6 @@
 import LocalGuideItem from '@/components/LocalGuideItem';
 import PackageList from '@/components/PackageList';
+import { getPackages } from '@/libs/services/getPackages';
 import { ILocalGuide, IPackage } from '@/types';
 
 type Props = {
@@ -24,12 +25,6 @@ const getLocalGuide = async (id: string): Promise<ILocalGuide> => {
   const data = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/local_guides/${id}.json`
   );
-  const res = await data.json();
-  return res;
-};
-
-const getPackages = async (): Promise<IPackage[]> => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packages.json`);
   const res = await data.json();
   return res;
 };

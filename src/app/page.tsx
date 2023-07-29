@@ -1,25 +1,10 @@
 import AppShellItem from '@/components/AppShellItem';
 import { getDestinations } from '@/libs/services/getDestinations';
-import { IPackage, IProduct } from '@/types';
+import { getPackages } from '@/libs/services/getPackages';
+import { getProducts } from '@/libs/services/getProducts';
 
 export const metadata = {
   title: 'Pattani smart tourism',
-};
-
-const getPackages = async (): Promise<IPackage[]> => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packages.json`, {
-    next: { revalidate: 10 },
-  });
-  const res = await data.json();
-  return res;
-};
-
-const getProducts = async (): Promise<IProduct[]> => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products.json`, {
-    next: { revalidate: 10 },
-  });
-  const products = await data.json();
-  return products;
 };
 
 export default async function Home() {

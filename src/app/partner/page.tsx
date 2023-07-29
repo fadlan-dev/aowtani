@@ -1,5 +1,5 @@
 import PartnerList from '@/components/PartnerList';
-import { IPartner } from '@/types';
+import { getPartners } from '@/libs/services/getPartners';
 
 type Props = {
   searchParams: {
@@ -9,21 +9,6 @@ type Props = {
 
 export const metadata = {
   title: 'ผู้ประกอบการ',
-};
-
-const getPartners = async ({
-  type,
-}: {
-  type: 'Hotel' | 'Restaurant' | 'TourActivity' | 'Shop';
-}): Promise<IPartner[]> => {
-  const data = await fetch(
-    type
-      ? `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json?type=${type}`
-      : `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json`
-  );
-  const partners = await data.json();
-
-  return partners;
 };
 
 const Page = async ({ searchParams }: Props) => {

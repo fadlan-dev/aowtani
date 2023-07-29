@@ -1,19 +1,11 @@
 import React from 'react';
 import LocalGuideList from '@/components/LocalGuieList';
-import { ILocalGuide, IPackage } from '@/types';
+import { getLocalGuides } from '@/libs/services/getLocalGuides';
 
 type Props = {};
 
 export const metadata = {
   title: 'ไกด์ท้องถิ่น',
-};
-
-const getLocalGuides = async (): Promise<ILocalGuide[]> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/local_guides.json`
-  );
-  const res = await data.json();
-  return res;
 };
 
 const Page = async (props: Props) => {

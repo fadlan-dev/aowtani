@@ -1,5 +1,5 @@
 import Empty from './Empty';
-import PackageCard from './PackageItem';
+import PackageItem from './PackageItem';
 import { IPackage } from '@/types';
 
 type Props = {
@@ -20,7 +20,7 @@ const PackageList = ({ data }: Props) => {
       }}
     >
       {data.map((pkg: IPackage, idx: number) => (
-        <PackageCard pkg={pkg} key={idx} />
+        <PackageItem pkg={pkg} key={idx} />
       ))}
     </div>
   );

@@ -95,7 +95,7 @@ const SignInForm = ({ withBorder }: Props) => {
             <Anchor
               component='button'
               size='sm'
-              onClick={() => router.push('/forgotpassword')}
+              onClick={() => router.push('forgotpassword')}
             >
               Forgot password?
             </Anchor>

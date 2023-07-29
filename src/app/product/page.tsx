@@ -1,20 +1,10 @@
 import ProductList from '@/components/ProductList';
 import ProductSearch from '@/components/ProductSearch';
-import { IProduct } from '@/types';
-import { ActionIcon, TextInput } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
-import React from 'react';
+import { getProducts } from '@/libs/services/getProducts';
 
 type Props = {};
 export const metadata = {
   title: 'ของฝาก',
-};
-
-const getProducts = async (): Promise<IProduct[]> => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products.json`);
-  const products = await data.json();
-
-  return products;
 };
 
 const page = async (props: Props) => {

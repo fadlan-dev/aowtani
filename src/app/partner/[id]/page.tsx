@@ -1,5 +1,6 @@
 import PackageList from '@/components/PackageList';
 import PartnerCard from '@/components/PartnerItem';
+import { getPackages } from '@/libs/services/getPackages';
 import { IPackage, IPartner } from '@/types';
 
 type Props = {
@@ -26,12 +27,6 @@ const getPartner = async (id: string): Promise<IPartner> => {
   );
   const partner = await data.json();
   return partner;
-};
-
-const getPackages = async (): Promise<IPackage[]> => {
-  const data = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packages.json`);
-  const pkgs = await data.json();
-  return pkgs;
 };
 
 const Page = async ({ params }: Props) => {
