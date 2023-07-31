@@ -33,8 +33,8 @@ const LocalGuideItem = ({ className, data }: Props) => {
       onClick={() => router.push(`local-guides/${data.id}`)}
       className={cn(className, 'cursor-pointer')}
     >
-      <Flex justify='space-between'>
-        <Group>
+      <Flex justify='space-between' align='center'>
+        <Group spacing={4}>
           <Avatar
             radius='xl'
             src={`${process.env.NEXT_PUBLIC_URL}${data.profile.asset}`}
