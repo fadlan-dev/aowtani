@@ -34,7 +34,7 @@ export interface IPackage {
   name: string;
   period: string;
   desciption: string;
-  images: Image[];
+  images: IImage[];
   conditions: string;
   price: number;
   created_at: string;
@@ -45,7 +45,7 @@ export interface IPackage {
   destination_visit: IDestinationVisit;
 }
 
-export interface Image {
+export interface IImage {
   id: number;
   asset: string;
   thumbUrl?: string;
@@ -67,7 +67,7 @@ export interface ICommunity {
   name: string;
   address: string;
   detail: string;
-  images: Image[];
+  images: IImage[];
   created_at: string;
   updated_at: string;
   content: string;
@@ -82,7 +82,7 @@ export interface IPartner {
   facebook: string;
   type: string;
   status: string;
-  images: any[];
+  images: IImage[];
   embed_map: any;
   created_at: string;
   updated_at: string;
@@ -91,7 +91,7 @@ export interface IPartner {
 export interface IProduct {
   id: number;
   name: string;
-  images: Image[];
+  images: IImage[];
   sku: string;
   stock: number;
   price: any;
