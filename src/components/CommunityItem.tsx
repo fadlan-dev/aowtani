@@ -22,8 +22,11 @@ const CommunityCard: FunctionComponent<CommunityCardProps> = ({
                 ? `${process.env.NEXT_PUBLIC_URL}${community.images[0].asset}`
                 : './image.svg'
             }
-            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-            alt='Norway'
+            sizes='(max-width: 640px) 100vw,
+            (max-width: 1280px) 50vw,
+            (max-width: 1536px) 33vw,
+            25vw'
+            alt={community.name}
             fill
           />
         </AspectRatio>
