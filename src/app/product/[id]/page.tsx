@@ -1,3 +1,5 @@
+import ProductHero from '@/components/ProductHero';
+import { getProduct } from '@/libs/services/getProduct';
 import { IProduct } from '@/types';
 
 interface pageProps {
@@ -18,20 +20,18 @@ export async function generateMetadata({ params }: pageProps) {
   };
 }
 
-const getProduct = async (id: string): Promise<IProduct> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/products/${id}.json`
-  );
-  const product = await data.json();
-  return product;
-};
-
 const Page = async ({ params }: pageProps) => {
   const product = await getProduct(params.id);
   return (
     <div className='mt-20 mb-20'>
       <div className='container overflow-hidden'>
-        <p>{JSON.stringify(product)}</p>
+        <ProductHero product={product} />
+
+        <div
+          id='ck-editor'
+          className='mt-4 relative'
+          dangerouslySetInnerHTML={{ __html: product.details }}
+        />
       </div>
     </div>
   );
