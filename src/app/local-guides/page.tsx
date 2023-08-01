@@ -1,5 +1,5 @@
 import React from 'react';
-import LocalGuideList from '@/components/LocalGuieList';
+import LocalGuideList from '@/components/LocalGuideList';
 import { getLocalGuides } from '@/libs/services/getLocalGuides';
 
 type Props = {};
