@@ -12,6 +12,9 @@ module.exports = {
       backgroundImage: {
         'banner-news': "url('/news.jpeg')",
       },
+      gridTemplateColumns: {
+        list: 'repeat(auto-fill,minmax(280px, 1fr))',
+      },
       colors: {
         primary: {
           100: '#e6f7ff',

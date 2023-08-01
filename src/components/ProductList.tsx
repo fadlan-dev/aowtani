@@ -14,13 +14,7 @@ const ProductList: FunctionComponent<ProductListProps> = ({ data }) => {
   }
 
   return (
-    <div
-      className={'gap-4 px-4 mt-4'}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
-      }}
-    >
+    <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
       {data.map((product: IProduct) => (
         <ProductItem key={product.id} product={product} />
       ))}
