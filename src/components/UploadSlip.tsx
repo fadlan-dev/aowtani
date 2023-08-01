@@ -6,9 +6,13 @@ import { FunctionComponent, Suspense, useState } from 'react';
 
 interface UploadSlipProps {
   className?: string;
+  onSubmit?: VoidFunction;
 }
 
-const UploadSlip: FunctionComponent<UploadSlipProps> = ({ className }) => {
+const UploadSlip: FunctionComponent<UploadSlipProps> = ({
+  className,
+  onSubmit,
+}) => {
   const [file, setFile] = useState<File>();
   const [imageDataUrl, setImageDataUrl] = useState<string>();
 
@@ -47,6 +51,7 @@ const UploadSlip: FunctionComponent<UploadSlipProps> = ({ className }) => {
         fullWidth
         mt='md'
         disabled={!file ? true : false}
+        onClick={onSubmit}
         variant='gradient'
       >
         ชำระเงิน
