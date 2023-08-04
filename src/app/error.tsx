@@ -11,8 +11,8 @@ export default function Error({
 }) {
   return (
     <div
-      className='flex flex-col  justify-center'
-      style={{ height: 'calc(100vh - 80px)' }}
+      className='flex flex-col  justify-center mt-20 mb-20'
+      style={{ minHeight: 'calc(100vh - 80px)' }}
     >
       <div className='container block text-center'>
         <h2>{error.message || ' Something went wrong!'}</h2>
