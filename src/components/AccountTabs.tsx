@@ -1,14 +1,9 @@
 'use client';
-import { Button, Tabs } from '@mantine/core';
-import React from 'react';
-import PackageList from './PackageList';
+import { Card, Tabs } from '@mantine/core';
 import PersonalInfo from './PersonalInfo';
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import PackageTable from './PackageTable';
+import OrderTable from './OrderTable';
 
 type Props = {
   className: string;
@@ -28,15 +23,17 @@ const TravelTabs = ({ className }: Props) => {
         <Tabs.Tab value='booking'>การจองแพ็กเกจ</Tabs.Tab>
         <Tabs.Tab value='order'>คำสั่งซื้อ</Tabs.Tab>
       </Tabs.List>
-      <Tabs.Panel value='personal' pt='xs'>
-        <PersonalInfo className='m-auto' />
-      </Tabs.Panel>
-      <Tabs.Panel value='booking' pt='xs'>
-        <PackageList data={[]} />
-      </Tabs.Panel>
-      <Tabs.Panel value='order' pt='xs'>
-        order
-      </Tabs.Panel>
+      <Card>
+        <Tabs.Panel value='personal' pt='xs'>
+          <PersonalInfo className='m-auto' />
+        </Tabs.Panel>
+        <Tabs.Panel value='booking' pt='xs'>
+          <PackageTable />
+        </Tabs.Panel>
+        <Tabs.Panel value='order' pt='xs'>
+          <OrderTable />
+        </Tabs.Panel>
+      </Card>
     </Tabs>
   );
 };
