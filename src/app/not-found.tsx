@@ -18,7 +18,9 @@ export default function Custom404() {
           address, or the page has been moved to another URL.
         </p>
         <div className=' text-cetner'>
-          <Button variant='subtle'> Take me back to home page</Button>
+          <Button component='a' href='/' variant='subtle'>
+            Take me back to home page
+          </Button>
         </div>
       </div>
     </div>
