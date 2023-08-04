@@ -12,7 +12,7 @@ import {
   Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import { signIn } from 'next-auth/react';
 
@@ -22,12 +22,13 @@ type Props = {
 
 const SignInForm = ({ withBorder }: Props) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callback');
   const form = useForm({
     initialValues: {
       email: 'fadlan.8291@gmail.com',
       password: 'Fadlan_8291',
     },
-
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
       password: (val) =>
@@ -65,8 +66,10 @@ const SignInForm = ({ withBorder }: Props) => {
       >
         <form
           onSubmit={form.onSubmit((values) => {
-            console.log('onSubmit', values);
-            signIn('credentials', values);
+            signIn('credentials', {
+              ...values,
+              callbackUrl: `${callbackUrl}`,
+            });
           })}
         >
           <TextInput

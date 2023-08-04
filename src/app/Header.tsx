@@ -110,7 +110,7 @@ const Index = () => {
                 </Popover.Dropdown>
               </Popover>
             ) : (
-              <Link href='/sign-in'>
+              <Link href={`/sign-in?callback=${pathname}`}>
                 <Button ml='xs' variant='gradient'>
                   Sign In
                 </Button>
