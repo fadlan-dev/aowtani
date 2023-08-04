@@ -32,7 +32,6 @@ export const authOptions: NextAuthOptions = {
         } else {
           // If you return null then an error will be displayed advising the user to check their details.
           return null;
-
           // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
@@ -46,6 +45,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.phone = token.phone;
         session.user.address = token.address;
+        session.user.zip = token.zip;
       }
 
       return session;
@@ -58,10 +58,8 @@ export const authOptions: NextAuthOptions = {
         email: 'mando@gmail.com',
         phone: '0808734357',
         address: 'Moon',
+        zip: '95140',
       };
-    },
-    redirect() {
-      return '/';
     },
   },
 };
