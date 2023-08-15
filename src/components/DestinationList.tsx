@@ -13,9 +13,8 @@ import {
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { IDestination } from '@/types';
-import DestinationCard from './DestinationItem';
+import DestinationItem from './DestinationItem';
 import Empty from './Empty';
-import { usePagination } from '@mantine/hooks';
 
 type Props = {
   showSearch?: boolean;
@@ -96,7 +95,7 @@ const DestinationList = ({
         <>
           <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
             {data?.map((dest: IDestination) => (
-              <DestinationCard key={dest.id} destination={dest} />
+              <DestinationItem key={dest.id} destination={dest} />
             ))}
           </div>
           <div
