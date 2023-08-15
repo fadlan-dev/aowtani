@@ -1,14 +1,15 @@
+'use client';
 import { IDestination } from '@/types';
 import { AspectRatio, Button, Card, Text } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 
-interface DestinationCardProps {
+interface DestinationItemProps {
   destination: IDestination;
 }
 
-const DestinationCard: FunctionComponent<DestinationCardProps> = ({
+const DestinationItem: FunctionComponent<DestinationItemProps> = ({
   destination,
 }) => {
   const router = useRouter();
@@ -48,4 +49,4 @@ const DestinationCard: FunctionComponent<DestinationCardProps> = ({
   );
 };
 
-export default DestinationCard;
+export default DestinationItem;

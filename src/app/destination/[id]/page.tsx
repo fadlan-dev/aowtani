@@ -6,6 +6,8 @@ import { IDestination, IDestinationType } from '@/types';
 import Image from 'next/image';
 import ShowPhotos from '@/components/ShowPhotos';
 import ShowAllPhotos from '@/components/ShowAllPhotos';
+import Reviews from '@/components/Reviews';
+import { getDestination } from '@/libs/services/getDestination';
 
 type Props = {
   params: { id: string };
@@ -24,14 +26,6 @@ export async function generateMetadata({ params }: Props) {
     },
   };
 }
-
-const getDestination = async (id: string): Promise<IDestination> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${id}.json`
-  );
-  const destination = await data.json();
-  return destination;
-};
 
 function DestinationType({
   destinationType,
@@ -62,8 +56,8 @@ const page = async ({ params }: Props) => {
             className='object-cover bg-zinc-200'
             src={
               dest.banners[0]?.asset
-                ? `${process.env.NEXT_PUBLIC_URL}${dest.banners[0].asset}`
-                : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
+                ? `${process.env.NEXT_PUBLIC_URL}${dest.banners[0]?.asset}`
+                : './image.svg'
             }
             alt={dest.name}
             fill
@@ -88,7 +82,11 @@ const page = async ({ params }: Props) => {
               className='mt-4 relative'
               dangerouslySetInnerHTML={{ __html: dest.content }}
             />
-            <NearbyAttractions className='mt-4' />
+            <Reviews
+              className='mt-6'
+              exploreTo={`review/${params.id}?t=destination`}
+            />
+            <NearbyAttractions className='mt-6' />
           </div>
           <div className='w-full lg:w-80'>
             {dest.embed_map && (
