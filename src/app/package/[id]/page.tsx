@@ -4,6 +4,7 @@ import PackageType from '@/components/PackageType';
 import DestinationVisit from '@/components/DestinationVisit';
 import LocalGuideItem from '@/components/LocalGuideItem';
 import Booking from '@/components/Booking';
+import { getPackage } from '@/libs/services/getPackage';
 
 interface pageProps {
   params: { id: string };
@@ -22,14 +23,6 @@ export async function generateMetadata({ params }: pageProps) {
     },
   };
 }
-
-const getPackage = async (id: string): Promise<IPackage> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/packages/${id}.json`
-  );
-  const res = await data.json();
-  return res;
-};
 
 async function page({ params }: pageProps) {
   const { id } = params;
