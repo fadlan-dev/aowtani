@@ -1,10 +1,17 @@
 'use client';
 import { IProduct } from '@/types';
-import { Button, Flex, Group, NumberInput } from '@mantine/core';
+import {
+  Button,
+  Flex,
+  Group,
+  NumberInput,
+  useMantineTheme,
+} from '@mantine/core';
 import { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
 import { Carousel } from '@mantine/carousel';
 import { useRouter } from 'next/navigation';
+import { useMediaQuery } from '@mantine/hooks';
 
 interface ProductHeroProps {
   product: IProduct;
@@ -13,33 +20,35 @@ interface ProductHeroProps {
 
 const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
   const router = useRouter();
+  const theme = useMantineTheme();
+  const matches = useMediaQuery('(max-width: 768px)');
   const [quantity, setQuantity] = useState<number | ''>(1);
   return (
     <div className='flex flex-col lg:flex-row gap-4 overflow-hidden relative'>
       <div className='relative lg:w-1/2 w-full h-96 '>
-        <Carousel w='100%' h='100%' withIndicators>
-          {new Array(5).fill('').map((_, idx: number) => (
+        <Carousel
+          w='100%'
+          h='100%'
+          withIndicators
+          styles={{
+            indicator: {
+              '&[data-active]': {
+                backgroundColor: theme.colors.brand[6],
+              },
+            },
+          }}
+        >
+          {product.images.map((img, idx: number) => (
             <Carousel.Slide h='384px' key={idx}>
               <Image
-                className='object-cover'
-                src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1699&q=80'
+                className='object-contain'
+                src={`${process.env.NEXT_PUBLIC_URL}${img.asset}`}
                 alt={product.name}
                 fill
               />
             </Carousel.Slide>
           ))}
         </Carousel>
-        {/* <Image
-          className='object-cover'
-          src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1699&q=80'
-          // src={
-          //   product.images[0]?.asset
-          //     ? `${process.env.NEXT_PUBLIC_URL}${product.images[0].asset}`
-          //     : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-          // }
-          alt={product.name}
-          fill
-        /> */}
       </div>
       <Flex direction='column' gap='md' className='flex-1'>
         <Flex direction='column'>
@@ -47,9 +56,8 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
           <h4 className='m-0'>{product.sku}</h4>
         </Flex>
         <Group p='sm' bg='brand.0'>
-          <p>ราคา</p>
           <span className='font-bold text-2xl text-primary'>
-            {product.price || 1000}฿
+            ฿{product.price || 1000}
           </span>
         </Group>
         <Group>
@@ -65,9 +73,12 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
         </Group>
         <Group>
           <Button
+            fullWidth={matches}
             size='md'
             variant='gradient'
-            onClick={() => router.push(`product/payment/${product.id}`)}
+            onClick={() =>
+              router.push(`product/checkout/${product.id}?q=${quantity}`)
+            }
           >
             ซื้อสินค้า
           </Button>

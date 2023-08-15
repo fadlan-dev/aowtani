@@ -9,31 +9,37 @@ type Props = {
 const PersonalInfo = ({ className }: Props) => {
   const { data: session } = useSession();
   return (
-    <form className={`block max-w-xs ${className}`}>
+    <form className={`block max-w-full sm:max-w-xs ${className}`}>
       <TextInput
         label='ชื่อ-สกุล'
         placeholder='ชื่อ-สกุล'
         mt='md'
-        value={session?.user.name || ''}
+        defaultValue={session?.user.name || ''}
       />
       <TextInput
         label='อีเมล์'
         placeholder='อีเมล์'
         mt='md'
-        value={session?.user.email || ''}
+        defaultValue={session?.user.email || ''}
       />
       <TextInput
         label='เบอร์โทรศัพท์'
         placeholder='เบอร์โทรศัพท์'
         mt='md'
-        value={session?.user.phone || ''}
+        defaultValue={session?.user.phone || ''}
       />
       <Textarea
         label='ที่อยู่'
         placeholder='ที่อยู่'
         minRows={4}
         mt='md'
-        value={session?.user.address || ''}
+        defaultValue={session?.user.address || ''}
+      />
+      <TextInput
+        label='รหัสไปรษณีย์'
+        placeholder='รหัสไปรษณีย์'
+        mt='md'
+        defaultValue={session?.user.zip || ''}
       />
       <Button mt='md' fullWidth className='text-center'>
         บันทึกข้อมูล

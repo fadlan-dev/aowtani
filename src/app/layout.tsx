@@ -66,12 +66,7 @@ export default async function RootLayout({
           <Providers>
             <Header />
             {authModal}
-            <main
-              style={{
-                minHeight: 'calc(100vh - 143px)',
-                backgroundColor: 'rgb(248, 249, 250)',
-              }}
-            >
+            <main className='md:min-h-[calc(100vh-83px)] min-h-[calc(100vh-122.8px)] bg-[rgb(248, 249, 250)]'>
               {children}
             </main>
             <Footer />

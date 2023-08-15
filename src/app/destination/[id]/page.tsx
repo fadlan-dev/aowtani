@@ -4,6 +4,8 @@ import PopularProductsSlide from '@/components/PopularProductsSlide';
 import Link from 'next/link';
 import { IDestination, IDestinationType } from '@/types';
 import Image from 'next/image';
+import ShowPhotos from '@/components/ShowPhotos';
+import ShowAllPhotos from '@/components/ShowAllPhotos';
 
 type Props = {
   params: { id: string };
@@ -53,11 +55,11 @@ function DestinationType({
 const page = async ({ params }: Props) => {
   const dest: IDestination = await getDestination(params.id);
   return (
-    <div className='mt-20 mb-24'>
-      <div className='container'>
+    <div className='mt-[60px] lg:mt-20 mb-24'>
+      <div className='lg:container lg:w-full px-0 lg:px-4'>
         <div className='h-96 overflow-hidden relative'>
           <Image
-            className='object-cover'
+            className='object-cover bg-zinc-200'
             src={
               dest.banners[0]?.asset
                 ? `${process.env.NEXT_PUBLIC_URL}${dest.banners[0].asset}`
@@ -66,7 +68,13 @@ const page = async ({ params }: Props) => {
             alt={dest.name}
             fill
           />
+          <div className='absolute bottom-2 right-2'>
+            <ShowPhotos images={dest.banners} />
+            <ShowAllPhotos total={dest.banners.length} />
+          </div>
         </div>
+      </div>
+      <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1'>
             <h1 className='capitalize'>{dest.name}</h1>

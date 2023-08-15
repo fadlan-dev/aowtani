@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/libs/utils';
+import { calculateItemsPerPage, cn } from '@/libs/utils';
 import {
   Button,
   Text,
@@ -15,6 +15,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { IDestination } from '@/types';
 import DestinationCard from './DestinationItem';
 import Empty from './Empty';
+import { usePagination } from '@mantine/hooks';
 
 type Props = {
   showSearch?: boolean;
@@ -41,6 +42,7 @@ const DestinationList = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const tag = searchParams.get('t');
+  const page = Number(searchParams.get('page')) || 1;
 
   return (
     <div className={cn(className)}>
@@ -92,13 +94,7 @@ const DestinationList = ({
         <Empty className='px-4 mt-10 md:mt-4' />
       ) : (
         <>
-          <div
-            className={'gap-4 px-4 mt-4'}
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
-            }}
-          >
+          <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
             {data?.map((dest: IDestination) => (
               <DestinationCard key={dest.id} destination={dest} />
             ))}
@@ -107,7 +103,17 @@ const DestinationList = ({
             className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}
           >
             {showPagination && (
-              <Pagination total={10} size='sm' className='w-fit m-auto' />
+              <Pagination
+                total={calculateItemsPerPage(data?.length || 0, 6)}
+                value={page}
+                size='sm'
+                onChange={(page) => {
+                  page === 1
+                    ? router.push(`destination`)
+                    : router.push(`destination?page=${page}`);
+                }}
+                className='w-fit m-auto'
+              />
             )}
             {showMore && (
               <Button

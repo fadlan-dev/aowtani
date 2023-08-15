@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/libs/utils';
+import { calculateItemsPerPage, cn, getItemsPerPage } from '@/libs/utils';
 import { IPartner } from '@/types';
 import {
   Text,
@@ -13,8 +13,8 @@ import {
   Button,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import PartnerCard from './PartnerItem';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import PartnerItem from './PartnerItem';
 import Empty from './Empty';
 
 type Props = {
@@ -38,11 +38,13 @@ const PartnerList = ({
 }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
-  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
+  const page = Number(searchParams.get('page')) || 1;
 
   return (
     <div className={cn(className)}>
-      <div className='text-center '>
+      <div className='text-center px-4'>
         <Title weight='bold'>{title}</Title>
         {subTitle && <Text className='mt-2'>{subTitle}</Text>}
         {showSearch && (
@@ -76,7 +78,14 @@ const PartnerList = ({
         </Button> */}
         <SegmentedControl
           defaultValue={searchParams.get('type') || ''}
-          onChange={(e) => router.push(e ? `/partner?type=${e}` : '/partner')}
+          onChange={(type: string) => {
+            const newParams = new URLSearchParams(searchParams.toString());
+            newParams.set('page', '1');
+            type === ''
+              ? newParams.delete('type')
+              : newParams.set('type', type);
+            router.push(`${pathname}?${newParams}`);
+          }}
           data={[
             { label: 'ทั้งหมด', value: '' },
             { label: 'กิจกรรมทัวร์', value: 'TourActivity' },
@@ -87,23 +96,27 @@ const PartnerList = ({
         />
       </Flex>
       {data.length === 0 ? (
-        <Empty />
+        <Empty className='px-4 mt-10 md:mt-4' />
       ) : (
-        <div
-          className={'gap-4 px-4 mt-4'}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill,minmax(300px, 1fr))',
-          }}
-        >
+        <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
           {data.map((partner: IPartner) => (
-            <PartnerCard key={partner.id} partner={partner} />
+            <PartnerItem key={partner.id} partner={partner} />
           ))}
         </div>
       )}
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
         {showPagination && (
-          <Pagination total={10} size='sm' className='w-fit m-auto' />
+          <Pagination
+            total={calculateItemsPerPage(data.length, 6)}
+            value={page}
+            size='sm'
+            className='w-fit m-auto'
+            onChange={(page: number) => {
+              const newParams = new URLSearchParams(searchParams.toString());
+              newParams.set('page', `${page}`);
+              router.push(`${pathname}?${newParams}`);
+            }}
+          />
         )}
         {showMore && (
           <Button variant='subtle' onClick={() => router.push('/partner')}>

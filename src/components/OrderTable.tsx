@@ -7,12 +7,29 @@ import {
   Table,
   ScrollArea,
 } from '@mantine/core';
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconSelector,
+} from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { FunctionComponent, useCallback, useState } from 'react';
 import StatusItem from './StatusItem';
+import sortBy from 'lodash/sortBy';
 
-const elements = [
+interface IData {
+  id: number;
+  booking_at: string;
+  package: string;
+  giude: string;
+  type: string;
+  amount: number;
+  date: string;
+  payment: string;
+  status: string;
+}
+
+const elements: IData[] = [
   {
     id: 1,
     booking_at: '2023-01-01',
@@ -20,7 +37,7 @@ const elements = [
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-01-01',
     payment: 'purchased',
     status: 'pending',
   },
@@ -31,7 +48,7 @@ const elements = [
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-01-01',
     payment: 'purchased',
     status: 'confirm',
   },
@@ -42,7 +59,7 @@ const elements = [
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-01-01',
     payment: 'purchased',
     status: 'cancel',
   },
@@ -52,22 +69,41 @@ interface OrderTableProps {
   className?: string;
 }
 
+type ISortStatus = {
+  columnAccessor: string;
+  direction: 'asc' | 'desc';
+};
+
 const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
-  const [reverseSortDirection, setReverseSortDirection] = useState(false);
+  const [sortStatus, setSortStatus] = useState<ISortStatus>({
+    columnAccessor: '',
+    direction: 'asc',
+  });
 
   function Th({
     children,
-    reversed,
+    sorted,
+    columnAccessor,
   }: {
     children: React.ReactNode;
-    reversed: boolean;
+    columnAccessor: string;
+    sorted: boolean;
   }) {
-    const Icon = reversed ? IconChevronUp : IconChevronDown;
+    const Icon = sorted
+      ? sortStatus.direction === 'desc'
+        ? IconChevronUp
+        : IconChevronDown
+      : IconSelector;
 
     return (
       <th>
         <UnstyledButton
-          onClick={() => setReverseSortDirection((prev) => !prev)}
+          onClick={() => {
+            setSortStatus({
+              direction: sortStatus.direction === 'asc' ? 'desc' : 'asc',
+              columnAccessor: columnAccessor,
+            });
+          }}
         >
           <Group position='apart' noWrap>
             <Text fz='sm' fw='bold' color='#495057' truncate>
@@ -82,18 +118,19 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     );
   }
 
-  const onSorted = useCallback(
-    (data: any[]) => {
-      return data.sort(
-        (a, b) => +new Date(a.booking_at) - +new Date(b.booking_at)
-      );
-    },
-    [reverseSortDirection]
-  );
+  const onSorted = useCallback(() => {
+    const data = sortBy(elements, sortStatus.columnAccessor) as IData[];
+    return sortStatus.direction === 'desc' ? data.reverse() : data;
+  }, [sortStatus]);
 
   const ths = (
     <tr className='text-black'>
-      <Th reversed={reverseSortDirection}>วันที่สั่ง</Th>
+      <Th
+        sorted={sortStatus.columnAccessor === 'booking_at'}
+        columnAccessor='booking_at'
+      >
+        วันที่สั่ง
+      </Th>
       <th className=' whitespace-nowrap'>ชื่อสินค้า</th>
       <th className=' whitespace-nowrap'>SKU</th>
       <th className=' whitespace-nowrap'>จำนวน (ต่อชิ้น)</th>
@@ -104,7 +141,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     </tr>
   );
 
-  const rows = onSorted(elements).map((pkg) => (
+  const rows = onSorted().map((pkg) => (
     <tr key={pkg.id}>
       <td>{dayjs(pkg.booking_at).format('YYYY-MM-DD')}</td>
       <td>{pkg.package}</td>

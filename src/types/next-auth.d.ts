@@ -8,6 +8,7 @@ declare module 'next-auth/jwt' {
     id: UserId;
     phone?: string | null;
     address?: string | null;
+    zip?: string;
   }
 }
 
@@ -17,6 +18,7 @@ declare module 'next-auth' {
       id: UserId;
       phone?: string | null;
       address?: string | null;
+      zip?: string;
     };
   }
 }

@@ -46,7 +46,12 @@ const ShowPhotos: FunctionComponent<ShowPhotosProps> = ({ images }) => {
           }}
         >
           {images.map((img: IImage) => (
-            <Carousel.Slide w='100vw' h='100vh' className='relative'>
+            <Carousel.Slide
+              key={img.id}
+              w='100vw'
+              h='100vh'
+              className='relative'
+            >
               <Image
                 className='object-contain'
                 src={

@@ -7,67 +7,103 @@ import {
   Center,
   ScrollArea,
 } from '@mantine/core';
-import { IconChevronDown, IconChevronUp } from '@tabler/icons-react';
+import {
+  IconChevronDown,
+  IconChevronUp,
+  IconSelector,
+} from '@tabler/icons-react';
 import dayjs from 'dayjs';
 import { FunctionComponent, useCallback, useState } from 'react';
 import StatusItem from './StatusItem';
+import sortBy from 'lodash/sortBy';
 
 interface PackageTableProps {
   className?: string;
 }
 
-const elements = [
+interface IDate {
+  id: number;
+  booking_at: string;
+  package: string;
+  giude: string;
+  type: string;
+  amount: number;
+  date: string;
+  payment: string;
+  status: string;
+}
+
+const elements: IDate[] = [
   {
     id: 1,
-    booking_at: '2023-01-01',
-    package: 'Package Name',
+    booking_at: '2023-07-14 12:00:00',
+    package: 'Package 1',
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-07-14 12:00:00',
     payment: 'purchased',
     status: 'pending',
   },
   {
     id: 2,
-    booking_at: '2023-05-01',
-    package: 'Package Name',
+    booking_at: '2023-05-01 12:00:00',
+    package: 'Package 2',
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-05-01 12:00:00',
     payment: 'purchased',
     status: 'confirm',
   },
   {
     id: 3,
-    booking_at: '2023-05-01',
-    package: 'Package Name',
+    booking_at: '2023-05-30 12:00:00',
+    package: 'Package 3',
     giude: ' Guide Name',
     type: 'fd',
     amount: 1,
-    date: +new Date(),
+    date: '2023-05-30 12:00:00',
     payment: 'purchased',
     status: 'cancel',
   },
 ];
 
+type ISortStatus = {
+  columnAccessor: string;
+  direction: 'asc' | 'desc';
+};
+
 const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
-  const [reverseSortDirection, setReverseSortDirection] = useState(false);
+  const [sortStatus, setSortStatus] = useState<ISortStatus>({
+    columnAccessor: '',
+    direction: 'asc',
+  });
 
   function Th({
     children,
-    reversed,
+    sorted,
+    columnAccessor,
   }: {
     children: React.ReactNode;
-    reversed: boolean;
+    columnAccessor: string;
+    sorted: boolean;
   }) {
-    const Icon = reversed ? IconChevronUp : IconChevronDown;
+    const Icon = sorted
+      ? sortStatus.direction === 'desc'
+        ? IconChevronUp
+        : IconChevronDown
+      : IconSelector;
 
     return (
       <th>
         <UnstyledButton
-          onClick={() => setReverseSortDirection((prev) => !prev)}
+          onClick={() => {
+            setSortStatus({
+              direction: sortStatus.direction === 'asc' ? 'desc' : 'asc',
+              columnAccessor: columnAccessor,
+            });
+          }}
         >
           <Group position='apart' noWrap>
             <Text fz='sm' fw='bold' color='#495057' truncate>
@@ -82,18 +118,19 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
     );
   }
 
-  const onSorted = useCallback(
-    (data: any[]) => {
-      return data.sort(
-        (a, b) => +new Date(a.booking_at) - +new Date(b.booking_at)
-      );
-    },
-    [reverseSortDirection]
-  );
+  const onSorted = useCallback(() => {
+    const data = sortBy(elements, sortStatus.columnAccessor) as IDate[];
+    return sortStatus.direction === 'desc' ? data.reverse() : data;
+  }, [sortStatus]);
 
   const ths = (
     <tr>
-      <Th reversed={reverseSortDirection}>วันที่จอง</Th>
+      <Th
+        sorted={sortStatus.columnAccessor === 'booking_at'}
+        columnAccessor='booking_at'
+      >
+        วันที่จอง
+      </Th>
       <th>ชื่อแพ็คเกจ</th>
       <th>ชื่อไกด์</th>
       <th>รูปแบบ</th>
@@ -104,14 +141,14 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
     </tr>
   );
 
-  const rows = onSorted(elements).map((pkg) => (
+  const rows = onSorted().map((pkg) => (
     <tr key={pkg.id}>
       <td>{dayjs(pkg.booking_at).format('YYYY-MM-DD')}</td>
       <td>{pkg.package}</td>
       <td>{pkg.giude}</td>
       <td>{pkg.type}</td>
       <td>{pkg.amount}</td>
-      <td>{dayjs(pkg.date).format('YYYY-MM-DD')}</td>
+      <td className='truncate'>{dayjs(pkg.date).format('YYYY-MM-DD')}</td>
       <td>{pkg.payment}</td>
       <td>
         <StatusItem text={pkg.status} />

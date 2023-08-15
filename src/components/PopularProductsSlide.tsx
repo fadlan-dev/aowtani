@@ -62,7 +62,7 @@ const Index = (props: Props) => {
                 อันซีนของจังหวัดนี้กัน
               </Text>
               <Text weight={600} align='end'>
-                {numberFormat(35)} ฿
+                ฿{numberFormat(35)}
               </Text>
               <Button variant='light' fullWidth mt='md' radius='md'>
                 ดูรายละเอียด

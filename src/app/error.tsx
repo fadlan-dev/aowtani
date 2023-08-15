@@ -9,7 +9,7 @@ export default function Error({
 }) {
   return (
     <div
-      className='flex flex-col justify-center'
+      className='flex flex-col justify-center mt-20 pb-20'
       style={{ minHeight: 'calc(100vh - 142px)' }}
     >
       <div className='container block text-center'>

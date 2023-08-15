@@ -1,11 +1,13 @@
+'use client';
 import BookingInfo from '@/components/BookingInfo';
 import CustomerInfo from '@/components/CustomerInfo';
 import UploadSlip from '@/components/UploadSlip';
 import { IPackage } from '@/types';
-import React from 'react';
+import { useRouter } from 'next/navigation';
+// import { use } from 'react';
 
 type Props = {
-  params: { id: string };
+  // params: { id: string };
 };
 
 const getPackage = async (id: string): Promise<IPackage> => {
@@ -16,8 +18,9 @@ const getPackage = async (id: string): Promise<IPackage> => {
   return res;
 };
 
-const Page = async ({ params }: Props) => {
-  const pkg: IPackage = await getPackage(params.id);
+const Page = ({}: Props) => {
+  const router = useRouter();
+  // const pkg: IPackage = use(getPackage(params.id));
   return (
     <div className='mt-20 mb-24'>
       <center>
@@ -31,7 +34,10 @@ const Page = async ({ params }: Props) => {
           </div>
           <div className='w-full lg:w-80'>
             <CustomerInfo />
-            <UploadSlip className='mt-4' />
+            <UploadSlip
+              className='mt-4'
+              onSubmit={() => router.push('/booking/success')}
+            />
           </div>
         </div>
       </div>

@@ -40,7 +40,14 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
     >
       <Group position='apart'>
         <Group spacing={8}>
-          <Avatar radius='xl' src={partner?.images?.[0] || null} />
+          <Avatar
+            radius='xl'
+            src={
+              `${process.env.NEXT_PUBLIC_URL}${partner.images[0].asset}` ||
+              '/image.svg'
+            }
+            alt={partner.name}
+          />
           <Text>{partner.name}</Text>
         </Group>
         <IconDiscountCheckFilled className='text-primary' />

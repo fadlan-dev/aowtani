@@ -20,6 +20,7 @@ const Page = async ({ searchParams }: Props) => {
       <PartnerList
         data={partners}
         showSearch
+        showPagination
         title='ผู้ประกอบการ'
         subTitle='เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ'
       />
