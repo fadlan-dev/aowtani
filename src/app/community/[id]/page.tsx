@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: Props) {
 
 const getCommunity = async (id: string): Promise<ICommunity> => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/communities/${id}.json`
+    `${process.env.NEXT_PUBLIC_API_URL}/communities/${id}.json`,
+    { cache: 'no-store' }
   );
   const community = await data.json();
   return community;
@@ -31,9 +32,9 @@ const getCommunity = async (id: string): Promise<ICommunity> => {
 const page = async ({ params }: Props) => {
   const community: ICommunity = await getCommunity(params.id);
   return (
-    <div className='mt-[60px] mb-24'>
-      <div className='container'>
-        <div className='h-96 relative'>
+    <div className='mt-[60px] lg:mt-20 mb-24'>
+      <div className='lg:container lg:w-full px-0 lg:px-4'>
+        <div className='h-96 overflow-hidden relative'>
           <Image
             className='bg-zinc-200 object-cover'
             src={
@@ -45,6 +46,8 @@ const page = async ({ params }: Props) => {
             fill
           />
         </div>
+      </div>
+      <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className=' flex-1'>
             <h1>{community.name}</h1>
