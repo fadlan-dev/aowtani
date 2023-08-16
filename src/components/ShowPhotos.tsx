@@ -42,7 +42,7 @@ const ShowPhotos: FunctionComponent<ShowPhotosProps> = ({ images }) => {
   if (!open) return null;
 
   return (
-    <div className='w-screen h-screen fixed top-0 left-0 right-0 bottom-0 z-30 bg-[#09090bd9]'>
+    <div className='w-screen h-[100dvh] fixed top-0 left-0 right-0 bottom-0 z-30 bg-[#09090bd9]'>
       <div className='relative'>
         <div className='absolute right-4 top-4 z-20'>
           <CloseButton
@@ -59,7 +59,7 @@ const ShowPhotos: FunctionComponent<ShowPhotosProps> = ({ images }) => {
         >
           <IconChevronLeft onClick={handlePrevSlide} />
         </ActionIcon>
-        <div className='w-screen h-screen flex overflow-hidden relative m-auto'>
+        <div className='w-screen h-[100dvh] flex overflow-hidden relative m-auto'>
           <Swipe
             onSwipeLeft={handleNextSlide}
             onSwipeRight={handlePrevSlide}
