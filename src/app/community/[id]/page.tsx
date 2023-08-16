@@ -1,4 +1,6 @@
 import PartnerList from '@/components/PartnerList';
+import ShowAllPhotos from '@/components/ShowAllPhotos';
+import ShowPhotos from '@/components/ShowPhotos';
 import { ICommunity } from '@/types';
 import Image from 'next/image';
 
@@ -45,6 +47,10 @@ const page = async ({ params }: Props) => {
             alt={community.name}
             fill
           />
+          <div className='absolute bottom-2 right-2'>
+            <ShowPhotos images={community.images} />
+            <ShowAllPhotos total={community.images.length} />
+          </div>
         </div>
       </div>
       <div className='container'>
