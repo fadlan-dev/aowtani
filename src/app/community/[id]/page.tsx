@@ -1,6 +1,6 @@
 import PartnerList from '@/components/PartnerList';
 import ShowAllPhotos from '@/components/ShowAllPhotos';
-import ShowPhotos from '@/components/ShowPhotos';
+import { getCommunity } from '@/libs/services/getComunity';
 import { ICommunity } from '@/types';
 import Image from 'next/image';
 
@@ -22,15 +22,6 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-const getCommunity = async (id: string): Promise<ICommunity> => {
-  const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/communities/${id}.json`,
-    { cache: 'no-store' }
-  );
-  const community = await data.json();
-  return community;
-};
-
 const page = async ({ params }: Props) => {
   const community: ICommunity = await getCommunity(params.id);
   return (
@@ -48,8 +39,7 @@ const page = async ({ params }: Props) => {
             fill
           />
           <div className='absolute bottom-2 right-2'>
-            <ShowPhotos images={community.images} />
-            <ShowAllPhotos total={community.images.length} />
+            <ShowAllPhotos images={community.images} />
           </div>
         </div>
       </div>

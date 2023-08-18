@@ -4,7 +4,6 @@ import PopularProductsSlide from '@/components/PopularProductsSlide';
 import Link from 'next/link';
 import { IDestination, IDestinationType } from '@/types';
 import Image from 'next/image';
-import ShowPhotos from '@/components/ShowPhotos';
 import ShowAllPhotos from '@/components/ShowAllPhotos';
 import Reviews from '@/components/Reviews';
 import { getDestination } from '@/libs/services/getDestination';
@@ -63,8 +62,7 @@ const page = async ({ params }: Props) => {
             fill
           />
           <div className='absolute bottom-2 right-2'>
-            <ShowPhotos images={dest.banners} />
-            <ShowAllPhotos total={dest.banners.length} />
+            <ShowAllPhotos images={dest.banners} />
           </div>
         </div>
       </div>
