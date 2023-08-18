@@ -1,8 +1,7 @@
+import Hero from '@/components/Hero';
 import PartnerList from '@/components/PartnerList';
-import ShowAllPhotos from '@/components/ShowAllPhotos';
 import { getCommunity } from '@/libs/services/getComunity';
 import { ICommunity } from '@/types';
-import Image from 'next/image';
 
 type Props = {
   params: { id: string };
@@ -27,21 +26,7 @@ const page = async ({ params }: Props) => {
   return (
     <div className='mt-[60px] lg:mt-20 mb-24'>
       <div className='lg:container lg:w-full px-0 lg:px-4'>
-        <div className='h-96 overflow-hidden relative'>
-          <Image
-            className='bg-zinc-200 object-cover'
-            src={
-              community.images[0]?.asset
-                ? `${process.env.NEXT_PUBLIC_URL}${community.images[0].asset}`
-                : './image.svg'
-            }
-            alt={community.name}
-            fill
-          />
-          <div className='absolute bottom-2 right-2'>
-            <ShowAllPhotos images={community.images} />
-          </div>
-        </div>
+        <Hero images={community.images} name={community.name} />
       </div>
       <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>

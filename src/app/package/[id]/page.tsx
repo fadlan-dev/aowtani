@@ -1,10 +1,9 @@
-import Image from 'next/image';
 import { IPackage } from '@/types';
 import PackageType from '@/components/PackageType';
 import DestinationVisit from '@/components/DestinationVisit';
 import Booking from '@/components/Booking';
 import { getPackage } from '@/libs/services/getPackage';
-import ShowAllPhotos from '@/components/ShowAllPhotos';
+import Hero from '@/components/Hero';
 
 interface pageProps {
   params: { id: string };
@@ -30,21 +29,7 @@ async function page({ params }: pageProps) {
   return (
     <div className='mt-[60px] lg:mt-20 mb-24'>
       <div className='lg:container lg:w-full px-0 lg:px-4'>
-        <div className='h-96 overflow-hidden relative'>
-          <Image
-            fill
-            className='object-cover'
-            src={
-              pkg.images[0]?.asset
-                ? `${process.env.NEXT_PUBLIC_URL}${pkg.images[0]?.asset}`
-                : 'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80'
-            }
-            alt={pkg.name}
-          />
-          <div className='absolute bottom-2 right-2'>
-            <ShowAllPhotos images={pkg.images} />
-          </div>
-        </div>
+        <Hero images={pkg.images} name={pkg.name} />
       </div>
       <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
