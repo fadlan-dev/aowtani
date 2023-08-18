@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { IPackage } from '@/types';
 import PackageType from '@/components/PackageType';
 import DestinationVisit from '@/components/DestinationVisit';
-import LocalGuideItem from '@/components/LocalGuideItem';
 import Booking from '@/components/Booking';
 import { getPackage } from '@/libs/services/getPackage';
+import ShowAllPhotos from '@/components/ShowAllPhotos';
 
 interface pageProps {
   params: { id: string };
@@ -28,8 +28,8 @@ async function page({ params }: pageProps) {
   const { id } = params;
   const pkg: IPackage = await getPackage(id);
   return (
-    <div className='mt-20 mb-24'>
-      <div className='container'>
+    <div className='mt-[60px] lg:mt-20 mb-24'>
+      <div className='lg:container lg:w-full px-0 lg:px-4'>
         <div className='h-96 overflow-hidden relative'>
           <Image
             fill
@@ -41,7 +41,12 @@ async function page({ params }: pageProps) {
             }
             alt={pkg.name}
           />
+          <div className='absolute bottom-2 right-2'>
+            <ShowAllPhotos images={pkg.images} />
+          </div>
         </div>
+      </div>
+      <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1'>
             <div className='flex flex-col sm:flex-row items-baseline justify-between'>
@@ -79,6 +84,7 @@ async function page({ params }: pageProps) {
             <Booking price={pkg.price} />
           </div>
         </div>
+        d
       </div>
     </div>
   );
