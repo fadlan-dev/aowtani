@@ -6,6 +6,7 @@ import { IDestination, IDestinationType } from '@/types';
 import Reviews from '@/components/Reviews';
 import { getDestination } from '@/libs/services/getDestination';
 import Hero from '@/components/Hero';
+import OrganizationItem from '@/components/OrganizationItem';
 
 type Props = {
   params: { id: string };
@@ -81,6 +82,10 @@ const page = async ({ params }: Props) => {
                 }}
               />
             )}
+            <div className='w-full lg:w-80'>
+              <h3 className='mb-2'>สังกัดหน่วยงาน</h3>
+              <OrganizationItem data={dest.organization} />
+            </div>
             <RecommendedPackagesSlide />
             <PopularProductsSlide />
           </div>
