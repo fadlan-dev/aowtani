@@ -12,7 +12,7 @@ import {
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
-import CommunityCard from './CommunityItem';
+import CommunityItem from './CommunityItem';
 
 type Props = {
   data: ICommunity[];
@@ -68,7 +68,7 @@ const CommunityList = ({
       </div>
       <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
         {data.map((commu: ICommunity) => {
-          return <CommunityCard key={commu.id} community={commu} />;
+          return <CommunityItem key={commu.id} community={commu} />;
         })}
       </div>
       <div className='px-4 mt-4 text-end'>

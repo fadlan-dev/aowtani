@@ -1,18 +1,26 @@
+'use client';
 import { AspectRatio, Button, Card, Text } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ICommunity } from '@/types';
-interface CommunityCardProps {
+import { cn } from '@/libs/utils';
+
+interface CommunityItemProps {
   community: ICommunity;
+  className?: string;
 }
 
-const CommunityCard: FunctionComponent<CommunityCardProps> = ({
+const CommunityItem: FunctionComponent<CommunityItemProps> = ({
+  className,
   community,
 }) => {
   const router = useRouter();
   return (
-    <Card padding='md' className='cursor-pointer hover:shadow transition'>
+    <Card
+      padding='md'
+      className={cn(className, 'cursor-pointer hover:shadow transition')}
+    >
       <Card.Section>
         <AspectRatio ratio={16 / 9}>
           <Image
@@ -51,4 +59,4 @@ const CommunityCard: FunctionComponent<CommunityCardProps> = ({
   );
 };
 
-export default CommunityCard;
+export default CommunityItem;
