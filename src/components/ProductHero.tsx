@@ -6,6 +6,8 @@ import {
   Group,
   NumberInput,
   useMantineTheme,
+  Text,
+  Badge,
 } from '@mantine/core';
 import { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
@@ -55,10 +57,13 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
           <h1>{product.name}</h1>
           <h4 className='m-0'>{product.sku}</h4>
         </Flex>
-        <Group p='sm' bg='brand.0'>
-          <span className='font-bold text-2xl text-primary'>
-            ฿{product.price || 1000}
-          </span>
+        <Group p='sm' bg='brand.0' align='baseline'>
+          <Text className='font-bold text-2xl text-primary'>
+            ฿{product.price}
+          </Text>
+          <Text c='dimmed' td='line-through'>
+            ฿{product.price_before_discount}
+          </Text>
         </Group>
         <Group>
           จำนวน
