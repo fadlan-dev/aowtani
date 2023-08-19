@@ -1,7 +1,7 @@
 'use client';
 import { numberFormat } from '@/libs/utils';
 import { IProduct } from '@/types';
-import { AspectRatio, Badge, Card, Group, Text } from '@mantine/core';
+import { AspectRatio, Badge, Card, Flex, Group, Text } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -34,9 +34,18 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
         <Group mt={2}>
           <Badge>ชุมชนบ้านบูดี</Badge>
         </Group>
-        <Text weight={600} align='end'>
-          ฿{numberFormat(product.price)}
-        </Text>
+        <Flex justify='end'>
+          <Flex align='baseline' gap={2}>
+            <Text weight='bold' size='lg' c='brand.6'>
+              ฿{numberFormat(product.price)}
+            </Text>
+            {product.price_before_discount > 0 && (
+              <Text size='sm' c='dimmed' td='line-through'>
+                ฿{numberFormat(product.price_before_discount)}
+              </Text>
+            )}
+          </Flex>
+        </Flex>
       </Card>
     </Link>
   );
