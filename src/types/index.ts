@@ -9,13 +9,28 @@ export type IDestination = {
   name: string;
   content: string;
   embed_map: string;
-  description: any;
+  description: string;
   address: string;
   destination_type: IDestinationType;
   banners: IBanner[];
   created_at: string;
   updated_at: string;
+  organization: IOrganization;
 };
+
+export interface IOrganization {
+  id: number;
+  name: string;
+  address: string;
+  detail: string;
+  president_name: string;
+  website: string;
+  phone: string;
+  created_at: string;
+  updated_at: string;
+  banner: IImage;
+  logo: IImage;
+}
 
 export interface IDestinationType {
   id: number;
@@ -67,9 +82,10 @@ export interface ICommunity {
   name: string;
   address: string;
   detail: string;
-  images: IImage[];
+  organization_id: number;
   created_at: string;
   updated_at: string;
+  images: IImage[];
   content: string;
 }
 
@@ -94,7 +110,8 @@ export interface IProduct {
   images: IImage[];
   sku: string;
   stock: number;
-  price: any;
+  price: number;
+  price_before_discount: number;
   created_at: string;
   updated_at: string;
   details: string;
@@ -105,16 +122,22 @@ export interface ILocalGuide {
   name: string;
   phone: string;
   facebook: string;
-  detail: any;
+  detail?: string;
   address: string;
   status: string;
   created_at: string;
   updated_at: string;
+  community: ICommunity;
   experience: string;
-  profile: Profile;
-  id_card_pdf: IdCardPdf;
-  house_registration_pdf: HouseRegistrationPdf;
-  certificate_pdf: any;
+  profile?: Profile;
+  id_card_pdf?: IdCardPdf;
+  house_registration_pdf?: HouseRegistrationPdf;
+  certificate_pdf?: ICertificatePdf;
+}
+
+export interface ICertificatePdf {
+  id: number;
+  asset: string;
 }
 
 export interface Profile {
