@@ -51,8 +51,7 @@ const LocalGuideItem = ({ className, data }: Props) => {
       </Group>
       <Text lineClamp={3}>{data.detail}</Text>
       <Group className='text-primary'>
-        <Text>#ขับเรือได้</Text>
-        <Text>#พูดได้หลายภาษา</Text>
+        <Text>{data.experience}</Text>
       </Group>
       <Flex gap={8} mt={8} className='text-primary'>
         <Link href={data.facebook} target='_blank'>

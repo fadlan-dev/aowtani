@@ -70,7 +70,7 @@ const LocalGuidList = ({
           สมัครเป็นไกด์ท้องถิ่น
         </Button> */}
       </div>
-      <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
+      <div className={'grid grid-cols-list gap-4 mt-4'}>
         {data.map((guide: ILocalGuide) => (
           <LocalGuideItem data={guide} key={guide.id} />
         ))}
