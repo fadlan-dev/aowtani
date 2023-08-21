@@ -1,6 +1,7 @@
 'use client';
 import { CacheProvider } from '@emotion/react';
 import { useEmotionCache, MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { useServerInsertedHTML } from 'next/navigation';
 
 export default function RootStyleRegistry({
@@ -54,7 +55,7 @@ export default function RootStyleRegistry({
         withGlobalStyles
         withNormalizeCSS
       >
-        {children}
+        <ModalsProvider>{children}</ModalsProvider>
       </MantineProvider>
     </CacheProvider>
   );

@@ -10,7 +10,7 @@ export const metadata = {
 
 const Page = (props: Props) => {
   return (
-    <div>
+    <div className='mt-24 mb-24'>
       <div className='container'>
         <h1 className='text-center mt-20'>ข้อมูลส่วนตัว</h1>
         <AccountTabs className='mt-4' />

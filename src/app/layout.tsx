@@ -5,7 +5,6 @@ import { Anuphan } from 'next/font/google';
 import Header from './Header';
 import Footer from './Footer';
 import Providers from '@/components/Providers';
-import { getAuthSession } from '@/libs/auth';
 
 const anuphan = Anuphan({ subsets: ['thai'] });
 
@@ -57,8 +56,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   authModal: React.ReactNode;
 }) {
-  const session = await getAuthSession();
-
   return (
     <html lang='en'>
       <body className={anuphan.className}>

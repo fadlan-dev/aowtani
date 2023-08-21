@@ -61,7 +61,7 @@ export interface IPackage {
 }
 
 export interface IImage {
-  id: number;
+  id: number | string;
   asset: string;
   thumbUrl?: string;
   uid?: number;
@@ -153,4 +153,19 @@ export interface IdCardPdf {
 export interface HouseRegistrationPdf {
   id: number;
   asset: string;
+}
+
+export interface IUser {
+  id?: number;
+  username: string;
+  name_title: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  address: string;
+  post_code: string;
+  created_at?: string;
+  updated_at?: string;
+  profile: IImage;
+  token?: string;
 }

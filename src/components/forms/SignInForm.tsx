@@ -11,10 +11,11 @@ import {
   Checkbox,
   Button,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { useForm, zodResolver } from '@mantine/form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { z } from 'zod';
 
 type Props = {
   withBorder?: boolean;
@@ -23,18 +24,31 @@ type Props = {
 const SignInForm = ({ withBorder }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { data } = useSession();
   const callbackUrl = searchParams.get('callback');
+
+  const schema = z.object({
+    username: z.string().min(1, { message: 'Please input your username' }),
+    password: z.string().min(6, { message: 'Please input your password' }),
+  });
+
   const form = useForm({
     initialValues: {
-      email: 'fadlan.8291@gmail.com',
-      password: 'Fadlan_8291',
+      username: '',
+      password: '',
     },
-    validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
-      password: (val) =>
-        val.length < 6 ? 'Password should include at least 6 characters' : null,
-    },
+    validate: zodResolver(schema),
   });
+
+  const handleLogin = async () => {
+    const payload = form.values;
+    signIn('credentials', {
+      ...payload,
+      callbackUrl: `${callbackUrl}`,
+    });
+  };
+
+  console.log(data);
   return (
     <Container size={420} className='w-full' my={40}>
       <Title
@@ -65,33 +79,23 @@ const SignInForm = ({ withBorder }: Props) => {
         radius='md'
       >
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={form.onSubmit((values) =>
             signIn('credentials', {
               ...values,
               callbackUrl: `${callbackUrl}`,
-            });
-          })}
+            })
+          )}
         >
           <TextInput
-            label='Email'
-            placeholder='you@mantine.dev'
-            value={form.values.email}
-            name='email'
-            onChange={(event) =>
-              form.setFieldValue('email', event.currentTarget.value)
-            }
-            error={form.errors.email && 'Invalid email'}
+            label='Username'
+            placeholder='Username'
+            {...form.getInputProps('username')}
           />
           <PasswordInput
             label='Password'
             placeholder='Your password'
             mt='md'
-            name='password'
-            value={form.values.password}
-            onChange={(event) =>
-              form.setFieldValue('password', event.currentTarget.value)
-            }
-            error={form.errors.password}
+            {...form.getInputProps('password')}
           />
           <Group position='apart' mt='lg'>
             <Checkbox label='Remember me' />

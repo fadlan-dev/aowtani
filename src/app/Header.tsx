@@ -89,13 +89,14 @@ const Index = () => {
                   <Avatar
                     size='md'
                     radius='xl'
-                    src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'
+                    ml='sm'
+                    src={`${process.env.NEXT_PUBLIC_URL}${session.user?.profile?.asset}`}
                   />
                 </Popover.Target>
                 <Popover.Dropdown>
                   <Link href='/account' className='text-black'>
                     <Box w={124} className=' overflow-hidden cu'>
-                      <Text className='truncate'>{session.user?.email}</Text>
+                      <Text className='truncate'>{session.user?.username}</Text>
                     </Box>
                   </Link>
                   <Divider my='xs' />

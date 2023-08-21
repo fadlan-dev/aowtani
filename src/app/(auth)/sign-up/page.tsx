@@ -8,7 +8,7 @@ export const metadata = {
 
 const page = (props: Props) => {
   return (
-    <div className='h-screen flex items-center justify-center'>
+    <div className='flex items-center justify-center py-20'>
       <SignUpForm />
     </div>
   );
