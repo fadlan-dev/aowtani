@@ -23,7 +23,7 @@ const PersonalInfo = ({ className }: Props) => {
         m='auto'
         size='xl'
         radius={100}
-        src={`${process.env.NEXT_PUBLIC_URL}${session?.user.profile.asset}`}
+        src={`${process.env.NEXT_PUBLIC_URL}${session?.user.profile?.asset}`}
       />
       <Select
         mt='md'
