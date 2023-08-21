@@ -86,7 +86,7 @@ export interface ICommunity {
   created_at: string;
   updated_at: string;
   images: IImage[];
-  content: string;
+  content?: string;
 }
 
 export interface IPartner {
@@ -122,7 +122,7 @@ export interface ILocalGuide {
   name: string;
   phone: string;
   facebook: string;
-  detail?: string;
+  detail?: string | null;
   address: string;
   status: string;
   created_at: string;
@@ -132,7 +132,7 @@ export interface ILocalGuide {
   profile?: Profile;
   id_card_pdf?: IdCardPdf;
   house_registration_pdf?: HouseRegistrationPdf;
-  certificate_pdf?: ICertificatePdf;
+  certificate_pdf: ICertificatePdf | null;
 }
 
 export interface ICertificatePdf {
