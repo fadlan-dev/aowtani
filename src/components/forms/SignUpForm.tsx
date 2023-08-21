@@ -15,7 +15,6 @@ import {
 import { useForm, zodResolver } from '@mantine/form';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { useState } from 'react';
 import { IconPlus } from '@tabler/icons-react';
 import { z } from 'zod';
 import { IUser } from '@/types';
@@ -51,19 +50,18 @@ const RegisterForm = (props: Props) => {
   const form = useForm({
     initialValues: {
       profile: {
-        id: 239,
-        asset:
-          '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZTg9IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--c35e151227d29132e070b03cd0643148ccb45ca3/011%20%E0%B8%99%E0%B8%B2%E0%B8%A2%E0%B9%80%E0%B8%AD%20%E0%B8%99%E0%B8%B2%E0%B8%A1%E0%B8%AA%E0%B8%81%E0%B8%B8%E0%B8%A5%E0%B8%9A%E0%B8%B5_1.jpeg',
+        id: '',
+        asset: '',
       },
-      username: 'fadlan.8291@gmail.com',
-      name_title: 'mr',
-      first_name: 'Sir',
-      last_name: 'Lancelot',
-      phone: '0808734257',
-      address: '61/2',
-      post_code: '95140',
-      password: '123456',
-      confirm: '123456',
+      username: '',
+      name_title: '',
+      first_name: '',
+      last_name: '',
+      phone: '',
+      address: '',
+      post_code: '',
+      password: '',
+      confirm: '',
     },
     validate: zodResolver(schema),
   });
