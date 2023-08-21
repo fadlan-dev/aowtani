@@ -98,7 +98,7 @@ const Index = ({ destinations, pkgs, products }: Props) => {
         <div className='mt-10'>
           <h2 className='text-center text-3xl'>แพ็กเกจทัวร์แนะนำ</h2>
           <p className='text-center'>ตอบโจทย์ทุกไลฟ์สไตล์</p>
-          <PackageList data={pkgs} />
+          <PackageList className='mt-4 px-4' data={pkgs} />
         </div>
         <div className='mt-10'>
           <h2 className='text-center text-3xl'>สินค้ายอดนิยม</h2>

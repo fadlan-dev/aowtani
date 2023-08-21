@@ -42,7 +42,7 @@ const Page = async ({ params }: Props) => {
       <div className='flex flex-col-reverse lg:flex-row gap-4 mt-4 p-4'>
         <div className='flex-1'>
           <h2>แพ็กเกจทัวร์</h2>
-          <PackageList data={pkgs} />
+          <PackageList className='mt-2' data={pkgs} />
         </div>
 
         <div className='w-full lg:w-80'>
