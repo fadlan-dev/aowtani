@@ -1,5 +1,5 @@
 import { IUser } from '@/types';
-import { NextAuthOptions, getServerSession } from 'next-auth';
+import { NextAuthOptions, getServerSession, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export const authOptions: NextAuthOptions = {
@@ -51,9 +51,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }) {
-      if (account) {
-        token.accessToken = account.access_token;
+    async jwt({ token, user, account, session, trigger }) {
+      if (trigger === 'update') {
+        token.username = session.username;
+        token.name_title = session.name_title;
+        token.first_name = session.first_name;
+        token.last_name = session.last_name;
+        token.phone = session.phone;
+        token.address = session.address;
+        token.post_code = session.post_code;
+        token.created_at = session.created_at;
+        token.updated_at = session.updated_at;
+        token.updated_at = session.updated_at;
+        token.profile = session.profile;
+      } else if (account) {
+        token.accessToken = user.token;
         token.id = user.id;
         token.username = user.username;
         token.name_title = user.name_title;
@@ -70,7 +82,10 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async session({ token, session }) {
+    async session({ token, session, newSession, trigger }) {
+      if (trigger === 'update') {
+        console.log('newSession', newSession);
+      }
       session.user.id = token.id;
       session.user.username = token.username;
       session.user.name_title = token.name_title;
@@ -84,6 +99,7 @@ export const authOptions: NextAuthOptions = {
       session.user.updated_at = token.updated_at;
       session.user.profile = token.profile;
       session.user.token = token.token;
+
       return session;
     },
     // redirect() {

@@ -169,3 +169,15 @@ export interface IUser {
   profile: IImage;
   token?: string;
 }
+
+export interface IUpdateCustomerRequest {
+  username: string;
+  password: string;
+  name_title: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  address: string;
+  post_code: string;
+  profile: Profile;
+}
