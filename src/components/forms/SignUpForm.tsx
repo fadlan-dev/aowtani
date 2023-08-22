@@ -20,8 +20,9 @@ import { z } from 'zod';
 import { IUser } from '@/types';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { ModalsProvider, modals } from '@mantine/modals';
+import { ModalsProvider } from '@mantine/modals';
 import { cn } from '@/libs/utils';
+import { ErrorModal } from '@/hooks/error-modal';
 type Props = {};
 
 const RegisterForm = (props: Props) => {
@@ -77,7 +78,7 @@ const RegisterForm = (props: Props) => {
       return data;
     },
     onError: (err: AxiosError) => {
-      openErrModal({ title: 'Upload', content: err.response?.statusText });
+      ErrorModal({ title: 'Upload', content: err.response?.statusText });
     },
     onSuccess: (res) => {
       form.setFieldValue('profile', res);
@@ -85,25 +86,6 @@ const RegisterForm = (props: Props) => {
   });
 
   const handleFileChange = (file: File) => uploadProfile(file);
-
-  const openErrModal = ({
-    title,
-    content,
-  }: {
-    title: string;
-    content: string | undefined;
-  }) =>
-    modals.openConfirmModal({
-      title: title,
-      centered: true,
-      children: (
-        <Text size='sm'>
-          {content || `Comment wasn't created successfully. Please try again.`}
-        </Text>
-      ),
-      labels: { confirm: 'Ok', cancel: 'cancel' },
-      cancelProps: { display: 'none' },
-    });
 
   const { mutate: Regsiter, isLoading: resiterLoading } = useMutation({
     mutationFn: async (payload: IUser) => {
@@ -114,7 +96,7 @@ const RegisterForm = (props: Props) => {
       return data;
     },
     onError: (err: AxiosError) => {
-      openErrModal({ title: 'Register', content: err.response?.statusText });
+      ErrorModal({ title: 'Register', content: err.response?.statusText });
     },
     onSuccess: (res) => {
       router.replace('/sign-in');
