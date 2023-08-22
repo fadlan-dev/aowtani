@@ -86,7 +86,7 @@ export interface ICommunity {
   created_at: string;
   updated_at: string;
   images: IImage[];
-  content?: string;
+  content: string;
 }
 
 export interface IPartner {
