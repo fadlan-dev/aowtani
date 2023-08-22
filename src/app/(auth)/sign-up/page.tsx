@@ -9,7 +9,7 @@ export const metadata = {
 const page = (props: Props) => {
   return (
     <div className='flex items-center justify-center py-20'>
-      <SignUpForm />
+      <SignUpForm p={24} />
     </div>
   );
 };

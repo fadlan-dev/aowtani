@@ -23,9 +23,11 @@ import axios, { AxiosError } from 'axios';
 import { ModalsProvider } from '@mantine/modals';
 import { cn } from '@/libs/utils';
 import { ErrorModal } from '@/hooks/error-modal';
-type Props = {};
+type Props = {
+  p?: number;
+};
 
-const RegisterForm = (props: Props) => {
+const RegisterForm = ({ p }: Props) => {
   const router = useRouter();
 
   const schema = z
@@ -130,7 +132,7 @@ const RegisterForm = (props: Props) => {
             Login
           </Anchor>
         </Text>
-        <Paper withBorder shadow='md' p={30} mt={30} radius='md'>
+        <Paper mt={30} p={p} mb='lg' radius='md'>
           <form
             className='flex flex-col gap-2'
             onSubmit={form.onSubmit((values) => handleRegister(values))}

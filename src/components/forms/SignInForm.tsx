@@ -14,17 +14,16 @@ import {
 import { useForm, zodResolver } from '@mantine/form';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { z } from 'zod';
 
 type Props = {
-  withBorder?: boolean;
+  p?: number;
 };
 
-const SignInForm = ({ withBorder }: Props) => {
+const SignInForm = ({ p }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data } = useSession();
   const callbackUrl = searchParams.get('callback');
 
   const schema = z.object({
@@ -40,17 +39,8 @@ const SignInForm = ({ withBorder }: Props) => {
     validate: zodResolver(schema),
   });
 
-  const handleLogin = async () => {
-    const payload = form.values;
-    signIn('credentials', {
-      ...payload,
-      callbackUrl: `${callbackUrl}`,
-    });
-  };
-
-  console.log(data);
   return (
-    <Container size={420} className='w-full' my={40}>
+    <Container size={420} className='w-full'>
       <Title
         align='center'
         sx={(theme) => ({
@@ -71,13 +61,7 @@ const SignInForm = ({ withBorder }: Props) => {
         </Anchor>
       </Text>
 
-      <Paper
-        withBorder={withBorder}
-        shadow={withBorder ? 'md' : ''}
-        p={30}
-        mt={30}
-        radius='md'
-      >
+      <Paper mt={30} p={p} mb='lg' radius='md'>
         <form
           onSubmit={form.onSubmit((values) =>
             signIn('credentials', {
