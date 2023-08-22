@@ -65,7 +65,7 @@ const SignInForm = ({ withBorder }: Props) => {
         <Anchor
           size='sm'
           component='button'
-          onClick={() => router.push('/register')}
+          onClick={() => router.push('/sign-up')}
         >
           Create account
         </Anchor>
