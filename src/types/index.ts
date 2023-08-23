@@ -181,3 +181,16 @@ export interface IUpdateCustomerRequest {
   post_code: string;
   profile: Profile;
 }
+
+export interface IBookingRequest {
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  quantity: number;
+  note: string;
+  package_id: number;
+  local_guide_id: number;
+  tour_date: string;
+  price: number;
+  slip: IImage;
+}

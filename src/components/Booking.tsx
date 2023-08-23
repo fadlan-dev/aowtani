@@ -1,5 +1,5 @@
 'use client';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback, useEffect } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
 import {
   Select,
@@ -8,25 +8,22 @@ import {
   Paper,
   Text,
   Button,
+  Textarea,
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { z } from 'zod';
 import { useSession } from 'next-auth/react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import dayjs from 'dayjs';
 
 interface BookingProps {
   price: number;
 }
 
 const schema = z.object({
-  date: z.date(),
-  prefix: z.string().min(1, { message: 'Please select your Prefix' }),
-  fname: z.string().min(1, { message: 'Please select your Firstname' }),
-  sname: z.string().min(1, { message: 'Please select your Surname' }),
-  email: z.string().email({ message: 'Invalid email' }),
-  tel: z.string().min(10, { message: 'Tel should have at least 10 letters' }),
+  tour_date: z.date(),
   note: z.string(),
-  people: z
+  quantity: z
     .number()
     .min(1, { message: 'You must be at least 1 to create an account' }),
 });
@@ -35,78 +32,59 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
   const { data: session } = useSession();
   const router = useRouter();
   const params = useParams();
+
   const form = useForm({
-    validate: zodResolver(schema),
     initialValues: {
-      date: '',
-      prefix: 'Mr',
-      fname: 'Sir',
-      sname: 'Lancelot',
-      email: 'sir@gmail.com',
-      tel: '2322392389',
-      note: 'Note',
-      people: 1,
+      tour_date: '',
+      note: '',
+      quantity: 1,
     },
+    validate: zodResolver(schema),
   });
+
+  const minDate = useCallback(() => {
+    // Get the current date
+    const currentDate = new Date();
+
+    // Calculate the date for tomorrow
+    const tomorrowDate = new Date(currentDate);
+    return new Date(
+      tomorrowDate.setDate(currentDate.getDate() + 1)
+    ).toISOString();
+  }, []);
+
   return (
     <Paper p='md'>
       <form
         className='flex flex-col gap-2'
-        onSubmit={form.onSubmit((e) => {
-          router.push(`booking/${params.id}`);
+        onSubmit={form.onSubmit((_values) => {
+          const url = `/booking/${params.id}/?tour_date=${new Date(
+            form.values.tour_date
+          ).toISOString()}&note=${form.values.note}&quantity=${
+            form.values.quantity
+          }`;
+
+          router.push(url);
         })}
       >
         <DateInput
           label='วันที่เดินทาง'
           placeholder='เลือกวันที่เดินทาง'
-          {...form.getInputProps('date')}
-        />
-        <Select
-          label='คำนำหน้า'
-          placeholder='Pick one'
-          name='prefix'
-          data={[
-            { value: 'Mr', label: 'นาย' },
-            { value: 'Ms', label: 'นางสาว' },
-          ]}
-          {...form.getInputProps('prefix')}
-        />
-        <TextInput
-          label='ชื่อ'
-          placeholder='กรอกชื่อ'
-          {...form.getInputProps('fname')}
-        />
-        <TextInput
-          label='นามสกุล'
-          placeholder='กรอกนามสกุล'
-          {...form.getInputProps('sname')}
-        />
-        <TextInput
-          label='อีเมล'
-          placeholder='กรอกอีเมล์'
-          {...form.getInputProps('email')}
-        />
-        <TextInput
-          label='เบอร์โทรศัพท์'
-          placeholder='กรอกเบอร์โทรศัพท์'
-          {...form.getInputProps('tel')}
-        />
-        <TextInput
-          label='หมายเหตุ'
-          placeholder='กรอกหมายเหตุที่ต้องการ'
-          {...form.getInputProps('note')}
+          valueFormat='YYYY MMM DD'
+          minDate={dayjs(new Date()).add(1, 'day').toDate()}
+          {...form.getInputProps('tour_date')}
         />
         <NumberInput
           label='จำนวน'
           min={1}
           placeholder='ระบุจำนวน'
-          {...form.getInputProps('people')}
+          {...form.getInputProps('quantity')}
         />
         <Text className='mt-4 font-semibold text-end'>
           ราคารวมทั้งหมด
           <span className='text-xl px-1 text-primary'>
             {Number(price).toLocaleString()}
-          </span>{' '}
+          </span>
           บาท
         </Text>
         {session ? (
