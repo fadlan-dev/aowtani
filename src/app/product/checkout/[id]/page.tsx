@@ -1,7 +1,7 @@
 'use client';
 import CustomerInfo from '@/components/CustomerInfo';
 import PaymentMethod from '@/components/PaymentMethod';
-import UploadSlip from '@/components/UploadSlip';
+// import UploadSlip from '@/components/UploadSlip';
 import { getProduct } from '@/libs/services/getProduct';
 import { numberFormat } from '@/libs/utils';
 import { Card, Title, Divider, Flex } from '@mantine/core';
@@ -86,7 +86,7 @@ const Page = ({ params }: Props) => {
           </div>
           <div className='w-full lg:w-80'>
             <CustomerInfo />
-            <UploadSlip
+            {/* <UploadSlip
               className='mt-4'
               onSubmit={() => {
                 const payload = {
@@ -97,7 +97,7 @@ const Page = ({ params }: Props) => {
                 console.log(payload);
                 router.push('product/payment/success');
               }}
-            />
+            /> */}
           </div>
         </div>
       </div>
