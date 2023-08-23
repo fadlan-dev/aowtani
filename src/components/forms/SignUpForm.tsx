@@ -193,8 +193,8 @@ const RegisterForm = ({ p }: Props) => {
             <Select
               label='คำนำหน้า'
               data={[
-                { value: 'mr', label: 'นาย' },
-                { value: 'ms', label: 'นางสาว' },
+                { value: 'นาย', label: 'นาย' },
+                { value: 'นางสาว', label: 'นางสาว' },
               ]}
               {...form.getInputProps('name_title')}
             />
