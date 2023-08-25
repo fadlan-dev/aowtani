@@ -7,7 +7,6 @@ import {
   NumberInput,
   useMantineTheme,
   Text,
-  Badge,
 } from '@mantine/core';
 import { FunctionComponent, useState } from 'react';
 import Image from 'next/image';
@@ -82,7 +81,7 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
             size='md'
             variant='gradient'
             onClick={() =>
-              router.push(`product/checkout/${product.id}?q=${quantity}`)
+              router.push(`product/${product.id}/checkout?quantity=${quantity}`)
             }
           >
             ซื้อสินค้า

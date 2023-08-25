@@ -230,3 +230,14 @@ export interface IReviewRequest {
   images: IImage[];
   customer_id: number;
 }
+
+export interface IOrderRequest {
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  customer_address: string;
+  quantity: number;
+  order_at: string;
+  product_id: number;
+  slip: IImage;
+}
