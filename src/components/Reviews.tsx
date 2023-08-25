@@ -14,10 +14,15 @@ import ReviewForm from './forms/ReviewForm';
 import { ErrorModal } from '@/hooks/error-modal';
 
 interface ReviewsProps {
+  variant: 'destination' | 'package';
   className?: string;
   exploreTo?: string;
 }
-const Reviews: FunctionComponent<ReviewsProps> = ({ className, exploreTo }) => {
+const Reviews: FunctionComponent<ReviewsProps> = ({
+  className,
+  variant,
+  exploreTo,
+}) => {
   const params = useParams();
   const { data: session } = useSession();
 
@@ -33,7 +38,9 @@ const Reviews: FunctionComponent<ReviewsProps> = ({ className, exploreTo }) => {
   } = useQuery({
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`
+        variant === 'destination'
+          ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`
+          : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews.json`
       );
       return data;
     },
@@ -45,7 +52,10 @@ const Reviews: FunctionComponent<ReviewsProps> = ({ className, exploreTo }) => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`,
+        url:
+          variant === 'destination'
+            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`
+            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -69,7 +79,10 @@ const Reviews: FunctionComponent<ReviewsProps> = ({ className, exploreTo }) => {
       const config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${updateReviewVal?.id}.json`,
+        url:
+          variant === 'destination'
+            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${updateReviewVal?.id}.json`
+            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews/${updateReviewVal?.id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -94,7 +107,10 @@ const Reviews: FunctionComponent<ReviewsProps> = ({ className, exploreTo }) => {
       const config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${id}.json`,
+        url:
+          variant === 'destination'
+            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${id}.json`
+            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews/${id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,

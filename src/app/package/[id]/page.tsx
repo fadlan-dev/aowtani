@@ -5,6 +5,7 @@ import Booking from '@/components/Booking';
 import { getPackage } from '@/libs/services/getPackage';
 import Hero from '@/components/Hero';
 import LocalGuideItem from '@/components/LocalGuideItem';
+import Reviews from '@/components/Reviews';
 
 interface pageProps {
   params: { id: string };
@@ -59,6 +60,11 @@ async function page({ params }: pageProps) {
               id='ck-editor'
               className='mt-4 relative'
               dangerouslySetInnerHTML={{ __html: pkg.conditions }}
+            />
+            <Reviews
+              variant='destination'
+              className='mt-6'
+              exploreTo={`review/${params.id}?t=destination`}
             />
           </div>
           <div className='w-full lg:w-80'>
@@ -116,7 +122,6 @@ async function page({ params }: pageProps) {
             <Booking price={pkg.price} />
           </div>
         </div>
-        d
       </div>
     </div>
   );
