@@ -68,7 +68,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       form.setFieldValue('customer_email', session?.user.username);
       form.setFieldValue('customer_phone', session?.user.phone);
     }
-  }, [session]);
+  }, [session, form]);
 
   const { mutate: uploadProfile } = useMutation({
     mutationFn: async (file: File) => {

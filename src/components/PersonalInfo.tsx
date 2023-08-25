@@ -30,9 +30,10 @@ const PersonalInfo = ({ className }: Props) => {
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [postCode, setPostCode] = useState<string>('');
+
   const toggleUpdate = useCallback(() => {
     setIsUpdate((prev) => !prev);
-  }, [isUpdate]);
+  }, []);
 
   useEffect(() => {
     setNameTitle(session?.user.name_title);
@@ -119,7 +120,16 @@ const PersonalInfo = ({ className }: Props) => {
       post_code: postCode,
     };
     updateCustomer({ id: session?.user.id, payload: updatedSession });
-  }, [session, nameTitle, firstName, lastName, phone, address, postCode]);
+  }, [
+    session,
+    nameTitle,
+    firstName,
+    lastName,
+    phone,
+    address,
+    postCode,
+    updateCustomer,
+  ]);
 
   return (
     <form className={`block max-w-full sm:max-w-xs ${className}`}>
