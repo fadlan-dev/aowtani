@@ -192,7 +192,10 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
             ))}
             {exploreTo && (
               <div className='text-center'>
-                <Button variant='light' onClick={() => router.push(exploreTo)}>
+                <Button
+                  variant='light'
+                  onClick={() => router.push(`${exploreTo}?variant=${variant}`)}
+                >
                   ดูทั้งหมด
                 </Button>
               </div>

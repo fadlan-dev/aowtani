@@ -62,9 +62,9 @@ async function page({ params }: pageProps) {
               dangerouslySetInnerHTML={{ __html: pkg.conditions }}
             />
             <Reviews
-              variant='destination'
+              variant='package'
               className='mt-6'
-              exploreTo={`review/${params.id}?t=destination`}
+              exploreTo={`review/${params.id}`}
             />
           </div>
           <div className='w-full lg:w-80'>

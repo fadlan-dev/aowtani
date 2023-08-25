@@ -69,7 +69,7 @@ const page = async ({ params }: Props) => {
             <Reviews
               variant='destination'
               className='mt-6'
-              exploreTo={`review/${params.id}?t=destination`}
+              exploreTo={`review/${params.id}`}
             />
             <NearbyAttractions className='mt-6' />
           </div>
