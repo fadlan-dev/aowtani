@@ -24,14 +24,15 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
 }) => {
   const theme = useMantineTheme();
   return (
-    <Card maw='320px'>
+    <Card>
       <Card.Section>
         <AspectRatio ratio={16 / 9}>
           <Image
             className='bg-zinc-200 object-contain'
             src={
-              `${process.env.NEXT_PUBLIC_URL}${data.banner.asset}` ||
-              './image.svg'
+              data.banner
+                ? `${process.env.NEXT_PUBLIC_URL}${data.banner.asset}`
+                : './image.svg'
             }
             alt={data.name}
             fill
@@ -41,7 +42,11 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
       <Group mt='sm' spacing='sm' align='center'>
         <Avatar
           radius='xl'
-          src={`${process.env.NEXT_PUBLIC_URL}${data.logo.asset}`}
+          src={
+            data.logo
+              ? `${process.env.NEXT_PUBLIC_URL}${data.logo.asset}`
+              : './image.svg'
+          }
         />
         <Text size='lg' lineClamp={1} weight={500}>
           {data.name}
@@ -58,16 +63,20 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
         {data.president_name}
       </Text>
       <Flex gap={8} mt={8} className='text-primary'>
-        <Link href={data.website} target='_blank' passHref={true}>
-          <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
-            <IconWorldWww size={14} />
-          </ActionIcon>
-        </Link>
-        <Link href={`tel:${data.phone}`} target='_blank'>
-          <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
-            <IconPhone size={14} />
-          </ActionIcon>
-        </Link>
+        {data.website !== 'no' && data.website && (
+          <Link href={data.website} target='_blank'>
+            <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
+              <IconWorldWww size={14} />
+            </ActionIcon>
+          </Link>
+        )}
+        {data.phone !== 'no' && data.phone && (
+          <Link href={`tel:${data.phone}`} target='_blank'>
+            <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
+              <IconPhone size={14} />
+            </ActionIcon>
+          </Link>
+        )}
       </Flex>
     </Card>
   );

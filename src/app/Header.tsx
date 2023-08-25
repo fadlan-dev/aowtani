@@ -47,6 +47,11 @@ const MENUS: IMenu[] = [
     key: 'local guides',
     path: '/local-guides',
   },
+  {
+    title: 'หน่วยงาน',
+    key: 'organizations',
+    path: '/organizations',
+  },
 ];
 
 const linkClass =
