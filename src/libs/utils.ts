@@ -46,3 +46,9 @@ export function getItemsPerPage<T>(
   const endIndex = startIndex + itemsPerPage || 6;
   return arr.slice(startIndex, endIndex);
 }
+
+export function isImageURL(str: string) {
+  const redirectPattern = /\/rails\/active_storage\/blobs\/redirect\//;
+
+  return redirectPattern.test(str);
+}

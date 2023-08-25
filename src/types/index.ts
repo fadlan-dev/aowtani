@@ -194,3 +194,39 @@ export interface IBookingRequest {
   price: number;
   slip: IImage;
 }
+
+export interface IReview {
+  id: number;
+  text: string;
+  images: IImage[];
+  star: number;
+  is_shown: boolean;
+  created_at: string;
+  updated_at: string;
+  customer?: {
+    id: number;
+    first_name: string;
+    last_name: string;
+    created_at: string;
+    updated_at: string;
+    profile: IImage;
+  };
+  reply: IReply[];
+}
+
+export interface IReply {
+  id: number;
+  text: string;
+  images?: IImage[];
+  user_id: number;
+  created_at: string;
+  updated_at: string;
+  user: { id: number; username: string; fullname: string };
+}
+
+export interface IReviewRequest {
+  text: string;
+  star: number;
+  images: IImage[];
+  customer_id: number;
+}

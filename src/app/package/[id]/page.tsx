@@ -4,6 +4,7 @@ import DestinationVisit from '@/components/DestinationVisit';
 import Booking from '@/components/Booking';
 import { getPackage } from '@/libs/services/getPackage';
 import Hero from '@/components/Hero';
+import LocalGuideItem from '@/components/LocalGuideItem';
 
 interface pageProps {
   params: { id: string };
@@ -63,8 +64,54 @@ async function page({ params }: pageProps) {
           <div className='w-full lg:w-80'>
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
             {/* <LocalGuidItem /> */}
-            <h3 className='mb-2'>ผู้ประกอบการ</h3>
-            {/* <LocalGuidItem /> */}
+            <h3 className='mb-2'>ไกด์ท้องถิ่น</h3>
+            <LocalGuideItem
+              data={{
+                id: 1,
+                name: 'XXXX',
+                phone: '0912212211',
+                facebook: 'face',
+                detail: 'XXXXX',
+                address: 'xxxx',
+                status: 'pending',
+                created_at: '2023-07-25T10:47:14.509Z',
+                updated_at: '2023-07-25T10:47:14.521Z',
+                community: {
+                  id: 1,
+                  name: 'test com',
+                  address: 'address',
+                  detail: 'test',
+                  organization_id: 1,
+                  created_at: '2023-07-25T10:45:50.306Z',
+                  updated_at: '2023-07-25T10:45:50.347Z',
+                  images: [
+                    {
+                      id: 2,
+                      asset:
+                        '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d6bb47e75c40c5fdc08b4bb9849e278074865f16/Screen%20Shot%202023-07-20%20at%2010.54.50.png',
+                    },
+                  ],
+                  content: '',
+                },
+                experience: 'exp',
+                profile: {
+                  id: 3,
+                  asset:
+                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8a471c56803656c8a27c02a9beaa5855982017bb/Screen%20Shot%202023-07-20%20at%2010.26.28.png',
+                },
+                id_card_pdf: {
+                  id: 4,
+                  asset:
+                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--02fb7690b86e0bf88d2600fc0b6cc76a9195c99b/logo.jpeg',
+                },
+                house_registration_pdf: {
+                  id: 5,
+                  asset:
+                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f2f679edbea4451faa4b087fba4543515c4a3368/logo.jpeg',
+                },
+                certificate_pdf: null,
+              }}
+            />
             <h3 className='mb-2'>การจอง</h3>
             <Booking price={pkg.price} />
           </div>
