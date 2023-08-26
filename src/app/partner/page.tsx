@@ -18,7 +18,8 @@ const Page = async ({ searchParams }: Props) => {
   return (
     <div className='mt-20 mb-20'>
       <PartnerList
-        data={partners}
+        data={partners.data}
+        total={partners.total}
         showSearch
         showPagination
         title='ผู้ประกอบการ'

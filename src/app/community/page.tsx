@@ -8,11 +8,12 @@ export const metadata = {
 };
 
 const Page = async (props: Props) => {
-  const communities = await getCommunities();
+  const communities = await getCommunities({});
   return (
     <div className='mt-20 mb-24'>
       <CommunityList
-        data={communities}
+        data={communities.data}
+        total={communities.total}
         title='ชุมชน'
         subTitle='สัมผัสวิถีชีวิต'
         showSearch

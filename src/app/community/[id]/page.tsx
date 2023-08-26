@@ -47,7 +47,13 @@ const page = async ({ params }: Props) => {
             <div className=' aspect-square bg-zinc-200'></div>
           </div>
         </div>
-        <PartnerList title='ผู้ประกอบการ' className='mt-6' showMore data={[]} />
+        <PartnerList
+          title='ผู้ประกอบการ'
+          className='mt-6'
+          showMore
+          data={[]}
+          total={1}
+        />
       </div>
     </div>
   );

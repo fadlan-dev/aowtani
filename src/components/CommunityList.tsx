@@ -11,11 +11,13 @@ import {
   Pagination,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import CommunityItem from './CommunityItem';
+import Empty from './Empty';
 
 type Props = {
   data: ICommunity[];
+  total: number;
   className?: string;
   title?: string;
   subTitle?: string;
@@ -24,6 +26,7 @@ type Props = {
 
 const CommunityList = ({
   data,
+  total,
   className,
   title,
   subTitle,
@@ -31,6 +34,18 @@ const CommunityList = ({
 }: Props) => {
   const theme = useMantineTheme();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const handleRoute = ({ page = '1' }: { page?: string }) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (page) {
+      newParams.set('page', `${page}`);
+    }
+
+    router.push(`${pathname}?${newParams}`);
+  };
+
   return (
     <div className={cn(className)}>
       <div className='text-center '>
@@ -66,14 +81,27 @@ const CommunityList = ({
           ]}
         />
       </div>
-      <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
-        {data.map((commu: ICommunity) => {
-          return <CommunityItem key={commu.id} community={commu} />;
-        })}
-      </div>
-      <div className='px-4 mt-4 text-end'>
-        <Pagination total={10} size='sm' className='w-fit m-auto' />
-      </div>
+      {data.length === 0 ? (
+        <Empty className='px-4 mt-10 md:mt-4' />
+      ) : (
+        <>
+          <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
+            {data.map((commu: ICommunity) => {
+              return <CommunityItem key={commu.id} community={commu} />;
+            })}
+          </div>
+          <div className='px-4 mt-4 text-end'>
+            {total > 6 && (
+              <Pagination
+                total={total}
+                size='sm'
+                className='w-fit m-auto'
+                onChange={(page) => handleRoute({ page: `${page}` })}
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

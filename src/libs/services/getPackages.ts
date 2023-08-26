@@ -1,7 +1,29 @@
 import { IPackage } from '@/types';
+interface props {
+  page?: number;
+  per_page?: number;
+}
 
-export const getPackages = async (): Promise<IPackage[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/packages.json`, {
+interface IResponse {
+  data: IPackage[];
+  total: number;
+}
+
+export const getPackages = async ({
+  page = 1,
+  per_page = 6,
+}: props): Promise<IResponse> => {
+  let queryParams = '';
+  if (page) {
+    queryParams += `page=${page}`;
+  }
+
+  if (per_page) {
+    queryParams += `per_page=${per_page}`;
+  }
+
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/packages.json?${queryParams}`;
+  const res = await fetch(url, {
     cache: 'no-store',
   });
 

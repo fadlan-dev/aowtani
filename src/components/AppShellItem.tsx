@@ -18,9 +18,9 @@ import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
 
 type Props = {
-  destinations: IDestination[];
-  pkgs: IPackage[];
-  products: IProduct[];
+  destinations: { data: IDestination[]; total: number };
+  pkgs: { data: IPackage[]; total: number };
+  products: { data: IProduct[]; total: number };
 };
 
 const Index = ({ destinations, pkgs, products }: Props) => {
@@ -89,7 +89,8 @@ const Index = ({ destinations, pkgs, products }: Props) => {
       </div>
       <div className='flex-auto overflow-auto mb-10'>
         <DestinationList
-          data={destinations}
+          total={1}
+          data={destinations.data}
           subTitle='และพื้นที่ใกล้เคียง'
           title={MENUS.find((menu) => menu.key === t)?.title || ''}
           className='mt-6 mb-6'
@@ -98,13 +99,13 @@ const Index = ({ destinations, pkgs, products }: Props) => {
         <div className='mt-10'>
           <h2 className='text-center text-3xl'>แพ็กเกจทัวร์แนะนำ</h2>
           <p className='text-center'>ตอบโจทย์ทุกไลฟ์สไตล์</p>
-          <PackageList className='mt-4 px-4' data={pkgs} />
+          <PackageList className='mt-4 px-4' data={pkgs.data} />
         </div>
         <div className='mt-10'>
           <h2 className='text-center text-3xl'>สินค้ายอดนิยม</h2>
           <p className='text-center'>ช้อปปิ้งได้ทุกเวลา</p>
-          <ProductList data={products} />
-          {products.length != 0 && (
+          <ProductList total={1} data={products.data} />
+          {products.data.length !== 0 && (
             <ExploreButton className='mt-2' to='product' />
           )}
         </div>

@@ -9,12 +9,13 @@ export const metadata = {
 };
 
 const Page = async (props: Props) => {
-  const localGuides = await getLocalGuides();
+  const localGuides = await getLocalGuides({});
 
   return (
     <div className='mt-20 mb-20'>
       <LocalGuideList
-        data={localGuides}
+        data={localGuides.data}
+        total={localGuides.total}
         showPagination
         showSearch
         title='ไกด์ท้องถิ่น'

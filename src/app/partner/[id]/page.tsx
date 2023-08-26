@@ -30,7 +30,7 @@ const getPartner = async (id: string): Promise<IPartner> => {
 };
 
 const Page = async ({ params }: Props) => {
-  const pkgs = await getPackages();
+  const pkgs = await getPackages({});
   const partner: IPartner = await getPartner(params.id);
   return (
     <div className='mt-20 mb-20'>
@@ -41,7 +41,7 @@ const Page = async ({ params }: Props) => {
       <div className='px-4'>
         <div className='flex-1'>
           <h3>แพ็กเกจทัวร์</h3>
-          <PackageList data={pkgs} />
+          <PackageList data={pkgs.data} />
         </div>
         <div className='hidden lg:block w-80'>
           <h3>สังกัดชุมชน</h3>

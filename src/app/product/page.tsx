@@ -8,11 +8,11 @@ export const metadata = {
 };
 
 const page = async (props: Props) => {
-  const products = await getProducts();
+  const products = await getProducts({});
   return (
     <div className='mt-24 mb-24'>
       <ProductSearch showSearch />
-      <ProductList data={products} />
+      <ProductList data={products.data} total={products.total} />
     </div>
   );
 };

@@ -1,5 +1,4 @@
 'use client';
-import { calculateItemsPerPage, cn } from '@/libs/utils';
 import {
   Button,
   Text,
@@ -9,12 +8,17 @@ import {
   useMantineTheme,
   SegmentedControl,
   Pagination,
+  SegmentedControlItem,
+  Skeleton,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
-import { IDestination } from '@/types';
+import { IDestination, IDestinationType } from '@/types';
 import DestinationItem from './DestinationItem';
 import Empty from './Empty';
+import { useGetDestinationTypes } from '@/hooks/useDestinationTypes';
+import { useCallback } from 'react';
+import { cn } from '@/libs/utils';
 
 type Props = {
   showSearch?: boolean;
@@ -24,6 +28,7 @@ type Props = {
   title?: string;
   subTitle?: string;
   data?: IDestination[];
+  total: number;
 };
 
 const DestinationList = ({
@@ -34,6 +39,7 @@ const DestinationList = ({
   title,
   subTitle,
   data,
+  total,
 }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
@@ -41,7 +47,42 @@ const DestinationList = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const tag = searchParams.get('t');
-  const page = Number(searchParams.get('page')) || 1;
+
+  const {
+    data: destinationTypes,
+    isFetching,
+    isFetched,
+  } = useGetDestinationTypes();
+
+  const renderSegmentedItem = useCallback(() => {
+    const mapped: SegmentedControlItem[] =
+      destinationTypes?.map((type: IDestinationType) => {
+        return {
+          label: type.name,
+          value: `${type.id}`,
+        };
+      }) || [];
+
+    return [{ label: 'ทั้งหมด', value: '' }, ...mapped];
+  }, [destinationTypes]);
+
+  const segmentedData = renderSegmentedItem();
+
+  const handleRoute = ({
+    page = '1',
+    destination_type_id = '',
+  }: {
+    page?: string;
+    destination_type_id?: string;
+  }) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (page) {
+      newParams.set('page', `${page}`);
+    }
+
+    newParams.set('destination_type_id', `${destination_type_id}`);
+    router.push(`${pathname}?${newParams}`);
+  };
 
   return (
     <div className={cn(className)}>
@@ -69,22 +110,18 @@ const DestinationList = ({
               rightSectionWidth={42}
             />
             {tag && <p className='mt-4'>#{tag}</p>}
-            <div className='p-4 text-end'>
-              <SegmentedControl
-                onChange={(e) => {
-                  if (tag) {
-                    router.push(`destination?t=${tag}&f=${e}`);
-                    return;
+            <div className='flex justify-end p-4'>
+              {isFetching && !isFetched ? (
+                <Skeleton width={200} h={40} />
+              ) : (
+                <SegmentedControl
+                  value={
+                    (searchParams.get('destination_type_id') as string) || ''
                   }
-                  router.push(`destination?f=${e}`);
-                }}
-                value={searchParams.get('f') || 'all'}
-                data={[
-                  { label: 'ทั้งหมด', value: 'all' },
-                  { label: 'สถานที่', value: 'location' },
-                  { label: 'ประเภท', value: 'type' },
-                ]}
-              />
+                  onChange={(e) => handleRoute({ destination_type_id: e })}
+                  data={segmentedData}
+                />
+              )}
             </div>
           </>
         )}
@@ -101,17 +138,13 @@ const DestinationList = ({
           <div
             className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}
           >
-            {showPagination && (
+            {total > 6 && showPagination && (
               <Pagination
-                total={calculateItemsPerPage(data?.length || 0, 6)}
-                value={page}
+                total={total / 6}
+                value={Number(searchParams.get('page')) || 1}
                 size='sm'
-                onChange={(page) => {
-                  page === 1
-                    ? router.push(`destination`)
-                    : router.push(`destination?page=${page}`);
-                }}
                 className='w-fit m-auto'
+                onChange={(page) => handleRoute({ page: `${page}` })}
               />
             )}
             {showMore && (

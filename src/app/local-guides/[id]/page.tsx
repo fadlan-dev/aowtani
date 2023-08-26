@@ -32,7 +32,7 @@ const getLocalGuide = async (id: string): Promise<ILocalGuide> => {
 
 const Page = async ({ params }: Props) => {
   const localGuide = await getLocalGuide(params.id);
-  const pkgs = await getPackages();
+  const pkgs = await getPackages({});
   return (
     <div className='mt-20 mb-20'>
       <div className='px-4'>
@@ -42,7 +42,7 @@ const Page = async ({ params }: Props) => {
       <div className='flex flex-col-reverse lg:flex-row gap-4 mt-4 p-4'>
         <div className='flex-1'>
           <h2>แพ็กเกจทัวร์</h2>
-          <PackageList className='mt-2' data={pkgs} />
+          <PackageList className='mt-2' data={pkgs.data} />
         </div>
 
         <div className='w-full lg:w-80'>

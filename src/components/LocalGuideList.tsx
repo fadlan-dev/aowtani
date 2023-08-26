@@ -10,12 +10,14 @@ import {
   Pagination,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import LocalGuideItem from './LocalGuideItem';
 import { ILocalGuide } from '@/types';
+import Empty from './Empty';
 
 type Props = {
   data: ILocalGuide[];
+  total: number;
   showSearch?: boolean;
   showPagination?: boolean;
   showMore?: boolean;
@@ -26,6 +28,7 @@ type Props = {
 
 const LocalGuidList = ({
   data,
+  total,
   className,
   showSearch,
   showPagination,
@@ -35,6 +38,18 @@ const LocalGuidList = ({
 }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const handleRoute = ({ page = '1' }: { page?: string }) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (page) {
+      newParams.set('page', `${page}`);
+    }
+
+    router.push(`${pathname}?${newParams}`);
+  };
+
   return (
     <div className={cn(className)}>
       <div className='text-center '>
@@ -70,21 +85,37 @@ const LocalGuidList = ({
           สมัครเป็นไกด์ท้องถิ่น
         </Button> */}
       </div>
-      <div className={'grid grid-cols-list gap-4 mt-4'}>
-        {data.map((guide: ILocalGuide) => (
-          <LocalGuideItem data={guide} key={guide.id} />
-        ))}
-      </div>
-      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
-        {showPagination && (
-          <Pagination total={10} size='sm' className='w-fit m-auto' />
-        )}
-        {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/destination')}>
-            ดูเพิ่มเติม
-          </Button>
-        )}
-      </div>
+      {data.length === 0 ? (
+        <Empty className='px-4 mt-10 md:mt-4' />
+      ) : (
+        <>
+          <div className={'grid grid-cols-list gap-4 mt-4'}>
+            {data.map((guide: ILocalGuide) => (
+              <LocalGuideItem data={guide} key={guide.id} />
+            ))}
+          </div>
+          <div
+            className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}
+          >
+            {total > 6 && showPagination && (
+              <Pagination
+                total={total}
+                size='sm'
+                className='w-fit m-auto'
+                onChange={(page) => handleRoute({ page: `${page}` })}
+              />
+            )}
+            {showMore && (
+              <Button
+                variant='subtle'
+                onClick={() => router.push('/destination')}
+              >
+                ดูเพิ่มเติม
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

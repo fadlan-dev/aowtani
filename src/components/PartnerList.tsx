@@ -1,5 +1,5 @@
 'use client';
-import { calculateItemsPerPage, cn, getItemsPerPage } from '@/libs/utils';
+import { cn } from '@/libs/utils';
 import { IPartner } from '@/types';
 import {
   Text,
@@ -19,6 +19,7 @@ import Empty from './Empty';
 
 type Props = {
   data: IPartner[];
+  total: number;
   showSearch?: boolean;
   showPagination?: boolean;
   showMore?: boolean;
@@ -29,6 +30,7 @@ type Props = {
 
 const PartnerList = ({
   data,
+  total,
   className,
   showSearch,
   showPagination,
@@ -40,7 +42,25 @@ const PartnerList = ({
   const theme = useMantineTheme();
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
-  const page = Number(searchParams.get('page')) || 1;
+
+  const handleRoute = ({
+    page = '1',
+    type = '',
+  }: {
+    page?: string;
+    type?: string;
+  }) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (page) {
+      newParams.set('page', `${page}`);
+    }
+
+    if (type) {
+      newParams.set('type', `${type}`);
+    }
+
+    router.push(`${pathname}?${newParams}`);
+  };
 
   return (
     <div className={cn(className)}>
@@ -78,14 +98,7 @@ const PartnerList = ({
         </Button> */}
         <SegmentedControl
           defaultValue={searchParams.get('type') || ''}
-          onChange={(type: string) => {
-            const newParams = new URLSearchParams(searchParams.toString());
-            newParams.set('page', '1');
-            type === ''
-              ? newParams.delete('type')
-              : newParams.set('type', type);
-            router.push(`${pathname}?${newParams}`);
-          }}
+          onChange={(e) => handleRoute({ type: e })}
           data={[
             { label: 'ทั้งหมด', value: '' },
             { label: 'กิจกรรมทัวร์', value: 'TourActivity' },
@@ -98,32 +111,32 @@ const PartnerList = ({
       {data.length === 0 ? (
         <Empty className='px-4 mt-10 md:mt-4' />
       ) : (
-        <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
-          {data.map((partner: IPartner) => (
-            <PartnerItem key={partner.id} partner={partner} />
-          ))}
-        </div>
+        <>
+          <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
+            {data.map((partner: IPartner) => (
+              <PartnerItem key={partner.id} partner={partner} />
+            ))}
+          </div>
+          <div
+            className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}
+          >
+            {showPagination && total > 6 && (
+              <Pagination
+                total={total}
+                value={Number(searchParams.get('page')) || 1}
+                size='sm'
+                className='w-fit m-auto'
+                onChange={(page) => handleRoute({ page: `${page}` })}
+              />
+            )}
+            {showMore && (
+              <Button variant='subtle' onClick={() => router.push('/partner')}>
+                ดูเพิ่มเติม
+              </Button>
+            )}
+          </div>
+        </>
       )}
-      <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
-        {showPagination && (
-          <Pagination
-            total={calculateItemsPerPage(data.length, 6)}
-            value={page}
-            size='sm'
-            className='w-fit m-auto'
-            onChange={(page: number) => {
-              const newParams = new URLSearchParams(searchParams.toString());
-              newParams.set('page', `${page}`);
-              router.push(`${pathname}?${newParams}`);
-            }}
-          />
-        )}
-        {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/partner')}>
-            ดูเพิ่มเติม
-          </Button>
-        )}
-      </div>
     </div>
   );
 };
