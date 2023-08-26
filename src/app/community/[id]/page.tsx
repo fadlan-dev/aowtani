@@ -34,11 +34,13 @@ const page = async ({ params }: Props) => {
             <h1>{community.name}</h1>
             <p className='text-primary'>{community.address}</p>
             <p className='mt-2'>{community.detail}</p>
-            <div
-              id='ck-editor'
-              className='mt-4 relative'
-              dangerouslySetInnerHTML={{ __html: community.content }}
-            />
+            {community.content && (
+              <div
+                id='ck-editor'
+                className='mt-4 relative'
+                dangerouslySetInnerHTML={{ __html: community.content }}
+              />
+            )}
           </div>
           <div className='w-full lg:w-80'>
             <h3 className='mb-2'>สังกัดหน่วยงาน</h3>
