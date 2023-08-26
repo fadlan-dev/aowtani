@@ -7,13 +7,14 @@ export const metadata = {
 };
 
 const page = async () => {
-  const organize = await getOrganizations();
+  const organize = await getOrganizations({});
   return (
     <div className='mt-20 mb-20'>
       <OrganizationList
+        data={organize.data}
+        total={organize.total}
         title='หน่วยงาน'
         subTitle='ที่ช่วยส่งเสริมชุมชนในพื้นที่'
-        data={organize}
       />
     </div>
   );
