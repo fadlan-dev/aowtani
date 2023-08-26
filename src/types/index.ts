@@ -86,7 +86,7 @@ export interface ICommunity {
   created_at: string;
   updated_at: string;
   images: IImage[];
-  content: string;
+  content?: string;
 }
 
 export interface IPartner {
@@ -129,9 +129,9 @@ export interface ILocalGuide {
   updated_at: string;
   community: ICommunity;
   experience: string;
-  profile?: Profile;
-  id_card_pdf?: IdCardPdf;
-  house_registration_pdf?: HouseRegistrationPdf;
+  profile: Profile | null;
+  id_card_pdf: IdCardPdf | null;
+  house_registration_pdf: HouseRegistrationPdf | null;
   certificate_pdf: ICertificatePdf | null;
 }
 

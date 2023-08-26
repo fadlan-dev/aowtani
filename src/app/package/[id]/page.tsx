@@ -73,48 +73,35 @@ async function page({ params }: pageProps) {
             <h3 className='mb-2'>ไกด์ท้องถิ่น</h3>
             <LocalGuideItem
               data={{
-                id: 1,
-                name: 'XXXX',
-                phone: '0912212211',
-                facebook: 'face',
-                detail: 'XXXXX',
-                address: 'xxxx',
-                status: 'pending',
-                created_at: '2023-07-25T10:47:14.509Z',
-                updated_at: '2023-07-25T10:47:14.521Z',
+                id: 8,
+                name: 'test_guide',
+                phone: '321',
+                facebook: '23',
+                detail: '213',
+                address: '12',
+                status: 'approved',
+                created_at: '2023-08-16T08:01:07.149Z',
+                updated_at: '2023-08-16T08:01:16.438Z',
                 community: {
-                  id: 1,
-                  name: 'test com',
-                  address: 'address',
-                  detail: 'test',
-                  organization_id: 1,
-                  created_at: '2023-07-25T10:45:50.306Z',
-                  updated_at: '2023-07-25T10:45:50.347Z',
+                  id: 5,
+                  name: 'Test Community',
+                  address: 'j',
+                  detail: 'j',
+                  organization_id: 6,
+                  created_at: '2023-08-16T07:59:32.957Z',
+                  updated_at: '2023-08-16T07:59:32.971Z',
                   images: [
                     {
-                      id: 2,
+                      id: 218,
                       asset:
-                        '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--d6bb47e75c40c5fdc08b4bb9849e278074865f16/Screen%20Shot%202023-07-20%20at%2010.54.50.png',
+                        '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZG89IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--34209269b5e3381ea6b582b28769c9383b945949/3.png',
                     },
                   ],
-                  content: '',
                 },
-                experience: 'exp',
-                profile: {
-                  id: 3,
-                  asset:
-                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDQT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--8a471c56803656c8a27c02a9beaa5855982017bb/Screen%20Shot%202023-07-20%20at%2010.26.28.png',
-                },
-                id_card_pdf: {
-                  id: 4,
-                  asset:
-                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--02fb7690b86e0bf88d2600fc0b6cc76a9195c99b/logo.jpeg',
-                },
-                house_registration_pdf: {
-                  id: 5,
-                  asset:
-                    '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--f2f679edbea4451faa4b087fba4543515c4a3368/logo.jpeg',
-                },
+                experience: '123',
+                profile: null,
+                id_card_pdf: null,
+                house_registration_pdf: null,
                 certificate_pdf: null,
               }}
             />
