@@ -90,7 +90,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
   const onSorted = useCallback(() => {
     const data = sortBy(bookings, sortStatus.columnAccessor) as any[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
-  }, [sortStatus]);
+  }, [sortStatus, bookings]);
 
   const ths = (
     <tr>
