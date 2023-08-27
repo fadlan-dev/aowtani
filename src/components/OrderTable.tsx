@@ -6,6 +6,7 @@ import {
   Text,
   Table,
   ScrollArea,
+  Loader,
 } from '@mantine/core';
 import {
   IconChevronDown,
@@ -16,6 +17,9 @@ import dayjs from 'dayjs';
 import { FunctionComponent, useCallback, useState } from 'react';
 import StatusItem from './StatusItem';
 import sortBy from 'lodash/sortBy';
+import { useGetOrdes } from '@/hooks/useGetOrders';
+import { useSession } from 'next-auth/react';
+import Empty from './Empty';
 
 interface IData {
   id: number;
@@ -29,42 +33,6 @@ interface IData {
   status: string;
 }
 
-const elements: IData[] = [
-  {
-    id: 1,
-    booking_at: '2023-01-01',
-    package: 'Package Name',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-01-01',
-    payment: 'purchased',
-    status: 'pending',
-  },
-  {
-    id: 2,
-    booking_at: '2023-05-01',
-    package: 'Package Name',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-01-01',
-    payment: 'purchased',
-    status: 'confirm',
-  },
-  {
-    id: 3,
-    booking_at: '2023-05-01',
-    package: 'Package Name',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-01-01',
-    payment: 'purchased',
-    status: 'cancel',
-  },
-];
-
 interface OrderTableProps {
   className?: string;
 }
@@ -75,6 +43,17 @@ type ISortStatus = {
 };
 
 const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
+  const { data: session } = useSession();
+
+  if (!session?.user.token) {
+    <p>Required authen</p>;
+  }
+
+  const {
+    data: orders,
+    isFetching,
+    isFetched,
+  } = useGetOrdes(session?.user.token, {});
   const [sortStatus, setSortStatus] = useState<ISortStatus>({
     columnAccessor: '',
     direction: 'asc',
@@ -119,9 +98,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
   }
 
   const onSorted = useCallback(() => {
-    const data = sortBy(elements, sortStatus.columnAccessor) as IData[];
+    const data = sortBy(orders, sortStatus.columnAccessor) as any[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
-  }, [sortStatus]);
+  }, [sortStatus, orders]);
 
   const ths = (
     <tr className='text-black'>
@@ -156,12 +135,22 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     </tr>
   ));
 
+  if (isFetching && !isFetched) {
+    return (
+      <center>
+        <Loader />
+      </center>
+    );
+  }
+
   return (
     <ScrollArea>
       <Table verticalSpacing='md' striped className={cn(className)}>
         <thead>{ths}</thead>
-        <tbody>{rows}</tbody>
+
+        {orders?.length !== 0 && <tbody>{rows}</tbody>}
       </Table>
+      {orders?.length === 0 && <Empty className='mt-4' />}
     </ScrollArea>
   );
 };

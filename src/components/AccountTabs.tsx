@@ -1,9 +1,10 @@
 'use client';
-import { Card, Tabs } from '@mantine/core';
+import { Card, Loader, Tabs } from '@mantine/core';
 import PersonalInfo from './PersonalInfo';
 import { useRouter, useSearchParams } from 'next/navigation';
 import PackageTable from './PackageTable';
 import OrderTable from './OrderTable';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   className: string;
@@ -12,6 +13,16 @@ type Props = {
 const TravelTabs = ({ className }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
+
+  if (!session?.user.token) {
+    return (
+      <center className='mt-6'>
+        <Loader />
+        <p>Authenticating</p>
+      </center>
+    );
+  }
   return (
     <Tabs
       value={searchParams.get('tab') || 'personal'}

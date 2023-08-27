@@ -16,6 +16,9 @@ import dayjs from 'dayjs';
 import { FunctionComponent, useCallback, useState } from 'react';
 import StatusItem from './StatusItem';
 import sortBy from 'lodash/sortBy';
+import { useSession } from 'next-auth/react';
+import { useGetBookings } from '@/hooks/useGetBookings';
+import Empty from './Empty';
 
 interface PackageTableProps {
   className?: string;
@@ -33,48 +36,14 @@ interface IDate {
   status: string;
 }
 
-const elements: IDate[] = [
-  {
-    id: 1,
-    booking_at: '2023-07-14 12:00:00',
-    package: 'Package 1',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-07-14 12:00:00',
-    payment: 'purchased',
-    status: 'pending',
-  },
-  {
-    id: 2,
-    booking_at: '2023-05-01 12:00:00',
-    package: 'Package 2',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-05-01 12:00:00',
-    payment: 'purchased',
-    status: 'confirm',
-  },
-  {
-    id: 3,
-    booking_at: '2023-05-30 12:00:00',
-    package: 'Package 3',
-    giude: ' Guide Name',
-    type: 'fd',
-    amount: 1,
-    date: '2023-05-30 12:00:00',
-    payment: 'purchased',
-    status: 'cancel',
-  },
-];
-
 type ISortStatus = {
   columnAccessor: string;
   direction: 'asc' | 'desc';
 };
 
 const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
+  const { data: session } = useSession();
+  const { data: bookings } = useGetBookings(session?.user.token);
   const [sortStatus, setSortStatus] = useState<ISortStatus>({
     columnAccessor: '',
     direction: 'asc',
@@ -119,7 +88,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
   }
 
   const onSorted = useCallback(() => {
-    const data = sortBy(elements, sortStatus.columnAccessor) as IDate[];
+    const data = sortBy(bookings, sortStatus.columnAccessor) as any[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
   }, [sortStatus]);
 
@@ -160,8 +129,9 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
     <ScrollArea>
       <Table verticalSpacing='md' striped className={cn(className)}>
         <thead>{ths}</thead>
-        <tbody>{rows}</tbody>
+        {bookings?.length !== 0 && <tbody>{rows}</tbody>}
       </Table>
+      {bookings?.length === 0 && <Empty className='mt-4' />}
     </ScrollArea>
   );
 };
