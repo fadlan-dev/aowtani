@@ -1,10 +1,10 @@
-import { IDestinationType } from '@/types';
+import { IBooking } from '@/types';
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 export type ApiServiceErr = any;
 export const useGetBookings = (token: string, opt?: QueryOptions<any[]>) =>
-  useQuery<IDestinationType[], ApiServiceErr>({
+  useQuery<IBooking[], ApiServiceErr>({
     queryFn: async () => {
       const config = {
         method: 'get',

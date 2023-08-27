@@ -189,6 +189,23 @@ export interface IUpdateCustomerRequest {
   profile: Profile;
 }
 
+export interface IBooking {
+  id: number;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  quantity: number;
+  note: string;
+  tour_date: string;
+  price: number;
+  slug: string;
+  created_at: string;
+  updated_at: string;
+  slip: IImage;
+  local_guide: { id: number; name: string };
+  package: { id: number; name: string; period: string };
+}
+
 export interface IBookingRequest {
   customer_name: string;
   customer_email: string;

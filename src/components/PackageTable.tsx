@@ -1,4 +1,4 @@
-import { cn } from '@/libs/utils';
+import { cn, numberFormat } from '@/libs/utils';
 import {
   Group,
   Table,
@@ -19,6 +19,7 @@ import sortBy from 'lodash/sortBy';
 import { useSession } from 'next-auth/react';
 import { useGetBookings } from '@/hooks/useGetBookings';
 import Empty from './Empty';
+import { IBooking } from '@/types';
 
 interface PackageTableProps {
   className?: string;
@@ -88,7 +89,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
   }
 
   const onSorted = useCallback(() => {
-    const data = sortBy(bookings, sortStatus.columnAccessor) as any[];
+    const data = sortBy(bookings, sortStatus.columnAccessor) as IBooking[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
   }, [sortStatus, bookings]);
 
@@ -103,24 +104,24 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
       <th>ชื่อแพ็คเกจ</th>
       <th>ชื่อไกด์</th>
       <th>รูปแบบ</th>
-      <th>จำนวน (ต่อท่าน)</th>
+      <th className='whitespace-nowrap text-end'>จำนวน (ต่อท่าน)</th>
       <th>วันที่เดินทาง</th>
-      <th>ชำระเงิน</th>
+      <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
       <th>สถานะ</th>
     </tr>
   );
 
   const rows = onSorted().map((pkg) => (
     <tr key={pkg.id}>
-      <td>{dayjs(pkg.booking_at).format('YYYY-MM-DD')}</td>
-      <td>{pkg.package}</td>
-      <td>{pkg.giude}</td>
-      <td>{pkg.type}</td>
-      <td>{pkg.amount}</td>
-      <td className='truncate'>{dayjs(pkg.date).format('YYYY-MM-DD')}</td>
-      <td>{pkg.payment}</td>
+      <td>{dayjs(pkg.created_at).format('YYYY-MM-DD')}</td>
+      <td className=' min-w-[112ox]'>{pkg.package.name}</td>
+      <td className='whitespace-nowrap'>{pkg.local_guide.name}</td>
+      <td className='whitespace-nowrap'>{pkg.customer_name}</td>
+      <td className='text-end'>{pkg.quantity}</td>
+      <td className='truncate'>{dayjs(pkg.tour_date).format('YYYY-MM-DD')}</td>
+      <td className='text-end'>{numberFormat(pkg.price)}</td>
       <td>
-        <StatusItem text={pkg.status} />
+        <StatusItem text={pkg.customer_name} />
       </td>
     </tr>
   ));
