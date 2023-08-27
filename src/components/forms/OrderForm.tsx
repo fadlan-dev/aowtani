@@ -59,7 +59,7 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
   });
 
   useEffect(() => {
-    if (session?.user && !form.isValid('customer_name')) {
+    if (session?.user && !form.isTouched()) {
       form.setFieldValue(
         'customer_name',
         `${session?.user.first_name} ${session?.user.last_name}`
