@@ -24,7 +24,7 @@ type Props = {
 const SignInForm = ({ p }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callback');
+  const callbackUrl = searchParams.get('callback') || '/';
 
   const schema = z.object({
     username: z.string().min(1, { message: 'Please input your username' }),
