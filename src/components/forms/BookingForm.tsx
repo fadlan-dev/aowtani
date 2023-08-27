@@ -20,7 +20,6 @@ import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { IBookingRequest, IPackage } from '@/types';
 import { useRouter } from 'next/navigation';
-import { SuccessModal } from '@/hooks/success-modal';
 import { modals } from '@mantine/modals';
 import { IconCheck } from '@tabler/icons-react';
 
@@ -29,7 +28,7 @@ interface BookingFormProps {
 }
 
 const schema = z.object({
-  customer_name: z.string().min(1, { message: 'Please input your Fullname' }),
+  customer_name: z.string().min(1, { message: 'Invalid Fullname' }),
   customer_email: z.string().email({ message: 'Invalid email' }),
   customer_phone: z.string().min(10, { message: 'Invalid phone' }),
   note: z.string(),
@@ -60,13 +59,14 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
   });
 
   useEffect(() => {
-    if (session?.user) {
+    if (session?.user && !form.isTouched()) {
       form.setFieldValue(
         'customer_name',
         `${session?.user.first_name} ${session?.user.last_name}`
       );
       form.setFieldValue('customer_email', session?.user.username);
       form.setFieldValue('customer_phone', session?.user.phone);
+      form.setFieldValue('customer_address', session?.user.address);
     }
   }, [session, form]);
 
@@ -105,11 +105,11 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       return data;
     },
     onError: (err: AxiosError) => {
-      ErrorModal({ title: 'Upload', content: err.response?.statusText });
+      ErrorModal({ title: 'Booking', content: err.response?.statusText });
     },
     onSuccess: (res) => {
       modals.openConfirmModal({
-        title: 'You successfully created your bookingÏ',
+        title: 'You successfully created your booking',
         centered: true,
         children: (
           <center>
@@ -120,7 +120,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
           </center>
         ),
         labels: { confirm: 'Ok', cancel: 'Cancel' },
-        onConfirm: () => router.push('/'),
+        onConfirm: () => router.replace('/'),
         cancelProps: { display: 'none' },
       });
     },
@@ -152,25 +152,25 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
           <Text weight='bold'>ข้อมูลลูกค้า</Text>
           <TextInput
             mt='md'
-            placeholder='Your name'
+            placeholder='Fullname'
             label='ชื่อ-สกุล'
             {...form.getInputProps('customer_name')}
           />
           <TextInput
             mt='md'
-            placeholder='Your name'
+            placeholder='Email'
             label='อีเมล'
             {...form.getInputProps('customer_email')}
           />
           <TextInput
             mt='md'
-            placeholder='Your name'
+            placeholder='Phone'
             label='เบอร์โทรศัพท์'
             {...form.getInputProps('customer_phone')}
           />
           <Textarea
             mt='md'
-            placeholder='Your name'
+            placeholder='Note'
             label='หมายเหตุ'
             autosize
             minRows={2}
