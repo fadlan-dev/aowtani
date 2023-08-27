@@ -12,11 +12,10 @@ const page = async ({ searchParams }: Props) => {
   const destinations = await getDestinations({
     destination_type_id: searchParams.destination_type_id as string,
     organization_id: searchParams.organization_id as string,
-    page: 1,
+    page: Number(searchParams.page) || 1,
   });
   return (
     <div className='mt-24'>
-      {searchParams.destination_type_id}
       <DestinationList
         data={destinations.data}
         total={destinations.total}
