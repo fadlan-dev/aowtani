@@ -13,9 +13,9 @@ type Props = {
 const TravelTabs = ({ className }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { data: session } = useSession();
+  const { data: _session, status } = useSession();
 
-  if (!session?.user.token) {
+  if (status === 'loading') {
     return (
       <center className='mt-6'>
         <Loader />
