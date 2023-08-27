@@ -1,5 +1,6 @@
 import DestinationList from '@/components/DestinationList';
 import { getDestinations } from '@/libs/services/getDestinations';
+
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };

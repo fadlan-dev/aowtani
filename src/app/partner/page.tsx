@@ -2,21 +2,30 @@ import PartnerList from '@/components/PartnerList';
 import { getPartners } from '@/libs/services/getPartners';
 
 type Props = {
-  searchParams: {
-    [key: string]: 'Hotel' | 'Restaurant' | 'TourActivity' | 'Shop';
-  };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export const metadata = {
   title: 'ผู้ประกอบการ',
 };
 
-const Page = async ({ searchParams }: Props) => {
-  const { type } = searchParams;
-  const partners = await getPartners({ type: type });
+// Define the valid types
+export type ValidPartnerType =
+  | ''
+  | 'Hotel'
+  | 'Restaurant'
+  | 'TourActivity'
+  | 'Shop';
+
+const page = async ({ searchParams }: Props) => {
+  const type = (searchParams.type as ValidPartnerType) || '';
+  const partners = await getPartners({
+    page: Number(searchParams.page) || 1,
+    type: type,
+  });
 
   return (
-    <div className='mt-20 mb-20'>
+    <div className='mt-24 mb-20'>
       <PartnerList
         data={partners.data}
         total={partners.total}
@@ -29,4 +38,4 @@ const Page = async ({ searchParams }: Props) => {
   );
 };
 
-export default Page;
+export default page;

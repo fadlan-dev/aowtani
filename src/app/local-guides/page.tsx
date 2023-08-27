@@ -2,14 +2,18 @@ import React from 'react';
 import LocalGuideList from '@/components/LocalGuideList';
 import { getLocalGuides } from '@/libs/services/getLocalGuides';
 
-type Props = {};
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 export const metadata = {
   title: 'ไกด์ท้องถิ่น',
 };
 
-const Page = async (props: Props) => {
-  const localGuides = await getLocalGuides({});
+const Page = async ({ searchParams }: Props) => {
+  const localGuides = await getLocalGuides({
+    page: Number(searchParams.page) || 1,
+  });
 
   return (
     <div className='mt-20 mb-20'>

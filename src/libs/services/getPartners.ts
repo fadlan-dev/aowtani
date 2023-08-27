@@ -1,7 +1,8 @@
+import { ValidPartnerType } from '@/app/partner/page';
 import { IPartner } from '@/types';
 
 interface props {
-  type?: 'Hotel' | 'Restaurant' | 'TourActivity' | 'Shop';
+  type?: ValidPartnerType;
   page?: number;
   per_page?: number;
 }
@@ -23,6 +24,10 @@ export const getPartners = async ({
 
   if (per_page) {
     queryParams += `per_page=${per_page}`;
+  }
+
+  if (type) {
+    queryParams += `type=${type}`;
   }
 
   const url = `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json?${queryParams}`;

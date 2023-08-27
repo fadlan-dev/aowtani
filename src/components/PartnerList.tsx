@@ -55,10 +55,7 @@ const PartnerList = ({
       newParams.set('page', `${page}`);
     }
 
-    if (type) {
-      newParams.set('type', `${type}`);
-    }
-
+    newParams.set('type', `${type}`);
     router.push(`${pathname}?${newParams}`);
   };
 
@@ -97,7 +94,7 @@ const PartnerList = ({
           สมัครเป็นผู้ประกอบการ
         </Button> */}
         <SegmentedControl
-          defaultValue={searchParams.get('type') || ''}
+          value={searchParams.get('type') || ''}
           onChange={(e) => handleRoute({ type: e })}
           data={[
             { label: 'ทั้งหมด', value: '' },
