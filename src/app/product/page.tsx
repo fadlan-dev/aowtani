@@ -16,6 +16,7 @@ const page = async ({ searchParams }: Props) => {
   return (
     <div className='mt-24 mb-24'>
       <ProductSearch showSearch />
+      <ProductList data={products.data} total={products.total} />
     </div>
   );
 };
