@@ -89,12 +89,19 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
     },
   });
 
-  const { mutate: booking, isLoading } = useMutation({
+  const { mutate: createBooking, isLoading } = useMutation({
     mutationFn: async (body: { booking: IBookingRequest }) => {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/bookings.json`,
-        body
-      );
+      const config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/bookings.json`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.user.token}`,
+        },
+        data: body,
+      };
+      const { data } = await axios.request(config);
       return data;
     },
     onError: (err: AxiosError) => {
@@ -120,7 +127,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
   });
 
   const onBooking = (payload: IBookingRequest) => {
-    booking({ booking: payload });
+    createBooking({ booking: payload });
   };
 
   return (

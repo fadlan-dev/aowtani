@@ -91,10 +91,17 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
 
   const { mutate: createOrder, isLoading } = useMutation({
     mutationFn: async (body: { order: IOrderRequest }) => {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/orders.json`,
-        body
-      );
+      const config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: `${process.env.NEXT_PUBLIC_API_URL}/orders.json`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session?.user.token}`,
+        },
+        data: body,
+      };
+      const { data } = await axios.request(config);
       return data;
     },
     onError: (err: AxiosError) => {
