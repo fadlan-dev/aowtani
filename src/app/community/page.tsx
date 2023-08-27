@@ -1,14 +1,16 @@
 import CommunityList from '@/components/CommunityList';
 import { getCommunities } from '@/libs/services/getCommunities';
-import React from 'react';
 
-type Props = {};
+type Props = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 export const metadata = {
   title: 'ชุมชน',
 };
 
-const Page = async (props: Props) => {
-  const communities = await getCommunities({});
+const Page = async ({ searchParams }: Props) => {
+  const page = Number(searchParams.page) || 1;
+  const communities = await getCommunities({ page: page });
   return (
     <div className='mt-20 mb-24'>
       <CommunityList

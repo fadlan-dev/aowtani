@@ -7,7 +7,6 @@ import {
   TextInput,
   ActionIcon,
   useMantineTheme,
-  SegmentedControl,
   Pagination,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
@@ -72,15 +71,7 @@ const CommunityList = ({
           />
         )}
       </div>
-      <div className='p-4 text-end'>
-        <SegmentedControl
-          data={[
-            { label: 'ทั้งหมด', value: 'all' },
-            { label: 'สถานที่', value: 'location' },
-            { label: 'ประเภท', value: 'type' },
-          ]}
-        />
-      </div>
+      <div className='p-4 text-end'></div>
       {data.length === 0 ? (
         <Empty className='px-4 mt-10 md:mt-4' />
       ) : (
