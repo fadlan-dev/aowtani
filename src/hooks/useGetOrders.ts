@@ -1,10 +1,11 @@
-import { IDestinationType } from '@/types';
+import { IOrder } from '@/types';
 import { QueryOptions, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 export type ApiServiceErr = any;
-export const useGetOrdes = (token: string, opt?: QueryOptions<any[]>) =>
-  useQuery<IDestinationType[], ApiServiceErr>({
+export const useGetOrdes = (token: string, opt?: QueryOptions<IOrder[]>) =>
+  useQuery({
+    ...opt,
     queryFn: async () => {
       const config = {
         method: 'get',

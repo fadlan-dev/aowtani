@@ -20,6 +20,7 @@ import sortBy from 'lodash/sortBy';
 import { useGetOrdes } from '@/hooks/useGetOrders';
 import { useSession } from 'next-auth/react';
 import Empty from './Empty';
+import { IOrder } from '@/types';
 
 interface IData {
   id: number;
@@ -44,10 +45,6 @@ type ISortStatus = {
 
 const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
   const { data: session } = useSession();
-
-  if (!session?.user.token) {
-    <p>Required authen</p>;
-  }
 
   const {
     data: orders,
@@ -98,7 +95,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
   }
 
   const onSorted = useCallback(() => {
-    const data = sortBy(orders, sortStatus.columnAccessor) as any[];
+    const data = sortBy(orders, sortStatus.columnAccessor) as IOrder[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
   }, [sortStatus, orders]);
 
@@ -110,28 +107,28 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       >
         วันที่สั่ง
       </Th>
-      <th className=' whitespace-nowrap'>ชื่อสินค้า</th>
-      <th className=' whitespace-nowrap'>SKU</th>
-      <th className=' whitespace-nowrap'>จำนวน (ต่อชิ้น)</th>
-      <th className=' whitespace-nowrap'>ที่อยู่</th>
-      <th className=' whitespace-nowrap'>รหัสไปรษณีย์</th>
-      <th className=' whitespace-nowrap'>ชำระเงิน</th>
-      <th className=' whitespace-nowrap'>สถานะ</th>
+      <th className='whitespace-nowrap min-w-[112px]'>ชื่อสินค้า</th>
+      <th className='whitespace-nowrap'>SKU</th>
+      <th className='whitespace-nowrap text-end'>จำนวน (ต่อชิ้น)</th>
+      <th className='whitespace-nowrap'>ที่อยู่</th>
+      <th className='whitespace-nowrap'>รหัสไปรษณีย์</th>
+      <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
+      <th className='whitespace-nowrap'>สถานะ</th>
     </tr>
   );
 
-  const rows = onSorted().map((pkg) => (
-    <tr key={pkg.id}>
-      <td>{dayjs(pkg.booking_at).format('YYYY-MM-DD')}</td>
-      <td>{pkg.package}</td>
-      <td>{pkg.giude}</td>
-      <td>{pkg.type}</td>
-      <td>{pkg.amount}</td>
-      <td>{dayjs(pkg.date).format('YYYY-MM-DD')}</td>
-      <td>{pkg.payment}</td>
-      <td>
-        <StatusItem text={pkg.status} />
+  const rows = onSorted().map((order) => (
+    <tr key={order.id}>
+      <td className='whitespace-nowrap'>
+        {dayjs(order.order_at).format('YYYY-MM-DD')}
       </td>
+      <td>{order.product.name}</td>
+      <td className='whitespace-nowrap'>{order.product.sku}</td>
+      <td className='text-end'>{order.quantity}</td>
+      <td>{order.price}</td>
+      <td>{order.customer_address}</td>
+      <td className='text-end'>{order.price * order.quantity}</td>
+      <td></td>
     </tr>
   ));
 

@@ -265,3 +265,19 @@ export interface IOrderRequest {
   product_id: number;
   slip: IImage;
 }
+
+export interface IOrder {
+  id: number;
+  customer_name: string;
+  customer_email: string;
+  customer_phone: string;
+  customer_address: string;
+  order_at: string;
+  quantity: number;
+  slug: string;
+  price: number;
+  created_at: string;
+  updated_at: string;
+  slip: IImage;
+  product: { id: number; name: string; sku: string };
+}
