@@ -1,5 +1,6 @@
 import { ValidPartnerType } from '@/app/partner/page';
 import { IPartner } from '@/types';
+import axios from 'axios';
 
 interface props {
   type?: ValidPartnerType;
@@ -30,14 +31,25 @@ export const getPartners = async ({
     queryParams += `type=${type}`;
   }
 
-  const url = `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json?${queryParams}`;
-  const res = await fetch(url, { cache: 'no-store' });
+  try {
+    const config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json?${queryParams}`,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  if (!res.ok) {
-    const { error } = await res.json();
-    throw new Error(error);
+    const response = await axios.request(config);
+
+    if (response.status >= 200 && response.status < 300) {
+      const data: IResponse = response.data;
+      return data;
+    } else {
+      throw new Error(`Request failed with status: ${response.status}`);
+    }
+  } catch (error: any) {
+    throw new Error(`An error occurred: ${error.message}`);
   }
-
-  const data = await res.json();
-  return data;
 };
