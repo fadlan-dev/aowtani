@@ -1,7 +1,6 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
 import { Loader, Text, useMantineTheme } from '@mantine/core';
-import PackageCard from './PackageItem';
 import { IOrganization, IPackage } from '@/types';
 import { useGetPackages } from '@/hooks/useGetPackage';
 import PackageItem from './PackageItem';
@@ -30,6 +29,7 @@ const Index = ({ organization }: Props) => {
   if (isError) {
     return <p>{JSON.stringify(error)}</p>;
   }
+
   return (
     <div className='pb-6'>
       <Text size='lg' weight={600} mt={8}>
