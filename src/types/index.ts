@@ -59,6 +59,7 @@ export interface IPackage {
   images: IImage[];
   conditions: string;
   price: number;
+  price_before_discount?: number;
   created_at: string;
   updated_at: string;
   types: string[];

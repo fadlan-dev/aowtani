@@ -6,6 +6,7 @@ import { getPackage } from '@/libs/services/getPackage';
 import Hero from '@/components/Hero';
 import LocalGuideItem from '@/components/LocalGuideItem';
 import Reviews from '@/components/Reviews';
+import { cn, numberFormat } from '@/libs/utils';
 
 interface pageProps {
   params: { id: string };
@@ -37,14 +38,17 @@ async function page({ params }: pageProps) {
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1'>
             <div className='flex flex-col sm:flex-row items-baseline justify-between'>
-              <h1 className='capitalize'>{pkg.name}</h1>
-              <h4 className='font-semibold'>
-                ราคา
-                <span className='text-primary text-xl px-1'>
-                  {pkg.price.toLocaleString()}
-                </span>
-                บาท/ท่าน
-              </h4>
+              <h1 className='capitalize flex-1'>{pkg.name}</h1>
+              <div className='flex flex-row items-baseline gap-1'>
+                {pkg.price_before_discount && (
+                  <span className={cn('text-slate-400 line-through text-md')}>
+                    ฿{numberFormat(pkg.price_before_discount)}
+                  </span>
+                )}
+                <p className='text-primary text-xl font-bold'>
+                  ฿{numberFormat(pkg.price)}/ท่าน
+                </p>
+              </div>
             </div>
             <PackageType types={pkg.types} />
             <DestinationVisit
