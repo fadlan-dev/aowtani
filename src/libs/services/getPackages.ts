@@ -3,7 +3,7 @@ import axios from 'axios';
 interface props {
   page?: number;
   per_page?: number;
-  search: string;
+  search?: string;
 }
 
 interface IResponse {
@@ -25,9 +25,7 @@ export const getPackages = async ({
     queryParams += `per_page=${per_page}&`;
   }
 
-  if (search) {
-    queryParams += `search=${search}&`;
-  }
+  queryParams += `search=${search}`;
 
   try {
     const config = {
