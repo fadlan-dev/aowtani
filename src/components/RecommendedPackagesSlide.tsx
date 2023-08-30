@@ -1,12 +1,35 @@
 'use client';
 import { Carousel } from '@mantine/carousel';
-import { Text, useMantineTheme } from '@mantine/core';
+import { Loader, Text, useMantineTheme } from '@mantine/core';
 import PackageCard from './PackageItem';
+import { IOrganization, IPackage } from '@/types';
+import { useGetPackages } from '@/hooks/useGetPackage';
+import PackageItem from './PackageItem';
 
-type Props = {};
+type Props = {
+  organization: IOrganization;
+};
 
-const Index = (props: Props) => {
+const Index = ({ organization }: Props) => {
   const theme = useMantineTheme();
+  const {
+    data: pkgs,
+    isLoading,
+    isFetched,
+    isError,
+    error,
+  } = useGetPackages(organization.id);
+  if (isLoading && !isFetched) {
+    return (
+      <center>
+        <Loader />
+      </center>
+    );
+  }
+
+  if (isError) {
+    return <p>{JSON.stringify(error)}</p>;
+  }
   return (
     <div className='pb-6'>
       <Text size='lg' weight={600} mt={8}>
@@ -25,16 +48,14 @@ const Index = (props: Props) => {
             position: 'relative',
             bottom: -28,
             '&[data-active]': {
-              backgroundColor: theme.primaryColor,
-              background: theme.primaryColor,
-              color: theme.primaryColor,
+              backgroundColor: theme.colors.brand[6],
             },
           },
         }}
       >
-        {new Array(3).fill('').map((item: any, idx: number) => (
+        {pkgs?.data.map((pkg: IPackage, idx: number) => (
           <Carousel.Slide key={idx}>
-            {/* <PackageCard pkg={null} /> */}
+            <PackageItem data={pkg} />
           </Carousel.Slide>
         ))}
       </Carousel>

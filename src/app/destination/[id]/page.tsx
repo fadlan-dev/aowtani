@@ -87,7 +87,7 @@ const page = async ({ params }: Props) => {
               <h3 className='mb-2'>สังกัดหน่วยงาน</h3>
               <OrganizationItem data={dest.organization} />
             </div>
-            <RecommendedPackagesSlide />
+            <RecommendedPackagesSlide organization={dest.organization} />
             <PopularProductsSlide />
           </div>
         </div>
