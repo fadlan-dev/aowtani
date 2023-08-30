@@ -12,6 +12,7 @@ export const metadata = {
 const page = async ({ searchParams }: Props) => {
   const products = await getProducts({
     page: Number(searchParams.page) || 1,
+    search: `${searchParams.search || ''}`,
   });
   return (
     <div className='mt-20 mb-24'>

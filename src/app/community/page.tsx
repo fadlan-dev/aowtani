@@ -11,7 +11,10 @@ export const metadata = {
 
 const Page = async ({ searchParams }: Props) => {
   const page = Number(searchParams.page) || 1;
-  const communities = await getCommunities({ page: page });
+  const communities = await getCommunities({
+    page: page,
+    search: `${searchParams.search || ''}`,
+  });
   return (
     <div className='mt-20 mb-24'>
       <center>

@@ -13,10 +13,11 @@ export const metadata = {
 
 const page = async ({ searchParams }: Props) => {
   const destinations = await getDestinations({
-    destination_type_id: searchParams.destination_type_id as string,
-    organization_id: searchParams.organization_id as string,
+    destination_type_id:
+      (searchParams.destination_type_id as string) || undefined,
+    organization_id: (searchParams.organization_id as string) || undefined,
     page: Number(searchParams.page) || 1,
-    search: String(searchParams.search),
+    search: `${searchParams.search || ''}`,
   });
 
   return (

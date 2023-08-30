@@ -6,7 +6,7 @@ interface props {
   type?: ValidPartnerType;
   page?: number;
   per_page?: number;
-  search?: string;
+  search: string;
 }
 
 interface IResponse {
@@ -33,9 +33,7 @@ export const getPartners = async ({
     queryParams += `per_page=${per_page}&`;
   }
 
-  if (search) {
-    queryParams += `search=${search}`;
-  }
+  queryParams += `search=${search}`;
 
   try {
     const config = {

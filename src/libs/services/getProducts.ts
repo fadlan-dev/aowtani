@@ -26,9 +26,7 @@ export const getProducts = async ({
     queryParams += `per_page=${per_page}&`;
   }
 
-  if (search) {
-    queryParams += `search=${search}`;
-  }
+  queryParams += `search=${search}`;
 
   try {
     const config = {

@@ -4,7 +4,7 @@ import axios from 'axios';
 type props = {
   destination_type_id?: string;
   organization_id?: string;
-  search?: string;
+  search: string;
   page?: number;
   per_page?: number;
 };
@@ -39,9 +39,9 @@ export const getDestinations = async ({
     queryParams += `per_page=${per_page}&`;
   }
 
-  if (search) {
-    queryParams += `search=${search}`;
-  }
+  queryParams += `search=${search}`;
+
+  console.log('queryParams', queryParams);
 
   try {
     const config = {

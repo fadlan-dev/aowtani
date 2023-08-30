@@ -24,6 +24,7 @@ const page = async ({ searchParams }: Props) => {
   const partners = await getPartners({
     page: Number(searchParams.page) || 1,
     type: type,
+    search: `${searchParams.search || ''}`,
   });
 
   return (

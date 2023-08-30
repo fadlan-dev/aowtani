@@ -14,6 +14,7 @@ export const metadata = {
 const Page = async ({ searchParams }: Props) => {
   const localGuides = await getLocalGuides({
     page: Number(searchParams.page) || 1,
+    search: `${searchParams.search || ''}`,
   });
 
   return (
