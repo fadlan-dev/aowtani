@@ -26,5 +26,5 @@ export const useGetProducts = (
       );
       return data;
     },
-    queryKey: ['packages-query'],
+    queryKey: ['products-query'],
   });
