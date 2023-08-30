@@ -4,6 +4,7 @@ import { Loader, Text, useMantineTheme } from '@mantine/core';
 import { IOrganization, IPackage } from '@/types';
 import { useGetPackages } from '@/hooks/useGetPackage';
 import PackageItem from './PackageItem';
+import Empty from './Empty';
 
 type Props = {
   organization: IOrganization;
@@ -31,6 +32,10 @@ const Index = ({ organization }: Props) => {
       {isLoading && !isFetched ? (
         <center>
           <Loader />
+        </center>
+      ) : pkgs?.data.length === 0 ? (
+        <center>
+          <Empty className='py-4' />
         </center>
       ) : (
         <Carousel
