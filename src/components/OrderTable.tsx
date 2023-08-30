@@ -122,7 +122,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <td className='whitespace-nowrap'>
         {dayjs(order.order_at).format('YYYY-MM-DD')}
       </td>
-      <td>{order.product.name}</td>
+      <td className='min-w-[240px]'>{order.product.name}</td>
       <td className='whitespace-nowrap'>{order.product.sku}</td>
       <td className='text-end'>{order.quantity}</td>
       <td>{order.price}</td>

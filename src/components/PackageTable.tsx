@@ -114,7 +114,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
   const rows = onSorted().map((pkg) => (
     <tr key={pkg.id}>
       <td>{dayjs(pkg.created_at).format('YYYY-MM-DD')}</td>
-      <td className=' min-w-[112ox]'>{pkg.package.name}</td>
+      <td className='min-w-[240px]'>{pkg.package.name}</td>
       <td className='whitespace-nowrap'>{pkg.local_guide.name}</td>
       <td className='whitespace-nowrap'>{pkg.customer_name}</td>
       <td className='text-end'>{pkg.quantity}</td>
