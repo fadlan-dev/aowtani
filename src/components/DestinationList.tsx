@@ -42,7 +42,7 @@ const DestinationList = ({
 
   return (
     <>
-      <div className={cn(className, 'grid grid-cols-list gap-4 px-4 mt-4')}>
+      <div className={cn('grid grid-cols-list gap-4 px-4 mt-4', className)}>
         {data?.map((dest: IDestination) => (
           <DestinationItem key={dest.id} destination={dest} />
         ))}

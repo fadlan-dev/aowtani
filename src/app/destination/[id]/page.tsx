@@ -71,7 +71,10 @@ const page = async ({ params }: Props) => {
               className='mt-6'
               exploreTo={`review/${params.id}`}
             />
-            <NearbyAttractions className='mt-6' />
+            <NearbyAttractions
+              className='mt-6'
+              organization={dest.organization}
+            />
           </div>
           <div className='w-full lg:w-80'>
             {dest.embed_map && (
