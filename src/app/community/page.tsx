@@ -1,3 +1,4 @@
+import BasciSearch from '@/components/BasicSearch';
 import CommunityList from '@/components/CommunityList';
 import { getCommunities } from '@/libs/services/getCommunities';
 
@@ -13,13 +14,12 @@ const Page = async ({ searchParams }: Props) => {
   const communities = await getCommunities({ page: page });
   return (
     <div className='mt-20 mb-24'>
-      <CommunityList
-        data={communities.data}
-        total={communities.total}
-        title='ชุมชน'
-        subTitle='สัมผัสวิถีชีวิต'
-        showSearch
-      />
+      <center>
+        <h1>ชุมชน</h1>
+        <p>สัมผัสวิถีชีวิต</p>
+      </center>
+      <BasciSearch placeholder='ค้นหาชุมชนที่ต้องการ' />
+      <CommunityList data={communities.data} total={communities.total} />
     </div>
   );
 };

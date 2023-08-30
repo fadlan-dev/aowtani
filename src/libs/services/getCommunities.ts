@@ -4,6 +4,7 @@ import axios from 'axios';
 interface props {
   page?: number;
   per_page?: number;
+  search?: string;
 }
 
 interface IResponse {
@@ -14,14 +15,19 @@ interface IResponse {
 export const getCommunities = async ({
   page = 1,
   per_page = 6,
+  search = '',
 }: props): Promise<IResponse> => {
   let queryParams = '';
   if (page) {
-    queryParams += `page=${page}`;
+    queryParams += `page=${page}&`;
   }
 
   if (per_page) {
-    queryParams += `per_page=${per_page}`;
+    queryParams += `per_page=${per_page}&`;
+  }
+
+  if (search) {
+    queryParams += `search=${search}`;
   }
 
   try {

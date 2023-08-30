@@ -8,11 +8,16 @@ import { Pagination } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface ProductListProps {
+  className?: string;
   data: IProduct[];
   total: number;
 }
 
-const ProductList: FunctionComponent<ProductListProps> = ({ data, total }) => {
+const ProductList: FunctionComponent<ProductListProps> = ({
+  className,
+  data,
+  total,
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -32,7 +37,7 @@ const ProductList: FunctionComponent<ProductListProps> = ({ data, total }) => {
 
   return (
     <>
-      <div className={'grid grid-cols-list gap-4 px-4 mt-4'}>
+      <div className={cn(className, 'grid grid-cols-list gap-4 px-4 mt-4')}>
         {data.map((product: IProduct) => (
           <ProductItem key={product.id} product={product} />
         ))}

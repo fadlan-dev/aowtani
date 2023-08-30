@@ -4,6 +4,7 @@ import axios from 'axios';
 type props = {
   destination_type_id?: string;
   organization_id?: string;
+  search?: string;
   page?: number;
   per_page?: number;
 };
@@ -16,6 +17,7 @@ export interface IResponse {
 export const getDestinations = async ({
   destination_type_id,
   organization_id,
+  search = '',
   page = 1,
   per_page = 6,
 }: props): Promise<IResponse> => {
@@ -26,15 +28,19 @@ export const getDestinations = async ({
   }
 
   if (organization_id) {
-    queryParams += `organization_id=${organization_id}`;
+    queryParams += `organization_id=${organization_id}&`;
   }
 
   if (page) {
-    queryParams += `page=${page}`;
+    queryParams += `page=${page}&`;
   }
 
   if (per_page) {
-    queryParams += `per_page=${per_page}`;
+    queryParams += `per_page=${per_page}&`;
+  }
+
+  if (search) {
+    queryParams += `search=${search}`;
   }
 
   try {

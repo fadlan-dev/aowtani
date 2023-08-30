@@ -1,3 +1,5 @@
+import BasciSearch from '@/components/BasicSearch';
+import PartnerFilter from '@/components/PartnerFilter';
 import PartnerList from '@/components/PartnerList';
 import { getPartners } from '@/libs/services/getPartners';
 
@@ -25,15 +27,14 @@ const page = async ({ searchParams }: Props) => {
   });
 
   return (
-    <div className='mt-24 mb-20'>
-      <PartnerList
-        data={partners.data}
-        total={partners.total}
-        showSearch
-        showPagination
-        title='ผู้ประกอบการ'
-        subTitle='เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ'
-      />
+    <div className='mt-20 mb-24'>
+      <center>
+        <h1>ผู้ประกอบการ</h1>
+        <p>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</p>
+      </center>
+      <BasciSearch placeholder='ค้นหาสถานทที่ต้องการ' />
+      <PartnerFilter />
+      <PartnerList data={partners.data} total={partners.total} />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import LocalGuideList from '@/components/LocalGuideList';
 import { getLocalGuides } from '@/libs/services/getLocalGuides';
+import BasciSearch from '@/components/BasicSearch';
 
 type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
@@ -16,14 +17,16 @@ const Page = async ({ searchParams }: Props) => {
   });
 
   return (
-    <div className='mt-20 mb-20'>
+    <div className='mt-20 mb-24'>
+      <center>
+        <h1>ไกด์ท้องถิ่น</h1>
+        <p>รวมทุกแนว สัมผัสได้ทุกวิถีชีวิต</p>
+      </center>
+      <BasciSearch placeholder='ค้นหาสถานทที่ต้องการ' />
       <LocalGuideList
         data={localGuides.data}
         total={localGuides.total}
         showPagination
-        showSearch
-        title='ไกด์ท้องถิ่น'
-        subTitle='รวมทุกแนว สัมผัสได้ทุกวิถีชีวิต'
       />
     </div>
   );
