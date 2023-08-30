@@ -16,7 +16,7 @@ const PackageList = ({ className, data }: Props) => {
   return (
     <div className={cn('grid grid-cols-list gap-4', className)}>
       {data.map((pkg: IPackage, idx: number) => (
-        <PackageItem pkg={pkg} key={idx} />
+        <PackageItem data={pkg} key={idx} />
       ))}
     </div>
   );
