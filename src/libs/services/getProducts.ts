@@ -4,7 +4,7 @@ import axios from 'axios';
 interface props {
   page?: number;
   per_page?: number;
-  search?: string;
+  search: string;
 }
 
 interface IResponse {

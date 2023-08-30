@@ -8,9 +8,15 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const destinations = await getDestinations({});
-  const pkgs = await getPackages({});
-  const products = await getProducts({});
+  const destinations = await getDestinations({
+    search: '',
+  });
+  const pkgs = await getPackages({
+    search: '',
+  });
+  const products = await getProducts({
+    search: '',
+  });
   return (
     <AppShellItem destinations={destinations} pkgs={pkgs} products={products} />
   );
