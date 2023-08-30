@@ -30,7 +30,9 @@ const getPartner = async (id: string): Promise<IPartner> => {
 };
 
 const Page = async ({ params }: Props) => {
-  const pkgs = await getPackages({});
+  const pkgs = await getPackages({
+    search: '',
+  });
   const partner: IPartner = await getPartner(params.id);
   return (
     <div className='mt-20 mb-20'>

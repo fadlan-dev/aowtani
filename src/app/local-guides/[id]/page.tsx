@@ -32,7 +32,9 @@ const getLocalGuide = async (id: string): Promise<ILocalGuide> => {
 
 const Page = async ({ params }: Props) => {
   const localGuide = await getLocalGuide(params.id);
-  const pkgs = await getPackages({});
+  const pkgs = await getPackages({
+    search: '',
+  });
   return (
     <div className='mt-20 mb-20'>
       <div className='px-4'>
