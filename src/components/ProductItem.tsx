@@ -35,8 +35,8 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
           <Badge>ชุมชนบ้านบูดี</Badge>
         </Group>
         <Flex justify='end'>
-          <Flex align='baseline' gap={2}>
-            <Text weight='bold' size='lg' c='brand.6'>
+          <Flex justify='end' align='end' direction='column' gap={0} mt='sm'>
+            <Text weight='bold' c='brand'>
               ฿{numberFormat(product.price)}
             </Text>
             {product.price_before_discount > 0 && (
