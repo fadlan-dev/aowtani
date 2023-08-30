@@ -88,7 +88,7 @@ const page = async ({ params }: Props) => {
               <OrganizationItem data={dest.organization} />
             </div>
             <RecommendedPackagesSlide organization={dest.organization} />
-            <PopularProductsSlide />
+            <PopularProductsSlide organization={dest.organization} />
           </div>
         </div>
       </div>
