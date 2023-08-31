@@ -11,6 +11,7 @@ type Props = {
   total: number;
   showPagination?: boolean;
   showMore?: boolean;
+  showMoreType?: string;
   className?: string;
 };
 
@@ -20,6 +21,7 @@ const PartnerList = ({
   className,
   showPagination,
   showMore,
+  showMoreType,
 }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -56,7 +58,10 @@ const PartnerList = ({
           />
         )}
         {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/partner')}>
+          <Button
+            variant='subtle'
+            onClick={() => router.push(`/partner?type=${showMoreType}`)}
+          >
             ดูเพิ่มเติม
           </Button>
         )}

@@ -11,27 +11,36 @@ import DestinationList from './DestinationList';
 import { FoodIcon, ResortIcon, TravelIcon } from './Icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/libs/utils';
-import { IDestination, IPackage, IProduct } from '@/types';
+import { IDestination, IPackage, IPartner, IProduct } from '@/types';
 import ProductList from './ProductList';
 import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
 import DestinationMap from './DestinationMap';
 import { useCallback } from 'react';
+import PartnerList from './PartnerList';
 
 type Props = {
   destinations: { data: IDestination[]; total: number };
   pkgs: { data: IPackage[]; total: number };
   products: { data: IProduct[]; total: number };
+  hotels: { data: IPartner[]; total: number };
+  restaurants: { data: IPartner[]; total: number };
 };
 
-const Index = ({ destinations, pkgs, products }: Props) => {
+const Index = ({
+  destinations,
+  pkgs,
+  products,
+  hotels,
+  restaurants,
+}: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const t = searchParams.get('t') || 'travel';
   const theme = useMantineTheme();
   const MENUS = [
     {
-      key: 'travel',
+      key: 'Destination',
       title: 'สถานที่ท่องเที่ยว',
       icon: <TravelIcon />,
       color: 'blue',
@@ -39,14 +48,14 @@ const Index = ({ destinations, pkgs, products }: Props) => {
       active: theme.colors.blue[0],
     },
     {
-      key: 'resort',
+      key: 'Hotel',
       title: 'ที่พักผ่อน',
       icon: <ResortIcon />,
       color: 'green',
       active: theme.colors.green[0],
     },
     {
-      key: 'food',
+      key: 'Restaurant',
       title: 'อาหารจานโปรด',
       icon: <FoodIcon />,
       color: 'violet',
@@ -57,7 +66,7 @@ const Index = ({ destinations, pkgs, products }: Props) => {
   const contentRender = useCallback(
     (key: string) => {
       switch (key) {
-        case 'travel':
+        case 'Destination':
           return (
             <>
               <center>
@@ -91,28 +100,40 @@ const Index = ({ destinations, pkgs, products }: Props) => {
             </>
           );
 
-        case 'resort':
+        case 'Hotel':
           return (
             <>
               <center>
                 <h1>ที่พัก</h1>
                 <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
               </center>
+              <PartnerList
+                data={hotels.data}
+                total={hotels.total}
+                showMoreType='Hotel'
+                showMore
+              />
             </>
           );
 
-        case 'food':
+        case 'Restaurant':
           return (
             <>
               <center>
                 <h1>อาหารจานโปรด</h1>
                 <p>อร่อยทุกเมนู</p>
               </center>
+              <PartnerList
+                data={restaurants.data}
+                total={restaurants.total}
+                showMoreType='Restaurant'
+                showMore
+              />
             </>
           );
       }
     },
-    [destinations, pkgs, products]
+    [destinations, pkgs, products, hotels, restaurants]
   );
 
   return (
