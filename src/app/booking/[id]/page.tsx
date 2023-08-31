@@ -10,7 +10,7 @@ type Props = {
 const Page = async ({ params }: Props) => {
   const pkg: IPackage = await getPackage(params.id);
   return (
-    <div className='mt-20 mb-24'>
+    <div className='pt-20 mb-24'>
       <center>
         <h1>ยืนยันการชำระเงิน</h1>
         <p>โปรดตรวจสอบข้อมูลให้ถูกต้องก่อนกดชำระเงิน</p>

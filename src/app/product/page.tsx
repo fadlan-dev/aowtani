@@ -15,7 +15,7 @@ const page = async ({ searchParams }: Props) => {
     search: `${searchParams.search || ''}`,
   });
   return (
-    <div className='mt-20 mb-24'>
+    <div className='pt-20 mb-24'>
       <center>
         <h1>ของฝาก</h1>
         <p>ช้อปปิ้งได้ทุกเวลา</p>

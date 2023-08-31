@@ -18,7 +18,7 @@ const Page = async ({ params, searchParams }: Props) => {
       : ((await getPackage(params.id)) as IPackage);
 
   return (
-    <div className='mt-20 mb-24'>
+    <div className='pt-20 mb-24'>
       <div className='container'>
         <div className='bg-white p-4 border border-solid border-slate-300 rounded'>
           <h1>{reviewTO.name}</h1>
