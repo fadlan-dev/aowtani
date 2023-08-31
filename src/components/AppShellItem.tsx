@@ -163,7 +163,7 @@ const Index = ({
         </Navbar>
       </div>
       <div className='flex-auto overflow-auto py-10'>
-        {contentRender(searchParams.get('t') || 'travel')}
+        {contentRender(searchParams.get('t') || 'Destination')}
       </div>
     </div>
   );
