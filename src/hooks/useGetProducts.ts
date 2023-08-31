@@ -10,19 +10,24 @@ type IResponse = {
 type Props = {
   page?: number;
   per_page?: number;
+  search?: number;
   organization_id?: number;
 };
 
 export type ApiServiceErr = any;
 export const useGetProducts = (
-  { page = 1, per_page = 3, organization_id }: Props,
+  { page = 1, per_page = 6, search, organization_id }: Props,
   opt?: QueryOptions<IResponse>
 ) =>
   useQuery<IResponse, ApiServiceErr>({
     ...opt,
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/packages.json?organization_id=${organization_id}&page=${page}&per_page=${per_page}`
+        `${
+          process.env.NEXT_PUBLIC_API_URL
+        }/products.json?organization_id=${organization_id}&page=${page}&per_page=${per_page}&search=${
+          search || ''
+        }`
       );
       return data;
     },

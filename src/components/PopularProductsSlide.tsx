@@ -18,7 +18,7 @@ const Index = ({ organization }: Props) => {
     isFetched,
     isError,
     error,
-  } = useGetProducts({ organization_id: organization.id });
+  } = useGetProducts({ organization_id: organization.id, per_page: 3 });
 
   if (isError) {
     return <p>{JSON.stringify(error)}</p>;
