@@ -114,7 +114,7 @@ const Index = ({ destinations, pkgs, products }: Props) => {
 
   return (
     <div className='flex pt-[60px]'>
-      <div className='w-72 min-w-[288px] h-[calc(100vh-143px)] hidden md:block'>
+      <div className='w-72 min-w-[288px] min-h-[calc(100vh-143px)] hidden md:block'>
         <Navbar hiddenBreakpoint='sm' className='h-full'>
           {MENUS.map((menu) => (
             <Navbar.Section
