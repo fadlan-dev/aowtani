@@ -17,7 +17,6 @@ import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { IReply, IReview } from '@/types';
-import { isImageURL } from '@/libs/utils';
 
 interface ReviewItemProps {
   data: IReview;
@@ -91,7 +90,7 @@ const ReviewItem: FunctionComponent<ReviewItemProps> = ({
         />
       </TypographyStylesProvider>
       <Flex gap={8} mt={8}>
-        {data.images.map((img) => (
+        {(data.images || []).map((img) => (
           <div
             key={img.id}
             className='h-12 w-auto bg-zinc-200 grid place-content-center relative'
