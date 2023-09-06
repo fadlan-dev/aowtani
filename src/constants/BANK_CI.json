@@ -1,0 +1,28 @@
+[
+  {
+    "image": "/promptpay.svg",
+    "slug": "PromptPay",
+    "color": "#053F67"
+  },
+  {
+    "image": "/bank/kbank.svg",
+    "slug": "ธนาคารกสิกรไทย",
+
+    "color": "#02a950"
+  },
+  {
+    "image": "/bank/ktb.svg",
+    "slug": "ธนาคารกรุงไทย",
+    "color": "#00A4E4"
+  },
+  {
+    "image": "/bank/scb.svg",
+    "slug": "ธนาคารไทยพาณิชย์",
+    "color": "#462279"
+  },
+  {
+    "image": "/bank/ttb.svg",
+    "slug": "ธนาคารทหารไทย",
+    "color": "#0050f0"
+  }
+]

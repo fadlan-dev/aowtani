@@ -1,76 +1,112 @@
+import { useGetBankAccounts } from '@/hooks/useGetBankAccounts';
 import { cn } from '@/libs/utils';
-import { Text, Title } from '@mantine/core';
+import { IBankAccount } from '@/types';
+import { Loader, Text, Title } from '@mantine/core';
 import Image from 'next/image';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
+import BANK_CI from '@/constants/BANK_CI.json';
+import Empty from './Empty';
 
 interface PaymentMethodProps {
   className?: string;
+  business_partner_id: number;
 }
 
 const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
   className,
+  business_partner_id,
 }) => {
-  const PAYMENTS = [
-    {
-      image: '/promptpay.svg',
-      label: 'PromptPay',
-      value: 'PromptPay',
-      acc_no: '0105539071246',
-      acc_name: 'บริษัท ปัตตานี ทัวร์ จำกัด',
-      color: '#053F67',
-    },
-
-    {
-      image: '/kbank.svg',
-      label: 'ธนาคารกสิกรไทย',
-      value: 'kbank',
-      acc_no: '0105539071246',
-      acc_name: 'บริษัท ปัตตานี ทัวร์ จำกัด',
-      color: '#02a950',
-    },
-    {
-      image: '/scb.svg',
-      label: ' ธนาคารไทยพาณิชย์',
-      value: 'scb',
-      acc_no: '0105539071246',
-      acc_name: 'บริษัท ปัตตานี ทัวร์ จำกัด',
-      color: '#462279',
-    },
-  ];
-
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const payment = searchParams.get('payment') || PAYMENTS[0].value;
+  const payment = searchParams.get('payment') || '';
+  const {
+    data: bankAccounts,
+    isFetching,
+    isFetched,
+  } = useGetBankAccounts({
+    business_partner_id: business_partner_id,
+  });
+
+  if (isFetching && !isFetched) {
+    return (
+      <center>
+        <Loader />
+      </center>
+    );
+  }
+  const getBankColor = useCallback(
+    (slug: string) => {
+      BANK_CI?.find((bank) => bank.slug === slug);
+      return BANK_CI?.find((bank) => bank.slug === slug)?.color;
+    },
+    [bankAccounts]
+  );
+
+  const getBankProfile = useCallback(
+    (slug: string) => {
+      BANK_CI?.find((bank) => bank.slug === slug);
+      return BANK_CI?.find((bank) => bank.slug === slug)?.image || '/image.svg';
+    },
+    [bankAccounts]
+  );
 
   return (
     <div className={cn(className)}>
       <Title order={4}>เลือกช่องทางการชำระเงิน</Title>
-      <div className={cn('grid grid-cols-2 sm:grid-cols-3 gap-4 mt-2')}>
-        {PAYMENTS.map((d) => (
-          <div
-            key={d.value}
-            className={cn(
-              'flex flex-col items-center border-[3px] border-solid p-4 rounded cursor-pointer'
-            )}
-            style={{
-              borderColor: payment === d.value ? d.color : '#fff',
-            }}
-            onClick={() => {
-              const newParams = new URLSearchParams(searchParams.toString());
-              newParams.set('payment', d.value);
-              router.push(`${pathname}?${newParams}`);
-            }}
-          >
-            <Image width={32} height={32} src={d.image} alt={d.label} />
-            <Text mt='xs'>{d.label}</Text>
-            <Text>{d.acc_no}</Text>
-            <Text color='dimmed' size='sm'>
-              {d.acc_name}
-            </Text>
-          </div>
-        ))}
+      <div
+        className={cn(
+          'grid gap-4 mt-2',
+          bankAccounts?.length === 0
+            ? 'grid-cols-1 sm:grid-cols-1'
+            : 'grid-cols-2 sm:grid-cols-3'
+        )}
+      >
+        {bankAccounts?.length === 0 ? (
+          <center>
+            <Empty />
+          </center>
+        ) : (
+          bankAccounts?.map((bank: IBankAccount) => (
+            <div
+              key={bank.account_number}
+              className={cn(
+                'flex flex-col items-center border-[3px] border-solid p-4 rounded cursor-pointer'
+              )}
+              style={{
+                borderColor:
+                  payment === bank.account_number
+                    ? getBankColor(bank.slug)
+                    : '#fff',
+              }}
+              onClick={() => {
+                const newParams = new URLSearchParams(searchParams.toString());
+                newParams.set('payment', bank.account_number);
+                router.push(`${pathname}?${newParams}`);
+              }}
+            >
+              {bank && (
+                <div
+                  className='p-1'
+                  style={{ backgroundColor: getBankColor(bank.slug) }}
+                >
+                  <Image
+                    width={32}
+                    height={32}
+                    src={getBankProfile(bank.slug)}
+                    alt={bank.slug}
+                  />
+                </div>
+              )}
+              <Text mt='xs'>{bank.slug}</Text>
+              <Text>{bank.account_number}</Text>
+              <Text color='dimmed' size='sm'>
+                {bank.account_name}
+              </Text>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
