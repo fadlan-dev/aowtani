@@ -18,7 +18,7 @@ const Page = async ({ params }: Props) => {
       <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1 '>
-            <BookingInfo price={pkg.price} />
+            <BookingInfo pkg={pkg} />
           </div>
           <div className='w-full lg:w-80'>
             <BookingForm pkg={pkg} />

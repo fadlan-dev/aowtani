@@ -5,18 +5,18 @@ import PaymentMethod from './PaymentMethod';
 import { numberFormat } from '@/libs/utils';
 import { useSearchParams } from 'next/navigation';
 import dayjs from 'dayjs';
+import { IPackage } from '@/types';
 
 interface BookingInfoProps {
-  price: number;
+  pkg: IPackage;
 }
 
-const BookingInfo: FunctionComponent<BookingInfoProps> = ({ price }) => {
+const BookingInfo: FunctionComponent<BookingInfoProps> = ({ pkg }) => {
   const searchParams = useSearchParams();
   const tour_date = searchParams.get('tour_date');
-  const note = searchParams.get('note');
   const quantity = Number(searchParams.get('quantity'));
 
-  const total = useCallback(() => price * quantity, [price, quantity]);
+  const total = useCallback(() => pkg.price * quantity, [pkg, quantity]);
   return (
     <Card>
       <Title order={3}>ข้อมูลการจอง</Title>
@@ -40,7 +40,7 @@ const BookingInfo: FunctionComponent<BookingInfoProps> = ({ price }) => {
                   </Text>{' '}
                 </Group>
               </td>
-              <td className='text-end'>{numberFormat(price)}</td>
+              <td className='text-end'>{numberFormat(pkg.price)}</td>
               <td className='text-end'>{numberFormat(quantity)}</td>
               <td className='text-end'>{numberFormat(total())}</td>
             </tr>
@@ -53,7 +53,10 @@ const BookingInfo: FunctionComponent<BookingInfoProps> = ({ price }) => {
         <span className='text-primary mx-2'>{numberFormat(total())}</span>บาท
       </Title>
 
-      <PaymentMethod className='mt-4' />
+      <PaymentMethod
+        className='mt-4'
+        business_partner_id={pkg.tour_activity.id}
+      />
     </Card>
   );
 };
