@@ -36,7 +36,7 @@ const Index = ({
 }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const t = searchParams.get('t') || 'travel';
+  const t = searchParams.get('t') || 'Destination';
   const theme = useMantineTheme();
   const MENUS = [
     {
@@ -76,7 +76,6 @@ const Index = ({
               <DestinationList
                 total={1}
                 data={destinations.data}
-                title={MENUS.find((menu) => menu.key === t)?.title || ''}
                 className='mt-6 mb-6'
                 showMore
               />
@@ -162,9 +161,7 @@ const Index = ({
           ))}
         </Navbar>
       </div>
-      <div className='flex-auto overflow-auto py-10'>
-        {contentRender(searchParams.get('t') || 'Destination')}
-      </div>
+      <div className='flex-auto overflow-auto py-10'>{t}</div>
     </div>
   );
 };

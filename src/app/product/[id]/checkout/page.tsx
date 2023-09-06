@@ -28,7 +28,7 @@ const Page = ({ params }: pageProps) => {
     (product: IProduct) => {
       return Number(product.price * Number(quantity)).toLocaleString();
     },
-    [product, quantity]
+    [quantity]
   );
 
   return (

@@ -21,6 +21,23 @@ const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const payment = searchParams.get('payment') || '';
+
+  const getBankColor = useCallback(
+    (slug: string) => {
+      // BANK_CI.find((bank) => bank.slug === slug);
+      return BANK_CI.find((bank) => bank.slug === slug)?.color;
+    },
+    [] // Remove 'BANK_CI' from the dependency array
+  );
+
+  const getBankProfile = useCallback(
+    (slug: string) => {
+      // BANK_CI.find((bank) => bank.slug === slug);
+      return BANK_CI.find((bank) => bank.slug === slug)?.image || '/image.svg';
+    },
+    [] // Remove 'BANK_CI' from the dependency array
+  );
+
   const {
     data: bankAccounts,
     isFetching,
@@ -36,21 +53,6 @@ const PaymentMethod: FunctionComponent<PaymentMethodProps> = ({
       </center>
     );
   }
-  const getBankColor = useCallback(
-    (slug: string) => {
-      BANK_CI?.find((bank) => bank.slug === slug);
-      return BANK_CI?.find((bank) => bank.slug === slug)?.color;
-    },
-    [bankAccounts]
-  );
-
-  const getBankProfile = useCallback(
-    (slug: string) => {
-      BANK_CI?.find((bank) => bank.slug === slug);
-      return BANK_CI?.find((bank) => bank.slug === slug)?.image || '/image.svg';
-    },
-    [bankAccounts]
-  );
 
   return (
     <div className={cn(className)}>
