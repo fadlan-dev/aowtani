@@ -41,8 +41,6 @@ export const getDestinations = async ({
 
   queryParams += `search=${search}`;
 
-  console.log('queryParams', queryParams);
-
   try {
     const config = {
       method: 'get',
