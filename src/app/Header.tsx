@@ -14,6 +14,7 @@ import {
   Avatar,
   Popover,
   Text,
+  Skeleton,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
@@ -64,7 +65,7 @@ const Index = () => {
   const router = useRouter();
   const theme = useMantineTheme();
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <Box>
@@ -88,7 +89,9 @@ const Index = () => {
                 {menu.title}
               </Link>
             ))}
-            {session ? (
+            {status === 'loading' ? (
+              <Skeleton width={32} height={32} radius='xl' />
+            ) : session ? (
               <Popover position='bottom-end' shadow='md'>
                 <Popover.Target>
                   <Avatar
