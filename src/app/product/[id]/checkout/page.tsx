@@ -1,10 +1,10 @@
 'use client';
 import PaymentMethod from '@/components/PaymentMethod';
 import OrderForm from '@/components/forms/OrderForm';
+import { useGetProduct } from '@/hooks/useGetProduct';
 import { numberFormat } from '@/libs/utils';
+import { IProduct } from '@/types';
 import { Card, Divider, Flex, Loader, Title } from '@mantine/core';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -19,23 +19,17 @@ const Page = ({ params }: pageProps) => {
   const quantity = searchParams.get('quantity');
 
   const {
-    isFetching,
     data: product,
-    refetch,
+    isFetching,
     isFetched,
-  } = useQuery({
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/products/${params.id}.json`
-      );
-      return data;
-    },
-    queryKey: ['reviews-query'],
-  });
+  } = useGetProduct({ id: params.id });
 
-  const callTotalProce = useCallback(() => {
-    return Number(product.price * Number(quantity)).toLocaleString();
-  }, [product, quantity]);
+  const callTotalProce = useCallback(
+    (product: IProduct) => {
+      return Number(product.price * Number(quantity)).toLocaleString();
+    },
+    [product, quantity]
+  );
 
   return (
     <div className='mt-20 mb-20'>
@@ -76,7 +70,7 @@ const Page = ({ params }: pageProps) => {
                               className='object-cover'
                               width={84}
                               height={84}
-                              alt={product.name}
+                              alt={`${product?.name}`}
                             />
                             <Link
                               href={`product/${params.id}`}
@@ -87,12 +81,14 @@ const Page = ({ params }: pageProps) => {
                           </Flex>
                         </td>
                         <td className='text-end'>
-                          {numberFormat(product.price)}
+                          {product && numberFormat(product.price)}
                         </td>
                         <td className='text-end'>
                           {numberFormat(Number(quantity))}
                         </td>
-                        <td className='text-end'>{callTotalProce()}</td>
+                        <td className='text-end'>
+                          {product && callTotalProce(product)}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -100,15 +96,22 @@ const Page = ({ params }: pageProps) => {
                 <Divider variant='dashed' my='md' />
                 <Title order={3} className='text-end'>
                   รวมเป็นเงินทั้งหมด
-                  <span className='text-primary mx-2'>{callTotalProce()}</span>
+                  <span className='text-primary mx-2'>
+                    {product && callTotalProce(product)}
+                  </span>
                   บาท
                 </Title>
-                <PaymentMethod className='mt-4' />
+                {product?.shop && (
+                  <PaymentMethod
+                    className='mt-4'
+                    business_partner_id={product.shop.id}
+                  />
+                )}
               </Card>
             )}
           </div>
           <div className='w-full lg:w-80'>
-            <OrderForm product={product} />
+            {product && <OrderForm product={product} />}
           </div>
         </div>
       </div>

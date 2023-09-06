@@ -123,6 +123,23 @@ export interface IProduct {
   created_at: string;
   updated_at: string;
   details: string;
+  shop: IShop;
+}
+
+export interface IShop {
+  id: number;
+  name: string;
+  address: string;
+  detail: string;
+  phone: string;
+  facebook: string;
+  type: string;
+  type_details: any;
+  status: string;
+  images: IImage[];
+  embed_map: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface ILocalGuide {
@@ -281,4 +298,14 @@ export interface IOrder {
   updated_at: string;
   slip: IImage;
   product: { id: number; name: string; sku: string };
+}
+
+export interface IBankAccount {
+  id: number;
+  slug: string;
+  account_number: string;
+  account_name: string;
+  account_branch: string;
+  created_at: string;
+  updated_at: string;
 }
