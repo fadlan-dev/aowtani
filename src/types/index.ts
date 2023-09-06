@@ -66,6 +66,23 @@ export interface IPackage {
   content: string;
   local_guide: LocalGuide;
   destination_visit: IDestinationVisit;
+  tour_activity: ITourActivity;
+}
+
+export interface ITourActivity {
+  id: number;
+  name: string;
+  address: string;
+  detail: string;
+  phone: string;
+  facebook: string;
+  type: string;
+  type_details: any;
+  status: string;
+  images: IImage[];
+  embed_map: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface IImage {
