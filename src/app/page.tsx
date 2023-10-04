@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const metadata = {
-  title: 'Pattani smart tourism',
+  title: 'Aow Tani',
 };
 
 export default async function Home({ searchParams }: Props) {

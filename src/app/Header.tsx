@@ -18,6 +18,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { IconLogout } from '@tabler/icons-react';
@@ -72,7 +73,7 @@ const Index = () => {
       <Header height={60} px='md' fixed zIndex={10}>
         <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
-            <div>Logo</div>
+            <Image height={32} width={98} src='/logo.svg' alt='aowtani' />
           </Link>
 
           <Group className='h-full hidden sm:flex gap-px'>
