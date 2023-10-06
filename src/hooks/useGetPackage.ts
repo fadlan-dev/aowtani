@@ -16,7 +16,7 @@ export const useGetPackages = (
     ...opt,
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/packages.json?organization_id=${organization_id}&page=1&per_page=3`
+        `${process.env.NEXT_API_HOST}/packages.json?organization_id=${organization_id}&page=1&per_page=3`
       );
       return data;
     },

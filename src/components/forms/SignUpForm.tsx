@@ -92,7 +92,7 @@ const RegisterForm = ({ p }: Props) => {
   const { mutate: Regsiter, isLoading: resiterLoading } = useMutation({
     mutationFn: async (payload: IUser) => {
       const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/customers.json`,
+        `${process.env.NEXT_API_HOST}/customers.json`,
         { customer: payload }
       );
       return data;

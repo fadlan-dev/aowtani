@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
         };
 
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/customers/login.json`,
+          `${process.env.NEXT_API_HOST}/customers/login.json`,
           requestOptions
         );
 

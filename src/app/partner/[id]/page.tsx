@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props) {
 
 const getPartner = async (id: string): Promise<IPartner> => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/business_partners/${id}.json`
+    `${process.env.NEXT_API_HOST}/business_partners/${id}.json`
   );
   const partner = await data.json();
   return partner;

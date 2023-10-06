@@ -94,7 +94,7 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/orders.json`,
+        url: `${process.env.NEXT_API_HOST}/orders.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,

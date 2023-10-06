@@ -31,7 +31,7 @@ export const getPackages = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/packages.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/packages.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -15,7 +15,7 @@ export const useGetBankAccounts = (
     ...opt,
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/bank_accounts.json?business_partner_id=${business_partner_id}`
+        `${process.env.NEXT_API_HOST}/bank_accounts.json?business_partner_id=${business_partner_id}`
       );
       return data;
     },

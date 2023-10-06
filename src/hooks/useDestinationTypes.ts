@@ -9,7 +9,7 @@ export const useGetDestinationTypes = (
   useQuery<IDestinationType[], ApiServiceErr>({
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/destination_types.json`
+        `${process.env.NEXT_API_HOST}/destination_types.json`
       );
       return data;
     },

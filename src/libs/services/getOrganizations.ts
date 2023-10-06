@@ -33,7 +33,7 @@ export const getOrganizations = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/organizations.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/organizations.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

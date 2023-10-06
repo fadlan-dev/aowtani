@@ -32,7 +32,7 @@ export const getLocalGuides = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/local_guides.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/local_guides.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

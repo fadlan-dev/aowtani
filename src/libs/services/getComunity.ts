@@ -2,7 +2,7 @@ import { ICommunity } from '@/types';
 
 export const getCommunity = async (id: string): Promise<ICommunity> => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/communities/${id}.json`,
+    `${process.env.NEXT_API_HOST}/communities/${id}.json`,
     { cache: 'no-store' }
   );
 

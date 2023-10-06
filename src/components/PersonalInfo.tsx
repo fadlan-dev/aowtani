@@ -83,7 +83,7 @@ const PersonalInfo = ({ className }: Props) => {
       const config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/customers/${id}.json`,
+        url: `${process.env.NEXT_API_HOST}/customers/${id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,

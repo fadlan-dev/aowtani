@@ -39,7 +39,7 @@ export const getPartners = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/business_partners.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/business_partners.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

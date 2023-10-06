@@ -12,7 +12,7 @@ export const useGetProduct = ({ id }: Props, opt?: QueryOptions<IProduct>) =>
     ...opt,
     queryFn: async () => {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/products/${id}.json`
+        `${process.env.NEXT_API_HOST}/products/${id}.json`
       );
       return data;
     },

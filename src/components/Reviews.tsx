@@ -39,8 +39,8 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
     queryFn: async () => {
       const { data } = await axios.get(
         variant === 'destination'
-          ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`
-          : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews.json`
+          ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews.json`
+          : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews.json`
       );
       return data;
     },
@@ -54,8 +54,8 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
         maxBodyLength: Infinity,
         url:
           variant === 'destination'
-            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews.json`
-            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews.json`,
+            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews.json`
+            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -81,8 +81,8 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
         maxBodyLength: Infinity,
         url:
           variant === 'destination'
-            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${updateReviewVal?.id}.json`
-            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews/${updateReviewVal?.id}.json`,
+            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews/${updateReviewVal?.id}.json`
+            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews/${updateReviewVal?.id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -109,8 +109,8 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
         maxBodyLength: Infinity,
         url:
           variant === 'destination'
-            ? `${process.env.NEXT_PUBLIC_API_URL}/destination_visits/${params.id}/reviews/${id}.json`
-            : `${process.env.NEXT_PUBLIC_API_URL}/packages/${params.id}/reviews/${id}.json`,
+            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews/${id}.json`
+            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews/${id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,

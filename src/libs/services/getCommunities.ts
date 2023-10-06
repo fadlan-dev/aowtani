@@ -32,7 +32,7 @@ export const getCommunities = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/communities.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/communities.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

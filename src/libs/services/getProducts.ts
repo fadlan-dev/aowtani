@@ -32,7 +32,7 @@ export const getProducts = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/products.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/products.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },

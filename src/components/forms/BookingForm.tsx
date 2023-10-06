@@ -94,7 +94,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/bookings.json`,
+        url: `${process.env.NEXT_API_HOST}/bookings.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,

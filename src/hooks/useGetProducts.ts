@@ -24,7 +24,7 @@ export const useGetProducts = (
     queryFn: async () => {
       const { data } = await axios.get(
         `${
-          process.env.NEXT_PUBLIC_API_URL
+          process.env.NEXT_API_HOST
         }/products.json?organization_id=${organization_id}&page=${page}&per_page=${per_page}&search=${
           search || ''
         }`

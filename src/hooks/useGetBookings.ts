@@ -10,7 +10,7 @@ export const useGetBookings = (token: string, opt?: QueryOptions<IBooking[]>) =>
       const config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/bookings.json`,
+        url: `${process.env.NEXT_API_HOST}/bookings.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,

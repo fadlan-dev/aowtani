@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props) {
 
 const getLocalGuide = async (id: string): Promise<ILocalGuide> => {
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/local_guides/${id}.json`
+    `${process.env.NEXT_API_HOST}/local_guides/${id}.json`
   );
   const res = await data.json();
   return res;

@@ -10,7 +10,7 @@ export const useGetOrdes = (token: string, opt?: QueryOptions<IOrder[]>) =>
       const config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `${process.env.NEXT_PUBLIC_API_URL}/orders.json`,
+        url: `${process.env.NEXT_API_HOST}/orders.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
