@@ -48,7 +48,7 @@ export const useGetDestinations = (
       queryParams += `search=${search || ''}`;
 
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/destination_visits.json?${queryParams}`
+        `${process.env.NEXT_API_HOST}/destination_visits.json?${queryParams}`
       );
       return data;
     },

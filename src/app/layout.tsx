@@ -6,7 +6,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Providers from '@/components/Providers';
 
-const anuphan = Anuphan({ subsets: ['thai'] });
+const anuphan = Anuphan({ subsets: ['thai'], display: 'swap' });
 
 export const metadata = {
   title: 'Aow Tani',
