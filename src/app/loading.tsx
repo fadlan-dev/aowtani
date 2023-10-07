@@ -1,12 +1,11 @@
-'use client';
-import { LoadingOverlay } from '@mantine/core';
+import Image from 'next/image';
 
 type Props = {};
 
 const Loading = (props: Props) => {
   return (
     <div className='h-screen flex items-center justify-center'>
-      <LoadingOverlay visible overlayBlur={0.2} />
+      <Image width={112} height={80} src='./logo.svg' alt='loading' />
     </div>
   );
 };
