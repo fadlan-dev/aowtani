@@ -36,11 +36,11 @@ const Index = ({
 }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const t = searchParams.get('t') || 'Destination';
+  const t = searchParams.get('t') || 'destination';
   const theme = useMantineTheme();
   const MENUS = [
     {
-      key: 'Destination',
+      key: 'destination',
       title: 'สถานที่ท่องเที่ยว',
       icon: <TravelIcon />,
       color: 'blue',
@@ -48,14 +48,14 @@ const Index = ({
       active: theme.colors.blue[0],
     },
     {
-      key: 'Hotel',
+      key: 'hotel',
       title: 'ที่พักผ่อน',
       icon: <ResortIcon />,
       color: 'green',
       active: theme.colors.green[0],
     },
     {
-      key: 'Restaurant',
+      key: 'restaurant',
       title: 'อาหารจานโปรด',
       icon: <FoodIcon />,
       color: 'violet',
@@ -66,7 +66,7 @@ const Index = ({
   const contentRender = useCallback(
     (key: string) => {
       switch (key) {
-        case 'Destination':
+        case 'destination':
           return (
             <>
               <center>
@@ -99,7 +99,7 @@ const Index = ({
             </>
           );
 
-        case 'Hotel':
+        case 'hotel':
           return (
             <>
               <center>
@@ -115,7 +115,7 @@ const Index = ({
             </>
           );
 
-        case 'Restaurant':
+        case 'restaurant':
           return (
             <>
               <center>
@@ -161,7 +161,7 @@ const Index = ({
           ))}
         </Navbar>
       </div>
-      <div className='flex-auto overflow-auto py-10'>{t}</div>
+      <div className='flex-auto overflow-auto py-10'>{contentRender(t)}</div>
     </div>
   );
 };

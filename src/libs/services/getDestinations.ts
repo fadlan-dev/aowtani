@@ -45,7 +45,7 @@ export const getDestinations = async ({
     const config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `${process.env.NEXT_PUBLIC_API_URL}/destination_visits.json?${queryParams}`,
+      url: `${process.env.NEXT_API_HOST}/destination_visits.json?${queryParams}`,
       headers: {
         'Content-Type': 'application/json',
       },
