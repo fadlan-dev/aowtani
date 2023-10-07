@@ -5,6 +5,7 @@ import {
   IconBrandYoutube,
   IconBrandInstagram,
 } from '@tabler/icons-react';
+import Image from 'next/image';
 
 const Index = () => {
   const { classes } = useStyles();
@@ -12,7 +13,13 @@ const Index = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        Logo
+        <Image
+          height={32}
+          width={98}
+          src='/logo.svg'
+          alt='aowtani'
+          className='h-5 w-auto'
+        />
         <Group spacing={0} className={classes.links} position='right' noWrap>
           <ActionIcon size='lg'>
             <IconBrandTwitter size='1.05rem' stroke={1.5} />
