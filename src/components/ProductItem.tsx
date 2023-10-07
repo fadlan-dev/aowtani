@@ -20,7 +20,7 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
               className='bg-zinc-200 object-contain'
               src={
                 product.images[0].asset
-                  ? `${process.env.NEXT_PUBLIC_URL}${product.images[0].asset}`
+                  ? `${process.env.NEXT_IMAGE_HOST}${product.images[0].asset}`
                   : './image.svg'
               }
               alt={product.name}

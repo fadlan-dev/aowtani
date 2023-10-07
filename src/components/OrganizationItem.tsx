@@ -23,6 +23,7 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
   data,
 }) => {
   const theme = useMantineTheme();
+
   return (
     <Card>
       <Card.Section>
@@ -31,7 +32,7 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
             className='bg-zinc-200 object-contain'
             src={
               data.banner
-                ? `${process.env.NEXT_PUBLIC_URL}${data.banner.asset}`
+                ? `${process.env.NEXT_IMAGE_HOST}${data.banner.asset}`
                 : './image.svg'
             }
             alt={data.name}
@@ -44,7 +45,7 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
           radius='xl'
           src={
             data.logo
-              ? `${process.env.NEXT_PUBLIC_URL}${data.logo.asset}`
+              ? `${process.env.NEXT_IMAGE_HOST}${data.logo.asset}`
               : './image.svg'
           }
         />

@@ -148,7 +148,7 @@ const RegisterForm = ({ p }: Props) => {
                       {...props}
                       width={120}
                       height={120}
-                      src={`${process.env.NEXT_PUBLIC_URL}${form.values.profile?.asset}`}
+                      src={`${process.env.NEXT_IMAGE_HOST}${form.values.profile?.asset}`}
                       alt={''}
                       className='m-auto border border-dashed border-zinc-200 p-2'
                     />

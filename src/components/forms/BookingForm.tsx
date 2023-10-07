@@ -193,7 +193,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
             >
               <Image
                 className='object-contain'
-                src={`${process.env.NEXT_PUBLIC_URL}${form.values.slip.asset}`}
+                src={`${process.env.NEXT_IMAGE_HOST}${form.values.slip.asset}`}
                 alt='slip'
                 fill
               />

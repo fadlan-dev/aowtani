@@ -65,7 +65,7 @@ const ShowPhotos: FunctionComponent<ShowPhotosProps> = ({ images }) => {
                       key={image.id}
                       src={
                         image.asset
-                          ? `${process.env.NEXT_PUBLIC_URL}${image.asset}`
+                          ? `${process.env.NEXT_IMAGE_HOST}${image.asset}`
                           : './image.svg'
                       }
                       fill

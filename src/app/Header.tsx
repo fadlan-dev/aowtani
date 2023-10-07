@@ -99,7 +99,7 @@ const Index = () => {
                     size='md'
                     radius='xl'
                     ml='sm'
-                    src={`${process.env.NEXT_PUBLIC_URL}${session.user?.profile?.asset}`}
+                    src={`${process.env.NEXT_IMAGE_HOST}${session.user?.profile?.asset}`}
                   />
                 </Popover.Target>
                 <Popover.Dropdown>

@@ -37,7 +37,7 @@ const LocalGuideItem = ({ className, data }: Props) => {
         <Group spacing={4}>
           <Avatar
             radius='xl'
-            src={`${process.env.NEXT_PUBLIC_URL}${data.profile?.asset}`}
+            src={`${process.env.NEXT_IMAGE_HOST}${data.profile?.asset}`}
           />
           <Text weight={500} size='lg'>
             {data.name}

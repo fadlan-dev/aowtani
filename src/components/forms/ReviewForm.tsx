@@ -126,7 +126,7 @@ const ReviewForm: FunctionComponent<ReviewFormProps> = ({
                 <Image
                   width={320}
                   height={112}
-                  src={`${process.env.NEXT_PUBLIC_URL}${image.asset}`}
+                  src={`${process.env.NEXT_IMAGE_HOST}${image.asset}`}
                   alt={`${image.id}`}
                   className='border-zinc-200 w-auto'
                 />

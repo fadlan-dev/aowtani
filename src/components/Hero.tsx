@@ -15,7 +15,7 @@ const Hero: FunctionComponent<HeroProps> = ({ images, name }) => {
       <Image
         fill
         className='object-cover w-full h-full'
-        src={`${process.env.NEXT_PUBLIC_URL}${getImage()}`}
+        src={`${process.env.NEXT_IMAGE_HOST}${getImage()}`}
         alt={name}
       />
       <div className='absolute bottom-2 right-2'>

@@ -43,7 +43,7 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
             <Carousel.Slide h='384px' key={idx}>
               <Image
                 className='object-contain'
-                src={`${process.env.NEXT_PUBLIC_URL}${img.asset}`}
+                src={`${process.env.NEXT_IMAGE_HOST}${img.asset}`}
                 alt={product.name}
                 fill
               />

@@ -141,7 +141,7 @@ const PersonalInfo = ({ className }: Props) => {
             m='auto'
             size='xl'
             radius={100}
-            src={`${process.env.NEXT_PUBLIC_URL}${session?.user.profile?.asset}`}
+            src={`${process.env.NEXT_IMAGE_HOST}${session?.user.profile?.asset}`}
           />
         )}
         <div className=' absolute bottom-0 right-0'>

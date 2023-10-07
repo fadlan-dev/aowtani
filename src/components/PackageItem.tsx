@@ -17,7 +17,7 @@ const PackageItem = ({ data }: Props) => {
             <Image
               className='bg-zinc-200 object-contain'
               src={
-                `${process.env.NEXT_PUBLIC_URL}${data.images[0].asset}` ||
+                `${process.env.NEXT_IMAGE_HOST}${data.images[0].asset}` ||
                 './image.svg'
               }
               alt={data.name}

@@ -21,7 +21,7 @@ const DestinationItem: FunctionComponent<DestinationItemProps> = ({
               className='bg-zinc-200 object-contain'
               src={
                 destination.banners[0]?.asset
-                  ? `${process.env.NEXT_PUBLIC_URL}${destination.banners[0]?.asset}`
+                  ? `${process.env.NEXT_IMAGE_HOST}${destination.banners[0]?.asset}`
                   : './image.svg'
               }
               alt={destination.name}
