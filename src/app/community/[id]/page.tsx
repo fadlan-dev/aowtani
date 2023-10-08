@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import OrganizationItem from '@/components/OrganizationItem';
 import PartnerList from '@/components/PartnerList';
 import { getCommunity } from '@/libs/services/getComunity';
 import { ICommunity } from '@/types';
@@ -44,7 +45,7 @@ const page = async ({ params }: Props) => {
           </div>
           <div className='w-full lg:w-80'>
             <h3 className='mb-2'>สังกัดหน่วยงาน</h3>
-            <div className=' aspect-square bg-zinc-200'></div>
+            <OrganizationItem data={community.organization} />
           </div>
         </div>
         <PartnerList className='mt-6' showMore data={[]} total={1} />

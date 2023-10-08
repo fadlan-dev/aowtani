@@ -112,6 +112,7 @@ export interface ICommunity {
   updated_at: string;
   images: IImage[];
   content?: string;
+  organization: IOrganization;
 }
 
 export interface IPartner {
