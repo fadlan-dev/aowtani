@@ -75,40 +75,7 @@ async function page({ params }: pageProps) {
             <h3 className='mb-2'>ผู้ประกอบการ</h3>
             {/* <LocalGuidItem /> */}
             <h3 className='mb-2'>ไกด์ท้องถิ่น</h3>
-            <LocalGuideItem
-              data={{
-                id: 8,
-                name: 'test_guide',
-                phone: '321',
-                facebook: '23',
-                detail: '213',
-                address: '12',
-                status: 'approved',
-                created_at: '2023-08-16T08:01:07.149Z',
-                updated_at: '2023-08-16T08:01:16.438Z',
-                community: {
-                  id: 5,
-                  name: 'Test Community',
-                  address: 'j',
-                  detail: 'j',
-                  organization_id: 6,
-                  created_at: '2023-08-16T07:59:32.957Z',
-                  updated_at: '2023-08-16T07:59:32.971Z',
-                  images: [
-                    {
-                      id: 218,
-                      asset:
-                        '/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBZG89IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--34209269b5e3381ea6b582b28769c9383b945949/3.png',
-                    },
-                  ],
-                },
-                experience: '123',
-                profile: null,
-                id_card_pdf: null,
-                house_registration_pdf: null,
-                certificate_pdf: null,
-              }}
-            />
+            {/* <LocalGuideItem /> */}
             <h3 className='mb-2'>การจอง</h3>
             <Booking price={pkg.price} />
           </div>
