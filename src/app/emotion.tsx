@@ -25,7 +25,7 @@ export default function RootStyleRegistry({
     <CacheProvider value={cache}>
       <MantineProvider
         theme={{
-          fontFamily: '__Anuphan_cac2bf',
+          fontFamily: 'var(--noto_sans_thai)',
           colors: {
             brand: [
               '#e6f7ff',

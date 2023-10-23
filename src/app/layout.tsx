@@ -1,12 +1,16 @@
 import RootStyleRegistry from './emotion';
 import './globals.css';
 import './base.css';
-import { Anuphan } from 'next/font/google';
+import { Noto_Sans_Thai } from 'next/font/google';
 import Header from './Header';
 import Footer from './Footer';
 import Providers from '@/components/Providers';
 
-const anuphan = Anuphan({ subsets: ['thai'], display: 'swap' });
+const noto_sans_thai = Noto_Sans_Thai({
+  subsets: ['thai'],
+  display: 'swap',
+  variable: '--noto_sans_thai',
+});
 
 export const metadata = {
   title: 'Aow Tani',
@@ -58,7 +62,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={anuphan.className}>
+      <body className={noto_sans_thai.className}>
         <RootStyleRegistry>
           <Providers>
             <Header />
