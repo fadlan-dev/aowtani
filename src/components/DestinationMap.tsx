@@ -25,7 +25,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
         <g
           id='Custom_Size_1'
           data-name='Custom Size – 1'
-          clip-path='url(#clip-Custom_Size_1)'
+          clipPath='url(#clip-Custom_Size_1)'
         >
           {/* <rect width='217' height='140' fill='#fff' /> */}
           <g id='map-01' transform='translate(-19.505 -0.17)'>
@@ -135,7 +135,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_1'
               data-name='Group 1'
               transform='translate(21.959 14.932)'
-              clip-path='url(#clip-path)'
+              clipPath='url(#clipPath)'
               onClick={() => handleRoute(3)}
             >
               <image
@@ -170,7 +170,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_2'
               data-name='Group 2'
               transform='translate(76.024 9.57)'
-              clip-path='url(#clip-path)'
+              clipPath='url(#clipPath)'
               onClick={() => handleRoute(3)}
             >
               <image
@@ -205,7 +205,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_3'
               data-name='Group 3'
               transform='translate(101.237 24.172)'
-              clip-path='url(#clip-path)'
+              clipPath='url(#clipPath)'
               onClick={() => handleRoute(3)}
             >
               <image
@@ -288,7 +288,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_4'
               data-name='Group 4'
               transform='translate(131.987 49.321)'
-              clip-path='url(#clip-path-4)'
+              clipPath='url(#clipPath-4)'
             >
               <image
                 id='Rectangle_14'
@@ -378,7 +378,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_5'
               data-name='Group 5'
               transform='translate(160.815 57.617)'
-              clip-path='url(#clip-path-4)'
+              clipPath='url(#clipPath-4)'
             >
               <image
                 id='Rectangle_18'
@@ -435,7 +435,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_6'
               data-name='Group 6'
               transform='translate(171.534 102.847)'
-              clip-path='url(#clip-path-4)'
+              clipPath='url(#clipPath-4)'
             >
               <image
                 id='Rectangle_22'
@@ -493,7 +493,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_7'
               data-name='Group 7'
               transform='translate(138.502 110.719)'
-              clip-path='url(#clip-path-7)'
+              clipPath='url(#clipPath-7)'
             >
               <image
                 id='Rectangle_26'
@@ -587,7 +587,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_8'
               data-name='Group 8'
               transform='translate(89.803 111.045)'
-              clip-path='url(#clip-path-7)'
+              clipPath='url(#clipPath-7)'
             >
               <image
                 id='Rectangle_30'
@@ -633,7 +633,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_9'
               data-name='Group 9'
               transform='translate(49.702 114.081)'
-              clip-path='url(#clip-path-9)'
+              clipPath='url(#clipPath-9)'
               onClick={() => handleRoute(2)}
             >
               <image
@@ -736,7 +736,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_10'
               data-name='Group 10'
               transform='translate(84.237 68.754)'
-              clip-path='url(#clip-path-9)'
+              clipPath='url(#clipPath-9)'
               onClick={() => handleRoute(2)}
             >
               <rect
@@ -783,7 +783,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_11'
               data-name='Group 11'
               transform='translate(64.05 62.75)'
-              clip-path='url(#clip-path-9)'
+              clipPath='url(#clipPath-9)'
               onClick={() => handleRoute(2)}
             >
               <image
@@ -853,7 +853,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_12'
               data-name='Group 12'
               transform='translate(44.286 54.148)'
-              clip-path='url(#clip-path-9)'
+              clipPath='url(#clipPath-9)'
               onClick={() => handleRoute(2)}
             >
               <image
@@ -888,7 +888,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='Group_13'
               data-name='Group 13'
               transform='translate(27.111 98.969)'
-              clip-path='url(#clip-path-9)'
+              clipPath='url(#clipPath-9)'
               onClick={() => handleRoute(2)}
             >
               <image
