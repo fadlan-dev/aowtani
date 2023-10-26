@@ -16,27 +16,20 @@ import ProductList from './ProductList';
 import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
 import DestinationMap from './DestinationMap';
-import { useCallback } from 'react';
+import { use, useCallback } from 'react';
 import PartnerList from './PartnerList';
+import { getDestinations } from '@/libs/services/getDestinations';
+import { getPackages } from '@/libs/services/getPackages';
+import { getProducts } from '@/libs/services/getProducts';
+import { getPartners } from '@/libs/services/getPartners';
+import { useQuery } from '@tanstack/react-query';
 
-type Props = {
-  destinations: { data: IDestination[]; total: number };
-  pkgs: { data: IPackage[]; total: number };
-  products: { data: IProduct[]; total: number };
-  hotels: { data: IPartner[]; total: number };
-  restaurants: { data: IPartner[]; total: number };
-};
+type Props = {};
 
-const Index = ({
-  destinations,
-  pkgs,
-  products,
-  hotels,
-  restaurants,
-}: Props) => {
+const Index = ({}: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const t = searchParams.get('t') || 'destination';
+  const variant = searchParams.get('t') || 'destination';
   const theme = useMantineTheme();
   const MENUS = [
     {
@@ -63,9 +56,48 @@ const Index = ({
     },
   ];
 
+  const { data: destinations } = useQuery({
+    queryKey: ['destination'],
+    queryFn: () =>
+      getDestinations({
+        organization_id:
+          (searchParams.get('organization_id') as string) || undefined,
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  const { data: pkgs } = useQuery({
+    queryKey: ['packages'],
+    queryFn: () =>
+      getPackages({
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  const { data: products } = useQuery({
+    queryKey: ['products'],
+    queryFn: () =>
+      getProducts({
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  const { data: hotels } = useQuery({
+    queryKey: ['hotels'],
+    queryFn: () => getPartners({ type: 'Hotel', per_page: 3, search: '' }),
+  });
+
+  const { data: restaurants } = useQuery({
+    queryKey: ['restaurants'],
+    queryFn: () => getPartners({ type: 'Restaurant', per_page: 3, search: '' }),
+  });
+
   const contentRender = useCallback(
-    (key: string) => {
-      switch (key) {
+    (variant: string) => {
+      switch (variant) {
         case 'destination':
           return (
             <>
@@ -75,24 +107,31 @@ const Index = ({
               </center>
               <DestinationList
                 total={1}
-                data={destinations.data}
+                data={(destinations?.data || []) as IDestination[]}
                 className='mt-6 mb-6'
                 showMore
               />
+
               <div className='mt-10'>
                 <center>
                   <h1>แพ็กเกจทัวร์แนะนำ</h1>
                   <p>ตอบโจทย์ทุกไลฟ์สไตล์</p>
                 </center>
-                <PackageList className='mt-4 px-4' data={pkgs.data} />
+                <PackageList
+                  className='mt-4 px-4'
+                  data={pkgs?.data || ([] as IPackage[])}
+                />
               </div>
               <div className='mt-10'>
                 <center>
                   <h1>สินค้ายอดนิยม</h1>
                   <p>ช้อปปิ้งได้ทุกเวลา</p>
                 </center>
-                <ProductList total={1} data={products.data} />
-                {products.data.length !== 0 && (
+                <ProductList
+                  total={1}
+                  data={products?.data || ([] as IProduct[])}
+                />
+                {products?.data?.length !== 0 && (
                   <ExploreButton className='mt-2' to='product' />
                 )}
               </div>
@@ -107,8 +146,8 @@ const Index = ({
                 <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
               </center>
               <PartnerList
-                data={hotels.data}
-                total={hotels.total}
+                data={(hotels?.data || []) as IPartner[]}
+                total={Number(hotels?.total || 0)}
                 showMoreType='Hotel'
                 showMore
               />
@@ -123,8 +162,8 @@ const Index = ({
                 <p>อร่อยทุกเมนู</p>
               </center>
               <PartnerList
-                data={restaurants.data}
-                total={restaurants.total}
+                data={(restaurants?.data || []) as IPartner[]}
+                total={Number(restaurants?.total || 0)}
                 showMoreType='Restaurant'
                 showMore
               />
@@ -132,7 +171,7 @@ const Index = ({
           );
       }
     },
-    [destinations, pkgs, products, hotels, restaurants]
+    [variant]
   );
 
   return (
@@ -143,8 +182,10 @@ const Index = ({
             <Navbar.Section
               key={menu.title}
               className={cn(`p-2 cursor-pointer`)}
-              bg={t === menu.key ? menu.active : ''}
-              onClick={() => menu.key !== t && router.push(`?t=${menu.key}`)}
+              bg={variant === menu.key ? menu.active : ''}
+              onClick={() =>
+                menu.key !== variant && router.push(`?t=${menu.key}`)
+              }
             >
               <Group>
                 <ThemeIcon variant='light' color={menu.color}>
@@ -161,7 +202,9 @@ const Index = ({
           ))}
         </Navbar>
       </div>
-      <div className='flex-auto overflow-auto py-10'>{contentRender(t)}</div>
+      <div className='flex-auto overflow-auto py-10'>
+        {contentRender(variant)}
+      </div>
     </div>
   );
 };
