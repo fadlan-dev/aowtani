@@ -2,6 +2,7 @@
 import {
   Box,
   Group,
+  Loader,
   Navbar,
   Text,
   ThemeIcon,
@@ -16,7 +17,7 @@ import ProductList from './ProductList';
 import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
 import DestinationMap from './DestinationMap';
-import { use, useCallback } from 'react';
+import { useCallback } from 'react';
 import PartnerList from './PartnerList';
 import { getDestinations } from '@/libs/services/getDestinations';
 import { getPackages } from '@/libs/services/getPackages';
@@ -56,119 +57,17 @@ const Index = ({}: Props) => {
     },
   ];
 
-  const { data: destinations } = useQuery({
-    queryKey: ['destination'],
-    queryFn: () =>
-      getDestinations({
-        organization_id:
-          (searchParams.get('organization_id') as string) || undefined,
-        per_page: 3,
-        search: '',
-      }),
-  });
-
-  const { data: pkgs } = useQuery({
-    queryKey: ['packages'],
-    queryFn: () =>
-      getPackages({
-        per_page: 3,
-        search: '',
-      }),
-  });
-
-  const { data: products } = useQuery({
-    queryKey: ['products'],
-    queryFn: () =>
-      getProducts({
-        per_page: 3,
-        search: '',
-      }),
-  });
-
-  const { data: hotels } = useQuery({
-    queryKey: ['hotels'],
-    queryFn: () => getPartners({ type: 'Hotel', per_page: 3, search: '' }),
-  });
-
-  const { data: restaurants } = useQuery({
-    queryKey: ['restaurants'],
-    queryFn: () => getPartners({ type: 'Restaurant', per_page: 3, search: '' }),
-  });
-
   const contentRender = useCallback(
     (variant: string) => {
       switch (variant) {
         case 'destination':
-          return (
-            <>
-              <center>
-                <h1>สถานที่ท่องเที่ยว</h1>
-                <p>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</p>
-              </center>
-              <DestinationList
-                total={1}
-                data={(destinations?.data || []) as IDestination[]}
-                className='mt-6 mb-6'
-                showMore
-              />
-
-              <div className='mt-10'>
-                <center>
-                  <h1>แพ็กเกจทัวร์แนะนำ</h1>
-                  <p>ตอบโจทย์ทุกไลฟ์สไตล์</p>
-                </center>
-                <PackageList
-                  className='mt-4 px-4'
-                  data={pkgs?.data || ([] as IPackage[])}
-                />
-              </div>
-              <div className='mt-10'>
-                <center>
-                  <h1>สินค้ายอดนิยม</h1>
-                  <p>ช้อปปิ้งได้ทุกเวลา</p>
-                </center>
-                <ProductList
-                  total={1}
-                  data={products?.data || ([] as IProduct[])}
-                />
-                {products?.data?.length !== 0 && (
-                  <ExploreButton className='mt-2' to='product' />
-                )}
-              </div>
-            </>
-          );
+          return <DestinationItem />;
 
         case 'hotel':
-          return (
-            <>
-              <center>
-                <h1>ที่พัก</h1>
-                <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
-              </center>
-              <PartnerList
-                data={(hotels?.data || []) as IPartner[]}
-                total={Number(hotels?.total || 0)}
-                showMoreType='Hotel'
-                showMore
-              />
-            </>
-          );
+          return <HotelItem />;
 
         case 'restaurant':
-          return (
-            <>
-              <center>
-                <h1>อาหารจานโปรด</h1>
-                <p>อร่อยทุกเมนู</p>
-              </center>
-              <PartnerList
-                data={(restaurants?.data || []) as IPartner[]}
-                total={Number(restaurants?.total || 0)}
-                showMoreType='Restaurant'
-                showMore
-              />
-            </>
-          );
+          return <RestaurantItem />;
       }
     },
     [variant]
@@ -210,3 +109,139 @@ const Index = ({}: Props) => {
 };
 
 export default Index;
+
+const LoaderItem = () => (
+  <center className='my-6'>
+    <Loader variant='dots' />
+  </center>
+);
+
+const DestinationItem = () => {
+  const searchParams = useSearchParams();
+  const { data: destinations, isLoading: loadingDestination } = useQuery({
+    queryKey: ['destination'],
+    queryFn: () =>
+      getDestinations({
+        organization_id:
+          (searchParams.get('organization_id') as string) || undefined,
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  const { data: pkgs, isLoading: loadingPackage } = useQuery({
+    queryKey: ['packages'],
+    queryFn: () =>
+      getPackages({
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  const { data: products, isLoading: loadingProduct } = useQuery({
+    queryKey: ['products'],
+    queryFn: () =>
+      getProducts({
+        per_page: 3,
+        search: '',
+      }),
+  });
+
+  return (
+    <>
+      <center>
+        <h1>สถานที่ท่องเที่ยว</h1>
+        <p>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</p>
+      </center>
+      {loadingDestination ? (
+        <LoaderItem />
+      ) : (
+        <DestinationList
+          total={1}
+          data={(destinations?.data || []) as IDestination[]}
+          className='mt-6 mb-6'
+          showMore
+        />
+      )}
+
+      <div className='mt-10'>
+        <center>
+          <h1>แพ็กเกจทัวร์แนะนำ</h1>
+          <p>ตอบโจทย์ทุกไลฟ์สไตล์</p>
+        </center>
+        {loadingPackage ? (
+          <LoaderItem />
+        ) : (
+          <PackageList
+            className='mt-4 px-4'
+            data={pkgs?.data || ([] as IPackage[])}
+          />
+        )}
+      </div>
+      <div className='mt-10'>
+        <center>
+          <h1>สินค้ายอดนิยม</h1>
+          <p>ช้อปปิ้งได้ทุกเวลา</p>
+        </center>
+        {loadingProduct ? (
+          <LoaderItem />
+        ) : (
+          <ProductList total={1} data={products?.data || ([] as IProduct[])} />
+        )}
+        {products?.data.length !== 0 && (
+          <ExploreButton className='mt-2' to='product' />
+        )}
+      </div>
+    </>
+  );
+};
+
+const HotelItem = () => {
+  const { data: hotels, isLoading } = useQuery({
+    queryKey: ['hotels'],
+    queryFn: () => getPartners({ type: 'Hotel', per_page: 3, search: '' }),
+  });
+  return (
+    <>
+      <center>
+        <h1>ที่พัก</h1>
+        <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <PartnerList
+          data={(hotels?.data || []) as IPartner[]}
+          total={Number(hotels?.total || 0)}
+          showMoreType='Hotel'
+          showMore
+        />
+      )}
+    </>
+  );
+};
+
+const RestaurantItem = () => {
+  const { data: restaurants, isLoading } = useQuery({
+    queryKey: ['restaurants'],
+    queryFn: () => getPartners({ type: 'Restaurant', per_page: 3, search: '' }),
+  });
+  return (
+    <>
+      <center>
+        <h1>ที่พัก</h1>
+        <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <PartnerList
+          data={(restaurants?.data || []) as IPartner[]}
+          total={Number(restaurants?.total || 0)}
+          showMoreType='Restaurant'
+          showMore
+        />
+      )}
+    </>
+  );
+};
