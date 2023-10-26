@@ -63,12 +63,19 @@ const SignInForm = ({ p }: Props) => {
 
       <Paper mt={30} p={p} mb='lg' radius='md'>
         <form
-          onSubmit={form.onSubmit((values) =>
-            signIn('credentials', {
+          onSubmit={form.onSubmit(async (values) => {
+            const res = await signIn('credentials', {
               ...values,
               callbackUrl: `${callbackUrl}`,
-            })
-          )}
+              redirect: false,
+            });
+
+            if (res?.ok) {
+              router.push(`${callbackUrl}`);
+            } else {
+              console.log(res);
+            }
+          })}
         >
           <TextInput
             label='Username'
