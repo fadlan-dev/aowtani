@@ -37,8 +37,6 @@ export const authOptions: NextAuthOptions = {
           requestOptions
         );
 
-        console.log('aabbdd', res);
-
         const user = await res.json();
         if (user && res.ok) {
           // Any object returned will be saved in `user` property of the JWT

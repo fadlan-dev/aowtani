@@ -75,6 +75,7 @@ const SignInForm = ({ p }: Props) => {
               callbackUrl: `${callbackUrl}`,
               redirect: false,
             });
+            console.log('signIn', res);
             if (res?.error) {
               setError(res.error);
               console.error(res);
