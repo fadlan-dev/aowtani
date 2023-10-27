@@ -69,7 +69,7 @@ const SignInForm = ({ p }: Props) => {
               callbackUrl: `${callbackUrl}`,
               redirect: false,
             });
-
+            console.log(res);
             if (res?.ok) {
               router.push(`${callbackUrl}`);
             } else {
