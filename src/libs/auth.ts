@@ -46,9 +46,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         // Return an object that will pass error information through to the client-side.
-        throw new Error(
-          JSON.stringify({ errors: user.message, status: false })
-        );
+        throw new Error(JSON.stringify({ error: user.message, status: false }));
       },
     }),
   ],
