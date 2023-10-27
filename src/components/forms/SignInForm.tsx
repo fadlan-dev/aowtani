@@ -13,7 +13,7 @@ import {
 } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { z } from 'zod';
 
@@ -25,6 +25,7 @@ const SignInForm = ({ p }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callback') || '/';
+  const [error, setError] = useState('');
 
   const schema = z.object({
     username: z.string().min(1, { message: 'Please input your username' }),
@@ -60,6 +61,11 @@ const SignInForm = ({ p }: Props) => {
           Create account
         </Anchor>
       </Text>
+      {error && (
+        <Text align='center' c='red'>
+          {error}
+        </Text>
+      )}
 
       <Paper mt={30} p={p} mb='lg' radius='md'>
         <form
@@ -69,8 +75,8 @@ const SignInForm = ({ p }: Props) => {
               callbackUrl: `${callbackUrl}`,
               redirect: false,
             });
-            console.log(res);
             if (res?.error) {
+              setError(res.error);
               console.error(res);
               return;
             }
