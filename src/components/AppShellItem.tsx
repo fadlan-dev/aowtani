@@ -57,21 +57,18 @@ const Index = ({}: Props) => {
     },
   ];
 
-  const contentRender = useCallback(
-    (variant: string) => {
-      switch (variant) {
-        case 'destination':
-          return <DestinationItem />;
+  const contentRender = useCallback(() => {
+    switch (variant) {
+      case 'destination':
+        return <DestinationItem />;
 
-        case 'hotel':
-          return <HotelItem />;
+      case 'hotel':
+        return <HotelItem />;
 
-        case 'restaurant':
-          return <RestaurantItem />;
-      }
-    },
-    [variant]
-  );
+      case 'restaurant':
+        return <RestaurantItem />;
+    }
+  }, [variant]);
 
   return (
     <div className='flex pt-[60px]'>
@@ -101,9 +98,7 @@ const Index = ({}: Props) => {
           ))}
         </Navbar>
       </div>
-      <div className='flex-auto overflow-auto py-10'>
-        {contentRender(variant)}
-      </div>
+      <div className='flex-auto overflow-auto py-10'>{contentRender()}</div>
     </div>
   );
 };
