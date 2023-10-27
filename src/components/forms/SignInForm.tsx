@@ -70,11 +70,11 @@ const SignInForm = ({ p }: Props) => {
               redirect: false,
             });
             console.log(res);
-            if (res?.ok) {
-              router.push(`${callbackUrl}`);
-            } else {
-              console.log(res);
+            if (res?.error) {
+              console.error(res);
+              return;
             }
+            router.push(`${callbackUrl}`);
           })}
         >
           <TextInput
