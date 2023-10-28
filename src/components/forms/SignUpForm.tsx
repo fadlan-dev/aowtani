@@ -8,7 +8,6 @@ import {
   TextInput,
   Text,
   Container,
-  Select,
   FileButton,
   Loader,
 } from '@mantine/core';
@@ -89,7 +88,7 @@ const RegisterForm = ({ p }: Props) => {
 
   const handleFileChange = (file: File) => uploadProfile(file);
 
-  const { mutate: Regsiter, isLoading: resiterLoading } = useMutation({
+  const { mutate: RegsiterApi, isLoading: registerLoading } = useMutation({
     mutationFn: async (payload: IUser) => {
       const { data } = await axios.post(
         `${process.env.NEXT_API_HOST}/customers.json`,
@@ -98,17 +97,15 @@ const RegisterForm = ({ p }: Props) => {
       return data;
     },
     onError: (err: AxiosError) => {
-      ErrorModal({ title: 'Register', content: err.response?.statusText });
+      ErrorModal({
+        title: 'Register',
+        content: JSON.stringify(err.response?.data, null),
+      });
     },
     onSuccess: (res) => {
       router.replace('/sign-in');
     },
   });
-
-  const handleRegister = (values: IUser) => {
-    const payload = values;
-    Regsiter(payload);
-  };
 
   return (
     <ModalsProvider>
@@ -135,7 +132,9 @@ const RegisterForm = ({ p }: Props) => {
         <Paper mt={30} p={p} mb='lg' radius='md'>
           <form
             className='flex flex-col gap-2'
-            onSubmit={form.onSubmit((values) => handleRegister(values))}
+            onSubmit={form.onSubmit((values) => {
+              RegsiterApi(values);
+            })}
           >
             <div className='m-auto text-center'>
               <FileButton
@@ -187,15 +186,12 @@ const RegisterForm = ({ p }: Props) => {
             </div>
             <TextInput
               label='Username'
-              placeholder='example.@gmail.com'
+              placeholder='aowtani.@gmail.com'
               {...form.getInputProps('username')}
             />
-            <Select
+            <TextInput
               label='คำนำหน้า'
-              data={[
-                { value: 'นาย', label: 'นาย' },
-                { value: 'นางสาว', label: 'นางสาว' },
-              ]}
+              placeholder='นาย / นางสาว'
               {...form.getInputProps('name_title')}
             />
             <TextInput
@@ -235,7 +231,7 @@ const RegisterForm = ({ p }: Props) => {
               mt='md'
               {...form.getInputProps('confirm')}
             />
-            <Button fullWidth mt='xl' type='submit' loading={resiterLoading}>
+            <Button fullWidth mt='xl' type='submit' loading={registerLoading}>
               Sign up
             </Button>
           </form>
