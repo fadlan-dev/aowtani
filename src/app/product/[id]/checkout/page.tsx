@@ -76,7 +76,7 @@ const Page = ({ params }: pageProps) => {
                               href={`product/${params.id}`}
                               className='text-black'
                             >
-                              <Title order={5}>ล่องเรือบ้านบูดี</Title>
+                              <Title order={5}>{product?.name}</Title>
                             </Link>
                           </Flex>
                         </td>
