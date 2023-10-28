@@ -1,4 +1,5 @@
 import Hero from '@/components/Hero';
+import NearbyAttractions from '@/components/NearbyAttractions';
 import Reviews from '@/components/Reviews';
 import { getPartner } from '@/libs/services/getPartner';
 import { IPartner } from '@/types';
@@ -20,6 +21,10 @@ const page = async ({ params }: Props) => {
             <h1 className='capitalize'>{partner.name}</h1>
             <p className='text-primary'>{partner.address}</p>
             <p className='mt-4'>{partner.detail}</p>
+            <NearbyAttractions
+              className='mt-6'
+              organization={partner.organization}
+            />
           </div>
           <div className='w-full lg:w-80'>
             {partner.embed_map && (

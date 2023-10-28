@@ -123,11 +123,13 @@ export interface IPartner {
   phone: string;
   facebook: string;
   type: string;
+  type_details: string;
   status: string;
   images: IImage[];
-  embed_map: any;
+  embed_map: string;
   created_at: string;
   updated_at: string;
+  organization: IOrganization;
 }
 
 export interface IProduct {
