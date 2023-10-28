@@ -20,11 +20,6 @@ const page = async ({ params }: Props) => {
             <h1 className='capitalize'>{partner.name}</h1>
             <p className='text-primary'>{partner.address}</p>
             <p className='mt-4'>{partner.detail}</p>
-            <Reviews
-              variant='destination'
-              className='mt-6'
-              exploreTo={`review/${params.id}`}
-            />
           </div>
           <div className='w-full lg:w-80'>
             {partner.embed_map && (
