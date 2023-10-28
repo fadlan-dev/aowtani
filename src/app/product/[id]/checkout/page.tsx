@@ -42,7 +42,7 @@ const Page = ({ params }: pageProps) => {
           <div className='flex-1 '>
             {isFetching && !isFetched ? (
               <center>
-                <Loader />
+                <Loader variant='dots' />
               </center>
             ) : (
               <Card>
@@ -66,7 +66,7 @@ const Page = ({ params }: pageProps) => {
                         <td>
                           <Flex align='center' gap='sm' wrap='wrap'>
                             <Image
-                              src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1699&q=80'
+                              src={`${process.env.NEXT_IMAGE_HOST}${product?.images[0].asset}`}
                               className='object-cover'
                               width={84}
                               height={84}
