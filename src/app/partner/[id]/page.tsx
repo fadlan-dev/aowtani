@@ -1,7 +1,8 @@
 import PackageList from '@/components/PackageList';
 import PartnerCard from '@/components/PartnerItem';
 import { getPackages } from '@/libs/services/getPackages';
-import { IPackage, IPartner } from '@/types';
+import { getPartner } from '@/libs/services/getPartner';
+import { IPartner } from '@/types';
 
 type Props = {
   params: { id: string };
@@ -20,14 +21,6 @@ export async function generateMetadata({ params }: Props) {
     },
   };
 }
-
-const getPartner = async (id: string): Promise<IPartner> => {
-  const data = await fetch(
-    `${process.env.NEXT_API_HOST}/business_partners/${id}.json`
-  );
-  const partner = await data.json();
-  return partner;
-};
 
 const Page = async ({ params }: Props) => {
   const pkgs = await getPackages({
