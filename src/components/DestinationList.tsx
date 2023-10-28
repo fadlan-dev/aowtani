@@ -9,6 +9,7 @@ import { cn } from '@/libs/utils';
 type Props = {
   showPagination?: boolean;
   showMore?: boolean;
+  showMoreType?: string;
   className?: string;
   title?: string;
   subTitle?: string;
@@ -19,6 +20,7 @@ type Props = {
 const DestinationList = ({
   showPagination,
   showMore,
+  showMoreType,
   data,
   total,
   className,
@@ -58,7 +60,12 @@ const DestinationList = ({
           />
         )}
         {showMore && (
-          <Button variant='subtle' onClick={() => router.push('/destination')}>
+          <Button
+            variant='subtle'
+            onClick={() =>
+              router.push(`/destination?destination_type_id=${showMoreType}`)
+            }
+          >
             ดูเพิ่มเติม
           </Button>
         )}
