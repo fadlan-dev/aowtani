@@ -9,7 +9,7 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import DestinationList from './DestinationList';
-import { FoodIcon, ResortIcon, TravelIcon } from './Icons';
+import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from './Icons';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { cn } from '@/libs/utils';
 import { IDestination, IPackage, IPartner, IProduct } from '@/types';
@@ -18,12 +18,13 @@ import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
 import DestinationMap from './DestinationMap';
 import { useCallback } from 'react';
-import PartnerList from './PartnerList';
 import { getDestinations } from '@/libs/services/getDestinations';
 import { getPackages } from '@/libs/services/getPackages';
 import { getProducts } from '@/libs/services/getProducts';
 import { getPartners } from '@/libs/services/getPartners';
 import { useQuery } from '@tanstack/react-query';
+import HotelList from './HotelList';
+import RestaurantList from './RestaurantList';
 
 type Props = {};
 
@@ -55,6 +56,13 @@ const Index = ({}: Props) => {
       color: 'violet',
       active: theme.colors.violet[0],
     },
+    {
+      key: 'mosque',
+      title: 'มัสยิด',
+      icon: <MosqueIcon />,
+      color: 'orange',
+      active: theme.colors.orange[0],
+    },
   ];
 
   const contentRender = useCallback(() => {
@@ -67,6 +75,8 @@ const Index = ({}: Props) => {
 
       case 'restaurant':
         return <RestaurantItem />;
+      case 'mosque':
+        return <MosqueItem />;
     }
   }, [variant]);
 
@@ -112,13 +122,10 @@ const LoaderItem = () => (
 );
 
 const DestinationItem = () => {
-  const searchParams = useSearchParams();
   const { data: destinations, isLoading: loadingDestination } = useQuery({
     queryKey: ['destination'],
     queryFn: () =>
       getDestinations({
-        organization_id:
-          (searchParams.get('organization_id') as string) || undefined,
         per_page: 3,
         search: '',
       }),
@@ -205,10 +212,9 @@ const HotelItem = () => {
       {isLoading ? (
         <LoaderItem />
       ) : (
-        <PartnerList
+        <HotelList
           data={(hotels?.data || []) as IPartner[]}
           total={Number(hotels?.total || 0)}
-          showMoreType='Hotel'
           showMore
         />
       )}
@@ -230,13 +236,37 @@ const RestaurantItem = () => {
       {isLoading ? (
         <LoaderItem />
       ) : (
-        <PartnerList
+        <RestaurantList
           data={(restaurants?.data || []) as IPartner[]}
           total={Number(restaurants?.total || 0)}
-          showMoreType='Restaurant'
           showMore
         />
       )}
+    </>
+  );
+};
+
+const MosqueItem = () => {
+  const { data: mosques, isLoading } = useQuery({
+    queryKey: ['mosques'],
+    queryFn: () =>
+      getDestinations({
+        per_page: 3,
+        search: '',
+      }),
+  });
+  return (
+    <>
+      <center>
+        <h1>มัสยิด</h1>
+        <p>ศาสนสถาน</p>
+      </center>
+      <center>
+        <img
+          className='m-auto'
+          src='https://media.giphy.com/media/l3q2ysD8tMlC9Ygve/giphy.gif'
+        />
+      </center>
     </>
   );
 };
