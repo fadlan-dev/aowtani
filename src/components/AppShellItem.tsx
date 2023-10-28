@@ -224,8 +224,8 @@ const RestaurantItem = () => {
   return (
     <>
       <center>
-        <h1>ที่พัก</h1>
-        <p>ที่ตอบโจทย์ทุกไลฟ์สไตล์</p>
+        <h1>อาหารจานโปรด</h1>
+        <p>อร่อยทุกเมนู</p>
       </center>
       {isLoading ? (
         <LoaderItem />
