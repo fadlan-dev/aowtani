@@ -1,11 +1,7 @@
 'use client';
 import { useGetDestinationTypes } from '@/hooks/useDestinationTypes';
 import { IDestinationType } from '@/types';
-import {
-  SegmentedControl,
-  SegmentedControlItem,
-  Skeleton,
-} from '@mantine/core';
+import { Select, Skeleton } from '@mantine/core';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { FunctionComponent, useCallback } from 'react';
 
@@ -22,7 +18,7 @@ const DestinationFilter: FunctionComponent<DestinationFilterProps> = () => {
   } = useGetDestinationTypes();
 
   const renderSegmentedItem = useCallback(() => {
-    const mapped: SegmentedControlItem[] =
+    const mapped: { label: string; value: string }[] =
       destinationTypes?.map((type: IDestinationType) => {
         return {
           label: type.name,
@@ -32,7 +28,6 @@ const DestinationFilter: FunctionComponent<DestinationFilterProps> = () => {
 
     return [{ label: 'ทั้งหมด', value: '' }, ...mapped];
   }, [destinationTypes]);
-  const segmentedData = renderSegmentedItem();
 
   const handleRoute = ({
     destination_type_id = '',
@@ -50,10 +45,11 @@ const DestinationFilter: FunctionComponent<DestinationFilterProps> = () => {
       {isFetching && !isFetched ? (
         <Skeleton width={200} h={40} />
       ) : (
-        <SegmentedControl
+        <Select
+          w='120px'
           value={(searchParams.get('destination_type_id') as string) || ''}
-          onChange={(e) => handleRoute({ destination_type_id: e })}
-          data={segmentedData}
+          data={renderSegmentedItem()}
+          onChange={(id) => handleRoute({ destination_type_id: `${id}` })}
         />
       )}
     </div>
