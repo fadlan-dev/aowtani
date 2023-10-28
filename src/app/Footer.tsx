@@ -1,11 +1,19 @@
 'use client';
-import { createStyles, Container, Group, ActionIcon, rem } from '@mantine/core';
+import {
+  createStyles,
+  Container,
+  Group,
+  ActionIcon,
+  rem,
+  Button,
+} from '@mantine/core';
 import {
   IconBrandTwitter,
   IconBrandYoutube,
   IconBrandInstagram,
 } from '@tabler/icons-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Index = () => {
   const { classes } = useStyles();
@@ -20,16 +28,30 @@ const Index = () => {
           alt='aowtani'
           className='h-5 w-auto'
         />
-        <Group spacing={0} className={classes.links} position='right' noWrap>
-          <ActionIcon size='lg'>
-            <IconBrandTwitter size='1.05rem' stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size='lg'>
-            <IconBrandYoutube size='1.05rem' stroke={1.5} />
-          </ActionIcon>
-          <ActionIcon size='lg'>
-            <IconBrandInstagram size='1.05rem' stroke={1.5} />
-          </ActionIcon>
+
+        <Group spacing={0} className={classes.inner} position='right'>
+          <Group spacing='sm'>
+            <Link target='_blank' href='https://partners.admin.aowtani.com'>
+              <Button variant='subtle'>สมัครเป็นผู้ประกอบการ</Button>
+            </Link>
+            <Link
+              target='_blank'
+              href='https://localguide.admin.aowtani.com/login'
+            >
+              <Button variant='subtle'>สมัครเป็นไกด์ท้องถิ่น</Button>
+            </Link>
+          </Group>
+          <Group spacing={0} noWrap>
+            <ActionIcon size='lg'>
+              <IconBrandTwitter size='1.05rem' stroke={1.5} />
+            </ActionIcon>
+            <ActionIcon size='lg'>
+              <IconBrandYoutube size='1.05rem' stroke={1.5} />
+            </ActionIcon>
+            <ActionIcon size='lg'>
+              <IconBrandInstagram size='1.05rem' stroke={1.5} />
+            </ActionIcon>
+          </Group>
         </Group>
       </Container>
     </div>
