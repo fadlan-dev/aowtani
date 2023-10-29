@@ -21,13 +21,16 @@ const Index = () => {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <Image
-          height={32}
-          width={98}
-          src='/logo.svg'
-          alt='aowtani'
-          className='h-5 w-auto'
-        />
+        <div className='text-center'>
+          <Image
+            height={32}
+            width={98}
+            src='/logo.svg'
+            alt='aowtani'
+            className='h-5 w-auto'
+          />
+          <div id='google_translate_element' />
+        </div>
 
         <Group spacing={0} className={classes.inner} position='right'>
           <Group spacing='sm'>
@@ -41,16 +44,18 @@ const Index = () => {
               <Button variant='subtle'>สมัครเป็นไกด์ท้องถิ่น</Button>
             </Link>
           </Group>
-          <Group spacing={0} noWrap>
-            <ActionIcon size='lg'>
-              <IconBrandTwitter size='1.05rem' stroke={1.5} />
-            </ActionIcon>
-            <ActionIcon size='lg'>
-              <IconBrandYoutube size='1.05rem' stroke={1.5} />
-            </ActionIcon>
-            <ActionIcon size='lg'>
-              <IconBrandInstagram size='1.05rem' stroke={1.5} />
-            </ActionIcon>
+          <Group noWrap>
+            <Group spacing={0} noWrap>
+              <ActionIcon size='lg'>
+                <IconBrandTwitter size='1.05rem' stroke={1.5} />
+              </ActionIcon>
+              <ActionIcon size='lg'>
+                <IconBrandYoutube size='1.05rem' stroke={1.5} />
+              </ActionIcon>
+              <ActionIcon size='lg'>
+                <IconBrandInstagram size='1.05rem' stroke={1.5} />
+              </ActionIcon>
+            </Group>
           </Group>
         </Group>
       </Container>
