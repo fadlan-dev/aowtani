@@ -251,6 +251,7 @@ const MosqueItem = () => {
     queryKey: ['mosques'],
     queryFn: () =>
       getDestinations({
+        destination_type_id: '12',
         per_page: 3,
         search: '',
       }),
@@ -261,12 +262,16 @@ const MosqueItem = () => {
         <h1>มัสยิด</h1>
         <p>ศาสนสถาน</p>
       </center>
-      <center>
-        <img
-          className='m-auto'
-          src='https://media.giphy.com/media/l3q2ysD8tMlC9Ygve/giphy.gif'
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <DestinationList
+          total={1}
+          data={(mosques?.data || []) as IDestination[]}
+          className='mt-6 mb-6'
+          showMore
         />
-      </center>
+      )}
     </>
   );
 };
