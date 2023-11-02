@@ -1,10 +1,4 @@
-import {
-  ICommunity,
-  IDestination,
-  ILocalGuide,
-  IPartner,
-  IProduct,
-} from '@/types';
+import { ModalSettings } from '@mantine/modals/lib/context';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -52,3 +46,25 @@ export function isImageURL(str: string) {
 
   return redirectPattern.test(str);
 }
+
+export const MODALS_CONFIG: ModalSettings = {
+  fullScreen: true,
+  closeButtonProps: {
+    radius: 'xl',
+    variant: 'transparent',
+  },
+  styles: {
+    header: {
+      background: 'transparent',
+      position: 'absolute',
+      right: 16,
+    },
+    content: {
+      background: 'transparent',
+    },
+    body: {
+      padding: 0,
+      background: 'rgb(1,1,1,0.5)',
+    },
+  },
+};

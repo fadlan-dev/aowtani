@@ -1,7 +1,11 @@
+'use client';
 import { FunctionComponent, useCallback } from 'react';
 import Image from 'next/image';
-import ShowAllPhotos from './ShowAllPhotos';
 import { IImage } from '@/types';
+import { Button } from '@mantine/core';
+import { modals } from '@mantine/modals';
+import { MODALS_CONFIG } from '@/libs/utils';
+import ImagesCarousel from './ImagesCarousel';
 
 interface HeroProps {
   images: IImage[];
@@ -19,7 +23,22 @@ const Hero: FunctionComponent<HeroProps> = ({ images, name }) => {
         alt={name}
       />
       <div className='absolute bottom-2 right-2'>
-        <ShowAllPhotos images={images} />
+        <Button
+          size='xs'
+          variant='default'
+          onClick={() => {
+            modals.open({
+              ...MODALS_CONFIG,
+              children: (
+                <>
+                  <ImagesCarousel images={images} />
+                </>
+              ),
+            });
+          }}
+        >
+          Show all photos ({images.length})
+        </Button>
       </div>
     </div>
   );
