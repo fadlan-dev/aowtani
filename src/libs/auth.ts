@@ -106,6 +106,7 @@ export const authOptions: NextAuthOptions = {
     //   return '/';
     // },
   },
+  debug: process.env.NODE_ENV === 'development',
 };
 
 export const getAuthSession = () => getServerSession(authOptions);

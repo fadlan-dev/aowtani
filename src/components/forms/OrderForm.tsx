@@ -21,7 +21,9 @@ import { useSearchParams } from 'next/navigation';
 import { IOrderRequest, IProduct } from '@/types';
 import { useRouter } from 'next/navigation';
 import { modals } from '@mantine/modals';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconX } from '@tabler/icons-react';
+import { Notifications } from '../Notifications';
+import { notifications } from '@mantine/notifications';
 
 interface OrderFormProps {
   product: IProduct;
@@ -104,25 +106,36 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
       const { data } = await axios.request(config);
       return data;
     },
+    onMutate: (_variables) => {
+      notifications.show({
+        id: 'load-order',
+        loading: true,
+        title: 'Order',
+        message: 'Order Pending...',
+        autoClose: false,
+        withCloseButton: false,
+      });
+    },
     onError: (err: AxiosError) => {
-      ErrorModal({ title: 'Order', content: err.response?.statusText });
+      notifications.show({
+        id: 'load-order',
+        title: 'Order',
+        message: `${err.response?.statusText}`,
+        icon: <IconX size='1rem' />,
+        autoClose: false,
+      });
     },
     onSuccess: (res) => {
-      modals.openConfirmModal({
-        title: 'You successfully created your order',
-        centered: true,
-        children: (
-          <center>
-            <ThemeIcon color='green' radius='xl' size='xl'>
-              <IconCheck />
-            </ThemeIcon>
-            <Text mt='sm' size='sm'>{`Order Ref: ${res.slug}`}</Text>
-          </center>
-        ),
-        labels: { confirm: 'Ok', cancel: 'Cancel' },
-        onConfirm: () => router.push('/product'),
-        cancelProps: { display: 'none' },
+      notifications.update({
+        id: 'load-order',
+        color: 'teal',
+        title: 'Order',
+        message: 'Order was successfully created!',
+        icon: <IconCheck size='1rem' />,
       });
+      setTimeout(() => {
+        router.push('/product');
+      }, 1000);
     },
   });
 
