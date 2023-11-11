@@ -8,7 +8,6 @@ import {
   Text,
   TextInput,
   Textarea,
-  ThemeIcon,
 } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
@@ -20,9 +19,7 @@ import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { IOrderRequest, IProduct } from '@/types';
 import { useRouter } from 'next/navigation';
-import { modals } from '@mantine/modals';
 import { IconCheck, IconX } from '@tabler/icons-react';
-import { Notifications } from '../Notifications';
 import { notifications } from '@mantine/notifications';
 
 interface OrderFormProps {
