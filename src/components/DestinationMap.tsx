@@ -313,9 +313,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='แหลมตาชี'
               transform='translate(24.198 12.726)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 แหลมตาชี
@@ -324,9 +324,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='หาดตะโละมีแล'
               transform='translate(75.811 7.989)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 หาดตะโละมีแล
@@ -335,9 +335,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='มัสยิดดาโต๊ะ'
               transform='translate(102.024 21.719)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 มัสยิดดาโต๊ะ
@@ -346,9 +346,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='ถิ่นเรือกอและ'
               transform='translate(132.471 47.407)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 ถิ่นเรือกอและ
@@ -403,9 +403,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='หาดตะโละกาโปร์'
               transform='translate(158.331 55.148)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 หาดตะโละกาโปร์
@@ -461,9 +461,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='บูนาดารา'
               transform='translate(173.821 122.89)'
               fill='#fff'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 บูนาดารา
@@ -519,9 +519,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='ชุมชนท่องเที่ยวบางปู'
               transform='translate(133.789 130.208)'
               fill='#fff'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 ชุมชนท่องเที่ยวบางปู
@@ -613,9 +613,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='บาราโหมบาซาร์'
               transform='translate(88.59 130.2)'
               fill='#fff'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 บาราโหมบาซาร์
@@ -660,9 +660,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               id='สะพานไม้บานา'
               transform='translate(48.989 134.2)'
               fill='#fff'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 สะพานไม้บานา
@@ -763,9 +763,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='มัสยิดกรือเซะ'
               transform='translate(84.237 65.049)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 มัสยิดกรือเซะ
@@ -809,9 +809,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='ลานนกกระยาง'
               transform='translate(63.782 58.559)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 ลานนกกระยาง
@@ -914,9 +914,9 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
             <text
               id='นาเกลือโบราณ'
               transform='translate(44.014 49.961)'
-              font-size='3'
-              font-family='SukhumvitSet-Medium, Sukhumvit Set'
-              font-weight='500'
+              fontSize='3'
+              fontFamily='SukhumvitSet-Medium, Sukhumvit Set'
+              fontWeight='500'
             >
               <tspan x='0' y='0'>
                 นาเกลือโบราณ
