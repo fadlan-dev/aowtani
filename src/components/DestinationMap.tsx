@@ -49,7 +49,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-35.506 -74.372)'
               fill='#e29573'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -59,7 +59,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-84.55 -90.27)'
               fill='#6daaa2'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -69,7 +69,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-99.785 -96.369)'
               fill='#5f7d9e'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -79,7 +79,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-113.256 -91.734)'
               fill='#3ca1c4'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -89,7 +89,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-134.914 -88.02)'
               fill='#3ca1c4'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <path
@@ -99,7 +99,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-135.979 -75.985)'
               fill='#3ca1c4'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -109,7 +109,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-146.143 -72.222)'
               fill='#ebcb8e'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <path
@@ -119,7 +119,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(-27.075 -25.198)'
               fill='#577a41'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='0.5'
             />
             <rect
@@ -155,7 +155,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(21.959 14.932)'
               fill='none'
               stroke='#577a41'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -190,7 +190,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(76.024 9.57)'
               fill='none'
               stroke='#577a41'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -225,7 +225,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(101.237 24.172)'
               fill='none'
               stroke='#577a41'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -237,7 +237,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(29.787 33.586)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -249,7 +249,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(79.921 28.784)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -261,7 +261,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(91.71 47.108)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -273,7 +273,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(138.998 67.46)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -307,7 +307,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(131.987 49.321)'
               fill='none'
               stroke='#ebcb8e'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -363,7 +363,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(167.831 75.76)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -397,7 +397,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(160.815 57.617)'
               fill='none'
               stroke='#ebcb8e'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -420,7 +420,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(182.077 98.935)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -454,7 +454,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(171.534 102.847)'
               fill='none'
               stroke='#ebcb8e'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -478,7 +478,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(136.702 107.858)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -512,7 +512,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(138.502 110.719)'
               fill='none'
               stroke='#3ca1c4'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -536,7 +536,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(98.97 105.571)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -548,7 +548,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(77.318 98.565)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -560,7 +560,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(71.572 92.605)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -572,7 +572,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(66.001 80.096)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -606,7 +606,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(89.803 111.045)'
               fill='none'
               stroke='#3ca1c4'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -653,7 +653,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(49.702 114.081)'
               fill='none'
               stroke='#e29573'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -757,7 +757,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(84.018 68.754)'
               fill='none'
               stroke='#e29573'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -803,7 +803,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(64.05 62.75)'
               fill='none'
               stroke='#e29573'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
@@ -826,7 +826,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(51.692 73.016)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <circle
@@ -838,7 +838,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(57.049 82.611)'
               fill='#fff'
               stroke='#000'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -873,7 +873,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(44.286 54.148)'
               fill='none'
               stroke='#e29573'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <rect
@@ -908,7 +908,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               transform='translate(27.111 98.969)'
               fill='none'
               stroke='#e29573'
-              stroke-miterlimit='10'
+              strokeMiterlimit='10'
               stroke-width='1'
             />
             <text
