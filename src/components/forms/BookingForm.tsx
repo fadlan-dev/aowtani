@@ -1,5 +1,4 @@
 'use client';
-import { ErrorModal } from '@/hooks/error-modal';
 import {
   Box,
   Button,
@@ -8,7 +7,6 @@ import {
   Text,
   TextInput,
   Textarea,
-  ThemeIcon,
 } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
@@ -20,8 +18,8 @@ import { useSession } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import { IBookingRequest, IPackage } from '@/types';
 import { useRouter } from 'next/navigation';
-import { modals } from '@mantine/modals';
-import { IconCheck } from '@tabler/icons-react';
+import { IconCheck, IconX } from '@tabler/icons-react';
+import { notifications } from '@mantine/notifications';
 
 interface BookingFormProps {
   pkg: IPackage;
@@ -80,10 +78,33 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       );
       return data;
     },
+    onMutate: (_variables) => {
+      notifications.show({
+        id: 'load-attachments',
+        loading: true,
+        title: 'Slip',
+        message: 'Booking Pending...',
+        autoClose: false,
+        withCloseButton: false,
+      });
+    },
     onError: (err: AxiosError) => {
-      ErrorModal({ title: 'Upload', content: err.response?.statusText });
+      notifications.show({
+        id: 'load-attachments',
+        title: 'Slip',
+        message: `${err.response?.statusText}`,
+        icon: <IconX size='1rem' />,
+        autoClose: false,
+      });
     },
     onSuccess: (res) => {
+      notifications.update({
+        id: 'load-attachments',
+        color: 'teal',
+        title: 'Slip',
+        message: 'Slip upload successful',
+        icon: <IconCheck size='1rem' />,
+      });
       form.setFieldValue('slip', res);
       form.clearFieldError('slip');
     },
@@ -104,25 +125,36 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       const { data } = await axios.request(config);
       return data;
     },
+    onMutate: (_variables) => {
+      notifications.show({
+        id: 'load-tour',
+        loading: true,
+        title: 'Tour',
+        message: 'Tour Pending...',
+        autoClose: false,
+        withCloseButton: false,
+      });
+    },
     onError: (err: AxiosError) => {
-      ErrorModal({ title: 'Booking', content: err.response?.statusText });
+      notifications.show({
+        id: 'load-tour',
+        title: 'Tour',
+        message: `${err.response?.statusText}`,
+        icon: <IconX size='1rem' />,
+        autoClose: false,
+      });
     },
     onSuccess: (res) => {
-      modals.openConfirmModal({
-        title: 'You successfully created your booking',
-        centered: true,
-        children: (
-          <center>
-            <ThemeIcon color='green' radius='xl' size='xl'>
-              <IconCheck />
-            </ThemeIcon>
-            <Text mt='sm' size='sm'>{`Booking Ref: ${res.slug}`}</Text>
-          </center>
-        ),
-        labels: { confirm: 'Ok', cancel: 'Cancel' },
-        onConfirm: () => router.replace('/'),
-        cancelProps: { display: 'none' },
+      notifications.update({
+        id: 'load-tour',
+        color: 'teal',
+        title: 'Tour',
+        message: 'Tour was successfully created!',
+        icon: <IconCheck size='1rem' />,
       });
+      setTimeout(() => {
+        router.push('/');
+      }, 1000);
     },
   });
 
