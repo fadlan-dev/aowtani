@@ -3,6 +3,7 @@ import React, { ReactNode, useEffect } from 'react';
 import CookieConsent from './CookieConsent';
 import { SessionProvider } from 'next-auth/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Notifications } from '@mantine/notifications';
 
 declare global {
   interface Window {
@@ -57,6 +58,7 @@ const Providers = ({ children }: Props) => {
   return (
     <QueryClientProvider client={queryClient}>
       <SessionProvider>
+        <Notifications />
         <CookieConsent />
         {children}
       </SessionProvider>
