@@ -8,7 +8,7 @@ const nextConfig = {
     NEXT_API_HOST: 'https://api.aowtani.com/kronos',
     NEXT_IMAGE_HOST: 'https://api.aowtani.com',
     NEXTAUTH_SECRET: 'my_ultra_secure_nextauth_secret',
-    NEXTAUTH_URL: 'http://localhost:3000',
+    NEXTAUTH_URL: 'https://aowtani.com',
   },
 };
 
