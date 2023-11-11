@@ -54,6 +54,11 @@ const MENUS: IMenu[] = [
     key: 'organizations',
     path: '/organizations',
   },
+  {
+    title: 'ปฏิทินกิจกรรม',
+    key: 'calendar',
+    path: '/calendar',
+  },
 ];
 
 const linkClass =
