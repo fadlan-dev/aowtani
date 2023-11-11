@@ -50,7 +50,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#e29573'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_4'
@@ -60,7 +60,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#6daaa2'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_5'
@@ -70,7 +70,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#5f7d9e'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_6'
@@ -80,7 +80,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#3ca1c4'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_7'
@@ -90,7 +90,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#3ca1c4'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <path
               id='Path_8'
@@ -100,7 +100,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#3ca1c4'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_9'
@@ -110,7 +110,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#ebcb8e'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <path
               id='Path_10'
@@ -120,7 +120,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#577a41'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='0.5'
+              strokeWidth='0.5'
             />
             <rect
               id='Rectangle_1'
@@ -156,7 +156,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#577a41'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_5'
@@ -191,7 +191,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#577a41'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_9'
@@ -226,7 +226,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#577a41'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_1'
@@ -238,7 +238,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_2'
@@ -250,7 +250,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_3'
@@ -262,7 +262,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_4'
@@ -274,7 +274,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_13'
@@ -308,7 +308,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#ebcb8e'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='แหลมตาชี'
@@ -364,7 +364,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_17'
@@ -398,7 +398,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#ebcb8e'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='หาดตะโละกาโปร์'
@@ -421,7 +421,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_21'
@@ -455,7 +455,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#ebcb8e'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='บูนาดารา'
@@ -479,7 +479,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_25'
@@ -513,7 +513,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#3ca1c4'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='ชุมชนท่องเที่ยวบางปู'
@@ -537,7 +537,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_9'
@@ -549,7 +549,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_10'
@@ -561,7 +561,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_11'
@@ -573,7 +573,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_29'
@@ -607,7 +607,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#3ca1c4'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='บาราโหมบาซาร์'
@@ -654,7 +654,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#e29573'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='สะพานไม้บานา'
@@ -758,7 +758,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#e29573'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='มัสยิดกรือเซะ'
@@ -804,7 +804,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#e29573'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='ลานนกกระยาง'
@@ -827,7 +827,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <circle
               id='Ellipse_13'
@@ -839,7 +839,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='#fff'
               stroke='#000'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_45'
@@ -874,7 +874,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#e29573'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <rect
               id='Rectangle_49'
@@ -909,7 +909,7 @@ const DestinationMap: FunctionComponent<DestinationMapProps> = () => {
               fill='none'
               stroke='#e29573'
               strokeMiterlimit='10'
-              stroke-width='1'
+              strokeWidth='1'
             />
             <text
               id='นาเกลือโบราณ'
