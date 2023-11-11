@@ -329,3 +329,9 @@ export interface IBankAccount {
   created_at: string;
   updated_at: string;
 }
+
+export interface ICalendar {
+  date: number;
+  month: number;
+  year: number;
+}

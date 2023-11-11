@@ -4,6 +4,10 @@ import CookieConsent from './CookieConsent';
 import { SessionProvider } from 'next-auth/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Notifications } from '@mantine/notifications';
+import dayjs from 'dayjs';
+import isToday from 'dayjs/plugin/isToday';
+
+dayjs.extend(isToday);
 
 declare global {
   interface Window {
