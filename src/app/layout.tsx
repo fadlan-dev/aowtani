@@ -5,6 +5,13 @@ import { Noto_Sans_Thai } from 'next/font/google';
 import Header from './Header';
 import Footer from './Footer';
 import Providers from '@/components/Providers';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Asia/Bangkok');
 
 const noto_sans_thai = Noto_Sans_Thai({
   subsets: ['thai'],
