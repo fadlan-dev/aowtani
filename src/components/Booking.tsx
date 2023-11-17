@@ -58,9 +58,11 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
       <form
         className='flex flex-col gap-2'
         onSubmit={form.onSubmit((_values) => {
-          const url = `/booking/${params.id}/?tour_date=${new Date(
-            form.values.tour_date
-          ).toISOString()}&note=${form.values.note}&quantity=${
+          const url = `/booking/${params.id}/?tour_date=${dayjs(
+            new Date(form.values.tour_date)
+          )
+            .tz('Asia/Bangkok')
+            .toISOString()}&note=${form.values.note}&quantity=${
             form.values.quantity
           }`;
 
