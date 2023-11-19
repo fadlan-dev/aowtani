@@ -15,6 +15,7 @@ import {
   Popover,
   Text,
   Skeleton,
+  Flex,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
@@ -178,15 +179,45 @@ const Index = () => {
           />
 
           <Group position='center' grow pb='xl' px='md'>
-            <Button
-              variant='filled'
-              onClick={() => {
-                closeDrawer();
-                router.push('/sign-in');
-              }}
-            >
-              Sign In
-            </Button>
+            {session ? (
+              <Flex direction='column'>
+                <Flex justify='space-between' align='center'>
+                  <Flex direction='column'>
+                    <Text size='md'>
+                      {session.user?.first_name} {session.user?.last_name}
+                    </Text>
+                    <Text size='sm'>{session.user?.username}</Text>
+                  </Flex>
+                  <Avatar
+                    radius='xl'
+                    ml='sm'
+                    src={`${process.env.NEXT_IMAGE_HOST}${session.user?.profile?.asset}`}
+                  />
+                </Flex>
+                <Divider
+                  my='sm'
+                  color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
+                />
+                <Button
+                  variant='default'
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  Sign Out
+                </Button>
+              </Flex>
+            ) : (
+              <Button
+                variant='filled'
+                onClick={() => {
+                  closeDrawer();
+                  router.push('/sign-in');
+                }}
+              >
+                Sign In
+              </Button>
+            )}
           </Group>
         </ScrollArea>
       </Drawer>
