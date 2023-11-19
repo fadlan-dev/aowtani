@@ -151,7 +151,7 @@ const Index = () => {
             href='/'
             className='no-underline text-black'
           >
-            Logo
+            <Image height={32} width={98} src='/logo.svg' alt='aowtani' />
           </Link>
         }
         className='block sm:hidden'
@@ -159,7 +159,7 @@ const Index = () => {
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx='-md'>
           <Divider
-            my='sm'
+            mt={0}
             color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
           />
 
