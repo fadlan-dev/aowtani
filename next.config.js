@@ -4,11 +4,11 @@ const nextConfig = {
     remotePatterns: [{ hostname: 'api.aowtani.com' }],
   },
   env: {
-    NEXT_PUBLIC_URL: 'https://api.aowtani.com',
-    NEXT_API_HOST: 'https://api.aowtani.com/kronos',
-    NEXT_IMAGE_HOST: 'https://api.aowtani.com',
-    NEXTAUTH_SECRET: 'my_ultra_secure_nextauth_secret',
-    NEXTAUTH_URL: 'https://aowtani.com',
+    NEXT_PUBLIC_URL: process.env.NEXT_PUBLIC_URL,
+    NEXT_API_HOST: process.env.NEXT_API_HOST,
+    NEXT_IMAGE_HOST: process.env.NEXT_IMAGE_HOST,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   },
 };
 
