@@ -21,6 +21,7 @@ const page = async ({ params }: Props) => {
             <h1 className='capitalize'>{partner.name}</h1>
             <p className='text-primary'>{partner.address}</p>
             <p className='mt-4'>{partner.detail}</p>
+            <Reviews variant='business_partners' className='mt-6' />
             <NearbyAttractions
               className='mt-6'
               organization={partner.organization}

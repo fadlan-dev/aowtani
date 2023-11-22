@@ -1,4 +1,5 @@
 import ProductHero from '@/components/ProductHero';
+import Reviews from '@/components/Reviews';
 import { getProduct } from '@/libs/services/getProduct';
 import { IProduct } from '@/types';
 
@@ -28,6 +29,7 @@ const Page = async ({ params }: pageProps) => {
           className='mt-4 relative'
           dangerouslySetInnerHTML={{ __html: product.details }}
         />
+        <Reviews variant='products' className='mt-6' />
       </div>
     </div>
   );
