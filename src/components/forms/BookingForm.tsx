@@ -73,7 +73,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       var formdata = new FormData();
       formdata.append('asset', file);
       const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_URL}/attachments.json`,
+        `${process.env.NEXT_IMAGE_HOST}/attachments.json`,
         formdata
       );
       return data;
