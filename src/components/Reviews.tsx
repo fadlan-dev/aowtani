@@ -1,9 +1,9 @@
 'use client';
 import { Button, Modal, Text, Loader } from '@mantine/core';
-import { FunctionComponent, Suspense, useState } from 'react';
+import { FunctionComponent, Suspense, useCallback, useState } from 'react';
 import ReviewItem from './ReviewItem';
 import { cn } from '@/libs/utils';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useDisclosure } from '@mantine/hooks';
 
 import { useSession } from 'next-auth/react';
@@ -14,21 +14,20 @@ import ReviewForm from './forms/ReviewForm';
 import { ErrorModal } from '@/hooks/error-modal';
 
 interface ReviewsProps {
-  variant: 'destination' | 'package';
+  variant: 'destination_visits' | 'packages' | 'business_partners' | 'products';
   className?: string;
-  exploreTo?: string;
 }
-const Reviews: FunctionComponent<ReviewsProps> = ({
-  className,
-  variant,
-  exploreTo,
-}) => {
+
+const itemsPerPage = 3;
+
+const Reviews: FunctionComponent<ReviewsProps> = ({ className, variant }) => {
   const params = useParams();
   const { data: session } = useSession();
 
-  const router = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
   const [updateReviewVal, setUpdateReviewVal] = useState<IReview | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [total, setTotal] = useState(1);
 
   const {
     isFetching,
@@ -38,10 +37,9 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
   } = useQuery({
     queryFn: async () => {
       const { data } = await axios.get(
-        variant === 'destination'
-          ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews.json`
-          : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews.json`
+        `${process.env.NEXT_API_HOST}/${variant}/${params.id}/reviews.json`
       );
+      setTotal(Math.ceil(data.length / itemsPerPage) || 0);
       return data;
     },
     queryKey: ['reviews-query'],
@@ -52,10 +50,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
       const config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url:
-          variant === 'destination'
-            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews.json`
-            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews.json`,
+        url: `${process.env.NEXT_API_HOST}/${variant}/${params.id}/reviews.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -79,10 +74,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
       const config = {
         method: 'put',
         maxBodyLength: Infinity,
-        url:
-          variant === 'destination'
-            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews/${updateReviewVal?.id}.json`
-            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews/${updateReviewVal?.id}.json`,
+        url: `${process.env.NEXT_API_HOST}/${variant}/${params.id}/reviews/${updateReviewVal?.id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -107,10 +99,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
       const config = {
         method: 'delete',
         maxBodyLength: Infinity,
-        url:
-          variant === 'destination'
-            ? `${process.env.NEXT_API_HOST}/destination_visits/${params.id}/reviews/${id}.json`
-            : `${process.env.NEXT_API_HOST}/packages/${params.id}/reviews/${id}.json`,
+        url: `${process.env.NEXT_API_HOST}/${variant}/${params.id}/reviews/${id}.json`,
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session?.user.token}`,
@@ -127,10 +116,20 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
     },
   });
 
+  const paginatedData = useCallback(() => {
+    return reviews.slice(0, currentPage * itemsPerPage);
+  }, [reviews, currentPage]);
+
+  const showMore = useCallback(() => {
+    if (currentPage < total) {
+      setCurrentPage(currentPage + 1);
+    }
+  }, [currentPage]);
+
   if (isFetching && !isFetched) {
     return (
       <center className='mt-10'>
-        <Loader />
+        <Loader variant='dots' />
       </center>
     );
   }
@@ -146,7 +145,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
         }}
         title={`${updateReviewVal ? 'แก้ใข' : 'แสดง'}ความคิดเห็น`}
       >
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader variant='dots' />}>
           <ReviewForm
             loading={isLoading || isUpdating}
             onSubmit={(values) =>
@@ -177,7 +176,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
         )}
         {reviews.length > 0 ? (
           <>
-            {reviews.map((review: IReview) => (
+            {paginatedData().map((review: IReview) => (
               <ReviewItem
                 key={review.id}
                 data={review}
@@ -190,13 +189,10 @@ const Reviews: FunctionComponent<ReviewsProps> = ({
                 onDelete={(e) => destroyReview(e)}
               />
             ))}
-            {exploreTo && (
+            {currentPage < total && (
               <div className='text-center'>
-                <Button
-                  variant='light'
-                  onClick={() => router.push(`${exploreTo}?variant=${variant}`)}
-                >
-                  ดูทั้งหมด
+                <Button variant='subtle' size='sm' onClick={showMore}>
+                  อ่านต่อ
                 </Button>
               </div>
             )}
