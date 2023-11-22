@@ -65,11 +65,7 @@ async function page({ params }: pageProps) {
               className='mt-4 relative'
               dangerouslySetInnerHTML={{ __html: pkg.conditions }}
             />
-            <Reviews
-              variant='package'
-              className='mt-6'
-              exploreTo={`review/${params.id}`}
-            />
+            <Reviews variant='packages' className='mt-6' />
           </div>
           <div className='w-full lg:w-80'>
             <h3 className='mb-2'>ผู้ประกอบการ</h3>

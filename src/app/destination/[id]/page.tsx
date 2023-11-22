@@ -66,11 +66,7 @@ const page = async ({ params }: Props) => {
               className='mt-4 relative'
               dangerouslySetInnerHTML={{ __html: dest.content }}
             />
-            <Reviews
-              variant='destination'
-              className='mt-6'
-              exploreTo={`review/${params.id}`}
-            />
+            <Reviews variant='destination_visits' className='mt-6' />
             <NearbyAttractions
               className='mt-6'
               organization={dest.organization}

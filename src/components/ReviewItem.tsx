@@ -40,7 +40,7 @@ const ReviewItem: FunctionComponent<ReviewItemProps> = ({
         <Flex align='center' justify='space-between'>
           <Group spacing={8}>
             <Avatar
-              src={`${process.env.NEXT_PUBLIC_URL}${data.customer?.profile.asset}`}
+              src={`${process.env.NEXT_IMAGE_HOST}${data.customer?.profile.asset}`}
               alt={data.customer?.first_name}
               radius='xl'
               size='md'
@@ -114,7 +114,11 @@ const ReviewItem: FunctionComponent<ReviewItemProps> = ({
                 width={48}
                 height={48}
                 className='object-contain w-auto'
-                src={`${process.env.NEXT_PUBLIC_URL}${img.asset}`}
+                src={
+                  img.asset.includes('/rails/active_storage/blobs/redirect/')
+                    ? `${process.env.NEXT_IMAGE_HOST}${img.asset}`
+                    : `/image.svg`
+                }
                 alt={`${img.id}`}
               />
             </div>
@@ -153,7 +157,7 @@ const ReviewItem: FunctionComponent<ReviewItemProps> = ({
                       className='object-contain w-auto'
                       src={
                         img.asset !== 'asset url test'
-                          ? `${process.env.NEXT_PUBLIC_URL}${img.asset}`
+                          ? `${process.env.NEXT_IMAGE_HOST}${img.asset}`
                           : '/image.svg'
                       }
                       alt={`${img.id}`}
