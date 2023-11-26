@@ -1,5 +1,4 @@
 import { IImage } from '@/types';
-import { IconHome } from '@tabler/icons-react';
 import L from 'leaflet';
 import { renderToStaticMarkup } from 'react-dom/server';
 import Image from 'next/image';
@@ -11,7 +10,10 @@ type Props = {
 
 const CustomMarker = ({ image, ...props }: Props) => {
   const Marker = () => (
-    <div className='flex items-cente w-8  aspect-square justify-center bg-white rounded-full p-px shadow'>
+    <div
+      className='flex items-cente w-8  aspect-square justify-center bg-white rounded-full p-px shadow'
+      {...props}
+    >
       <div className='aspect-square rounded-full bg-slate-400 overflow-hidden'>
         <Image
           width={32}
@@ -20,7 +22,6 @@ const CustomMarker = ({ image, ...props }: Props) => {
           alt='marker'
           src={`${process.env.NEXT_IMAGE_HOST}${image.asset}`}
         />
-        <IconHome {...props} />
       </div>
     </div>
   );

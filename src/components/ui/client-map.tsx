@@ -145,8 +145,8 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
                             className='object-cover aspect-video'
                             src={`${process.env.NEXT_IMAGE_HOST}${
                               'images' in marker
-                                ? marker.images[0]
-                                : marker.banners[0]
+                                ? marker.images[0].asset
+                                : marker.banners[0].asset
                             }`}
                             alt={marker.name}
                           />
