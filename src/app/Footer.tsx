@@ -29,11 +29,11 @@ const Index = () => {
       <Container className={classes.inner}>
         <div className='text-center'>
           <Image
-            height={32}
-            width={98}
-            src='/logo.svg'
+            height={38}
+            width={120}
+            src='/logo-landscape.svg'
             alt='aowtani'
-            className='h-5 w-auto'
+            className='h-7 w-auto'
           />
           <div id='google_translate_element' />
         </div>

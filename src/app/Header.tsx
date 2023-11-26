@@ -84,7 +84,7 @@ const Index = () => {
       <Header height={60} px='md' fixed zIndex={10}>
         <Group position='apart' className='h-full'>
           <Link href='/' className=' no-underline text-black font-bold'>
-            <Image height={32} width={98} src='/logo.svg' alt='aowtani' />
+            <Image height={36} width={38} src='/logo.svg' alt='aowtani' />
           </Link>
 
           <Group className='h-full hidden sm:flex gap-px'>
