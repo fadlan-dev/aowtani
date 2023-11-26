@@ -16,6 +16,8 @@ export type IDestination = {
   created_at: string;
   updated_at: string;
   organization: IOrganization;
+  lat?: string;
+  long?: string;
 };
 
 export interface IDestinationType {
@@ -130,6 +132,8 @@ export interface IPartner {
   created_at: string;
   updated_at: string;
   organization: IOrganization;
+  lat?: string;
+  long?: string;
 }
 
 export interface IProduct {
@@ -334,4 +338,28 @@ export interface ICalendar {
   date: number;
   month: number;
   year: number;
+}
+
+export interface IEvent {
+  id: number;
+  name: string;
+  address: string;
+  event_date: string;
+  embed_map: string;
+  banners: IImage[];
+  created_at: string;
+  updated_at: string;
+  user?: IUserEvent;
+}
+
+export interface IUserEvent {
+  id: number;
+  username: string;
+  fullname: string;
+  role: string;
+  email: string;
+  phone: string;
+  created_at: string;
+  updated_at: string;
+  profile: Profile;
 }

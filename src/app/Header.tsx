@@ -26,6 +26,11 @@ import { IconLogout } from '@tabler/icons-react';
 
 const MENUS: IMenu[] = [
   {
+    title: 'แผนที่',
+    key: 'map',
+    path: '/map',
+  },
+  {
     title: 'สถานที่ท่องเที่ยว',
     key: 'destination',
     path: '/destination',

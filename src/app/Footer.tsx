@@ -14,9 +14,15 @@ import {
 } from '@tabler/icons-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Index = () => {
   const { classes } = useStyles();
+  const pathname = usePathname();
+
+  if (pathname === '/map') {
+    return null;
+  }
 
   return (
     <div className={classes.footer}>
