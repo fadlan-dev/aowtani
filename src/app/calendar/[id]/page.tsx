@@ -35,7 +35,7 @@ const Page = async ({ params }: Props) => {
   return (
     <div className='mt-[60px] lg:mt-20 mb-24'>
       <div className='lg:container lg:w-full px-0 lg:px-4'>
-        <Hero images={[]} name={event.name} />
+        <Hero images={event.banners} name={event.name} />
       </div>
       <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>

@@ -14,7 +14,11 @@ const UserEvent: FunctionComponent<UserEventProps> = ({ user }) => {
   }
   return (
     <div className='flex items-center bg-white p-2 gap-2'>
-      <Avatar color='primary' radius='xl' />
+      <Avatar
+        color='primary'
+        radius='xl'
+        src={`${process.env.NEXT_IMAGE_HOST}${user.profile.asset}`}
+      />
       <p>{user.fullname}</p>
     </div>
   );

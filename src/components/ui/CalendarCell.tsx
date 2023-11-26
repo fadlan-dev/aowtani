@@ -1,6 +1,6 @@
 import { cn } from '@/libs/utils';
+import { IEvent } from '@/types';
 import { IconPointFilled } from '@tabler/icons-react';
-import dayjs from 'dayjs';
 import Link from 'next/link';
 import { FunctionComponent } from 'react';
 
@@ -11,17 +11,16 @@ interface CalendarCellProps {
   isToday: boolean;
   isDateSelected: boolean;
   onClick: () => void;
+  events?: IEvent[];
 }
 
 const CalendarCell: FunctionComponent<CalendarCellProps> = ({
   day,
-  month,
-  year,
   isToday,
   isDateSelected,
   onClick,
+  events,
 }) => {
-  const date = new Date(`${month + 1} ${day}  ${year}`);
   return (
     <td
       className={cn(
@@ -36,16 +35,20 @@ const CalendarCell: FunctionComponent<CalendarCellProps> = ({
         <div className='flex aspect-square flex-col overflow-hidden'>
           <p className={cn('text-end')}>{day}</p>
           <div className='flex flex-col overflow-auto '>
-            {dayjs(date).isToday() &&
-              new Array(6).fill('').map((event, idx) => (
-                <Link
-                  key={idx}
-                  href={`/calendar/${idx + 1}`}
-                  className='flex items-center text-sm text-black'
-                >
-                  <IconPointFilled size={16} /> {`Event ${idx + 1}`}
-                </Link>
-              ))}
+            {(events || []).map((event, idx) => (
+              <Link
+                key={idx}
+                href={`/calendar/${event.id}`}
+                className='flex items-center text-sm text-black'
+              >
+                <IconPointFilled
+                  className='text-red-600'
+                  color='blue'
+                  size={16}
+                />{' '}
+                {event.name}
+              </Link>
+            ))}
           </div>
         </div>
       )}

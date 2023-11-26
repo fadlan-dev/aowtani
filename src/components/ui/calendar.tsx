@@ -1,9 +1,12 @@
 'use client';
-import { ICalendar } from '@/types';
+import { ICalendar, IEvent } from '@/types';
 import { Button, Select } from '@mantine/core';
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import CalendarCell from './CalendarCell';
 import { cn } from '@/libs/utils';
+import dayjs from 'dayjs';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 interface CalendarProps {
   className?: string;
@@ -103,6 +106,35 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
     return matrix;
   }
 
+  const { data: events } = useQuery({
+    queryKey: ['events-query', currentMonth],
+    queryFn: async () => {
+      const sdate = dayjs(
+        `${currentMonth.getFullYear()} ${currentMonth.getMonth() + 1} 1`,
+        'YYYY MM DD'
+      ).format('YYYY-MM-DD');
+      const edate = dayjs(
+        new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0),
+        'YYYY MM DD'
+      ).format('YYYY-MM-DD');
+      const { data } = await axios.get(
+        `${process.env.NEXT_API_HOST}/tani_events.json?start_date=${sdate}&end_date=${edate}`
+      );
+      return data as IEvent[];
+    },
+  });
+
+  const getEvent = useCallback(
+    (day: number) => {
+      const filteredEvents = events?.filter((event) => {
+        const eventDate = new Date(event.event_date).getDate();
+        return day === eventDate;
+      });
+      return filteredEvents || [];
+    },
+    [events]
+  );
+
   return (
     <div className={cn('w-full', className)}>
       <div className='flex items-center justify-end gap-2'>
@@ -157,6 +189,7 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
                     weeks.month,
                     weeks.year
                   )}
+                  events={getEvent(weeks.date)}
                   onClick={() =>
                     weeks.date !== 0 && handleDateClick(weeks.date)
                   }
