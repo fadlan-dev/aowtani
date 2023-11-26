@@ -124,7 +124,7 @@ const Reviews: FunctionComponent<ReviewsProps> = ({ className, variant }) => {
     if (currentPage < total) {
       setCurrentPage(currentPage + 1);
     }
-  }, [currentPage]);
+  }, [currentPage, total]);
 
   if (isFetching && !isFetched) {
     return (
