@@ -39,7 +39,6 @@ const Index = ({}: Props) => {
       title: 'สถานที่ท่องเที่ยว',
       icon: <TravelIcon />,
       color: 'blue',
-      img: <DestinationMap />,
       active: theme.colors.blue[0],
     },
     {
@@ -99,11 +98,6 @@ const Index = ({}: Props) => {
                 </ThemeIcon>
                 <Text>{menu.title}</Text>
               </Group>
-              {menu.img && (
-                <Box h={138} mt='xs' className='relative'>
-                  {menu.img}
-                </Box>
-              )}
             </Navbar.Section>
           ))}
         </Navbar>
