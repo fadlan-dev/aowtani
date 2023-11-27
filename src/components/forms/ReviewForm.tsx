@@ -85,7 +85,6 @@ const ReviewForm: FunctionComponent<ReviewFormProps> = ({
   return (
     <form
       onSubmit={form.onSubmit((values) => {
-        console.log(values);
         onSubmit(values as { star: number; text: string; images: IImage[] });
       })}
     >
