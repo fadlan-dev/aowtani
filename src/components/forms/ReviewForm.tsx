@@ -34,10 +34,9 @@ const imageSchema = z
   .optional();
 
 const schema = z.object({
-  text: z
-    .string()
-    .min(10, { message: 'Please input your review' })
-    .max(100, { message: 'Max 100 Characters' }),
+  text: z.string().min(1, { message: 'Please input your review' }).max(100, {
+    message: 'Please limit your review to a maximum of 100 characters',
+  }),
   star: z.number().min(1, { message: 'Please select your star' }),
   images: z.array(imageSchema).optional(),
 });
@@ -85,9 +84,10 @@ const ReviewForm: FunctionComponent<ReviewFormProps> = ({
 
   return (
     <form
-      onSubmit={form.onSubmit((values) =>
-        onSubmit(values as { star: number; text: string; images: IImage[] })
-      )}
+      onSubmit={form.onSubmit((values) => {
+        console.log(values);
+        onSubmit(values as { star: number; text: string; images: IImage[] });
+      })}
     >
       <Flex direction='column'>
         <Text size='sm'>คะแนน</Text>
