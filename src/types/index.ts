@@ -322,6 +322,8 @@ export interface IOrder {
   updated_at: string;
   slip: IImage;
   product: { id: number; name: string; sku: string };
+  status: string;
+  tracking_code: string;
 }
 
 export interface IBankAccount {

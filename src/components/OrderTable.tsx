@@ -114,6 +114,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <th className='whitespace-nowrap'>รหัสไปรษณีย์</th>
       <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
       <th className='whitespace-nowrap'>สถานะ</th>
+      <th className='whitespace-nowrap'>เลขพัสดุ</th>
     </tr>
   );
 
@@ -124,11 +125,12 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       </td>
       <td className='min-w-[240px]'>{order.product.name}</td>
       <td className='whitespace-nowrap'>{order.product.sku}</td>
-      <td className='text-end'>{order.quantity}</td>
+      <td className='text-end'>{order.customer_address}</td>
       <td>{order.price}</td>
-      <td>{order.customer_address}</td>
+      <td>{order.customer_phone}</td>
       <td className='text-end'>{order.price * order.quantity}</td>
-      <td></td>
+      <td>{order.status}</td>
+      <td>{order.tracking_code}</td>
     </tr>
   ));
 
