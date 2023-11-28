@@ -263,6 +263,7 @@ const MosqueItem = () => {
           total={1}
           data={(mosques?.data || []) as IDestination[]}
           className='mt-6 mb-6'
+          showMoreType='12'
           showMore
         />
       )}
