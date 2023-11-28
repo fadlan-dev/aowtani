@@ -97,16 +97,16 @@ const SignInForm = ({ p }: Props) => {
           />
           <Group position='apart' mt='lg'>
             <Checkbox label='Remember me' />
-            <Anchor
+            {/* <Anchor
               component='button'
               size='sm'
               onClick={() => router.push('forgotpassword')}
             >
               Forgot password?
-            </Anchor>
+            </Anchor> */}
           </Group>
           <Button fullWidth mt='xl' type='submit'>
-            Sign in
+            เข้าสู่ระบบ
           </Button>
         </form>
       </Paper>

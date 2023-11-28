@@ -126,14 +126,14 @@ const Index = () => {
                     onClick={() => signOut()}
                     leftIcon={<IconLogout />}
                   >
-                    Sign Out
+                    ออกจากระบบ
                   </Button>
                 </Popover.Dropdown>
               </Popover>
             ) : (
               <Link href={`/sign-in?callback=${pathname}`}>
                 <Button ml='xs' variant='gradient'>
-                  Sign In
+                  เข้าสู่ระบบ
                 </Button>
               </Link>
             )}
@@ -209,7 +209,7 @@ const Index = () => {
                     signOut();
                   }}
                 >
-                  Sign Out
+                  ออกจากระบบ
                 </Button>
               </Flex>
             ) : (
@@ -220,7 +220,7 @@ const Index = () => {
                   router.push('/sign-in');
                 }}
               >
-                Sign In
+                เข้าสู่ระบบ
               </Button>
             )}
           </Group>
