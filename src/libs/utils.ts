@@ -1,6 +1,7 @@
 import { ModalSettings } from '@mantine/modals/lib/context';
 import clsx, { ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -76,4 +77,22 @@ export function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+export function isTokenExpired(token: string): boolean {
+  try {
+    const decoded = jwt.decode(token) as JwtPayload;
+
+    if (!decoded || typeof decoded.exp === 'undefined') {
+      // Token couldn't be decoded or doesn't have an expiration claim
+      return false;
+    }
+
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    return decoded.exp! < currentTime;
+  } catch (error) {
+    // An error occurred while decoding the token
+    return false;
+  }
 }

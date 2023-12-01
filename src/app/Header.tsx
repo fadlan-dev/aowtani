@@ -23,6 +23,7 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 import { IconLogout } from '@tabler/icons-react';
+import { isTokenExpired } from '@/libs/utils';
 
 const MENUS: IMenu[] = [
   {
@@ -78,6 +79,10 @@ const Index = () => {
   const theme = useMantineTheme();
 
   const { data: session, status } = useSession();
+
+  if (isTokenExpired(session?.user.token)) {
+    signOut();
+  }
 
   return (
     <Box>
