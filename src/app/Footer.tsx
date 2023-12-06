@@ -31,7 +31,7 @@ const Index = () => {
           <Image
             height={38}
             width={120}
-            src='/logo-landscape.svg'
+            src='/logo.svg'
             alt='aowtani'
             className='h-7 w-auto'
           />
