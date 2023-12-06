@@ -1,19 +1,11 @@
 'use client';
-import { FunctionComponent, useCallback, useEffect } from 'react';
+import { FunctionComponent } from 'react';
 import { useForm, zodResolver } from '@mantine/form';
-import {
-  Select,
-  TextInput,
-  NumberInput,
-  Paper,
-  Text,
-  Button,
-  Textarea,
-} from '@mantine/core';
+import { NumberInput, Paper, Text, Button } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { z } from 'zod';
 import { useSession } from 'next-auth/react';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
 
 interface BookingProps {
@@ -42,17 +34,6 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
     validate: zodResolver(schema),
   });
 
-  const minDate = useCallback(() => {
-    // Get the current date
-    const currentDate = new Date();
-
-    // Calculate the date for tomorrow
-    const tomorrowDate = new Date(currentDate);
-    return new Date(
-      tomorrowDate.setDate(currentDate.getDate() + 1)
-    ).toISOString();
-  }, []);
-
   return (
     <Paper p='md'>
       <form
@@ -60,10 +41,9 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
         onSubmit={form.onSubmit((_values) => {
           const url = `/booking/${params.id}/?tour_date=${dayjs(
             new Date(form.values.tour_date)
-          ).toISOString()}&note=${form.values.note}&quantity=${
+          ).format('YYYY-MM-DD')}&note=${form.values.note}&quantity=${
             form.values.quantity
           }`;
-
           router.push(url);
         })}
       >
