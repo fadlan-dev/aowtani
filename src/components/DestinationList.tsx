@@ -63,7 +63,9 @@ const DestinationList = ({
           <Button
             variant='subtle'
             onClick={() =>
-              router.push(`/destination?destination_type_id=${showMoreType}`)
+              router.push(
+                `/destination?destination_type_id=${showMoreType || ''}`
+              )
             }
           >
             ดูเพิ่มเติม
