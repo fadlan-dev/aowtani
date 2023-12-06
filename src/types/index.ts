@@ -238,9 +238,10 @@ export interface IBooking {
   customer_phone: string;
   quantity: number;
   note: string;
-  tour_date: string;
+  tour_date?: string;
   price: number;
   slug: string;
+  status: string;
   created_at: string;
   updated_at: string;
   slip: IImage;

@@ -121,7 +121,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
       <td className='truncate'>{dayjs(pkg.tour_date).format('YYYY-MM-DD')}</td>
       <td className='text-end'>{numberFormat(pkg.price)}</td>
       <td>
-        <StatusItem text={pkg.customer_name} />
+        <StatusItem text={pkg.status} />
       </td>
     </tr>
   ));
