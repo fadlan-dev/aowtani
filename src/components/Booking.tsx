@@ -60,9 +60,7 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
         onSubmit={form.onSubmit((_values) => {
           const url = `/booking/${params.id}/?tour_date=${dayjs(
             new Date(form.values.tour_date)
-          )
-            .tz('Asia/Bangkok')
-            .toISOString()}&note=${form.values.note}&quantity=${
+          ).toISOString()}&note=${form.values.note}&quantity=${
             form.values.quantity
           }`;
 
