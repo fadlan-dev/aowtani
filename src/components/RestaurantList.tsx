@@ -3,7 +3,6 @@ import { IPartner } from '@/types';
 import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { FunctionComponent } from 'react';
-import HotelItem from './HotelItem';
 import Empty from './Empty';
 import RestaurantItem from './RestaurantItem';
 
@@ -37,7 +36,7 @@ const RestaurantList: FunctionComponent<RestaurantListProps> = ({
         {showMore && (
           <Button
             variant='subtle'
-            onClick={() => router.push(`/partner?type=Hotel`)}
+            onClick={() => router.push(`/partner?type=Restaurant`)}
           >
             ดูเพิ่มเติม
           </Button>
