@@ -22,18 +22,6 @@ import { useSession } from 'next-auth/react';
 import Empty from './Empty';
 import { IOrder } from '@/types';
 
-interface IData {
-  id: number;
-  booking_at: string;
-  package: string;
-  giude: string;
-  type: string;
-  amount: number;
-  date: string;
-  payment: string;
-  status: string;
-}
-
 interface OrderTableProps {
   className?: string;
 }
@@ -111,7 +99,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <th className='whitespace-nowrap'>SKU</th>
       <th className='whitespace-nowrap text-end'>จำนวน (ต่อชิ้น)</th>
       <th className='whitespace-nowrap'>ที่อยู่</th>
-      <th className='whitespace-nowrap'>รหัสไปรษณีย์</th>
+      <th className='whitespace-nowrap'>เบอร์โทร</th>
       <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
       <th className='whitespace-nowrap'>สถานะ</th>
       <th className='whitespace-nowrap'>เลขพัสดุ</th>
@@ -129,7 +117,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <td>{order.price}</td>
       <td>{order.customer_phone}</td>
       <td className='text-end'>{order.price * order.quantity}</td>
-      <td>{order.status}</td>
+      <td>
+        <StatusItem text={order.status} />
+      </td>
       <td>{order.tracking_code}</td>
     </tr>
   ));

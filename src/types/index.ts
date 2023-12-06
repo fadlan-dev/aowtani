@@ -318,12 +318,16 @@ export interface IOrder {
   quantity: number;
   slug: string;
   price: number;
+  tracking_code: any;
+  status: string;
   created_at: string;
   updated_at: string;
   slip: IImage;
-  product: { id: number; name: string; sku: string };
-  status: string;
-  tracking_code: string;
+  product: {
+    id: number;
+    name: string;
+    sku: string;
+  };
 }
 
 export interface IBankAccount {
