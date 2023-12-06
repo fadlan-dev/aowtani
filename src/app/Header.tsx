@@ -63,8 +63,8 @@ const MENUS: IMenu[] = [
   },
   {
     title: 'ปฏิทินกิจกรรม',
-    key: 'calendar',
-    path: '/calendar',
+    key: 'event',
+    path: '/event',
   },
 ];
 

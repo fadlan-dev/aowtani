@@ -38,7 +38,7 @@ const CalendarCell: FunctionComponent<CalendarCellProps> = ({
             {(events || []).map((event, idx) => (
               <Link
                 key={idx}
-                href={`/calendar/${event.id}`}
+                href={`/event/${event.id}`}
                 className='flex items-center text-sm text-black'
               >
                 <IconPointFilled
