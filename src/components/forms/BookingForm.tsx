@@ -168,9 +168,9 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
         onSubmit={form.onSubmit((values) => {
           const payload = {
             ...values,
-            customer_name: 'pang dev',
-            customer_email: 'pang@gmail.com',
-            customer_phone: '0912221111',
+            customer_name: values.customer_name,
+            customer_email: values.customer_email,
+            customer_phone: values.customer_phone,
             quantity: Number(searchParams.get('quantity')),
             package_id: pkg.id,
             local_guide_id: pkg.local_guide.id,
