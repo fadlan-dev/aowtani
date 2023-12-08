@@ -6,8 +6,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Notifications } from '@mantine/notifications';
 import dayjs from 'dayjs';
 import isToday from 'dayjs/plugin/isToday';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import isBetween from 'dayjs/plugin/isBetween';
 
 dayjs.extend(isToday);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(isBetween);
+dayjs.tz.setDefault('Asia/Bangkok');
 
 declare global {
   interface Window {

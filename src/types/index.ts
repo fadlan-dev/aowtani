@@ -351,12 +351,14 @@ export interface IEvent {
   id: number;
   name: string;
   address: string;
-  event_date: string;
+  start_date: string;
+  end_date: string;
   embed_map: string;
   banners: IImage[];
   created_at: string;
   updated_at: string;
   user?: IUserEvent;
+  content: any;
 }
 
 export interface IUserEvent {

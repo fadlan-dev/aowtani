@@ -36,17 +36,17 @@ const CalendarCell: FunctionComponent<CalendarCellProps> = ({
           <p className={cn('text-end')}>{day}</p>
           <div className='flex flex-col overflow-auto '>
             {(events || []).map((event, idx) => (
-              <Link
-                key={idx}
-                href={`/event/${event.id}`}
-                className='flex items-center text-sm text-black'
-              >
-                <IconPointFilled
-                  className='text-red-600'
-                  color='blue'
-                  size={16}
-                />{' '}
-                {event.name}
+              <Link key={idx} href={`/event/${event.id}`}>
+                <div className='flex items-center text-sm text-black'>
+                  <div className='flex items-center'>
+                    <IconPointFilled
+                      className='text-red-600 w-4 flex-shrink'
+                      color='blue'
+                      size={16}
+                    />
+                  </div>
+                  <p className='truncate flex-auto'>{event.name}</p>
+                </div>
               </Link>
             ))}
           </div>

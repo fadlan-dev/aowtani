@@ -38,8 +38,18 @@ const Page = async ({ params }: Props) => {
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className=' flex-1'>
             <h1>{event.name}</h1>
-            <p className='text-primary'>{dateFormatted(event.event_date)}</p>
+            <p className='text-primary'>
+              ตั้งแต่ {dateFormatted(event.start_date)} ถึง{' '}
+              {dateFormatted(event.end_date)}
+            </p>
             <p>{event.address}</p>
+            <div
+              id='ck-editor'
+              className='mt-4 relative'
+              dangerouslySetInnerHTML={{
+                __html: event.content,
+              }}
+            />
           </div>
           <div className='w-full lg:w-80'>
             {event.embed_map && (

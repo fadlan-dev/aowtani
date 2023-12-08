@@ -1,11 +1,11 @@
 'use client';
 import { ICalendar, IEvent } from '@/types';
 import { Button, Select } from '@mantine/core';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CalendarCell from './CalendarCell';
 import { cn } from '@/libs/utils';
 import dayjs from 'dayjs';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 interface CalendarProps {
@@ -55,7 +55,7 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
     Array.from({ length: 12 }, (_, index) => ({
       value: `${index}`,
       label: new Date(currentMonth.getFullYear(), index, 1).toLocaleString(
-        'default',
+        'th-TH',
         { month: 'long' }
       ),
     }));
@@ -126,11 +126,24 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
 
   const getEvent = useCallback(
     (day: number) => {
+      if (day === 0) {
+        return [];
+      }
       const filteredEvents = events?.filter((event) => {
-        const eventDate = new Date(event.event_date).getDate();
-        return day === eventDate;
+        const tody = `${currentMonth.getFullYear()}-${
+          currentMonth.getMonth() + 1
+        }-${day}`;
+        const start_date = dayjs(event.start_date).format('YYYY-MM-DD');
+        const end_date = dayjs(event.end_date).format('YYYY-MM-DD');
+        return dayjs(tody).isBetween(start_date, dayjs(end_date), 'day', '[]');
       });
-      return filteredEvents || [];
+      return (
+        (filteredEvents || []).sort((a, b) => {
+          return (
+            new Date(a.start_date).getTime() - new Date(b.start_date).getTime()
+          );
+        }) || []
+      );
     },
     [events]
   );
@@ -162,13 +175,13 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
       <table className='w-full mt-4 table-fixed'>
         <thead>
           <tr>
-            <th className='font-normal p-2'>Sun</th>
-            <th className='font-normal'>Mon</th>
-            <th className='font-normal'>Tue</th>
-            <th className='font-normal'>Wed</th>
-            <th className='font-normal'>Thu</th>
-            <th className='font-normal'>Fri</th>
-            <th className='font-normal'>Sat</th>
+            <th className='font-normal p-2'>อาทิตย์</th>
+            <th className='font-normal'>จันทร์</th>
+            <th className='font-normal'>อังคาร</th>
+            <th className='font-normal'>พุธ</th>
+            <th className='font-normal'>พฤหัสบดี</th>
+            <th className='font-normal'>ศุกร์</th>
+            <th className='font-normal'>เสาร์</th>
           </tr>
         </thead>
         <tbody>
