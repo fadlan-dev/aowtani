@@ -145,7 +145,7 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
         }) || []
       );
     },
-    [events]
+    [events, currentMonth]
   );
 
   return (
