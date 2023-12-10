@@ -17,7 +17,7 @@ const UserEvent: FunctionComponent<UserEventProps> = ({ user }) => {
       <Avatar
         color='primary'
         radius='xl'
-        src={`${process.env.NEXT_IMAGE_HOST}${user.profile.asset}`}
+        src={`${process.env.NEXT_IMAGE_HOST}${user.profile?.asset}`}
       />
       <p>{user.fullname}</p>
     </div>

@@ -370,5 +370,5 @@ export interface IUserEvent {
   phone: string;
   created_at: string;
   updated_at: string;
-  profile: Profile;
+  profile?: Profile;
 }
