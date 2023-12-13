@@ -94,11 +94,11 @@ const Index = ({}: Props) => {
         )}
       >
         <div className='absolute top-2 -right-8'>
-          <ActionIcon className='hidden md:block' onClick={toggleCollapsed}>
+          <ActionIcon className='hidden md:flex' onClick={toggleCollapsed}>
             {collapsed ? (
-              <IconLayoutSidebarLeftExpand />
+              <IconLayoutSidebarLeftExpand size='1.125rem' />
             ) : (
-              <IconLayoutSidebarLeftCollapse />
+              <IconLayoutSidebarLeftCollapse size='1.125rem' />
             )}
           </ActionIcon>
         </div>
