@@ -16,14 +16,22 @@ import {
   Text,
   Skeleton,
   Flex,
+  ActionIcon,
+  Navbar,
+  ThemeIcon,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
-import { IconLogout } from '@tabler/icons-react';
-import { isTokenExpired } from '@/libs/utils';
+import {
+  IconLayoutSidebarLeftCollapse,
+  IconLayoutSidebarLeftExpand,
+  IconLogout,
+} from '@tabler/icons-react';
+import { cn, isTokenExpired } from '@/libs/utils';
+import { APP_SHELL_MENUS } from '@/components/AppShellItem';
 
 const MENUS: IMenu[] = [
   {
@@ -75,6 +83,8 @@ const Index = () => {
   const pathname = usePathname();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
+  const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
+    useDisclosure(false);
   const router = useRouter();
   const theme = useMantineTheme();
 
@@ -84,13 +94,50 @@ const Index = () => {
     signOut();
   }
 
+  const searchParams = useSearchParams();
+  const variant = searchParams.get('t') || 'destination';
+
   return (
     <Box>
-      <Header height={60} px='md' fixed zIndex={10}>
+      <Drawer opened={collapsed} onClose={closeCollapsed}>
+        <Navbar hiddenBreakpoint='sm' className='h-full'>
+          {APP_SHELL_MENUS.map((menu) => (
+            <Navbar.Section
+              key={menu.title}
+              className={cn(`p-2 cursor-pointer`)}
+              bg={variant === menu.key ? menu.active : ''}
+              onClick={() => {
+                menu.key !== variant && router.push(`?t=${menu.key}`);
+                closeCollapsed();
+              }}
+            >
+              <Group>
+                <ThemeIcon variant='light' color={menu.color}>
+                  {menu.icon}
+                </ThemeIcon>
+                <Text>{menu.title}</Text>
+              </Group>
+            </Navbar.Section>
+          ))}
+        </Navbar>
+      </Drawer>
+      <Header height={80} px='md' fixed zIndex={10}>
         <Group position='apart' className='h-full'>
-          <Link href='/' className=' no-underline text-black font-bold'>
-            <Image height={36} width={38} src='/logo.svg' alt='aowtani' />
-          </Link>
+          <Group>
+            <ActionIcon className=' block md:hidden' onClick={toggleCollapsed}>
+              {!collapsed ? (
+                <IconLayoutSidebarLeftExpand />
+              ) : (
+                <IconLayoutSidebarLeftCollapse />
+              )}
+            </ActionIcon>
+            <Link
+              href='/'
+              className=' no-underline text-black font-bold md:pl-20'
+            >
+              <Image height={56} width={56} src='/logo.svg' alt='aowtani' />
+            </Link>
+          </Group>
 
           <Group className='h-full hidden sm:flex gap-px'>
             {MENUS.map((menu: IMenu) => (
@@ -151,6 +198,7 @@ const Index = () => {
         </Group>
       </Header>
       <Drawer
+        position='right'
         opened={drawerOpened}
         onClose={closeDrawer}
         size='100%'

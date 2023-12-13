@@ -1,12 +1,12 @@
 'use client';
 import {
+  ActionIcon,
   Box,
   Group,
   Loader,
   Navbar,
   Text,
   ThemeIcon,
-  useMantineTheme,
 } from '@mantine/core';
 import DestinationList from './DestinationList';
 import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from './Icons';
@@ -16,7 +16,6 @@ import { IDestination, IPackage, IPartner, IProduct } from '@/types';
 import ProductList from './ProductList';
 import PackageList from './PackageList';
 import ExploreButton from './ExploreButton';
-import DestinationMap from './DestinationMap';
 import { useCallback } from 'react';
 import { getDestinations } from '@/libs/services/getDestinations';
 import { getPackages } from '@/libs/services/getPackages';
@@ -25,44 +24,51 @@ import { getPartners } from '@/libs/services/getPartners';
 import { useQuery } from '@tanstack/react-query';
 import HotelList from './HotelList';
 import RestaurantList from './RestaurantList';
+import {
+  IconLayoutSidebarLeftCollapse,
+  IconLayoutSidebarLeftExpand,
+} from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
 
 type Props = {};
+export const APP_SHELL_MENUS = [
+  {
+    key: 'destination',
+    title: 'สถานที่ท่องเที่ยว',
+    icon: <TravelIcon />,
+    color: 'blue',
+    active: '#EDF2FF',
+  },
+  {
+    key: 'hotel',
+    title: 'ที่พักผ่อน',
+    icon: <ResortIcon />,
+    color: 'green',
+    active: '#EBFBEE',
+  },
+  {
+    key: 'restaurant',
+    title: 'อาหารจานโปรด',
+    icon: <FoodIcon />,
+    color: 'violet',
+    active: '#F3F0FF',
+  },
+  {
+    key: 'mosque',
+    title: 'มัสยิด',
+    icon: <MosqueIcon />,
+    color: 'orange',
+    active: '#FFF4E6',
+  },
+];
 
 const Index = ({}: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const variant = searchParams.get('t') || 'destination';
-  const theme = useMantineTheme();
-  const MENUS = [
-    {
-      key: 'destination',
-      title: 'สถานที่ท่องเที่ยว',
-      icon: <TravelIcon />,
-      color: 'blue',
-      active: theme.colors.blue[0],
-    },
-    {
-      key: 'hotel',
-      title: 'ที่พักผ่อน',
-      icon: <ResortIcon />,
-      color: 'green',
-      active: theme.colors.green[0],
-    },
-    {
-      key: 'restaurant',
-      title: 'อาหารจานโปรด',
-      icon: <FoodIcon />,
-      color: 'violet',
-      active: theme.colors.violet[0],
-    },
-    {
-      key: 'mosque',
-      title: 'มัสยิด',
-      icon: <MosqueIcon />,
-      color: 'orange',
-      active: theme.colors.orange[0],
-    },
-  ];
+
+  const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
+    useDisclosure(false);
 
   const contentRender = useCallback(() => {
     switch (variant) {
@@ -80,10 +86,27 @@ const Index = ({}: Props) => {
   }, [variant]);
 
   return (
-    <div className='flex pt-[60px]'>
-      <div className='w-72 min-w-[288px] min-h-[calc(100vh-143px)] hidden md:block'>
-        <Navbar hiddenBreakpoint='sm' className='h-full'>
-          {MENUS.map((menu) => (
+    <div className='flex pt-20'>
+      <div
+        className={cn(
+          'w-72 min-h-[calc(100vh-143px)] hidden md:block relative transition-all',
+          collapsed && 'w-0'
+        )}
+      >
+        <div className='absolute top-2 -right-8'>
+          <ActionIcon className='hidden md:block' onClick={toggleCollapsed}>
+            {collapsed ? (
+              <IconLayoutSidebarLeftExpand />
+            ) : (
+              <IconLayoutSidebarLeftCollapse />
+            )}
+          </ActionIcon>
+        </div>
+        <Navbar
+          hiddenBreakpoint='sm'
+          className={cn('w-72', collapsed && 'w-0 overflow-hidden')}
+        >
+          {APP_SHELL_MENUS.map((menu) => (
             <Navbar.Section
               key={menu.title}
               className={cn(`p-2 cursor-pointer`)}

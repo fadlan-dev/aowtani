@@ -113,7 +113,7 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
       </div>
       <MapContainer
         style={{ zIndex: 1 }}
-        className='w-screen h-[calc(100vh-60px)]'
+        className='w-screen h-[calc(100vh-80px)]'
         center={position}
         zoom={zoom}
         scrollWheelZoom={false}

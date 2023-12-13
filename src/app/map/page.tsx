@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function map({}: Props) {
   return (
-    <div className='pt-[60px]'>
+    <div className='pt-20'>
       <Map />
     </div>
   );

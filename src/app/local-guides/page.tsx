@@ -18,7 +18,7 @@ const Page = async ({ searchParams }: Props) => {
   });
 
   return (
-    <div className='pt-20 mb-24'>
+    <div className='pt-24 mb-24'>
       <center>
         <h1>ไกด์ท้องถิ่น</h1>
         <p>รวมทุกแนว สัมผัสได้ทุกวิถีชีวิต</p>
