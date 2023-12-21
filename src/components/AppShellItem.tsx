@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   ActionIcon,
   Box,
@@ -7,116 +7,117 @@ import {
   Navbar,
   Text,
   ThemeIcon,
-} from '@mantine/core';
-import DestinationList from './DestinationList';
-import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from './Icons';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { cn } from '@/libs/utils';
-import { IDestination, IPackage, IPartner, IProduct } from '@/types';
-import ProductList from './ProductList';
-import PackageList from './PackageList';
-import ExploreButton from './ExploreButton';
-import { useCallback } from 'react';
-import { getDestinations } from '@/libs/services/getDestinations';
-import { getPackages } from '@/libs/services/getPackages';
-import { getProducts } from '@/libs/services/getProducts';
-import { getPartners } from '@/libs/services/getPartners';
-import { useQuery } from '@tanstack/react-query';
-import HotelList from './HotelList';
-import RestaurantList from './RestaurantList';
+} from "@mantine/core";
+import DestinationList from "./DestinationList";
+import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from "./Icons";
+import { useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/libs/utils";
+import { IDestination, IPackage, IPartner, IProduct } from "@/types";
+import ProductList from "./ProductList";
+import PackageList from "./PackageList";
+import ExploreButton from "./ExploreButton";
+import { useCallback } from "react";
+import { getDestinations } from "@/libs/services/getDestinations";
+import { getPackages } from "@/libs/services/getPackages";
+import { getProducts } from "@/libs/services/getProducts";
+import { getPartners } from "@/libs/services/getPartners";
+import { useQuery } from "@tanstack/react-query";
+import HotelList from "./HotelList";
+import RestaurantList from "./RestaurantList";
 import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
-} from '@tabler/icons-react';
-import { useDisclosure } from '@mantine/hooks';
+} from "@tabler/icons-react";
+import { useDisclosure } from "@mantine/hooks";
+import Banner from "./Banner";
 
 type Props = {};
 export const APP_SHELL_MENUS = [
   {
-    key: 'destination',
-    title: 'สถานที่ท่องเที่ยว',
+    key: "destination",
+    title: "สถานที่ท่องเที่ยว",
     icon: <TravelIcon />,
-    color: 'blue',
-    active: '#EDF2FF',
+    color: "blue",
+    active: "#EDF2FF",
   },
   {
-    key: 'hotel',
-    title: 'ที่พักผ่อน',
+    key: "hotel",
+    title: "ที่พักผ่อน",
     icon: <ResortIcon />,
-    color: 'green',
-    active: '#EBFBEE',
+    color: "green",
+    active: "#EBFBEE",
   },
   {
-    key: 'restaurant',
-    title: 'อาหารจานโปรด',
+    key: "restaurant",
+    title: "อาหารจานโปรด",
     icon: <FoodIcon />,
-    color: 'violet',
-    active: '#F3F0FF',
+    color: "violet",
+    active: "#F3F0FF",
   },
   {
-    key: 'mosque',
-    title: 'มัสยิด',
+    key: "mosque",
+    title: "มัสยิด",
     icon: <MosqueIcon />,
-    color: 'orange',
-    active: '#FFF4E6',
+    color: "orange",
+    active: "#FFF4E6",
   },
 ];
 
 const Index = ({}: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const variant = searchParams.get('t') || 'destination';
+  const variant = searchParams.get("t") || "destination";
 
   const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
     useDisclosure(false);
 
   const contentRender = useCallback(() => {
     switch (variant) {
-      case 'destination':
+      case "destination":
         return <DestinationItem />;
 
-      case 'hotel':
+      case "hotel":
         return <HotelItem />;
 
-      case 'restaurant':
+      case "restaurant":
         return <RestaurantItem />;
-      case 'mosque':
+      case "mosque":
         return <MosqueItem />;
     }
   }, [variant]);
 
   return (
-    <div className='flex pt-20'>
+    <div className="flex pt-20">
       <div
         className={cn(
-          'w-72 min-h-[calc(100vh-143px)] hidden md:block relative transition-all',
-          collapsed && 'w-0'
+          "w-72 min-h-[calc(100vh-143px)] hidden md:block relative transition-all",
+          collapsed && "w-0"
         )}
       >
-        <div className='absolute top-2 -right-8'>
-          <ActionIcon className='hidden md:flex' onClick={toggleCollapsed}>
+        <div className="absolute top-2 -right-8">
+          <ActionIcon className="hidden md:flex" onClick={toggleCollapsed}>
             {collapsed ? (
-              <IconLayoutSidebarLeftExpand size='1.125rem' />
+              <IconLayoutSidebarLeftExpand size="1.125rem" />
             ) : (
-              <IconLayoutSidebarLeftCollapse size='1.125rem' />
+              <IconLayoutSidebarLeftCollapse size="1.125rem" />
             )}
           </ActionIcon>
         </div>
         <Navbar
-          hiddenBreakpoint='sm'
-          className={cn('w-72', collapsed && 'w-0 overflow-hidden')}
+          hiddenBreakpoint="sm"
+          className={cn("w-72", collapsed && "w-0 overflow-hidden")}
         >
           {APP_SHELL_MENUS.map((menu) => (
             <Navbar.Section
               key={menu.title}
               className={cn(`p-2 cursor-pointer`)}
-              bg={variant === menu.key ? menu.active : ''}
+              bg={variant === menu.key ? menu.active : ""}
               onClick={() =>
                 menu.key !== variant && router.push(`?t=${menu.key}`)
               }
             >
               <Group>
-                <ThemeIcon variant='light' color={menu.color}>
+                <ThemeIcon variant="light" color={menu.color}>
                   {menu.icon}
                 </ThemeIcon>
                 <Text>{menu.title}</Text>
@@ -125,7 +126,7 @@ const Index = ({}: Props) => {
           ))}
         </Navbar>
       </div>
-      <div className='flex-auto overflow-auto py-10'>{contentRender()}</div>
+      <div className="flex-auto overflow-auto py-10">{contentRender()}</div>
     </div>
   );
 };
@@ -133,41 +134,45 @@ const Index = ({}: Props) => {
 export default Index;
 
 const LoaderItem = () => (
-  <center className='my-6'>
-    <Loader variant='dots' />
+  <center className="my-6">
+    <Loader variant="dots" />
   </center>
 );
 
 const DestinationItem = () => {
   const { data: destinations, isLoading: loadingDestination } = useQuery({
-    queryKey: ['destination'],
+    queryKey: ["destination"],
     queryFn: () =>
       getDestinations({
         per_page: 3,
-        search: '',
+        search: "",
       }),
   });
 
   const { data: pkgs, isLoading: loadingPackage } = useQuery({
-    queryKey: ['packages'],
+    queryKey: ["packages"],
     queryFn: () =>
       getPackages({
         per_page: 3,
-        search: '',
+        search: "",
       }),
   });
 
   const { data: products, isLoading: loadingProduct } = useQuery({
-    queryKey: ['products'],
+    queryKey: ["products"],
     queryFn: () =>
       getProducts({
         per_page: 3,
-        search: '',
+        search: "",
       }),
   });
 
   return (
     <>
+      <div className="px-4 pb-6">
+        <Banner />
+      </div>
+
       <center>
         <h1>สถานที่ท่องเที่ยว</h1>
         <p>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</p>
@@ -178,12 +183,11 @@ const DestinationItem = () => {
         <DestinationList
           total={1}
           data={(destinations?.data || []) as IDestination[]}
-          className='mt-6 mb-6'
+          className="mt-6 mb-6"
           showMore
         />
       )}
-
-      <div className='mt-10'>
+      <div className="mt-10">
         <center>
           <h1>แพ็กเกจทัวร์แนะนำ</h1>
           <p>ตอบโจทย์ทุกไลฟ์สไตล์</p>
@@ -192,12 +196,12 @@ const DestinationItem = () => {
           <LoaderItem />
         ) : (
           <PackageList
-            className='mt-4 px-4'
+            className="mt-4 px-4"
             data={pkgs?.data || ([] as IPackage[])}
           />
         )}
       </div>
-      <div className='mt-10'>
+      <div className="mt-10">
         <center>
           <h1>สินค้ายอดนิยม</h1>
           <p>ช้อปปิ้งได้ทุกเวลา</p>
@@ -208,7 +212,7 @@ const DestinationItem = () => {
           <ProductList total={1} data={products?.data || ([] as IProduct[])} />
         )}
         {products?.data.length !== 0 && (
-          <ExploreButton className='mt-2' to='product' />
+          <ExploreButton className="mt-2" to="product" />
         )}
       </div>
     </>
@@ -217,8 +221,8 @@ const DestinationItem = () => {
 
 const HotelItem = () => {
   const { data: hotels, isLoading } = useQuery({
-    queryKey: ['hotels'],
-    queryFn: () => getPartners({ type: 'Hotel', per_page: 3, search: '' }),
+    queryKey: ["hotels"],
+    queryFn: () => getPartners({ type: "Hotel", per_page: 3, search: "" }),
   });
   return (
     <>
@@ -241,8 +245,8 @@ const HotelItem = () => {
 
 const RestaurantItem = () => {
   const { data: restaurants, isLoading } = useQuery({
-    queryKey: ['restaurants'],
-    queryFn: () => getPartners({ type: 'Restaurant', per_page: 3, search: '' }),
+    queryKey: ["restaurants"],
+    queryFn: () => getPartners({ type: "Restaurant", per_page: 3, search: "" }),
   });
   return (
     <>
@@ -265,12 +269,12 @@ const RestaurantItem = () => {
 
 const MosqueItem = () => {
   const { data: mosques, isLoading } = useQuery({
-    queryKey: ['mosques'],
+    queryKey: ["mosques"],
     queryFn: () =>
       getDestinations({
-        destination_type_id: '12',
+        destination_type_id: "12",
         per_page: 3,
-        search: '',
+        search: "",
       }),
   });
   return (
@@ -285,8 +289,8 @@ const MosqueItem = () => {
         <DestinationList
           total={1}
           data={(mosques?.data || []) as IDestination[]}
-          className='mt-6 mb-6'
-          showMoreType='12'
+          className="mt-6 mb-6"
+          showMoreType="12"
           showMore
         />
       )}
