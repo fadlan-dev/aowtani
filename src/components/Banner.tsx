@@ -71,13 +71,18 @@ function Banner() {
         );
       }}
     >
-      {images.map((image) => (
-        <Card padding="md" className="cursor-pointer hover:shadow transition">
+      {images.map((image, index) => (
+        <Card
+          key={index}
+          padding="md"
+          className="cursor-pointer hover:shadow transition"
+        >
           <Card.Section>
             <Image
               className="bg-zinc-200 object-cover"
               src={image}
               height={300}
+              alt={`banner-${index}`}
             />
           </Card.Section>
         </Card>
