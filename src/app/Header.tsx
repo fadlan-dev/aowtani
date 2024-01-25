@@ -1,5 +1,5 @@
-'use client';
-import { IMenu } from '@/types';
+"use client";
+import { IMenu } from "@/types";
 import {
   Header,
   Group,
@@ -19,65 +19,70 @@ import {
   ActionIcon,
   Navbar,
   ThemeIcon,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { signOut, useSession } from 'next-auth/react';
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
   IconLogout,
-} from '@tabler/icons-react';
-import { cn, isTokenExpired } from '@/libs/utils';
-import { APP_SHELL_MENUS } from '@/components/AppShellItem';
+} from "@tabler/icons-react";
+import { cn, isTokenExpired } from "@/libs/utils";
+import { APP_SHELL_MENUS } from "@/components/AppShellItem";
 
 const MENUS: IMenu[] = [
   {
-    title: 'แผนที่',
-    key: 'map',
-    path: '/map',
+    title: "แผนที่",
+    key: "map",
+    path: "/map",
   },
   {
-    title: 'สถานที่ท่องเที่ยว',
-    key: 'destination',
-    path: '/destination',
+    title: "สถานที่ท่องเที่ยว",
+    key: "destination",
+    path: "/destination",
+  },
+  // {
+  //   title: "ของฝาก",
+  //   key: "product",
+  //   path: "/product",
+  // },
+  {
+    title: "ชุมชนท่องเที่ยว",
+    key: "community",
+    path: "/community",
   },
   {
-    title: 'ของฝาก',
-    key: 'product',
-    path: '/product',
+    title: "ทัวร์ท่องเที่ยว",
+    key: "community",
+    path: "/community",
   },
   {
-    title: 'ชุมชน',
-    key: 'community',
-    path: '/community',
+    title: "ผู้ประกอบการ",
+    key: "partner",
+    path: "/partner",
   },
   {
-    title: 'ผู้ประกอบการ',
-    key: 'partner',
-    path: '/partner',
+    title: "ไกด์ท้องถิ่น",
+    key: "local guides",
+    path: "/local-guides",
   },
   {
-    title: 'ไกด์ท้องถิ่น',
-    key: 'local guides',
-    path: '/local-guides',
+    title: "องค์กรจัดการท่องเที่ยว",
+    key: "organizations",
+    path: "/organizations",
   },
-  {
-    title: 'หน่วยงาน',
-    key: 'organizations',
-    path: '/organizations',
-  },
-  {
-    title: 'ปฏิทินกิจกรรม',
-    key: 'event',
-    path: '/event',
-  },
+  // {
+  //   title: "ปฏิทินกิจกรรม",
+  //   key: "event",
+  //   path: "/event",
+  // },
 ];
 
 const linkClass =
-  'flex items-center h-11 sm:h-full px-2 text-black font-medium no-underline hover:bg-primary-100';
+  "flex items-center h-11 sm:h-full px-2 text-black font-medium no-underline hover:bg-primary-100";
 
 const Index = () => {
   const pathname = usePathname();
@@ -95,24 +100,24 @@ const Index = () => {
   }
 
   const searchParams = useSearchParams();
-  const variant = searchParams.get('t') || 'destination';
+  const variant = searchParams.get("t") || "destination";
 
   return (
     <Box>
       <Drawer opened={collapsed} onClose={closeCollapsed}>
-        <Navbar hiddenBreakpoint='sm' className='h-full'>
+        <Navbar hiddenBreakpoint="sm" className="h-full">
           {APP_SHELL_MENUS.map((menu) => (
             <Navbar.Section
               key={menu.title}
               className={cn(`p-2 cursor-pointer`)}
-              bg={variant === menu.key ? menu.active : ''}
+              bg={variant === menu.key ? menu.active : ""}
               onClick={() => {
                 menu.key !== variant && router.push(`?t=${menu.key}`);
                 closeCollapsed();
               }}
             >
               <Group>
-                <ThemeIcon variant='light' color={menu.color}>
+                <ThemeIcon variant="light" color={menu.color}>
                   {menu.icon}
                 </ThemeIcon>
                 <Text>{menu.title}</Text>
@@ -121,10 +126,10 @@ const Index = () => {
           ))}
         </Navbar>
       </Drawer>
-      <Header height={80} px='md' fixed zIndex={10}>
-        <Group position='apart' className='h-full'>
+      <Header height={80} px="md" fixed zIndex={10}>
+        <Group position="apart" className="h-full">
           <Group>
-            <ActionIcon className=' block md:hidden' onClick={toggleCollapsed}>
+            <ActionIcon className=" block md:hidden" onClick={toggleCollapsed}>
               {!collapsed ? (
                 <IconLayoutSidebarLeftExpand />
               ) : (
@@ -132,49 +137,49 @@ const Index = () => {
               )}
             </ActionIcon>
             <Link
-              href='/'
-              className=' no-underline text-black font-bold md:pl-20'
+              href="/"
+              className=" no-underline text-black font-bold md:pl-20"
             >
-              <Image height={56} width={56} src='/logo.svg' alt='aowtani' />
+              <Image height={56} width={56} src="/logo.svg" alt="aowtani" />
             </Link>
           </Group>
 
-          <Group className='h-full hidden sm:flex gap-px'>
+          <Group className="h-full hidden sm:flex gap-px">
             {MENUS.map((menu: IMenu) => (
               <Link
                 href={menu.path}
                 key={menu.key}
                 className={`${linkClass} ${
                   [menu.path].includes(pathname)
-                    ? ' bg-primary-100 text-primary-700'
-                    : ''
+                    ? " bg-primary-100 text-primary-700"
+                    : ""
                 }`}
               >
                 {menu.title}
               </Link>
             ))}
-            {status === 'loading' ? (
-              <Skeleton width={32} height={32} radius='xl' />
+            {status === "loading" ? (
+              <Skeleton width={32} height={32} radius="xl" />
             ) : session ? (
-              <Popover position='bottom-end' shadow='md'>
+              <Popover position="bottom-end" shadow="md">
                 <Popover.Target>
                   <Avatar
-                    size='md'
-                    radius='xl'
-                    ml='sm'
+                    size="md"
+                    radius="xl"
+                    ml="sm"
                     src={`${process.env.NEXT_IMAGE_HOST}${session.user?.profile?.asset}`}
                   />
                 </Popover.Target>
                 <Popover.Dropdown>
-                  <Link href='/account' className='text-black'>
-                    <Box w={124} className=' overflow-hidden cu'>
-                      <Text className='truncate'>{session.user?.username}</Text>
+                  <Link href="/account" className="text-black">
+                    <Box w={124} className=" overflow-hidden cu">
+                      <Text className="truncate">{session.user?.username}</Text>
                     </Box>
                   </Link>
-                  <Divider my='xs' />
+                  <Divider my="xs" />
                   <Button
-                    variant='light'
-                    className='cursor-pointer'
+                    variant="light"
+                    className="cursor-pointer"
                     onClick={() => signOut()}
                     leftIcon={<IconLogout />}
                   >
@@ -184,7 +189,7 @@ const Index = () => {
               </Popover>
             ) : (
               <Link href={`/sign-in?callback=${pathname}`}>
-                <Button ml='xs' variant='gradient'>
+                <Button ml="xs" variant="gradient">
                   เข้าสู่ระบบ
                 </Button>
               </Link>
@@ -193,32 +198,32 @@ const Index = () => {
           <Burger
             opened={drawerOpened}
             onClick={toggleDrawer}
-            className='block sm:hidden'
+            className="block sm:hidden"
           />
         </Group>
       </Header>
       <Drawer
-        position='right'
+        position="right"
         opened={drawerOpened}
         onClose={closeDrawer}
-        size='100%'
-        padding='md'
+        size="100%"
+        padding="md"
         title={
           <Link
             onClick={closeDrawer}
-            href='/'
-            className='no-underline text-black'
+            href="/"
+            className="no-underline text-black"
           >
-            <Image height={32} width={98} src='/logo.svg' alt='aowtani' />
+            <Image height={32} width={98} src="/logo.svg" alt="aowtani" />
           </Link>
         }
-        className='block sm:hidden'
+        className="block sm:hidden"
         zIndex={1000000}
       >
-        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx='-md'>
+        <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
           <Divider
             mt={0}
-            color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
+            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
           {MENUS.map((menu: IMenu) => (
@@ -232,32 +237,32 @@ const Index = () => {
             </Link>
           ))}
           <Divider
-            my='sm'
-            color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
+            my="sm"
+            color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
           />
 
-          <Group position='center' grow pb='xl' px='md'>
+          <Group position="center" grow pb="xl" px="md">
             {session ? (
-              <Flex direction='column'>
-                <Flex justify='space-between' align='center'>
-                  <Flex direction='column'>
-                    <Text size='md'>
+              <Flex direction="column">
+                <Flex justify="space-between" align="center">
+                  <Flex direction="column">
+                    <Text size="md">
                       {session.user?.first_name} {session.user?.last_name}
                     </Text>
-                    <Text size='sm'>{session.user?.username}</Text>
+                    <Text size="sm">{session.user?.username}</Text>
                   </Flex>
                   <Avatar
-                    radius='xl'
-                    ml='sm'
+                    radius="xl"
+                    ml="sm"
                     src={`${process.env.NEXT_IMAGE_HOST}${session.user?.profile?.asset}`}
                   />
                 </Flex>
                 <Divider
-                  my='sm'
-                  color={theme.colorScheme === 'dark' ? 'dark.5' : 'gray.1'}
+                  my="sm"
+                  color={theme.colorScheme === "dark" ? "dark.5" : "gray.1"}
                 />
                 <Button
-                  variant='default'
+                  variant="default"
                   onClick={() => {
                     signOut();
                   }}
@@ -267,10 +272,10 @@ const Index = () => {
               </Flex>
             ) : (
               <Button
-                variant='filled'
+                variant="filled"
                 onClick={() => {
                   closeDrawer();
-                  router.push('/sign-in');
+                  router.push("/sign-in");
                 }}
               >
                 เข้าสู่ระบบ

@@ -18,6 +18,7 @@ export type IDestination = {
   organization: IOrganization;
   lat?: string;
   long?: string;
+  type?: string;
 };
 
 export interface IDestinationType {

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   Container,
   Title,
@@ -10,12 +10,18 @@ import {
   Group,
   Checkbox,
   Button,
-} from '@mantine/core';
-import { useForm, zodResolver } from '@mantine/form';
-import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { z } from 'zod';
+} from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
+import { signIn } from "next-auth/react";
+import { z } from "zod";
+import {
+  AdminMasterIcon,
+  GuideIcon,
+  OrganizationIcon,
+  PartnerIcon,
+} from "../Icons";
 
 type Props = {
   p?: number;
@@ -24,26 +30,26 @@ type Props = {
 const SignInForm = ({ p }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get('callback') || '/';
-  const [error, setError] = useState('');
+  const callbackUrl = searchParams.get("callback") || "/";
+  const [error, setError] = useState("");
 
   const schema = z.object({
-    username: z.string().min(1, { message: 'Please input your username' }),
-    password: z.string().min(6, { message: 'Please input your password' }),
+    username: z.string().min(1, { message: "Please input your username" }),
+    password: z.string().min(6, { message: "Please input your password" }),
   });
 
   const form = useForm({
     initialValues: {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     },
     validate: zodResolver(schema),
   });
 
   return (
-    <Container size={420} className='w-full'>
+    <Container size={420} className="w-full">
       <Title
-        align='center'
+        align="center"
         sx={(theme) => ({
           fontFamily: `Greycliff CF, ${theme.fontFamily}`,
           fontWeight: 900,
@@ -51,31 +57,88 @@ const SignInForm = ({ p }: Props) => {
       >
         Welcome back!
       </Title>
-      <Text color='dimmed' size='sm' align='center' mt={5}>
-        Do not have an account yet?{' '}
+      <Text color="dimmed" size="sm" align="center" mt={5}>
+        Do not have an account yet?{" "}
         <Anchor
-          size='sm'
-          component='button'
-          onClick={() => router.push('/sign-up')}
+          size="sm"
+          component="button"
+          onClick={() => router.push("/sign-up")}
         >
           Create account
         </Anchor>
       </Text>
       {error && (
-        <Text align='center' c='red'>
+        <Text align="center" c="red">
           {error}
         </Text>
       )}
 
-      <Paper mt={30} p={p} mb='lg' radius='md'>
+      <Group className="pt-6 md:px-3">
+        <ul className="flex items-center justify-between w-full">
+          <li>
+            <a
+              href="https://master.admin.aowtani.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-black gap-1"
+            >
+              <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
+                <AdminMasterIcon />
+              </div>
+              <span className="text-sm hidden md:block">Admin Master</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://organization.admin.aowtani.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-black gap-1"
+            >
+              <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
+                <OrganizationIcon />
+              </div>
+              <span className="text-sm hidden md:block">Organization</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://partners.admin.aowtani.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-black gap-1"
+            >
+              <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
+                <PartnerIcon />
+              </div>
+              <span className="text-sm hidden md:block">Partner</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://localguide.admin.aowtani.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-black gap-1"
+            >
+              <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
+                <GuideIcon />
+              </div>
+              <span className="text-sm hidden md:block">Local Guide</span>
+            </a>
+          </li>
+        </ul>
+      </Group>
+
+      <Paper mt={30} p={p} mb="lg" radius="md">
         <form
           onSubmit={form.onSubmit(async (values) => {
-            const res = await signIn('credentials', {
+            const res = await signIn("credentials", {
               ...values,
               callbackUrl: `${callbackUrl}`,
               redirect: false,
             });
-            console.log('signIn', res);
+            console.log("signIn", res);
             if (res?.error) {
               setError(res.error);
               console.error(res);
@@ -85,18 +148,18 @@ const SignInForm = ({ p }: Props) => {
           })}
         >
           <TextInput
-            label='Username'
-            placeholder='Username'
-            {...form.getInputProps('username')}
+            label="Username"
+            placeholder="Username"
+            {...form.getInputProps("username")}
           />
           <PasswordInput
-            label='Password'
-            placeholder='Your password'
-            mt='md'
-            {...form.getInputProps('password')}
+            label="Password"
+            placeholder="Your password"
+            mt="md"
+            {...form.getInputProps("password")}
           />
-          <Group position='apart' mt='lg'>
-            <Checkbox label='Remember me' />
+          <Group position="apart" mt="lg">
+            <Checkbox label="Remember me" />
             {/* <Anchor
               component='button'
               size='sm'
@@ -105,7 +168,7 @@ const SignInForm = ({ p }: Props) => {
               Forgot password?
             </Anchor> */}
           </Group>
-          <Button fullWidth mt='xl' type='submit'>
+          <Button fullWidth mt="xl" type="submit">
             เข้าสู่ระบบ
           </Button>
         </form>
