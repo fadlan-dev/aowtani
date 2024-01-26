@@ -1,14 +1,18 @@
-import Calendar from '@/components/ui/calendar';
+import { ICalendar, IEvent } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+import Calendar from "@/components/ui/fullcalendar";
 
 type Props = {};
 const Page = ({}: Props) => {
   return (
-    <div className='pt-24 mb-24'>
+    <div className="pt-24 mb-24">
       <center>
         <h1>ปฎิทินกิจกรรม</h1>
         <p>กิจกรรมดีๆ ที่ไม่ควรพลาด</p>
-        <div className='container max-w-3xl'>
-          <Calendar className=' mt-4' />
+        <div className="container max-w-3xl">
+          <Calendar />
         </div>
       </center>
     </div>
