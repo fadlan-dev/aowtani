@@ -1,4 +1,3 @@
-"use client";
 import { FunctionComponent, useMemo, useState } from "react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";

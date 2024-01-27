@@ -86,49 +86,7 @@ const Index = ({}: Props) => {
     }
   }, [variant]);
 
-  return (
-    <div className="flex pt-20">
-      <div
-        className={cn(
-          "w-72 min-h-[calc(100vh-143px)] hidden md:block relative transition-all",
-          collapsed && "w-0"
-        )}
-      >
-        <div className="absolute top-2 -right-8">
-          <ActionIcon className="hidden md:flex" onClick={toggleCollapsed}>
-            {collapsed ? (
-              <IconLayoutSidebarLeftExpand size="1.125rem" />
-            ) : (
-              <IconLayoutSidebarLeftCollapse size="1.125rem" />
-            )}
-          </ActionIcon>
-        </div>
-        <Navbar
-          hiddenBreakpoint="sm"
-          className={cn("w-72", collapsed && "w-0 overflow-hidden")}
-        >
-          {APP_SHELL_MENUS.map((menu) => (
-            <Navbar.Section
-              key={menu.title}
-              className={cn(`p-2 cursor-pointer`)}
-              bg={variant === menu.key ? menu.active : ""}
-              onClick={() =>
-                menu.key !== variant && router.push(`?t=${menu.key}`)
-              }
-            >
-              <Group>
-                <ThemeIcon variant="light" color={menu.color}>
-                  {menu.icon}
-                </ThemeIcon>
-                <Text>{menu.title}</Text>
-              </Group>
-            </Navbar.Section>
-          ))}
-        </Navbar>
-      </div>
-      <div className="flex-auto overflow-auto py-10">{contentRender()}</div>
-    </div>
-  );
+  return <>{contentRender()}</>;
 };
 
 export default Index;
