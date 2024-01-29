@@ -1,5 +1,5 @@
-'use client';
-import { IProduct } from '@/types';
+"use client";
+import { IProduct } from "@/types";
 import {
   Button,
   Flex,
@@ -7,12 +7,14 @@ import {
   NumberInput,
   useMantineTheme,
   Text,
-} from '@mantine/core';
-import { FunctionComponent, useState } from 'react';
-import Image from 'next/image';
-import { Carousel } from '@mantine/carousel';
-import { useRouter } from 'next/navigation';
-import { useMediaQuery } from '@mantine/hooks';
+} from "@mantine/core";
+import { FunctionComponent, useState } from "react";
+import Image from "next/image";
+import { Carousel } from "@mantine/carousel";
+import { useRouter } from "next/navigation";
+import { useMediaQuery } from "@mantine/hooks";
+
+import { useCart } from "react-use-cart";
 
 interface ProductHeroProps {
   product: IProduct;
@@ -22,27 +24,28 @@ interface ProductHeroProps {
 const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
   const router = useRouter();
   const theme = useMantineTheme();
-  const matches = useMediaQuery('(max-width: 768px)');
-  const [quantity, setQuantity] = useState<number | ''>(1);
+  const matches = useMediaQuery("(max-width: 768px)");
+  const { addItem } = useCart();
+  const [quantity, setQuantity] = useState<number | any>(1);
   return (
-    <div className='flex flex-col lg:flex-row gap-4 overflow-hidden relative'>
-      <div className='relative lg:w-1/2 w-full h-96 '>
+    <div className="flex flex-col lg:flex-row gap-4 overflow-hidden relative">
+      <div className="relative lg:w-1/2 w-full h-96 ">
         <Carousel
-          w='100%'
-          h='100%'
+          w="100%"
+          h="100%"
           withIndicators
           styles={{
             indicator: {
-              '&[data-active]': {
+              "&[data-active]": {
                 backgroundColor: theme.colors.brand[6],
               },
             },
           }}
         >
           {product.images.map((img, idx: number) => (
-            <Carousel.Slide h='384px' key={idx}>
+            <Carousel.Slide h="384px" key={idx}>
               <Image
-                className='object-contain'
+                className="object-contain"
                 src={`${process.env.NEXT_IMAGE_HOST}${img.asset}`}
                 alt={product.name}
                 fill
@@ -51,16 +54,16 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
           ))}
         </Carousel>
       </div>
-      <Flex direction='column' gap='md' className='flex-1'>
-        <Flex direction='column'>
+      <Flex direction="column" gap="md" className="flex-1">
+        <Flex direction="column">
           <h1>{product.name}</h1>
-          <h4 className='m-0'>{product.sku}</h4>
+          <h4 className="m-0">{product.sku}</h4>
         </Flex>
-        <Group p='sm' bg='brand.0' align='baseline'>
-          <Text className='font-bold text-2xl text-primary'>
+        <Group p="sm" bg="brand.0" align="baseline">
+          <Text className="font-bold text-2xl text-primary">
             ฿{product.price}
           </Text>
-          <Text c='dimmed' td='line-through'>
+          <Text c="dimmed" td="line-through">
             ฿{product.price_before_discount}
           </Text>
         </Group>
@@ -70,7 +73,7 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
             value={quantity}
             min={1}
             max={product.stock}
-            placeholder='ระบุจำนวน'
+            placeholder="ระบุจำนวน"
             onChange={setQuantity}
           />
           มีสินค้าทั้งหมด {product.stock} ชิ้น
@@ -78,8 +81,24 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
         <Group>
           <Button
             fullWidth={matches}
-            size='md'
-            variant='gradient'
+            size="md"
+            variant="outline"
+            onClick={() => {
+              let item = {
+                id: product.id.toString(),
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+              };
+              addItem(item, quantity);
+            }}
+          >
+            เพิ่มไปยังรถเข็น
+          </Button>
+          <Button
+            fullWidth={matches}
+            size="md"
+            variant="gradient"
             onClick={() =>
               router.push(`product/${product.id}/checkout?quantity=${quantity}`)
             }
