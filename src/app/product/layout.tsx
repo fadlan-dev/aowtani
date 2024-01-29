@@ -1,26 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 import { CartIcon } from "@/components/Icons";
-
 import { useCart } from "react-use-cart";
 import Cart from "@/components/Cart";
 import { useDisclosure } from "@mantine/hooks";
+
+import { usePathname } from "next/navigation";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [TotalItem, setTotalItem] = useState(0);
   const { totalUniqueItems } = useCart();
 
   const [opened, { open, close }] = useDisclosure(false);
 
+  const pathname = usePathname();
+
   useEffect(() => {
     setTotalItem(totalUniqueItems);
   }, [totalUniqueItems]);
 
+  if (pathname.indexOf("checkout") > -1) {
+    return <main>{children}</main>;
+  }
+
   return (
     <>
       <Cart opened={opened} close={close} />
-
       <div className="float-right pr-12">
         <div
           onClick={open}

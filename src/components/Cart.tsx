@@ -2,8 +2,8 @@ import { FunctionComponent } from "react";
 
 import { Modal, Button, Image } from "@mantine/core";
 import { Item } from "react-use-cart";
-import { DeleteIcon } from "./Icons";
 import { useCart } from "react-use-cart";
+import Link from "next/link";
 
 interface CartProps {
   opened: boolean;
@@ -60,9 +60,11 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
         <div>ราคารวม</div>
         <div>฿{cartTotal} บาท</div>
       </div>
-      <Button variant="gradient" fullWidth>
-        ไปที่หน้าชำระเงิน
-      </Button>
+      <Link href="/product/checkout">
+        <Button variant="gradient" fullWidth>
+          ไปที่หน้าชำระเงิน
+        </Button>
+      </Link>
     </Modal>
   );
 };
