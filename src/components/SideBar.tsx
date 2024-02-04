@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import { cn } from "@/libs/utils";
 import { ActionIcon, Group, Navbar, ThemeIcon, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -7,44 +9,109 @@ import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
 } from "@tabler/icons-react";
-import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from "./Icons";
+import {
+  FoodIcon,
+  MosqueIcon,
+  ResortIcon,
+  TravelIcon,
+  CalendarIcon,
+  MuseumIcon,
+  SouvenirIcon,
+  MarketIcon,
+  LinkOutIcon,
+} from "./Icons";
 
 type Props = {};
 
 const SideBar = ({}: Props) => {
   const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
     useDisclosure(false);
-
   const APP_SHELL_MENUS = [
     {
-      key: "destination",
-      title: "สถานที่ท่องเที่ยว",
-      icon: <TravelIcon />,
+      key: "event",
+      title: "ปฏิทินกิจกรรม",
+      icon: <CalendarIcon />,
       color: "blue",
       active: "#EDF2FF",
+      slug: "/event",
     },
     {
       key: "hotel",
-      title: "ที่พักผ่อน",
+      title: "ที่พัก",
       icon: <ResortIcon />,
       color: "green",
       active: "#EBFBEE",
+      slug: "?t=hotel",
     },
     {
       key: "restaurant",
-      title: "อาหารจานโปรด",
+      title: "ร้านอาหารและคาเฟ่",
       icon: <FoodIcon />,
       color: "violet",
       active: "#F3F0FF",
+      slug: "?t=restaurant",
     },
     {
       key: "mosque",
       title: "มัสยิด",
       icon: <MosqueIcon />,
+      color: "#E6F6F1",
+      active: "#FFF4E6",
+      slug: "?t=mosque",
+    },
+    {
+      key: "museum",
+      title: "พิพิธภัณฑ์",
+      icon: <MuseumIcon />,
       color: "orange",
       active: "#FFF4E6",
+      slug: "",
+    },
+    {
+      key: "souvenir",
+      title: "ของฝาก",
+      icon: <SouvenirIcon />,
+      color: "#FFEBEB",
+      active: "#FFF4E6",
+      slug: "",
+    },
+    {
+      key: "market",
+      title: "แหล่งชอปปิ้ง / ตลาดนัด",
+      icon: <MarketIcon />,
+      color: "#E1E3F4",
+      active: "#FFF4E6",
+      slug: "",
+    },
+    {
+      key: "linkout1",
+      title: "สมัครเป็นผู้ประกอบการ",
+      icon: <LinkOutIcon />,
+      color: "#ffffff",
+      active: "#FFF4E6",
+      slug: "https://partners.admin.aowtani.com/login",
+      target: "_blank",
+    },
+    {
+      key: "linkout2",
+      title: "สมัครเป็นไกด์ท้องถิ่น",
+      icon: <LinkOutIcon />,
+      color: "#ffffff",
+      active: "#FFF4E6",
+      slug: "https://localguide.admin.aowtani.com/login",
+      target: "_blank",
     },
   ];
+
+  const activeMenu = (value: any) => {
+    return false;
+    // console.log({ searchParams, value });
+    // if (searchParams) {
+    //   return searchParams === value;
+    // } else {
+    //   return pathname === value;
+    // }
+  };
 
   return (
     <div
@@ -69,18 +136,20 @@ const SideBar = ({}: Props) => {
         {APP_SHELL_MENUS.map((menu) => (
           <Navbar.Section
             key={menu.title}
-            className={cn(`p-2 cursor-pointer`)}
-            //   bg={variant === menu.key ? menu.active : ""}
-            //   onClick={() =>
-            //     menu.key !== variant && router.push(`?t=${menu.key}`)
-            //   }
+            className={cn(`p-2 cursor-pointer text-black`)}
+            bg={activeMenu(menu.slug) ? menu.active : ""}
+            // onClick={() =>
+            //   menu.key !== variant && router.push(`?t=${menu.key}`)
+            // }
           >
-            <Group>
-              <ThemeIcon variant="light" color={menu.color}>
-                {menu.icon}
-              </ThemeIcon>
-              <Text>{menu.title}</Text>
-            </Group>
+            <Link href={menu.slug} target={menu.target ? menu.target : "_self"}>
+              <Group>
+                <ThemeIcon variant="light" color={menu.color}>
+                  {menu.icon}
+                </ThemeIcon>
+                <Text className="text-black">{menu.title}</Text>
+              </Group>
+            </Link>
           </Navbar.Section>
         ))}
       </Navbar>
