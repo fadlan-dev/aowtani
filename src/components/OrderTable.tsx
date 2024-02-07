@@ -82,10 +82,13 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     );
   }
 
+  console.log({orders})
+
   const onSorted = useCallback(() => {
     const data = sortBy(orders, sortStatus.columnAccessor) as IOrder[];
     return sortStatus.direction === 'desc' ? data.reverse() : data;
   }, [sortStatus, orders]);
+
 
   const ths = (
     <tr className='text-black'>
@@ -106,23 +109,23 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     </tr>
   );
 
-  const rows = onSorted().map((order) => (
-    <tr key={order.id}>
-      <td className='whitespace-nowrap'>
-        {dayjs(order.order_at).format('YYYY-MM-DD')}
-      </td>
-      <td className='min-w-[240px]'>{order.product?.name}</td>
-      <td className='whitespace-nowrap'>{order.product.sku}</td>
-      <td className='text-end'>{numberFormat(order.price)}</td>
-      <td>{order.customer_address}</td>
-      <td>{order.customer_phone}</td>
-      <td className='text-end'>{numberFormat(order.price * order.quantity)}</td>
-      <td>
-        <StatusItem text={order.status} />
-      </td>
-      <td>{order.tracking_code}</td>
-    </tr>
-  ));
+  // const rows = onSorted().map((order) => (
+  //   <tr key={order.id}>
+  //     <td className='whitespace-nowrap'>
+  //       {dayjs(order.order_at).format('YYYY-MM-DD')}
+  //     </td>
+  //     <td className='min-w-[240px]'>{order.product.name}</td>
+  //     <td className='whitespace-nowrap'>{order.product.sku}</td>
+  //     <td className='text-end'>{numberFormat(order.price)}</td>
+  //     <td>{order.customer_address}</td>
+  //     <td>{order.customer_phone}</td>
+  //     <td className='text-end'>{numberFormat(order.price * order.quantity)}</td>
+  //     <td>
+  //       <StatusItem text={order.status} />
+  //     </td>
+  //     <td>{order.tracking_code}</td>
+  //   </tr>
+  // ));
 
   if (isFetching && !isFetched) {
     return (
@@ -137,9 +140,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <Table verticalSpacing='md' striped className={cn(className)}>
         <thead>{ths}</thead>
 
-        {orders?.length !== 0 && <tbody>{rows}</tbody>}
+        {/* {orders?.length !== 0 && <tbody>{rows}</tbody>} */}
       </Table>
-      {orders?.length === 0 && <Empty className='mt-4' />}
+      {/* {orders?.length === 0 && <Empty className='mt-4' />} */}
     </ScrollArea>
   );
 };
