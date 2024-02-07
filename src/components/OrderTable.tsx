@@ -1,4 +1,4 @@
-import { cn, numberFormat } from '@/libs/utils';
+import { cn, numberFormat } from "@/libs/utils";
 import {
   Center,
   Group,
@@ -7,20 +7,21 @@ import {
   Table,
   ScrollArea,
   Loader,
-} from '@mantine/core';
+  Card,
+} from "@mantine/core";
 import {
   IconChevronDown,
   IconChevronUp,
   IconSelector,
-} from '@tabler/icons-react';
-import dayjs from 'dayjs';
-import { FunctionComponent, useCallback, useState } from 'react';
-import StatusItem from './StatusItem';
-import sortBy from 'lodash/sortBy';
-import { useGetOrdes } from '@/hooks/useGetOrders';
-import { useSession } from 'next-auth/react';
-import Empty from './Empty';
-import { IOrder } from '@/types';
+} from "@tabler/icons-react";
+import dayjs from "dayjs";
+import { FunctionComponent, useCallback, useState } from "react";
+import StatusItem from "./StatusItem";
+import sortBy from "lodash/sortBy";
+import { useGetOrdes } from "@/hooks/useGetOrders";
+import { useSession } from "next-auth/react";
+import Empty from "./Empty";
+import { IOrder, IOrderItem } from "@/types";
 
 interface OrderTableProps {
   className?: string;
@@ -28,7 +29,7 @@ interface OrderTableProps {
 
 type ISortStatus = {
   columnAccessor: string;
-  direction: 'asc' | 'desc';
+  direction: "asc" | "desc";
 };
 
 const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
@@ -40,8 +41,8 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     isFetched,
   } = useGetOrdes(session?.user.token, {});
   const [sortStatus, setSortStatus] = useState<ISortStatus>({
-    columnAccessor: '',
-    direction: 'asc',
+    columnAccessor: "",
+    direction: "asc",
   });
 
   function Th({
@@ -54,7 +55,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     sorted: boolean;
   }) {
     const Icon = sorted
-      ? sortStatus.direction === 'desc'
+      ? sortStatus.direction === "desc"
         ? IconChevronUp
         : IconChevronDown
       : IconSelector;
@@ -64,17 +65,17 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
         <UnstyledButton
           onClick={() => {
             setSortStatus({
-              direction: sortStatus.direction === 'asc' ? 'desc' : 'asc',
+              direction: sortStatus.direction === "asc" ? "desc" : "asc",
               columnAccessor: columnAccessor,
             });
           }}
         >
-          <Group position='apart' noWrap>
-            <Text fz='sm' fw='bold' color='#495057' truncate>
+          <Group position="apart" noWrap>
+            <Text fz="sm" fw="bold" color="#495057" truncate>
               {children}
             </Text>
             <Center>
-              <Icon size='0.9rem' stroke={1.5} />
+              <Icon size="0.9rem" stroke={1.5} />
             </Center>
           </Group>
         </UnstyledButton>
@@ -84,46 +85,31 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
 
   const onSorted = useCallback(() => {
     const data = sortBy(orders, sortStatus.columnAccessor) as IOrder[];
-    return sortStatus.direction === 'desc' ? data.reverse() : data;
+    return sortStatus.direction === "desc" ? data.reverse() : data;
   }, [sortStatus, orders]);
 
   const ths = (
-    <tr className='text-black'>
-      <Th
-        sorted={sortStatus.columnAccessor === 'booking_at'}
-        columnAccessor='booking_at'
-      >
-        วันที่สั่ง
-      </Th>
-      <th className='whitespace-nowrap min-w-[112px]'>ชื่อสินค้า</th>
-      <th className='whitespace-nowrap'>SKU</th>
-      <th className='whitespace-nowrap text-end'>จำนวน (ต่อชิ้น)</th>
-      <th className='whitespace-nowrap'>ที่อยู่</th>
-      <th className='whitespace-nowrap'>เบอร์โทร</th>
-      <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
-      <th className='whitespace-nowrap'>สถานะ</th>
-      <th className='whitespace-nowrap'>เลขพัสดุ</th>
+    <tr className="text-black">
+      <th className="whitespace-nowrap min-w-[112px]">ชื่อสินค้า</th>
+      <th className="whitespace-nowrap">SKU</th>
+      <th className="whitespace-nowrap text-end">จำนวน (ต่อชิ้น)</th>
+      <th className="whitespace-nowrap text-end">ชำระเงิน</th>
     </tr>
   );
 
-  const rows = onSorted().map((orders) => {
-    return orders.order_items.map(order=>(
-    <tr key={order.id}>
-      <td className='whitespace-nowrap'>
-        {dayjs(order.order_at).format('YYYY-MM-DD')}
-      </td>
-      <td className='min-w-[240px]'>{order.product.name}</td>
-      <td className='whitespace-nowrap'>{order.product.sku}</td>
-      <td className='text-end'>{numberFormat(order.price)}</td>
-      <td>{order.customer_address}</td>
-      <td>{order.customer_phone}</td>
-      <td className='text-end'>{numberFormat(order.price * order.quantity)}</td>
-      <td>
-        <StatusItem text={order.status} />
-      </td>
-      <td>{order.tracking_code}</td>
-    </tr>
-  ))});
+  const rows = (order_items: IOrderItem[]) => {
+    console.log(order_items);
+    return order_items.map((order) => (
+      <tr key={order.id}>
+        <td className="min-w-[240px]">{order.product.name}</td>
+        <td className="whitespace-nowrap">{order.product.sku}</td>
+        <td className="text-end">{numberFormat(order.price)}</td>
+        <td className="text-end">
+          {numberFormat(order.price * order.quantity)}
+        </td>
+      </tr>
+    ));
+  };
 
   if (isFetching && !isFetched) {
     return (
@@ -134,14 +120,33 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
   }
 
   return (
-    <ScrollArea>
-      <Table verticalSpacing='md' striped className={cn(className)}>
-        <thead>{ths}</thead>
+    <>
+      {orders?.map((order) => (
+        <>
+          <Card shadow="sm" withBorder mb={15}>
+            <Card.Section className="flex justify-between px-6 gap-3">
+              <Text fw={500} size="lg" mt="md">
+                {dayjs(order.order_at).format("YYYY-MM-DD")}
+              </Text>
+              <Text fw={500} size="lg" mt="md" className="flex items-center">
+                <StatusItem text={order.status} />
+                &nbsp;{order.tracking_code && order.tracking_code}
+              </Text>
+            </Card.Section>
+            <ScrollArea>
+              <Table verticalSpacing="md" striped className={cn(className)}>
+                <thead>{ths}</thead>
+                {orders?.length !== 0 && (
+                  <tbody>{rows(order.order_items)}</tbody>
+                )}
+              </Table>
+            </ScrollArea>
+          </Card>
+        </>
+      ))}
 
-        {orders?.length !== 0 && <tbody>{rows}</tbody>}
-      </Table>
-      {orders?.length === 0 && <Empty className='mt-4' />}
-    </ScrollArea>
+      {orders?.length === 0 && <Empty className="mt-4" />}
+    </>
   );
 };
 
