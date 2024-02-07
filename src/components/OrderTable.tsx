@@ -106,26 +106,24 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     </tr>
   );
 
-  const rows = onSorted().map((order) => {
-    console.log({order})
-    return (
-      <tr key={order.id}>
-        <td className='whitespace-nowrap'>
-          {dayjs(order.order_at).format('YYYY-MM-DD')}
-        </td>
-        <td className='min-w-[240px]'>{order.product.name}</td>
-        <td className='whitespace-nowrap'>{order.product.sku}</td>
-        <td className='text-end'>{numberFormat(order.price)}</td>
-        <td>{order.customer_address}</td>
-        <td>{order.customer_phone}</td>
-        <td className='text-end'>{numberFormat(order.price * order.quantity)}</td>
-        <td>
-          <StatusItem text={order.status} />
-        </td>
-        <td>{order.tracking_code}</td>
-      </tr>
-    )
-  });
+  const rows = onSorted().map((orders) => {
+    return orders.order_items.map(order=>(
+    <tr key={order.id}>
+      <td className='whitespace-nowrap'>
+        {dayjs(order.order_at).format('YYYY-MM-DD')}
+      </td>
+      <td className='min-w-[240px]'>{order.product.name}</td>
+      <td className='whitespace-nowrap'>{order.product.sku}</td>
+      <td className='text-end'>{numberFormat(order.price)}</td>
+      <td>{order.customer_address}</td>
+      <td>{order.customer_phone}</td>
+      <td className='text-end'>{numberFormat(order.price * order.quantity)}</td>
+      <td>
+        <StatusItem text={order.status} />
+      </td>
+      <td>{order.tracking_code}</td>
+    </tr>
+  ))});
 
   if (isFetching && !isFetched) {
     return (

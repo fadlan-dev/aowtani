@@ -24,7 +24,7 @@ import { notifications } from "@mantine/notifications";
 import { Item } from "react-use-cart";
 
 interface OrderFormProps {
-  product: Item[];
+  products: Item[];
 }
 
 const schema = z.object({
@@ -40,7 +40,7 @@ const schema = z.object({
     .partial(),
 });
 
-const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
+const OrderForm: FunctionComponent<OrderFormProps> = ({ products }) => {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -140,15 +140,17 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ product }) => {
   return (
     <div>
       <form
-      // onSubmit={form.onSubmit((values) => {
-      //   const payload: IOrderRequest = {
-      //     ...values,
-      //     quantity: Number(searchParams.get('quantity')),
-      //     product_id: product[0].id,
-      //     order_at: new Date().toISOString(),
-      //   };
-      //   createOrder({ order: payload });
-      // })}
+      onSubmit={form.onSubmit((values) => {
+        const payload: IOrderRequest = {
+          ...values,
+          order_at: new Date().toISOString(),
+          order_items: products.map((item) => ({
+            quantity: Number(item.quantity),
+            product_id: item.id
+          })),
+        };
+        createOrder({ order: payload });
+      })}
       >
         <Paper p="sm">
           <Text weight="bold">ข้อมูลลูกค้า</Text>
