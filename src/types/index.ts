@@ -314,7 +314,7 @@ export interface IOrderRequest {
   order_items: IOrderItemRequest[];
 }
 
-interface IOrderItem{
+export interface IOrderItem{
   id: number;
   customer_name: string;
   customer_email: string;
@@ -333,6 +333,7 @@ interface IOrderItem{
 }
 
 export interface IOrder {
+  order_at: string;
   quantity: number;
   slug: string;
   created_at: string;
@@ -344,6 +345,8 @@ export interface IOrder {
     sku: string;
   };
   order_items: IOrderItem[];
+  status: string;
+  tracking_code: string
 }
 
 export interface IBankAccount {
