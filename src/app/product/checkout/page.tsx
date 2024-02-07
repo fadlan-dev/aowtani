@@ -102,7 +102,7 @@ const Page = ({ params }: pageProps) => {
             </Card>
           </div>
           <div className="w-full lg:w-80">
-            {items && <OrderForm product={items} />}
+            {items && <OrderForm products={items} />}
           </div>
         </div>
       </div>

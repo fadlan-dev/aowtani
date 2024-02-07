@@ -299,18 +299,22 @@ export interface IReviewRequest {
   customer_id: number;
 }
 
+interface IOrderItemRequest {
+  product_id: string;
+  quantity: number;
+}
+
 export interface IOrderRequest {
   customer_name: string;
   customer_email: string;
   customer_phone: string;
   customer_address: string;
-  quantity: number;
   order_at: string;
-  product_id: number;
   slip: IImage;
+  order_items: IOrderItemRequest[];
 }
 
-export interface IOrder {
+interface IOrderItem{
   id: number;
   customer_name: string;
   customer_email: string;
@@ -318,10 +322,19 @@ export interface IOrder {
   customer_address: string;
   order_at: string;
   quantity: number;
-  slug: string;
   price: number;
   tracking_code: any;
   status: string;
+  product: {
+    id: number;
+    name: string;
+    sku: string;
+  };
+}
+
+export interface IOrder {
+  quantity: number;
+  slug: string;
   created_at: string;
   updated_at: string;
   slip: IImage;
@@ -330,6 +343,7 @@ export interface IOrder {
     name: string;
     sku: string;
   };
+  order_items: IOrderItem[];
 }
 
 export interface IBankAccount {

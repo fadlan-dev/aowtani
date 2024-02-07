@@ -117,9 +117,10 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
             fullWidth={matches}
             size="md"
             variant="gradient"
-            onClick={() =>
-              router.push(`product/${product.id}/checkout?quantity=${quantity}`)
-            }
+            onClick={() => {
+              addToCart()
+              router.push(`product/checkout`)
+            }}
           >
             ซื้อสินค้า
           </Button>

@@ -106,7 +106,8 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     </tr>
   );
 
-  const rows = onSorted().map((order) => (
+  const rows = onSorted().map((orders) => {
+    return orders.order_items.map(order=>(
     <tr key={order.id}>
       <td className='whitespace-nowrap'>
         {dayjs(order.order_at).format('YYYY-MM-DD')}
@@ -122,7 +123,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       </td>
       <td>{order.tracking_code}</td>
     </tr>
-  ));
+  ))});
 
   if (isFetching && !isFetched) {
     return (

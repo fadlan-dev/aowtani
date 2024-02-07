@@ -26,6 +26,7 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
                 height={50}
                 src={`${process.env.NEXT_IMAGE_HOST}${item.image.asset}`}
                 fit="cover"
+                alt={item.name}
               />
               <div>
                 <div>{item.name}</div>
