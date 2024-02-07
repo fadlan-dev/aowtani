@@ -20,8 +20,8 @@ const STATUS_TH = {
 };
 
 const PACKAGE_STATUS = {
-  pending: 'ยืนยันแล้ว',
-  approved: 'จัดส่งแล้ว',
+  pending: 'กำลังตรวจสอบ',
+  approved: 'ยืนยันแล้ว',
   cancelled: 'ยกเลิก',
 }
 
