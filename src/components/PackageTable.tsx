@@ -103,7 +103,7 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
       </Th>
       <th>ชื่อแพ็คเกจ</th>
       <th>ชื่อไกด์</th>
-      <th>รูปแบบ</th>
+      {/* <th>รูปแบบ</th> */}
       <th className='whitespace-nowrap text-end'>จำนวน (ต่อท่าน)</th>
       <th>วันที่เดินทาง</th>
       <th className='whitespace-nowrap text-end'>ชำระเงิน</th>
@@ -114,14 +114,14 @@ const PackageTable: FunctionComponent<PackageTableProps> = ({ className }) => {
   const rows = onSorted().map((pkg) => (
     <tr key={pkg.id}>
       <td>{dayjs(pkg.created_at).format('YYYY-MM-DD')}</td>
-      <td className='min-w-[240px]'>{pkg.package.name}</td>
-      <td className='whitespace-nowrap'>{pkg.local_guide.name}</td>
-      <td className='whitespace-nowrap'>{pkg.customer_name}</td>
+      <td className='min-w-[240px]'>{pkg.package?.name}</td>
+      <td className='whitespace-nowrap'>{pkg.local_guide?.name}</td>
+      {/* <td className='whitespace-nowrap'>{pkg.customer_name}</td> */}
       <td className='text-end'>{pkg.quantity}</td>
       <td className='truncate'>{dayjs(pkg.tour_date).format('YYYY-MM-DD')}</td>
       <td className='text-end'>{numberFormat(pkg.price)}</td>
       <td>
-        <StatusItem text={pkg.status} />
+        <StatusItem text={pkg.status} type="package"/>
       </td>
     </tr>
   ));

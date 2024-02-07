@@ -7,8 +7,10 @@ import { z } from 'zod';
 import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 
 interface BookingProps {
+  id: number | string;
   price: number;
 }
 
@@ -20,7 +22,8 @@ const schema = z.object({
     .min(1, { message: 'You must be at least 1 to create an account' }),
 });
 
-const Booking: FunctionComponent<BookingProps> = ({ price }) => {
+const Booking: FunctionComponent<BookingProps> = ({ id,price }) => {
+
   const { data: session } = useSession();
   const router = useRouter();
   const params = useParams();
@@ -72,7 +75,9 @@ const Booking: FunctionComponent<BookingProps> = ({ price }) => {
             จองทัวร์
           </Button>
         ) : (
-          <Button variant='gradient'>เข้าสู่ระบบเพื่อจอง</Button>
+          <Link href={`/sign-in?callback=/package/${id}`}>
+            <Button variant='gradient' fullWidth>เข้าสู่ระบบเพื่อจอง</Button>
+          </Link>
         )}
       </form>
     </Paper>

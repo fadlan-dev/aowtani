@@ -4,6 +4,7 @@ import { FunctionComponent, useCallback } from 'react';
 
 interface StatusItemProps {
   text: string;
+  type?: "package" | "product"
 }
 
 interface IStatus {
@@ -18,13 +19,19 @@ const STATUS_TH = {
   cancelled: 'ยกเลิก',
 };
 
+const PACKAGE_STATUS = {
+  pending: 'ยืนยันแล้ว',
+  approved: 'จัดส่งแล้ว',
+  cancelled: 'ยกเลิก',
+}
+
 const STATUS_COLORS = {
   pending: 'blue',
   approved: 'teal',
   cancelled: 'red',
 };
 
-const StatusItem: FunctionComponent<StatusItemProps> = ({ text }) => {
+const StatusItem: FunctionComponent<StatusItemProps> = ({ text,type = "order"}) => {
   const Icon = useCallback(() => {
     switch (text) {
       case 'pending':
@@ -55,7 +62,8 @@ const StatusItem: FunctionComponent<StatusItemProps> = ({ text }) => {
       color={STATUS_COLORS[text as keyof IStatus] || 'gray'}
       leftSection={Icon()}
     >
-      {STATUS_TH[text as keyof IStatus]}
+      {/* {STATUS_TH[text as keyof IStatus]} */}
+      {type === 'package' ? PACKAGE_STATUS[text as keyof IStatus] : STATUS_TH[text as keyof IStatus]}
     </Badge>
   );
 };
