@@ -26,7 +26,7 @@ const RestaurantItem: FunctionComponent<RestaurantItemProps> = ({
         <Card.Section>
           <AspectRatio ratio={16 / 9}>
             <Image
-              className='bg-zinc-200 object-contain'
+              className='bg-zinc-200 object-cover'
               src={
                 partner.images[0]?.asset
                   ? `${process.env.NEXT_IMAGE_HOST}${partner.images[0]?.asset}`

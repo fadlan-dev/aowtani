@@ -14,6 +14,7 @@ import Image from 'next/image';
 import { IOrganization } from '@/types';
 import { IconMapPin, IconPhone, IconWorldWww } from '@tabler/icons-react';
 import Link from 'next/link';
+import { isValidUrl } from '@/libs/utils';
 
 interface OrganizationItemProps {
   data: IOrganization;
@@ -63,19 +64,27 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
       <Text weight='bold' mt='sm'>
         {data.president_name}
       </Text>
-      <Flex gap={8} mt={8} className='text-primary'>
+      <Flex gap={8} mt={8} className='text-primary' direction="column">
         {data.website !== 'no' && data.website && (
-          <Link href={data.website} target='_blank'>
+          <Link href={isValidUrl(data.website)} target='_blank'>
+            <Group>
             <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
               <IconWorldWww size={14} />
             </ActionIcon>
+            <Text color='black'>{data.website}</Text>
+            </Group>
           </Link>
         )}
         {data.phone !== 'no' && data.phone && (
-          <Link href={`tel:${data.phone}`} target='_blank'>
+            <Link href={`tel:${data.phone}`} target='_blank'>
+          <Group>
+
             <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
               <IconPhone size={14} />
             </ActionIcon>
+            <Text color='black'>{data.phone}</Text>
+          </Group>
+
           </Link>
         )}
       </Flex>

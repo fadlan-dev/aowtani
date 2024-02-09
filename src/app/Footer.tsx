@@ -39,7 +39,7 @@ const Index = () => {
         </div>
 
         <Group spacing={0} className={classes.inner} position='right'>
-          <Group spacing='sm'>
+          {/* <Group spacing='sm'>
             <Link target='_blank' href='https://partners.admin.aowtani.com'>
               <Button variant='subtle'>สมัครเป็นผู้ประกอบการ</Button>
             </Link>
@@ -49,7 +49,7 @@ const Index = () => {
             >
               <Button variant='subtle'>สมัครเป็นไกด์ท้องถิ่น</Button>
             </Link>
-          </Group>
+          </Group> */}
           <Group noWrap>
             <Group spacing={0} noWrap>
               <ActionIcon size='lg'>

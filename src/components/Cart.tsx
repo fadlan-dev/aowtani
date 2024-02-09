@@ -57,7 +57,7 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
           </li>
         ))}
       </ul>
-      <div className="flex justify-between items-center font-bold pt-24">
+      <div className="flex justify-between items-center font-bold pt-12">
         <div>ราคารวม</div>
         <div>฿{cartTotal} บาท</div>
       </div>

@@ -16,7 +16,7 @@ import { IDestination, IPackage, IPartner, IProduct } from "@/types";
 import ProductList from "./ProductList";
 import PackageList from "./PackageList";
 import ExploreButton from "./ExploreButton";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { getDestinations } from "@/libs/services/getDestinations";
 import { getPackages } from "@/libs/services/getPackages";
 import { getProducts } from "@/libs/services/getProducts";
@@ -30,6 +30,7 @@ import {
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import Banner from "./Banner";
+import RestaurantFilter from "./RestaurantFilter";
 
 type Props = {};
 export const APP_SHELL_MENUS = [
@@ -75,14 +76,18 @@ const Index = ({}: Props) => {
     switch (variant) {
       case "destination":
         return <DestinationItem />;
-
       case "hotel":
         return <HotelItem />;
-
       case "restaurant":
         return <RestaurantItem />;
       case "mosque":
         return <MosqueItem />;
+      case "museum":
+        return <MuseumItem />;
+      case "market":
+        return <MarketItem />;
+      case "souvenir":
+        return <SouvenirItem />;
     }
   }, [variant]);
 
@@ -202,9 +207,12 @@ const HotelItem = () => {
 };
 
 const RestaurantItem = () => {
+
+  const [filterValue,setFilterValue] = useState('ทั้งหมด')
+
   const { data: restaurants, isLoading } = useQuery({
     queryKey: ["restaurants"],
-    queryFn: () => getPartners({ type: "Restaurant", per_page: 3, search: "" }),
+    queryFn: () => getPartners({ type: "Restaurant", per_page: 100, search: "" }),
   });
   return (
     <>
@@ -212,11 +220,14 @@ const RestaurantItem = () => {
         <h1>อาหารจานโปรด</h1>
         <p>อร่อยทุกเมนู</p>
       </center>
+      <div className="float-right pr-3">
+        <RestaurantFilter value={filterValue} setValue={setFilterValue}/>
+      </div>
       {isLoading ? (
         <LoaderItem />
       ) : (
         <RestaurantList
-          data={(restaurants?.data || []) as IPartner[]}
+          data={(restaurants?.data.filter(item=>filterValue === 'ทั้งหมด' ? item : item.type_details === filterValue) || []) as IPartner[]}
           total={Number(restaurants?.total || 0)}
           showMore
         />
@@ -235,6 +246,7 @@ const MosqueItem = () => {
         search: "",
       }),
   });
+
   return (
     <>
       <center>
@@ -251,6 +263,96 @@ const MosqueItem = () => {
           showMoreType="12"
           showMore
         />
+      )}
+    </>
+  );
+};
+
+const MuseumItem = () => {
+  const { data: museums, isLoading } = useQuery({
+    queryKey: ["museum"],
+    queryFn: () =>
+      getDestinations({
+        destination_type_id: "10",
+        per_page: 3,
+        search: "",
+      }),
+  });
+  
+  return (
+    <>
+      <center>
+        <h1>พิพิธภัณฑ์</h1>
+        {/* <p>ศาสนสถาน</p> */}
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <DestinationList
+          total={1}
+          data={(museums?.data || []) as IDestination[]}
+          className="mt-6 mb-6"
+          showMoreType="12"
+          showMore
+        />
+      )}
+    </>
+  );
+};
+
+const MarketItem = () => {
+  const { data: markets, isLoading } = useQuery({
+    queryKey: ["market"],
+    queryFn: () =>
+      getDestinations({
+        destination_type_id: "11",
+        per_page: 3,
+        search: "",
+      }),
+  });
+  
+  return (
+    <>
+      <center>
+        <h1>แหล่งชอปปิ้ง / ตลาดนัด</h1>
+        {/* <p>ศาสนสถาน</p> */}
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <DestinationList
+          total={1}
+          data={(markets?.data || []) as IDestination[]}
+          className="mt-6 mb-6"
+          showMoreType="12"
+          showMore
+        />
+      )}
+    </>
+  );
+};
+
+
+const SouvenirItem = () => {
+  const { data: souvenirs, isLoading } = useQuery({
+    queryKey: ["souvenir"],
+    queryFn: () =>
+      getProducts({
+        per_page: 3,
+        search: "",
+      }),
+  });
+  
+  return (
+    <>
+      <center>
+        <h1>ของฝาก</h1>
+        {/* <p>ศาสนสถาน</p> */}
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <ProductList total={1} data={souvenirs?.data || ([] as IProduct[])} />
       )}
     </>
   );

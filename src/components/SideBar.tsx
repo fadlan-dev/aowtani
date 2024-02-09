@@ -65,7 +65,7 @@ const SideBar = ({}: Props) => {
       icon: <MuseumIcon />,
       color: "orange",
       active: "#FFF4E6",
-      slug: "",
+      slug: "?t=museum",
     },
     {
       key: "souvenir",
@@ -73,7 +73,7 @@ const SideBar = ({}: Props) => {
       icon: <SouvenirIcon />,
       color: "#FFEBEB",
       active: "#FFF4E6",
-      slug: "",
+      slug: "?t=souvenir",
     },
     {
       key: "market",
@@ -81,7 +81,7 @@ const SideBar = ({}: Props) => {
       icon: <MarketIcon />,
       color: "#E1E3F4",
       active: "#FFF4E6",
-      slug: "",
+      slug: "?t=market",
     },
     {
       key: "linkout1",

@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import OrganizationItem from '@/components/OrganizationItem';
 import PartnerList from '@/components/PartnerList';
+import Share from '@/components/Share';
 import { getCommunity } from '@/libs/services/getComunity';
 import { ICommunity } from '@/types';
 
@@ -34,6 +35,7 @@ const page = async ({ params }: Props) => {
           <div className=' flex-1'>
             <h1>{community.name}</h1>
             <p className='text-primary'>{community.address}</p>
+            <Share/>
             <p className='mt-2'>{community.detail}</p>
             {community.content && (
               <div

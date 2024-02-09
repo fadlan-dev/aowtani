@@ -45,7 +45,7 @@ const Page = ({ params }: pageProps) => {
                     <tr>
                       <th className="text-start">ยอดชำระทั้งหมด</th>
                       <th className="text-end whitespace-nowrap">
-                        ราคาต่อท่าน
+                        ราคาต่อหน่วย
                       </th>
                       <th className="text-end">จำนวน</th>
                       <th className="text-end whitespace-nowrap">รวม (บาท)</th>

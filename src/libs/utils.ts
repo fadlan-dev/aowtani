@@ -96,3 +96,11 @@ export function isTokenExpired(token: string): boolean {
     return false;
   }
 }
+
+export function isValidUrl(url: string) {
+  // Regular expression to match "http://" or "https://"
+  var pattern = /^(http|https):\/\//;
+
+  // Test if the URL starts with "http://" or "https://"
+  return pattern.test(url) ? url : `http://${url}`;
+}

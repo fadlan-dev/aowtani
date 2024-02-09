@@ -7,6 +7,7 @@ import Hero from '@/components/Hero';
 import LocalGuideItem from '@/components/LocalGuideItem';
 import Reviews from '@/components/Reviews';
 import { cn, numberFormat } from '@/libs/utils';
+import Share from '@/components/Share';
 
 interface pageProps {
   params: { id: string };
@@ -55,6 +56,7 @@ async function page({ params }: pageProps) {
               className='mt-2'
               destination={pkg.destination_visit}
             />
+            <Share/>
             <div
               id='ck-editor'
               className='mt-4 relative'
