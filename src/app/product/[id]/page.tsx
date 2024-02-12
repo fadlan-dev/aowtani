@@ -1,5 +1,6 @@
 import ProductHero from '@/components/ProductHero';
 import Reviews from '@/components/Reviews';
+import Share from '@/components/Share';
 import { getProduct } from '@/libs/services/getProduct';
 import { IProduct } from '@/types';
 
@@ -24,6 +25,7 @@ const Page = async ({ params }: pageProps) => {
     <div className='mt-20 mb-20'>
       <div className='container overflow-hidden'>
         <ProductHero product={product} />
+        <Share/>
         <div
           id='ck-editor'
           className='mt-4 relative'

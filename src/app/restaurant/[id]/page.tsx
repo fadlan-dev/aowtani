@@ -1,6 +1,7 @@
 import Hero from '@/components/Hero';
 import NearbyAttractions from '@/components/NearbyAttractions';
 import Reviews from '@/components/Reviews';
+import Share from '@/components/Share';
 import { getPartner } from '@/libs/services/getPartner';
 import { IPartner } from '@/types';
 
@@ -20,6 +21,7 @@ const page = async ({ params }: Props) => {
           <div className='flex-1'>
             <h1 className='capitalize'>{partner.name}</h1>
             <p className='text-primary'>{partner.address}</p>
+            <Share/>
             <p className='mt-4'>{partner.detail}</p>
             <Reviews variant='business_partners' className='mt-6' />
             <NearbyAttractions

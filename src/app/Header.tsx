@@ -54,6 +54,11 @@ const MENUS: IMenu[] = [
     key: "community",
     path: "/community",
   },
+  // {
+  //   title: "ทัวร์ท่องเที่ยว",
+  //   key: "community",
+  //   path: "/community",
+  // },
   {
     title: "ผู้ประกอบการ",
     key: "partner",
@@ -121,7 +126,7 @@ const Index = () => {
           ))}
         </Navbar>
       </Drawer>
-      <Header height={80} px="md" fixed zIndex={10}>
+      <Header height={100} px="md" fixed zIndex={10}>
         <Group position="apart" className="h-full">
           <Group>
             <ActionIcon className=" block md:hidden" onClick={toggleCollapsed}>
@@ -135,7 +140,7 @@ const Index = () => {
               href="/"
               className=" no-underline text-black font-bold md:pl-20"
             >
-              <Image height={56} width={56} src="/logo.svg" alt="aowtani" />
+              <Image height={80} width={80} src="/logo.svg" alt="aowtani" />
             </Link>
           </Group>
 

@@ -15,7 +15,7 @@ const page = async ({ searchParams }: Props) => {
     page: Number(searchParams.page) || 1,
   });
   return (
-    <div className='pt-24 mb-24'>
+    <div className='pt-12 mb-24'>
       <center>
         <h1>หน่วยงาน</h1>
         <p>ที่ช่วยส่งเสริมชุมชนในพื้นที่</p>

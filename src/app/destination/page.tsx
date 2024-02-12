@@ -21,7 +21,7 @@ const page = async ({ searchParams }: Props) => {
   });
 
   return (
-    <div className='pt-24 mb-24'>
+    <div className='pt-12 mb-24'>
       <center>
         <h1>สถานที่ท่องเที่ยว</h1>
         <p>เลือกรายการสถานที่ท่องเที่ยวตามไลฟ์สไตล์ของคุณ</p>

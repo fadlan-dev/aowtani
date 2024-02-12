@@ -7,7 +7,7 @@ import Calendar from "@/components/ui/fullcalendar";
 type Props = {};
 const Page = ({}: Props) => {
   return (
-    <div className="pt-24 mb-24">
+    <div className="pt-12 mb-24">
       <center>
         <h1>ปฎิทินกิจกรรม</h1>
         <p>กิจกรรมดีๆ ที่ไม่ควรพลาด</p>

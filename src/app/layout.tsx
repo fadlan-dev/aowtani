@@ -69,7 +69,7 @@ export default async function RootLayout({
             <Header />
             {authModal}
             <main className="md:min-h-[calc(100vh-83px)] min-h-[calc(100vh-213px)] bg-[rgb(248, 249, 250)]">
-              <div className="flex pt-20">
+              <div className="flex pt-[6.25rem]">
                 <SideBar />
                 <div className="flex-auto overflow-auto py-10">{children}</div>
               </div>

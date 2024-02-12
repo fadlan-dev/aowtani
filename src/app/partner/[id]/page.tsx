@@ -38,7 +38,7 @@ const Page = async ({ params }: Props) => {
           <h3>แพ็กเกจทัวร์</h3>
           <PackageList data={pkgs.data} />
         </div>
-        <div className='hidden lg:block w-80'>
+        <div className='hidden w-80'>
           <h3>สังกัดชุมชน</h3>
           {/* 
        

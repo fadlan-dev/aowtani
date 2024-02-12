@@ -27,19 +27,19 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
     queryKey: ["destination"],
     queryFn: () =>
       getDestinations({
-        per_page: 3,
+        per_page: 100,
         search: "",
       }),
   });
 
   const { data: hotels } = useQuery({
     queryKey: ["hotels"],
-    queryFn: () => getPartners({ type: "Hotel", per_page: 3, search: "" }),
+    queryFn: () => getPartners({ type: "Hotel", per_page: 100, search: "" }),
   });
 
   const { data: restaurants } = useQuery({
     queryKey: ["restaurants"],
-    queryFn: () => getPartners({ type: "Restaurant", per_page: 3, search: "" }),
+    queryFn: () => getPartners({ type: "Restaurant", per_page: 100, search: "" }),
   });
 
   const { data: mosques } = useQuery({
@@ -47,7 +47,7 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
     queryFn: () =>
       getDestinations({
         destination_type_id: "12",
-        per_page: 3,
+        per_page: 100,
         search: "",
       }),
   });

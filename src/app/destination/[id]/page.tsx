@@ -7,6 +7,7 @@ import Reviews from '@/components/Reviews';
 import { getDestination } from '@/libs/services/getDestination';
 import Hero from '@/components/Hero';
 import OrganizationItem from '@/components/OrganizationItem';
+import Share from '@/components/Share';
 
 type Props = {
   params: { id: string };
@@ -60,6 +61,7 @@ const page = async ({ params }: Props) => {
             <div className='flex gap-2'>
               <DestinationType destinationType={dest.destination_type} />
             </div>
+            <Share/>
             <p className='mt-4'>{dest.description}</p>
             <div
               id='ck-editor'
