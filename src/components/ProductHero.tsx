@@ -7,14 +7,17 @@ import {
   NumberInput,
   useMantineTheme,
   Text,
+  Modal,
 } from "@mantine/core";
 import { FunctionComponent, useState } from "react";
 import Image from "next/image";
 import { Carousel } from "@mantine/carousel";
 import { useRouter } from "next/navigation";
-import { useMediaQuery } from "@mantine/hooks";
+import { useDisclosure, useMediaQuery } from "@mantine/hooks";
+import { notifications } from '@mantine/notifications';
 
 import { useCart } from "react-use-cart";
+import { IconCheck } from "@tabler/icons-react";
 
 interface ProductHeroProps {
   product: IProduct;
@@ -27,10 +30,11 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
   const matches = useMediaQuery("(max-width: 768px)");
   const { addItem, setCartMetadata, metadata, emptyCart } = useCart();
   const [quantity, setQuantity] = useState<number | any>(1);
+  const [opened, { open, close }] = useDisclosure(false);
 
-  console.log({ product });
 
   const addToCart = () => {
+
     let item = {
       id: product.id.toString(),
       name: product.name,
@@ -41,17 +45,45 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
     if (metadata?.shop) {
       if (metadata?.shop.id === product.shop.id) {
         addItem(item, quantity);
+        notifications.show({
+          title: 'อัปเดทสินค้าในรถเข็นเรียบร้อย',
+          message: false,
+          color:'green',
+          icon: <IconCheck/>
+        })
       } else {
-        alert("ต้องการเปลี่ยนร้านใช่หรือไม่");
-        emptyCart();
-        setCartMetadata({ shop: product.shop });
-        addItem(item, quantity);
+        open();
       }
     } else {
+      notifications.show({
+        title: 'เพิ่มสินค้าใหม่ไปยังรถเข็นเรียบร้อย',
+        message: false,
+        color:'green',
+        icon: <IconCheck/>
+      })
       setCartMetadata({ shop: product.shop });
       addItem(item, quantity);
     }
   };
+
+  const changeShop = () => {
+        let item = {
+          id: product.id.toString(),
+          name: product.name,
+          price: product.price,
+          image: product.images[0],
+        };
+        emptyCart();
+        setCartMetadata({ shop: product.shop });
+        addItem(item, quantity);
+        close()
+        notifications.show({
+          title: 'เพิ่มสินค้าใหม่ไปยังรถเข็นเรียบร้อย',
+          message: false,
+          color:'green',
+          icon: <IconCheck/>
+        })
+  }
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 overflow-hidden relative">
@@ -126,6 +158,15 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
           </Button>
         </Group>
       </Flex>
+      <Modal size="xs" opened={opened} onClose={close} title={<b>คุณต้องการเปลี่ยนร้านหรอ?</b>} centered>
+      <Text size="sm">
+        เราจัดให้ได้ทันทีเลย แต่ต้องลบรายการอาหารที่คุณสั่งไว้ตอนนี้ก่อนน่ะ
+      </Text>
+      <Flex mt="xl" direction="column" gap={6}>
+          <Button variant="gradient" onClick={changeShop}>ตกลง</Button>
+          <Button variant="default" onClick={close}>ยกเลิก</Button>
+        </Flex>
+      </Modal>
     </div>
   );
 };
