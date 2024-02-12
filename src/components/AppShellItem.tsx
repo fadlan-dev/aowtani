@@ -9,7 +9,7 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 import DestinationList from "./DestinationList";
-import { FoodIcon, MosqueIcon, ResortIcon, TravelIcon } from "./Icons";
+import { CalendarIcon, FoodIcon, LinkOutIcon, MarketIcon, MosqueIcon, MuseumIcon, ResortIcon, SouvenirIcon, TravelIcon } from "./Icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/libs/utils";
 import { IDestination, IPackage, IPartner, IProduct } from "@/types";
@@ -35,32 +35,78 @@ import RestaurantFilter from "./RestaurantFilter";
 type Props = {};
 export const APP_SHELL_MENUS = [
   {
-    key: "destination",
-    title: "สถานที่ท่องเที่ยว",
-    icon: <TravelIcon />,
+    key: "event",
+    title: "ปฏิทินกิจกรรม",
+    icon: <CalendarIcon />,
     color: "blue",
     active: "#EDF2FF",
+    slug: "/event",
   },
   {
     key: "hotel",
-    title: "ที่พักผ่อน",
+    title: "ที่พัก",
     icon: <ResortIcon />,
     color: "green",
     active: "#EBFBEE",
+    slug: "?t=hotel",
   },
   {
     key: "restaurant",
-    title: "อาหารจานโปรด",
+    title: "ร้านอาหารและคาเฟ่",
     icon: <FoodIcon />,
     color: "violet",
     active: "#F3F0FF",
+    slug: "?t=restaurant",
   },
   {
     key: "mosque",
     title: "มัสยิด",
     icon: <MosqueIcon />,
+    color: "#E6F6F1",
+    active: "#FFF4E6",
+    slug: "?t=mosque",
+  },
+  {
+    key: "museum",
+    title: "พิพิธภัณฑ์",
+    icon: <MuseumIcon />,
     color: "orange",
     active: "#FFF4E6",
+    slug: "?t=museum",
+  },
+  {
+    key: "souvenir",
+    title: "ของฝาก",
+    icon: <SouvenirIcon />,
+    color: "#FFEBEB",
+    active: "#FFF4E6",
+    slug: "?t=souvenir",
+  },
+  {
+    key: "market",
+    title: "แหล่งชอปปิ้ง / ตลาดนัด",
+    icon: <MarketIcon />,
+    color: "#E1E3F4",
+    active: "#FFF4E6",
+    slug: "?t=market",
+  },
+  {
+    key: "linkout1",
+    title: "สมัครเป็นผู้ประกอบการ",
+    icon: <LinkOutIcon />,
+    color: "#ffffff",
+    active: "#FFF4E6",
+    slug: "https://partners.admin.aowtani.com/login",
+    target: "_blank",
+  },
+  {
+    key: "linkout2",
+    title: "สมัครเป็นไกด์ท้องถิ่น",
+    icon: <LinkOutIcon />,
+    color: "#ffffff",
+    active: "#FFF4E6",
+    slug: "https://localguide.admin.aowtani.com/login",
+    target: "_blank",
   },
 ];
 
