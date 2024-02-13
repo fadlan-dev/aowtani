@@ -97,10 +97,15 @@ export function isTokenExpired(token: string): boolean {
   }
 }
 
-export function isValidUrl(url: string) {
+export function isValidUrl(url: string): string {
   // Regular expression to match "http://" or "https://"
   var pattern = /^(http|https):\/\//;
 
   // Test if the URL starts with "http://" or "https://"
   return pattern.test(url) ? url : `http://${url}`;
+}
+
+export function facebookLink(value: string): string{
+    const urlRegex = /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)(?:\.[a-zA-Z]{2,})(?:\/[a-zA-Z0-9-._]*)*\/?$/
+    return urlRegex.test(value) ? value : `https://web.facebook.com/search/top/?q=${value}`
 }

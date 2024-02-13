@@ -11,6 +11,8 @@ import Link from 'next/link';
 import { FunctionComponent } from 'react';
 import Image from 'next/image';
 import { IconBrandFacebook, IconPhone } from '@tabler/icons-react';
+import { facebookLink } from '@/libs/utils';
+import { useRouter } from "next/navigation";
 
 interface RestaurantItemProps {
   partner: IPartner;
@@ -19,11 +21,12 @@ interface RestaurantItemProps {
 const RestaurantItem: FunctionComponent<RestaurantItemProps> = ({
   partner,
 }) => {
+  const router = useRouter();
   const theme = useMantineTheme();
+
   return (
-    <Link href={`restaurant/${partner.id}`}>
       <Card padding='md' className='cursor-pointer hover:shadow transition'>
-        <Card.Section>
+        <Card.Section onClick={() => router.push(`restaurant/${partner.id}`)}>
           <AspectRatio ratio={16 / 9}>
             <Image
               className='bg-zinc-200 object-cover'
@@ -44,26 +47,36 @@ const RestaurantItem: FunctionComponent<RestaurantItemProps> = ({
           {partner.address}
         </Text>
         <Text lineClamp={2}>{partner.detail}</Text>
-        <Flex gap={8} mt={8} className='text-primary'>
-          {partner.facebook && (
-            <Link href={partner.facebook} target='_blank'>
-              <ActionIcon
-                radius='lg'
-                color={theme.primaryColor}
-                variant='light'
-              >
-                <IconBrandFacebook size={14} target='_blank' />
-              </ActionIcon>
-            </Link>
-          )}
-          {partner.phone && (
-            <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
+        <Flex gap={8} mt={8} direction="column" className="text-primary">
+        {partner.facebook && (
+          <Link
+            href={facebookLink(partner.facebook)}
+            target="_blank"
+            className="flex items-center gap-3"
+          >
+            <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
+              <IconBrandFacebook size={14} target="_blank" />
+            </ActionIcon>
+            <Text size="sm" color="black" className="hover:underline">
+              {partner.facebook}
+            </Text>
+          </Link>
+        )}
+        {partner.phone && (
+          <Link
+            href={`tel:${partner.phone}`}
+            className="flex items-center gap-3"
+          >
+            <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
               <IconPhone size={14} />
             </ActionIcon>
-          )}
-        </Flex>
+            <Text size="sm" color="black" className="hover:underline">
+              {partner.phone}
+            </Text>
+          </Link>
+        )}
+      </Flex>
       </Card>
-    </Link>
   );
 };
 

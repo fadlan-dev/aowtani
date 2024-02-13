@@ -148,8 +148,8 @@ const SignInForm = ({ p }: Props) => {
           })}
         >
           <TextInput
-            label="Username"
-            placeholder="Username"
+            label="Email"
+            placeholder="Email"
             {...form.getInputProps("username")}
           />
           <PasswordInput

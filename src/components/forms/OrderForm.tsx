@@ -21,7 +21,8 @@ import { IOrderRequest, IProduct } from "@/types";
 import { useRouter } from "next/navigation";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { notifications } from "@mantine/notifications";
-import { Item } from "react-use-cart";
+import { Item,useCart } from "react-use-cart";
+import Link from "next/link";
 
 interface OrderFormProps {
   products: Item[];
@@ -41,6 +42,9 @@ const schema = z.object({
 });
 
 const OrderForm: FunctionComponent<OrderFormProps> = ({ products }) => {
+
+  const { clearCartMetadata,emptyCart } = useCart();
+
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -132,6 +136,8 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ products }) => {
         icon: <IconCheck size="1rem" />,
       });
       setTimeout(() => {
+        clearCartMetadata()
+        emptyCart()
         router.push("/product");
       }, 1000);
     },
@@ -183,13 +189,14 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ products }) => {
         </Paper>
         <Paper p="sm" mt="lg">
           <Text weight="bold">แจ้งการชำระเงิน</Text>
-          <FileInput
+          {session && <FileInput
             mt="md"
             label="อัพโหลดหลักฐานการชำระเงิน"
             placeholder="Click to Upload"
             error={form.errors["slip.asset"]}
             onChange={(file) => file && uploadProfile(file as File)}
-          />
+          />}
+
           {form.values.slip.asset && (
             <Box
               mt="sm"
@@ -203,15 +210,22 @@ const OrderForm: FunctionComponent<OrderFormProps> = ({ products }) => {
               />
             </Box>
           )}
-          <Button
-            mt="sm"
-            variant="gradient"
-            fullWidth
-            type="submit"
-            loading={isLoading}
-          >
-            ชำระเงิน
-          </Button>
+         
+          {session ? (
+           <Button
+           mt="sm"
+           variant="gradient"
+           fullWidth
+           type="submit"
+           loading={isLoading}
+         >
+           ชำระเงิน
+         </Button>
+        ) : (
+          <Link href="/sign-in?callback=/product/checkout">
+            <Button fullWidth mt="sm" variant='gradient'>เข้าสู่เพื่อชำระเงิน</Button>
+          </Link>
+        )}
         </Paper>
       </form>
     </div>

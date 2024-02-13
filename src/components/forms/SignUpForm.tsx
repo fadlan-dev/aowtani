@@ -185,7 +185,7 @@ const RegisterForm = ({ p }: Props) => {
               )}
             </div>
             <TextInput
-              label='Username'
+              label='Email'
               placeholder='aowtani.@gmail.com'
               {...form.getInputProps('username')}
             />

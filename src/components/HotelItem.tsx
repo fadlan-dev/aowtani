@@ -11,6 +11,7 @@ import Link from "next/link";
 import { FunctionComponent } from "react";
 import Image from "next/image";
 import { IconBrandFacebook, IconPhone } from "@tabler/icons-react";
+import { facebookLink } from "@/libs/utils";
 
 interface HotelItemProps {
   partner: IPartner;
@@ -43,20 +44,33 @@ const HotelItem: FunctionComponent<HotelItemProps> = ({ partner }) => {
         </Text>
         <Text lineClamp={2}>{partner.detail}</Text>
       </Link>
-      <Flex gap={8} mt={8} className="text-primary">
+      <Flex gap={8} mt={8} direction="column" className="text-primary">
         {partner.facebook && (
-          <Link href={partner.facebook} target="_blank">
+          <Link
+            href={facebookLink(partner.facebook)}
+            target="_blank"
+            className="flex items-center gap-3"
+          >
             <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
               <IconBrandFacebook size={14} target="_blank" />
             </ActionIcon>
+            <Text size="sm" color="black" className="hover:underline">
+              {partner.facebook}
+            </Text>
           </Link>
         )}
         {partner.phone && (
-          <a href={`tel:${partner.phone}`}>
+          <Link
+            href={`tel:${partner.phone}`}
+            className="flex items-center gap-3"
+          >
             <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
               <IconPhone size={14} />
             </ActionIcon>
-          </a>
+            <Text size="sm" color="black" className="hover:underline">
+              {partner.phone}
+            </Text>
+          </Link>
         )}
       </Flex>
     </Card>

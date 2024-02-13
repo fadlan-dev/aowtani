@@ -23,6 +23,11 @@ const page = async ({ params }: Props) => {
             <p className='text-primary'>{partner.address}</p>
             <Share/>
             <p className='mt-4'>{partner.detail}</p>
+            <div
+              id='ck-editor'
+              className='mt-4 relative'
+              dangerouslySetInnerHTML={{ __html: partner.content }}
+            />
             <Reviews variant='business_partners' className='mt-6' />
             <NearbyAttractions
               className='mt-6'

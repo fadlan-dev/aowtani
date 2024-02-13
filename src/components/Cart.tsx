@@ -4,6 +4,7 @@ import { Modal, Button, Image } from "@mantine/core";
 import { Item } from "react-use-cart";
 import { useCart } from "react-use-cart";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface CartProps {
   opened: boolean;
@@ -11,10 +12,12 @@ interface CartProps {
 }
 
 const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
+
+  const router = useRouter()
   const { items, isEmpty, updateItemQuantity, cartTotal } = useCart();
 
   return (
-    <Modal opened={opened} onClose={close} title="ตะกร้าสินค้า">
+    <Modal opened={opened} onClose={close} title="ตะกร้าสินค้า" key="cart-modal">
       {isEmpty && <div className="text-center">ไม่มีสินค้าในตะกร้า</div>}
       <ul className="space-y-4">
         {items.map((item: Item) => (
@@ -61,11 +64,12 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
         <div>ราคารวม</div>
         <div>฿{cartTotal} บาท</div>
       </div>
-      <Link href="/product/checkout">
-        <Button variant="gradient" fullWidth>
+        <Button variant="gradient" fullWidth onClick={()=>{
+          router.push("/product/checkout")
+          close()
+        }}>
           ไปที่หน้าชำระเงิน
         </Button>
-      </Link>
     </Modal>
   );
 };
