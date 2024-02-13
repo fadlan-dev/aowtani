@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const [TotalItem, setTotalItem] = useState(0);
   const { totalUniqueItems } = useCart();
 
-  const [opened, { open, close }] = useDisclosure(false);
+  const [cartOpened, { open, close }] = useDisclosure(false);
 
   const pathname = usePathname();
 
@@ -24,9 +24,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return <main>{children}</main>;
   }
 
+  console.log({cartOpened})
+
   return (
     <>
-      <Cart opened={opened} close={close} />
+      <Cart opened={cartOpened} close={close} />
       <div className="float-right pr-12">
         <div
           onClick={open}

@@ -1,5 +1,5 @@
 'use client';
-import { cn } from '@/libs/utils';
+import { cn, facebookLink } from '@/libs/utils';
 import { ILocalGuide } from '@/types';
 import {
   ActionIcon,
@@ -53,17 +53,34 @@ const LocalGuideItem = ({ className, data }: Props) => {
       <Group className='text-primary'>
         <Text>{data.experience}</Text>
       </Group>
-      <Flex gap={8} mt={8} className='text-primary'>
-        <Link href={data.facebook} target='_blank'>
-          <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
-            <IconBrandFacebook size={14} />
-          </ActionIcon>
-        </Link>
-        <Link href={`tel:${data.phone}`} target='_blank'>
-          <ActionIcon radius='lg' color={theme.primaryColor} variant='light'>
-            <IconPhone size={14} />
-          </ActionIcon>
-        </Link>
+      <Flex gap={8} mt={8} direction="column" className="text-primary">
+        {data.facebook && (
+          <Link
+            href={facebookLink(data.facebook)}
+            target="_blank"
+            className="flex items-center gap-3"
+          >
+            <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
+              <IconBrandFacebook size={14} target="_blank" />
+            </ActionIcon>
+            <Text size="sm" color="black" className="hover:underline">
+              {data.facebook}
+            </Text>
+          </Link>
+        )}
+        {data.phone && (
+          <Link
+            href={`tel:${data.phone}`}
+            className="flex items-center gap-3"
+          >
+            <ActionIcon radius="lg" color={theme.primaryColor} variant="light">
+              <IconPhone size={14} />
+            </ActionIcon>
+            <Text size="sm" color="black" className="hover:underline">
+              {data.phone}
+            </Text>
+          </Link>
+        )}
       </Flex>
     </Card>
   );

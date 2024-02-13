@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@/libs/utils";
+import { cn, facebookLink } from "@/libs/utils";
 import { IPartner } from "@/types";
 import {
   ActionIcon,
@@ -71,7 +71,7 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
       <Flex gap={8} mt={8} direction="column" className="text-primary">
         {partner.facebook && (
           <Link
-            href={partner.facebook}
+            href={facebookLink(partner.facebook)}
             target="_blank"
             className="flex items-center gap-3"
           >

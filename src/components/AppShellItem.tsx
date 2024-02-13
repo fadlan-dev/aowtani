@@ -80,7 +80,7 @@ export const APP_SHELL_MENUS = [
     icon: <SouvenirIcon />,
     color: "#FFEBEB",
     active: "#FFF4E6",
-    slug: "?t=souvenir",
+    slug: "/product",
   },
   {
     key: "market",
@@ -329,7 +329,7 @@ const MuseumItem = () => {
     <>
       <center>
         <h1>พิพิธภัณฑ์</h1>
-        {/* <p>ศาสนสถาน</p> */}
+        <p>แหล่งเรียนรู้มิวเซียม</p>
       </center>
       {isLoading ? (
         <LoaderItem />
@@ -338,7 +338,7 @@ const MuseumItem = () => {
           total={1}
           data={(museums?.data || []) as IDestination[]}
           className="mt-6 mb-6"
-          showMoreType="12"
+          showMoreType="10"
           showMore
         />
       )}
@@ -361,7 +361,7 @@ const MarketItem = () => {
     <>
       <center>
         <h1>แหล่งชอปปิ้ง / ตลาดนัด</h1>
-        {/* <p>ศาสนสถาน</p> */}
+        <p>ร่วมแหล่งช๊อป กิน ชิล</p>
       </center>
       {isLoading ? (
         <LoaderItem />

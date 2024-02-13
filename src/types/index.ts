@@ -135,6 +135,7 @@ export interface IPartner {
   organization: IOrganization;
   lat?: string;
   long?: string;
+  content: string;
 }
 
 export interface IProduct {

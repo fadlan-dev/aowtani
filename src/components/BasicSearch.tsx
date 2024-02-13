@@ -3,7 +3,7 @@ import { cn } from '@/libs/utils';
 import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState , useEffect} from 'react';
 
 interface BasciSearchProps {
   className?: string;
@@ -22,6 +22,7 @@ const BasciSearch: FunctionComponent<BasciSearchProps> = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const [keyword,setKeyword] = useState('')
 
   const handleRoute = ({
     search = '',
@@ -34,6 +35,15 @@ const BasciSearch: FunctionComponent<BasciSearchProps> = ({
     newParams.set('search', `${search}`);
     router.push(`${pathname}?${newParams}`);
   };
+
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget
+    if(value === ''){
+      handleRoute({ search: value});
+    }
+    setKeyword(value)
+
+  }
 
   return (
     <div className={cn(className, 'text-center')}>
@@ -49,6 +59,9 @@ const BasciSearch: FunctionComponent<BasciSearchProps> = ({
             radius='xl'
             color={theme.primaryColor}
             variant='filled'
+            onClick={(e)=>{
+              handleRoute({ search: keyword});
+            }}
           >
             <IconSearch size='1.1rem' stroke={1.5} />
           </ActionIcon>
@@ -57,9 +70,10 @@ const BasciSearch: FunctionComponent<BasciSearchProps> = ({
         rightSectionWidth={42}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            handleRoute({ search: e.currentTarget.value });
+            handleRoute({ search: keyword});
           }
         }}
+        onChange={handleChange}
       />
       {tag && <p className='mt-4'>#{tag}</p>}
     </div>

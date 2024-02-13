@@ -75,7 +75,11 @@ async function page({ params }: pageProps) {
             <h3 className='mb-2'>ไกด์ท้องถิ่น</h3>
             {/* <LocalGuideItem /> */}
             <h3 className='mb-2'>การจอง</h3>
+<<<<<<< HEAD
             <Booking id={params.id} price={pkg.price} />
+=======
+            <Booking price={pkg.price} id={params.id}/>
+>>>>>>> fitdev
           </div>
         </div>
       </div>

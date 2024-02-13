@@ -73,7 +73,7 @@ const SideBar = ({}: Props) => {
       icon: <SouvenirIcon />,
       color: "#FFEBEB",
       active: "#FFF4E6",
-      slug: "?t=souvenir",
+      slug: "/product",
     },
     {
       key: "market",
