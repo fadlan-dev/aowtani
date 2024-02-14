@@ -109,3 +109,18 @@ export function facebookLink(value: string): string{
     const urlRegex = /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)(?:\.[a-zA-Z]{2,})(?:\/[a-zA-Z0-9-._]*)*\/?$/
     return urlRegex.test(value) ? value : `https://web.facebook.com/search/top/?q=${value}`
 }
+
+export function getPartnerType(value: string): string{
+  switch (value) {
+    case 'Hotel':
+      return 'ที่พัก'
+    case 'Restaurant':
+      return 'ที่พัก'
+    case 'TourActivity':
+      return 'ที่พัก'
+    case 'Shop':
+      return 'ที่พัก'
+    default:
+      return '';
+  }
+}
