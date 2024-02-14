@@ -12,20 +12,21 @@ import { FunctionComponent } from "react";
 import Image from "next/image";
 import { IconBrandFacebook, IconPhone } from "@tabler/icons-react";
 import { facebookLink } from "@/libs/utils";
+import { useRouter } from "next/navigation";
 
 interface HotelItemProps {
   partner: IPartner;
 }
 
 const HotelItem: FunctionComponent<HotelItemProps> = ({ partner }) => {
+  const router = useRouter();
   const theme = useMantineTheme();
   return (
     <Card padding="md" className="cursor-pointer hover:shadow transition">
-      <Link href={`hotel/${partner.id}`} className="text-black">
-        <Card.Section>
+        <Card.Section onClick={() => router.push(`hotel/${partner.id}`)}>
           <AspectRatio ratio={16 / 9}>
             <Image
-              className="bg-zinc-200 object-contain"
+              className="bg-zinc-200 object-cover"
               src={
                 partner.images[0]?.asset
                   ? `${process.env.NEXT_IMAGE_HOST}${partner.images[0]?.asset}`
@@ -43,7 +44,6 @@ const HotelItem: FunctionComponent<HotelItemProps> = ({ partner }) => {
           {partner.address}
         </Text>
         <Text lineClamp={2}>{partner.detail}</Text>
-      </Link>
       <Flex gap={8} mt={8} direction="column" className="text-primary">
         {partner.facebook && (
           <Link

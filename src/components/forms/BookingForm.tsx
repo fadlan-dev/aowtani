@@ -10,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
@@ -39,6 +39,8 @@ const schema = z.object({
 });
 
 const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
+
+  const [waitting,setWaitting] = useState(false)
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -145,6 +147,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
       });
     },
     onSuccess: (res) => {
+      setWaitting(true)
       notifications.update({
         id: 'load-tour',
         color: 'teal',
@@ -152,9 +155,10 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
         message: 'Tour was successfully created!',
         icon: <IconCheck size='1rem' />,
       });
-      setTimeout(() => {
+
+      if(!waitting){
         router.push('/');
-      }, 1000);
+      }
     },
   });
 
@@ -238,6 +242,7 @@ const BookingForm: FunctionComponent<BookingFormProps> = ({ pkg }) => {
             fullWidth
             type='submit'
             loading={isLoading}
+            disabled={waitting}
           >
             ชำระเงิน
           </Button>

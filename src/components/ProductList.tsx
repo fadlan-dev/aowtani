@@ -45,7 +45,7 @@ const ProductList: FunctionComponent<ProductListProps> = ({
       <div className={cn('px-4 mt-4 text-end')}>
         {total > 6 && (
           <Pagination
-            total={total / 6}
+            total={total / 3}
             value={Number(searchParams.get('page')) || 1}
             size='sm'
             className='w-fit m-auto'

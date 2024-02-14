@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams,usePathname } from "next/navigation"
 
 import { cn } from "@/libs/utils";
 import { ActionIcon, Group, Navbar, ThemeIcon, Text } from "@mantine/core";
@@ -26,6 +27,10 @@ type Props = {};
 const SideBar = ({}: Props) => {
   const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
     useDisclosure(false);
+
+    const searchParams = useSearchParams()
+    const pathname = usePathname()
+  
   const APP_SHELL_MENUS = [
     {
       key: "event",
@@ -104,13 +109,8 @@ const SideBar = ({}: Props) => {
   ];
 
   const activeMenu = (value: any) => {
-    return false;
-    // console.log({ searchParams, value });
-    // if (searchParams) {
-    //   return searchParams === value;
-    // } else {
-    //   return pathname === value;
-    // }
+    const t = searchParams.get('t')
+    return t ? value === `?t=${t}` : value === pathname;
   };
 
   return (
