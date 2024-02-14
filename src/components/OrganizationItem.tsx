@@ -30,7 +30,7 @@ const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
       <Card.Section>
         <AspectRatio ratio={16 / 9}>
           <Image
-            className='bg-zinc-200 object-contain'
+            className='bg-zinc-200 object-cover'
             src={
               data.banner
                 ? `${process.env.NEXT_IMAGE_HOST}${data.banner.asset}`

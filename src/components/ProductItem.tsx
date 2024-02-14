@@ -39,7 +39,7 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
             <Text weight='bold' c='brand'>
               ฿{numberFormat(product.price)}
             </Text>
-            {product.price_before_discount > 0 && (
+            {product.price_before_discount && (
               <Text size='sm' c='dimmed' td='line-through'>
                 ฿{numberFormat(product.price_before_discount)}
               </Text>

@@ -24,8 +24,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return <main>{children}</main>;
   }
 
-  console.log({cartOpened})
-
   return (
     <>
       <Cart opened={cartOpened} close={close} />

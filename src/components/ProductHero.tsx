@@ -32,7 +32,6 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
   const [quantity, setQuantity] = useState<number | any>(1);
   const [opened, { open, close }] = useDisclosure(false);
 
-
   const addToCart = () => {
 
     let item = {
@@ -121,9 +120,9 @@ const ProductHero: FunctionComponent<ProductHeroProps> = ({ product }) => {
           <Text className="font-bold text-2xl text-primary">
             ฿{product.price}
           </Text>
-          <Text c="dimmed" td="line-through">
+          {product.price_before_discount && <Text c="dimmed" td="line-through">
             ฿{product.price_before_discount}
-          </Text>
+          </Text>}
         </Group>
         <Group>
           จำนวน

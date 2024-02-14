@@ -70,9 +70,9 @@ async function page({ params }: pageProps) {
             <Reviews variant='packages' className='mt-6' />
           </div>
           <div className='w-full lg:w-80'>
-            <h3 className='mb-2'>ผู้ประกอบการ</h3>
+            {/* <h3 className='mb-2'>ผู้ประกอบการ</h3> */}
             {/* <LocalGuidItem /> */}
-            <h3 className='mb-2'>ไกด์ท้องถิ่น</h3>
+            {/* <h3 className='mb-2'>ไกด์ท้องถิ่น</h3> */}
             {/* <LocalGuideItem /> */}
             <h3 className='mb-2'>การจอง</h3>
 <<<<<<< HEAD

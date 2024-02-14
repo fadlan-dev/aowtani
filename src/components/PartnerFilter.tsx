@@ -22,9 +22,9 @@ const PartnerFilter: FunctionComponent<PartnerFilterProps> = () => {
         value={(searchParams.get('type') as string) || ''}
         onChange={(e) => handleRoute({ type: e })}
         data={[
-          { label: 'All', value: '' },
-          { label: 'Hotel', value: 'Hotel' },
-          { label: 'Restaurant', value: 'Restaurant' },
+          { label: 'ทั้งหมด', value: '' },
+          { label: 'ที่พัก', value: 'Hotel' },
+          { label: 'ร้านอาหารและคาเฟ่', value: 'Restaurant' },
           { label: 'Tour Activity', value: 'TourActivity' },
           { label: 'Shop', value: 'Shop' },
         ]}
