@@ -55,16 +55,16 @@ const SignInForm = ({ p }: Props) => {
           fontWeight: 900,
         })}
       >
-        Welcome back!
+        เข้าสู่ระบบ
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?{" "}
+        ยังไม่มีบัญชีใช่หรือไม่?{" "}
         <Anchor
           size="sm"
           component="button"
           onClick={() => router.push("/sign-up")}
         >
-          Create account
+          ลงทะเบียน
         </Anchor>
       </Text>
       {error && (
@@ -85,7 +85,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <AdminMasterIcon />
               </div>
-              <span className="text-sm hidden md:block">Admin Master</span>
+              <span className="text-sm hidden md:block">แอดมิน</span>
             </a>
           </li>
           <li>
@@ -98,7 +98,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <OrganizationIcon />
               </div>
-              <span className="text-sm hidden md:block">Organization</span>
+              <span className="text-sm hidden md:block">องค์กร</span>
             </a>
           </li>
           <li>
@@ -111,7 +111,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <PartnerIcon />
               </div>
-              <span className="text-sm hidden md:block">Partner</span>
+              <span className="text-sm hidden md:block">ผู้ประกอบการ</span>
             </a>
           </li>
           <li>
@@ -124,7 +124,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <GuideIcon />
               </div>
-              <span className="text-sm hidden md:block">Local Guide</span>
+              <span className="text-sm hidden md:block">ไกด์ท้องถิ่น</span>
             </a>
           </li>
         </ul>
@@ -148,18 +148,18 @@ const SignInForm = ({ p }: Props) => {
           })}
         >
           <TextInput
-            label="Email"
-            placeholder="Email"
+            label="อีเมล์"
+            placeholder="กรอกอีเมล์"
             {...form.getInputProps("username")}
           />
           <PasswordInput
-            label="Password"
-            placeholder="Your password"
+            label="รหัสผ่าน"
+            placeholder="กรอกรหัสผ่าน"
             mt="md"
             {...form.getInputProps("password")}
           />
           <Group position="apart" mt="lg">
-            <Checkbox label="Remember me" />
+            {/* <Checkbox label="จดจำการเข้าสู่ระบบ" /> */}
             {/* <Anchor
               component='button'
               size='sm'

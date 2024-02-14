@@ -115,11 +115,11 @@ export function getPartnerType(value: string): string{
     case 'Hotel':
       return 'ที่พัก'
     case 'Restaurant':
-      return 'ที่พัก'
+      return 'ร้านอาหารและคาเฟ่'
     case 'TourActivity':
-      return 'ที่พัก'
+      return 'ทัวร์ท่องเที่ยว'
     case 'Shop':
-      return 'ที่พัก'
+      return 'ของฝาก'
     default:
       return '';
   }

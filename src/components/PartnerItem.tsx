@@ -1,5 +1,5 @@
 "use client";
-import { cn, facebookLink } from "@/libs/utils";
+import { cn, facebookLink, getPartnerType } from "@/libs/utils";
 import { IPartner } from "@/types";
 import {
   ActionIcon,
@@ -54,7 +54,7 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
         </Group>
         <Flex align="center" gap={4} mt={4} className="text-primary">
           <IconBriefcase size={14} />
-          <Text size="xs">กิจกรรมทัวร์</Text>
+          <Text size="xs">{getPartnerType(partner.type)}</Text>
         </Flex>
         {partner.address && (
           <Flex align="center" gap={4} mt={2} className="text-primary">
