@@ -144,7 +144,7 @@ const Index = () => {
             </Link>
           </Group>
 
-          <Group className="h-full hidden sm:flex gap-px">
+          <Group className="h-full hidden lg:flex gap-px">
             {MENUS.map((menu: IMenu) => (
               <Link
                 href={menu.path}
@@ -198,7 +198,7 @@ const Index = () => {
           <Burger
             opened={drawerOpened}
             onClick={toggleDrawer}
-            className="block sm:hidden"
+            className="block lg:hidden"
           />
         </Group>
       </Header>
@@ -206,7 +206,7 @@ const Index = () => {
         position="right"
         opened={drawerOpened}
         onClose={closeDrawer}
-        size="100%"
+        // size="50%"
         padding="md"
         title={
           <Link
@@ -217,7 +217,7 @@ const Index = () => {
             <Image height={32} width={98} src="/logo.svg" alt="aowtani" />
           </Link>
         }
-        className="block sm:hidden"
+        className="block w-full md:w-[50%] lg:hidden"
         zIndex={1000000}
       >
         <ScrollArea h={`calc(100vh - ${rem(60)})`} mx="-md">
