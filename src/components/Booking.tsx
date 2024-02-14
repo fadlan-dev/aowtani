@@ -10,11 +10,7 @@ import dayjs from 'dayjs';
 import Link from 'next/link';
 
 interface BookingProps {
-<<<<<<< HEAD
-  id: number | string;
-=======
   id: any,
->>>>>>> fitdev
   price: number;
 }
 
@@ -27,10 +23,6 @@ const schema = z.object({
 });
 
 const Booking: FunctionComponent<BookingProps> = ({ id,price }) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> fitdev
   const { data: session } = useSession();
   const router = useRouter();
   const params = useParams();
