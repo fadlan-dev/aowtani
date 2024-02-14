@@ -25,8 +25,8 @@ const PartnerFilter: FunctionComponent<PartnerFilterProps> = () => {
           { label: 'ทั้งหมด', value: '' },
           { label: 'ที่พัก', value: 'Hotel' },
           { label: 'ร้านอาหารและคาเฟ่', value: 'Restaurant' },
-          { label: 'Tour Activity', value: 'TourActivity' },
-          { label: 'Shop', value: 'Shop' },
+          { label: 'ทัวร์ท่องเที่ยว', value: 'TourActivity' },
+          { label: 'ของฝาก', value: 'Shop' },
         ]}
       />
     </div>

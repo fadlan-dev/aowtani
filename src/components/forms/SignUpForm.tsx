@@ -117,16 +117,16 @@ const RegisterForm = ({ p }: Props) => {
             fontWeight: 900,
           })}
         >
-          Register
+          ลงทะเบียน
         </Title>
         <Text color='dimmed' size='sm' align='center' mt={5}>
-          Already have an account?{' '}
+          มีบัญชีแล้วใช่ไหม?{' '}
           <Anchor
             size='sm'
             component='button'
             onClick={() => router.push('/login')}
           >
-            Login
+            เข้าสู่ระบบ
           </Anchor>
         </Text>
         <Paper mt={30} p={p} mb='lg' radius='md'>
@@ -165,12 +165,12 @@ const RegisterForm = ({ p }: Props) => {
                         {isLoading ? (
                           <>
                             <Loader size={16} />
-                            <Text size='sm'>Uploading</Text>
+                            <Text size='sm'>กำลังอัปโหลด</Text>
                           </>
                         ) : (
                           <>
                             <IconPlus size={16} />
-                            <Text size='sm'>Upload</Text>
+                            <Text size='sm'>อัปโหลด</Text>
                           </>
                         )}
                       </Paper>
@@ -180,12 +180,12 @@ const RegisterForm = ({ p }: Props) => {
               </FileButton>
               {!form.values.profile.id && form.errors['profile.id'] && (
                 <Text color='red' size='sm'>
-                  Please upload your profile
+                  กรุณาอัปโหลดโปรไฟล์ของคุณ
                 </Text>
               )}
             </div>
             <TextInput
-              label='Email'
+              label='อีเมล์'
               placeholder='aowtani.@gmail.com'
               {...form.getInputProps('username')}
             />
@@ -220,19 +220,19 @@ const RegisterForm = ({ p }: Props) => {
               {...form.getInputProps('post_code')}
             />
             <PasswordInput
-              label='Password'
-              placeholder='Your password'
+              label='รหัสผ่าน'
+              placeholder='กรอกรหัสผ่าน'
               mt='md'
               {...form.getInputProps('password')}
             />
             <PasswordInput
-              label='Confirm'
-              placeholder='Confirm your password'
+              label='ยืนยันรหัสผ่าน'
+              placeholder='กรอกรหัสผ่านอีกครั้ง'
               mt='md'
               {...form.getInputProps('confirm')}
             />
             <Button fullWidth mt='xl' type='submit' loading={registerLoading}>
-              Sign up
+             ลงทะเบียน
             </Button>
           </form>
         </Paper>
