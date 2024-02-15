@@ -3,7 +3,7 @@
 import PaymentMethod from "@/components/PaymentMethod";
 import OrderForm from "@/components/forms/OrderForm";
 import { useGetProduct } from "@/hooks/useGetProduct";
-import { numberFormat } from "@/libs/utils";
+import { numberFormat, priceFormat } from "@/libs/utils";
 import { IProduct } from "@/types";
 import { Card, Divider, Flex, Loader, Title } from "@mantine/core";
 import Image from "next/image";
@@ -48,7 +48,7 @@ const Page = ({ params }: pageProps) => {
                         ราคาต่อหน่วย
                       </th>
                       <th className="text-end">จำนวน</th>
-                      <th className="text-end whitespace-nowrap">รวม (บาท)</th>
+                      <th className="text-end whitespace-nowrap">รวม</th>
                     </tr>
                   </thead>
                   <tbody className="mt-4 space-y-3">
@@ -72,13 +72,11 @@ const Page = ({ params }: pageProps) => {
                           </Flex>
                         </td>
                         <td className="text-end">
-                          {product && numberFormat(product.price)}
+                          {product && priceFormat(product.price)}
                         </td>
+                        <td className="text-end">{product.quantity}</td>
                         <td className="text-end">
-                          {numberFormat(Number(product.quantity))}
-                        </td>
-                        <td className="text-end">
-                          {numberFormat(Number(product.itemTotal))}
+                          {product.itemTotal && priceFormat(product.itemTotal)}
                         </td>
                       </tr>
                     ))}
@@ -89,7 +87,7 @@ const Page = ({ params }: pageProps) => {
               <Title order={3} className="text-end">
                 รวมเป็นเงินทั้งหมด
                 <span className="text-primary mx-2">
-                  {numberFormat(cartTotal)}
+                  {priceFormat(cartTotal, false)}
                 </span>
                 บาท
               </Title>

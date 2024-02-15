@@ -1,15 +1,28 @@
-import { ModalSettings } from '@mantine/modals/lib/context';
-import clsx, { ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import { ModalSettings } from "@mantine/modals/lib/context";
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 export const numberFormat = (number: number | string) =>
-  new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(
+  new Intl.NumberFormat("en-IN", { maximumSignificantDigits: 3 }).format(
     +number
   );
+
+export function priceFormat(price: number, symbol: boolean = true) {
+  return symbol
+    ? new Intl.NumberFormat("th-TH", {
+        style: "currency",
+        currency: "THB",
+        maximumFractionDigits: 0,
+      }).format(price)
+    : new Intl.NumberFormat("th-TH", {
+        currency: "THB",
+        maximumFractionDigits: 0,
+      }).format(price);
+}
 
 export function calculateItemsPerPage(
   totalItems: number,
@@ -51,28 +64,28 @@ export function isImageURL(str: string) {
 export const MODALS_CONFIG: ModalSettings = {
   fullScreen: true,
   closeButtonProps: {
-    radius: 'xl',
-    variant: 'transparent',
+    radius: "xl",
+    variant: "transparent",
   },
   styles: {
     header: {
-      background: 'transparent',
-      position: 'absolute',
+      background: "transparent",
+      position: "absolute",
       right: 16,
     },
     content: {
-      background: 'transparent',
+      background: "transparent",
     },
     body: {
       padding: 0,
-      background: 'rgb(1,1,1,0.5)',
+      background: "rgb(1,1,1,0.5)",
     },
   },
 };
 
 export function getRandomColor() {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
+  const letters = "0123456789ABCDEF";
+  let color = "#";
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
@@ -83,7 +96,7 @@ export function isTokenExpired(token: string): boolean {
   try {
     const decoded = jwt.decode(token) as JwtPayload;
 
-    if (!decoded || typeof decoded.exp === 'undefined') {
+    if (!decoded || typeof decoded.exp === "undefined") {
       // Token couldn't be decoded or doesn't have an expiration claim
       return false;
     }
@@ -105,22 +118,25 @@ export function isValidUrl(url: string): string {
   return pattern.test(url) ? url : `http://${url}`;
 }
 
-export function facebookLink(value: string): string{
-    const urlRegex = /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)(?:\.[a-zA-Z]{2,})(?:\/[a-zA-Z0-9-._]*)*\/?$/
-    return urlRegex.test(value) ? value : `https://web.facebook.com/search/top/?q=${value}`
+export function facebookLink(value: string): string {
+  const urlRegex =
+    /^(?:https?:\/\/)?(?:www\.)?([a-zA-Z0-9-]+)(?:\.[a-zA-Z]{2,})(?:\/[a-zA-Z0-9-._]*)*\/?$/;
+  return urlRegex.test(value)
+    ? value
+    : `https://web.facebook.com/search/top/?q=${value}`;
 }
 
-export function getPartnerType(value: string): string{
+export function getPartnerType(value: string): string {
   switch (value) {
-    case 'Hotel':
-      return 'ที่พัก'
-    case 'Restaurant':
-      return 'ร้านอาหารและคาเฟ่'
-    case 'TourActivity':
-      return 'ทัวร์ท่องเที่ยว'
-    case 'Shop':
-      return 'ของฝาก'
+    case "Hotel":
+      return "ที่พัก";
+    case "Restaurant":
+      return "ร้านอาหารและคาเฟ่";
+    case "TourActivity":
+      return "ทัวร์ท่องเที่ยว";
+    case "Shop":
+      return "ของฝาก";
     default:
-      return '';
+      return "";
   }
 }

@@ -1,4 +1,4 @@
-import { cn, numberFormat } from "@/libs/utils";
+import { cn, numberFormat, priceFormat } from "@/libs/utils";
 import {
   Center,
   Group,
@@ -92,7 +92,8 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     <tr className="text-black">
       <th className="whitespace-nowrap min-w-[112px]">ชื่อสินค้า</th>
       <th className="whitespace-nowrap">SKU</th>
-      <th className="whitespace-nowrap text-end">จำนวน (ต่อชิ้น)</th>
+      <th className="whitespace-nowrap text-end">ราคา</th>
+      <th className="whitespace-nowrap text-end">จำนวน (ชิ้น)</th>
       <th className="whitespace-nowrap text-end">ชำระเงิน</th>
     </tr>
   );
@@ -103,9 +104,10 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
       <tr key={order.id}>
         <td className="min-w-[240px]">{order.product.name}</td>
         <td className="whitespace-nowrap">{order.product.sku}</td>
-        <td className="text-end">{numberFormat(order.price)}</td>
+        <td className="text-end">{priceFormat(order.price)}</td>
+        <td className="text-end">{order.quantity}</td>
         <td className="text-end">
-          {numberFormat(order.price * order.quantity)}
+          {priceFormat(order.price * order.quantity)}
         </td>
       </tr>
     ));

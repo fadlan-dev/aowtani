@@ -5,6 +5,7 @@ import { Item } from "react-use-cart";
 import { useCart } from "react-use-cart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { priceFormat } from "@/libs/utils";
 
 interface CartProps {
   opened: boolean;
@@ -12,12 +13,16 @@ interface CartProps {
 }
 
 const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
-
-  const router = useRouter()
+  const router = useRouter();
   const { items, isEmpty, updateItemQuantity, cartTotal } = useCart();
 
   return (
-    <Modal opened={opened} onClose={close} title="ตะกร้าสินค้า" key="cart-modal">
+    <Modal
+      opened={opened}
+      onClose={close}
+      title="ตะกร้าสินค้า"
+      key="cart-modal"
+    >
       {isEmpty && <div className="text-center">ไม่มีสินค้าในตะกร้า</div>}
       <ul className="space-y-4">
         {items.map((item: Item) => (
@@ -33,7 +38,7 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
               />
               <div>
                 <div>{item.name}</div>
-                <div className="font-bold">฿{item.price}</div>
+                <div className="font-bold">{priceFormat(item.price)}</div>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -62,14 +67,18 @@ const Cart: FunctionComponent<CartProps> = ({ opened, close }) => {
       </ul>
       <div className="flex justify-between items-center font-bold pt-12">
         <div>ราคารวม</div>
-        <div>฿{cartTotal} บาท</div>
+        <div>{priceFormat(cartTotal)} บาท</div>
       </div>
-        <Button variant="gradient" fullWidth onClick={()=>{
-          router.push("/product/checkout")
-          close()
-        }}>
-          ไปที่หน้าชำระเงิน
-        </Button>
+      <Button
+        variant="gradient"
+        fullWidth
+        onClick={() => {
+          router.push("/product/checkout");
+          close();
+        }}
+      >
+        ไปที่หน้าชำระเงิน
+      </Button>
     </Modal>
   );
 };
