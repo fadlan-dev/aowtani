@@ -209,6 +209,7 @@ const DestinationItem = () => {
             data={pkgs?.data || ([] as IPackage[])}
           />
         )}
+          <ExploreButton className="mt-2" to="package" />
       </div>
       <div className="mt-10">
         <center>
