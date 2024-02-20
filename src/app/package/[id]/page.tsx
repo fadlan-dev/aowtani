@@ -57,6 +57,7 @@ async function page({ params }: pageProps) {
               destination={pkg.destination_visit}
             />
             <Share/>
+            <p className='mt-4'>{pkg.desciption}</p>
             <div
               id='ck-editor'
               className='mt-4 relative'

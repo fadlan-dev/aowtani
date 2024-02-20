@@ -4,7 +4,8 @@ import axios from 'axios';
 interface props {
   page?: number;
   per_page?: number;
-  search: string;
+  search?: string;
+  organization_id?: string;
 }
 
 interface IResponse {
@@ -13,6 +14,7 @@ interface IResponse {
 }
 
 export const getCommunities = async ({
+  organization_id,
   page = 1,
   per_page = 6,
   search = '',
@@ -20,6 +22,10 @@ export const getCommunities = async ({
   let queryParams = '';
   if (page) {
     queryParams += `page=${page}&`;
+  }
+
+  if (organization_id) {
+    queryParams += `organization_id=${organization_id}&`;
   }
 
   if (per_page) {

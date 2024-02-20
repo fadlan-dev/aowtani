@@ -54,11 +54,11 @@ const MENUS: IMenu[] = [
     key: "community",
     path: "/community",
   },
-  // {
-  //   title: "ทัวร์ท่องเที่ยว",
-  //   key: "community",
-  //   path: "/community",
-  // },
+  {
+    title: "ทัวร์ท่องเที่ยว",
+    key: "package",
+    path: "/package",
+  },
   {
     title: "ผู้ประกอบการ",
     key: "partner",

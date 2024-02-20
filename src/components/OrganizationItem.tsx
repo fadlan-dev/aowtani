@@ -15,20 +15,24 @@ import { IOrganization } from '@/types';
 import { IconMapPin, IconPhone, IconWorldWww } from '@tabler/icons-react';
 import Link from 'next/link';
 import { isValidUrl } from '@/libs/utils';
+import { useRouter } from 'next/navigation';
 
 interface OrganizationItemProps {
   data: IOrganization;
+  height?: number | string
 }
 
 const OrganizationItem: FunctionComponent<OrganizationItemProps> = ({
   data,
+  height = 'auto'
 }) => {
+  const router = useRouter();
   const theme = useMantineTheme();
 
   return (
-    <Card>
-      <Card.Section>
-        <AspectRatio ratio={16 / 9}>
+    <Card onClick={() => router.push(`organizations/${data.id}`)} className='cursor-pointer'>
+      <Card.Section >
+        <AspectRatio ratio={16 / 9} style={{height: height}}>
           <Image
             className='bg-zinc-200 object-cover'
             src={

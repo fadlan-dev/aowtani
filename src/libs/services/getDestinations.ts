@@ -4,7 +4,7 @@ import axios from 'axios';
 type props = {
   destination_type_id?: string;
   organization_id?: string;
-  search: string;
+  search?: string;
   page?: number;
   per_page?: number;
 };
@@ -60,6 +60,7 @@ export const getDestinations = async ({
       throw new Error(`Request failed with status: ${response.status}`);
     }
   } catch (error: any) {
+    console.log(error)
     throw new Error(`An error occurred: ${error.message}`);
   }
 };
