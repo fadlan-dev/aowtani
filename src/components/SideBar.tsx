@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams,usePathname } from "next/navigation"
+import { useSearchParams, usePathname } from "next/navigation";
 
 import { cn } from "@/libs/utils";
 import { ActionIcon, Group, Navbar, ThemeIcon, Text } from "@mantine/core";
@@ -28,9 +28,9 @@ const SideBar = ({}: Props) => {
   const [collapsed, { toggle: toggleCollapsed, close: closeCollapsed }] =
     useDisclosure(false);
 
-    const searchParams = useSearchParams()
-    const pathname = usePathname()
-  
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
   const APP_SHELL_MENUS = [
     {
       key: "event",
@@ -106,10 +106,19 @@ const SideBar = ({}: Props) => {
       slug: "https://localguide.admin.aowtani.com/login",
       target: "_blank",
     },
+    {
+      key: "linkout3",
+      title: "ประเมินการใช้งานจากผู้ใช้ระบบ",
+      icon: <LinkOutIcon />,
+      color: "#ffffff",
+      active: "#FFF4E6",
+      slug: "https://docs.google.com/forms/d/e/1FAIpQLSeud6zvw2Y0WrGvxCr8I08aEVwAIXDnOqyVKARp5JyboEI4TQ/viewform",
+      target: "_blank",
+    },
   ];
 
   const activeMenu = (value: any) => {
-    const t = searchParams.get('t')
+    const t = searchParams.get("t");
     return t ? value === `?t=${t}` : value === pathname;
   };
 
