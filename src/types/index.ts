@@ -118,6 +118,11 @@ export interface ICommunity {
   organization: IOrganization;
 }
 
+export interface ICommunity {
+  id: number,
+  name: string
+}
+
 export interface IPartner {
   id: number;
   name: string;
@@ -136,6 +141,7 @@ export interface IPartner {
   lat?: string;
   long?: string;
   content: string;
+  community: ICommunity
 }
 
 export interface IProduct {

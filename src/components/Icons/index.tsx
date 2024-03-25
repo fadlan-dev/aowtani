@@ -12,12 +12,12 @@ const TravelIcon = () => (
       strokeLinecap="round"
       strokeLinejoin="round"
     />
-    <path
+    {/* <path
       d="M4.69 8.5L6.16 9.5C6.32936 9.62058 6.5321 9.68538 6.74 9.68538C6.94791 9.68538 7.15064 9.62058 7.32 9.5L8.21 8.83C8.3831 8.70018 8.59363 8.63 8.81 8.63C9.02637 8.63 9.23691 8.70018 9.41 8.83L10.3 9.5C10.4684 9.61834 10.6692 9.68185 10.875 9.68185C11.0808 9.68185 11.2816 9.61834 11.45 9.5L12.93 8.5"
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-    />
+    /> */}
     <path
       d="M3 5.5C4.38071 5.5 5.5 4.38071 5.5 3C5.5 1.61929 4.38071 0.5 3 0.5C1.61929 0.5 0.5 1.61929 0.5 3C0.5 4.38071 1.61929 5.5 3 5.5Z"
       stroke="currentColor"
@@ -264,6 +264,36 @@ const LinkOutIcon = () => (
   </svg>
 );
 
+const UserIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="19"
+    height="19"
+    viewBox="0 0 19 19"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path stroke="none" d="M0 0h24v24H0z"
+      fill="none" />
+    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+  </svg>
+);
+
+const TransportIcon = () => (
+<svg width="800px" height="800px" viewBox="0 0 48 48" id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg">
+  <path  
+  d="M24,4.5a30.16,30.16,0,0,1,5.25.44,23.87,23.87,0,0,1,5.94,1.82,5.8,5.8,0,0,1,2.68,2,5.64,5.64,0,0,1,.63,2.11C39.14,14,39.81,20.15,40,21.63V38.51H37.31V41.2a2.3,2.3,0,1,1-4.59,0V38.51H15.28V41.2a2.3,2.3,0,1,1-4.59,0V38.51H8V21.63c.16-1.48.83-7.59,1.47-10.76a5.64,5.64,0,0,1,.63-2.11,5.8,5.8,0,0,1,2.68-2,23.87,23.87,0,0,1,5.94-1.82A30.16,30.16,0,0,1,24,4.5ZM13.46,11.35a1.41,1.41,0,0,0-1.35,1.22l-1.27,9.22A1.41,1.41,0,0,0,12,23.38H35.76A1.42,1.42,0,0,0,37.18,22a1.23,1.23,0,0,0,0-.19l-1.27-9.22a1.41,1.41,0,0,0-1.4-1.22h-21ZM13,28.81a2.41,2.41,0,1,0,2.4,2.4A2.4,2.4,0,0,0,13,28.81Zm22,0a2.41,2.41,0,1,0,2.41,2.4A2.39,2.39,0,0,0,35,28.81Z"
+  fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+  />
+  <line  x1="10.69" y1="38.51" x2="37.31" y2="38.51"/>
+<line  x1="15.63" y1="8.48" x2="32.31" y2="8.48"/>
+</svg>
+);
+
 export {
   MuseumIcon,
   SouvenirIcon,
@@ -280,4 +310,6 @@ export {
   CartIcon,
   DeleteIcon,
   CalendarIcon,
+  UserIcon,
+  TransportIcon,
 };

@@ -7,6 +7,7 @@ import {
   Navbar,
   Text,
   ThemeIcon,
+  Pagination
 } from "@mantine/core";
 import DestinationList from "./DestinationList";
 import { CalendarIcon, FoodIcon, LinkOutIcon, MarketIcon, MosqueIcon, MuseumIcon, ResortIcon, SouvenirIcon, TravelIcon } from "./Icons";
@@ -16,7 +17,7 @@ import { IDestination, IPackage, IPartner, IProduct } from "@/types";
 import ProductList from "./ProductList";
 import PackageList from "./PackageList";
 import ExploreButton from "./ExploreButton";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { getDestinations } from "@/libs/services/getDestinations";
 import { getPackages } from "@/libs/services/getPackages";
 import { getProducts } from "@/libs/services/getProducts";
@@ -31,6 +32,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Banner from "./Banner";
 import RestaurantFilter from "./RestaurantFilter";
+import { data } from "autoprefixer";
 
 type Props = {};
 export const APP_SHELL_MENUS = [
@@ -110,7 +112,7 @@ export const APP_SHELL_MENUS = [
   },
 ];
 
-const Index = ({}: Props) => {
+const Index = ({ }: Props) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const variant = searchParams.get("t") || "destination";
@@ -132,6 +134,8 @@ const Index = ({}: Props) => {
         return <MuseumItem />;
       case "market":
         return <MarketItem />;
+      case "transport":
+        return <TransportItem />;
       case "souvenir":
         return <SouvenirItem />;
     }
@@ -209,7 +213,7 @@ const DestinationItem = () => {
             data={pkgs?.data || ([] as IPackage[])}
           />
         )}
-          <ExploreButton className="mt-2" to="package" />
+        <ExploreButton className="mt-2" to="package" />
       </div>
       <div className="mt-10">
         <center>
@@ -230,10 +234,37 @@ const DestinationItem = () => {
 };
 
 const HotelItem = () => {
-  const { data: hotels, isLoading } = useQuery({
+  const [hotels, setHotels] = useState<IPartner[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [valuePages, setvaluePages] = useState(1);
+
+  const { data: hotel, isLoading } = useQuery({
     queryKey: ["hotels"],
-    queryFn: () => getPartners({ type: "Hotel", per_page: 3, search: "" }),
+    queryFn: () => getPartners({ type: "Hotel", page: 1, per_page: 6, search: "" }),
   });
+
+  useEffect(() => {
+    if (hotel) {
+      setHotels(hotel.data);
+      setTotalPages(hotel.total);
+    }
+  }, [hotel]);
+
+  const fetchHotels = async (page: number) => {
+    try {
+      const response = await getPartners({ type: "Hotel", page, per_page: 6, search: "" });
+      setHotels(response.data);
+      setTotalPages(response.total);
+      setvaluePages(page)
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+    }
+  };
+
+  const parentHandleChange = (page: number) => {
+    fetchHotels(page);
+  };
+
   return (
     <>
       <center>
@@ -244,9 +275,11 @@ const HotelItem = () => {
         <LoaderItem />
       ) : (
         <HotelList
-          data={(hotels?.data || []) as IPartner[]}
-          total={Number(hotels?.total || 0)}
+          data={(hotels || []) as IPartner[]}
+          total={Number(totalPages)}
+          handleChange={parentHandleChange}
           showMore
+          value={valuePages}
         />
       )}
     </>
@@ -255,28 +288,73 @@ const HotelItem = () => {
 
 const RestaurantItem = () => {
 
-  const [filterValue,setFilterValue] = useState('ทั้งหมด')
+  const [restaurants, setRestaurants] = useState<IPartner[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [valuePages, setvaluePages] = useState(1);
+  const [filterValue, setFilterValue] = useState('ทั้งหมด')
 
-  const { data: restaurants, isLoading } = useQuery({
+  const { data: restaurant, isLoading } = useQuery({
     queryKey: ["restaurants"],
-    queryFn: () => getPartners({ type: "Restaurant", per_page: 100, search: "" }),
+    queryFn: () => getPartners({ type: "Restaurant", page: 1, per_page: 6, search: "" }),
   });
+
+  useEffect(() => {
+    if (restaurant) {
+      setRestaurants(restaurant.data);
+      setTotalPages(restaurant.total);
+    }
+  }, [restaurant]);
+
+  const fetchHotels = async (page: number, per:number, filter?:string) => {
+    try {
+      const response = await getPartners({ type: "Restaurant", page, per_page: per, search: "" });
+      
+      if(per === 100){
+        setRestaurants(response.data.filter(item => filter === 'ทั้งหมด' ? item : item.type_details === filter));
+        setTotalPages(1);
+      }else{
+        setRestaurants(response.data);
+        setTotalPages(response.total);
+      }
+      
+      setvaluePages(page)
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+    }
+  };
+
+  const parentHandleChange = (page: number) => {
+    fetchHotels(page, 6);
+  };
+
+  const filterRestaurant = (value: string) => {
+    setFilterValue(value);
+    if(value !== "ทั้งหมด"){
+      fetchHotels(1, 100, value);
+    }else {
+      fetchHotels(1, 6);
+    }
+
+  }
+  console.log(filterValue)
   return (
     <>
       <center>
         <h1>อาหารจานโปรด</h1>
         <p>อร่อยทุกเมนู</p>
       </center>
-      <div className="float-right pr-3">
-        <RestaurantFilter value={filterValue} setValue={setFilterValue}/>
+      <div className="flex justify-end pr-3 mb-5">
+        <RestaurantFilter value={filterValue} setValue={filterRestaurant} />
       </div>
       {isLoading ? (
         <LoaderItem />
       ) : (
         <RestaurantList
-          data={(restaurants?.data.filter(item=>filterValue === 'ทั้งหมด' ? item : item.type_details === filterValue) || []) as IPartner[]}
-          total={Number(restaurants?.total || 0)}
+          data={(restaurants || []) as IPartner[]}
+          total={Number(totalPages)}
+          handleChange={parentHandleChange}
           showMore
+          value={valuePages}
         />
       )}
     </>
@@ -284,16 +362,37 @@ const RestaurantItem = () => {
 };
 
 const MosqueItem = () => {
-  const { data: mosques, isLoading } = useQuery({
+  const [mosques, setMosques] = useState<IDestination[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const { data: mosque, isLoading } = useQuery({
     queryKey: ["mosques"],
     queryFn: () =>
       getDestinations({
         destination_type_id: "12",
-        per_page: 3,
+        page: 1,
+        per_page: 6,
         search: "",
       }),
   });
 
+  useEffect(() => {
+    if (mosque) {
+      setMosques(mosque.data);
+      setTotalPages(mosque.total);
+    }
+  }, [mosque]);
+
+  const handleChange = async (page: number) => {
+    const response = await getDestinations({
+      destination_type_id: "12",
+      page: Number(page) || 1,
+      per_page: 6,
+      search: "",
+    })
+    setMosques(response.data);
+    setTotalPages(response.total);
+  };
   return (
     <>
       <center>
@@ -304,11 +403,12 @@ const MosqueItem = () => {
         <LoaderItem />
       ) : (
         <DestinationList
-          total={1}
-          data={(mosques?.data || []) as IDestination[]}
+          total={totalPages}
+          data={(mosques || []) as IDestination[]}
           className="mt-6 mb-6"
           showMoreType="12"
-          showMore
+          showPagination
+          handleChange={handleChange}
         />
       )}
     </>
@@ -316,16 +416,38 @@ const MosqueItem = () => {
 };
 
 const MuseumItem = () => {
-  const { data: museums, isLoading } = useQuery({
-    queryKey: ["museum"],
+  const [museums, setMuseums] = useState<IDestination[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const { data: museum, isLoading } = useQuery({
+    queryKey: ["museums"],
     queryFn: () =>
       getDestinations({
         destination_type_id: "10",
-        per_page: 3,
+        page: 1,
+        per_page: 6,
         search: "",
       }),
   });
-  
+
+  useEffect(() => {
+    if (museum) {
+      setMuseums(museum.data);
+      setTotalPages(museum.total);
+    }
+  }, [museum]);
+
+  const handleChange = async (page: number) => {
+    const response = await getDestinations({
+      destination_type_id: "10",
+      page: Number(page) || 1,
+      per_page: 6,
+      search: "",
+    })
+    setMuseums(response.data);
+    setTotalPages(response.total);
+  };
+
   return (
     <>
       <center>
@@ -336,11 +458,12 @@ const MuseumItem = () => {
         <LoaderItem />
       ) : (
         <DestinationList
-          total={1}
-          data={(museums?.data || []) as IDestination[]}
-          className="mt-6 mb-6"
-          showMoreType="10"
-          showMore
+        total={totalPages}
+        data={(museums || []) as IDestination[]}
+        className="mt-6 mb-6"
+        showMoreType="10"
+        showPagination
+        handleChange={handleChange}
         />
       )}
     </>
@@ -353,11 +476,11 @@ const MarketItem = () => {
     queryFn: () =>
       getDestinations({
         destination_type_id: "11",
-        per_page: 3,
+        per_page: 9,
         search: "",
       }),
   });
-  
+
   return (
     <>
       <center>
@@ -372,7 +495,61 @@ const MarketItem = () => {
           data={(markets?.data || []) as IDestination[]}
           className="mt-6 mb-6"
           showMoreType="12"
+          showPagination
+
+        />
+      )}
+    </>
+  );
+};
+
+const TransportItem = () => {
+  const [hotels, setHotels] = useState<IPartner[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
+  const [valuePages, setvaluePages] = useState(1);
+
+  const { data: hotel, isLoading } = useQuery({
+    queryKey: ["others"],
+    queryFn: () => getPartners({ type: "Other", page: 1, per_page: 6, search: "" }),
+  });
+
+  useEffect(() => {
+    if (hotel) {
+      setHotels(hotel.data.filter(item => item.type_details === "ขนส่งขนสาธารณะ"));
+      setTotalPages(hotel.total);
+    }
+  }, [hotel]);
+
+  const fetchHotels = async (page: number) => {
+    try {
+      const response = await getPartners({ type: "Other", page, per_page: 6, search: "" });
+      setHotels(response.data.filter(item => item.type_details === "ขนส่งขนสาธารระ"));
+      setTotalPages(response.total);
+      setvaluePages(page)
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+    }
+  };
+
+  const parentHandleChange = (page: number) => {
+    fetchHotels(page);
+  };
+
+  return (
+    <>
+      <center>
+        <h1>ขนส่งสาธารณะ</h1>
+        <p>สะดวกทุกการเดินทาง</p>
+      </center>
+      {isLoading ? (
+        <LoaderItem />
+      ) : (
+        <HotelList
+          data={(hotels || []) as IPartner[]}
+          total={Number(totalPages)}
+          handleChange={parentHandleChange}
           showMore
+          value={valuePages}
         />
       )}
     </>
@@ -389,7 +566,7 @@ const SouvenirItem = () => {
         search: "",
       }),
   });
-  
+
   return (
     <>
       <center>

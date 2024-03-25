@@ -11,6 +11,8 @@ interface HotelListProps {
   data: IPartner[];
   total: number;
   showMore?: boolean;
+  handleChange?: any
+  value:number
 }
 
 const HotelList: FunctionComponent<HotelListProps> = ({
@@ -18,8 +20,21 @@ const HotelList: FunctionComponent<HotelListProps> = ({
   total,
   className,
   showMore,
+  handleChange,
+  value
 }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
   const router = useRouter();
+
+  const handleRoute = ({ page = '1' }: { page?: string }) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    if (page) {
+      newParams.set('page', `${page}`);
+    }
+
+    router.push(`${pathname}?${newParams}`);
+  };
 
   if (data.length === 0) {
     return <Empty className='px-4 mt-10 md:mt-4' />;
@@ -33,14 +48,15 @@ const HotelList: FunctionComponent<HotelListProps> = ({
         ))}
       </div>
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
-        {showMore && (
-          <Button
-            variant='subtle'
-            onClick={() => router.push(`/partner?type=Hotel`)}
-          >
-            ดูเพิ่มเติม
-          </Button>
-        )}
+
+        <Pagination
+          total={Math.ceil(total / 6)}
+          value={value || 1}
+          size='sm'
+          className='w-fit m-auto'
+          onChange={(page) => handleChange(page)}
+        />
+
       </div>
     </>
   );

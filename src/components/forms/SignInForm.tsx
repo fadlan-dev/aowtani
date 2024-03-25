@@ -21,6 +21,7 @@ import {
   GuideIcon,
   OrganizationIcon,
   PartnerIcon,
+  UserIcon,
 } from "../Icons";
 
 type Props = {
@@ -32,6 +33,7 @@ const SignInForm = ({ p }: Props) => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callback") || "/";
   const [error, setError] = useState("");
+  const [general, setGeneral] = useState(false);
 
   const schema = z.object({
     username: z.string().min(1, { message: "Please input your username" }),
@@ -47,7 +49,7 @@ const SignInForm = ({ p }: Props) => {
   });
 
   return (
-    <Container size={420} className="w-full">
+    <Container size={420} className="w-full" mb="lg">
       <Title
         align="center"
         sx={(theme) => ({
@@ -57,16 +59,18 @@ const SignInForm = ({ p }: Props) => {
       >
         เข้าสู่ระบบ
       </Title>
-      <Text color="dimmed" size="sm" align="center" mt={5}>
-        ยังไม่มีบัญชีใช่หรือไม่?{" "}
-        <Anchor
-          size="sm"
-          component="button"
-          onClick={() => router.push("/sign-up")}
-        >
-          ลงทะเบียน
-        </Anchor>
-      </Text>
+      {general && (
+        <Text color="dimmed" size="sm" align="center" mt={5}>
+          ยังไม่มีบัญชีใช่หรือไม่?{" "}
+          <Anchor
+            size="sm"
+            component="button"
+            onClick={() => router.push("/sign-up")}
+          >
+            ลงทะเบียน
+          </Anchor>
+        </Text>
+      )}
       {error && (
         <Text align="center" c="red">
           {error}
@@ -127,52 +131,64 @@ const SignInForm = ({ p }: Props) => {
               <span className="text-sm hidden md:block">ไกด์ท้องถิ่น</span>
             </a>
           </li>
+          <li>
+            <a
+              onClick={() => setGeneral(!general)}
+              className="flex flex-col items-center text-black gap-1"
+            >
+              <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
+                <UserIcon />
+              </div>
+              <span className="text-sm hidden md:block">ผู้ใช้ทั่วไป</span>
+            </a>
+          </li>
         </ul>
       </Group>
-
-      <Paper mt={30} p={p} mb="lg" radius="md">
-        <form
-          onSubmit={form.onSubmit(async (values) => {
-            const res = await signIn("credentials", {
-              ...values,
-              callbackUrl: `${callbackUrl}`,
-              redirect: false,
-            });
-            console.log("signIn", res);
-            if (res?.error) {
-              setError(res.error);
-              console.error(res);
-              return;
-            }
-            router.push(`${callbackUrl}`);
-          })}
-        >
-          <TextInput
-            label="อีเมล์"
-            placeholder="กรอกอีเมล์"
-            {...form.getInputProps("username")}
-          />
-          <PasswordInput
-            label="รหัสผ่าน"
-            placeholder="กรอกรหัสผ่าน"
-            mt="md"
-            {...form.getInputProps("password")}
-          />
-          <Group position="apart" mt="lg">
-            {/* <Checkbox label="จดจำการเข้าสู่ระบบ" /> */}
-            {/* <Anchor
+      {general && (
+        <Paper mt={30} p={p}  radius="md">
+          <form
+            onSubmit={form.onSubmit(async (values) => {
+              const res = await signIn("credentials", {
+                ...values,
+                callbackUrl: `${callbackUrl}`,
+                redirect: false,
+              });
+              console.log("signIn", res);
+              if (res?.error) {
+                setError(res.error);
+                console.error(res);
+                return;
+              }
+              router.push(`${callbackUrl}`);
+            })}
+          >
+            <TextInput
+              label="อีเมล์"
+              placeholder="กรอกอีเมล์"
+              {...form.getInputProps("username")}
+            />
+            <PasswordInput
+              label="รหัสผ่าน"
+              placeholder="กรอกรหัสผ่าน"
+              mt="md"
+              {...form.getInputProps("password")}
+            />
+            <Group position="apart" mt="lg">
+              {/* <Checkbox label="จดจำการเข้าสู่ระบบ" /> */}
+              {/* <Anchor
               component='button'
               size='sm'
               onClick={() => router.push('forgotpassword')}
             >
               Forgot password?
             </Anchor> */}
-          </Group>
-          <Button fullWidth mt="xl" type="submit">
-            เข้าสู่ระบบ
-          </Button>
-        </form>
-      </Paper>
+            </Group>
+            <Button fullWidth mt="xl" type="submit">
+              เข้าสู่ระบบ
+            </Button>
+          </form>
+        </Paper>
+      )}
     </Container>
   );
 };

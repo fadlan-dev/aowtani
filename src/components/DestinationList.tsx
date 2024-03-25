@@ -15,6 +15,7 @@ type Props = {
   subTitle?: string;
   data: IDestination[];
   total: number;
+  handleChange?:any;
 };
 
 const DestinationList = ({
@@ -24,6 +25,7 @@ const DestinationList = ({
   data,
   total,
   className,
+  handleChange
 }: Props) => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -33,6 +35,10 @@ const DestinationList = ({
     const newParams = new URLSearchParams(searchParams.toString());
     if (page) {
       newParams.set('page', `${page}`);
+
+      if(handleChange){
+        handleChange(page)
+      }
     }
 
     router.push(`${pathname}?${newParams}`);
@@ -52,7 +58,7 @@ const DestinationList = ({
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
         {total > 6 && showPagination && (
           <Pagination
-            total={total / 6}
+            total={Math.ceil(total / 6)}
             value={Number(searchParams.get('page')) || 1}
             size='sm'
             className='w-fit m-auto'

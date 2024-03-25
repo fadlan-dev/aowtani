@@ -28,11 +28,41 @@ const Page = async ({ params }: Props) => {
   });
   const partner: IPartner = await getPartner(params.id);
   return (
-    <div className='mt-20 mb-20'>
+    <div className='container mt-20 mb-20'>
       <div className='px-4'>
         <h1>โปรไฟล์ผู้ประกอบการ</h1>
         <PartnerCard partner={partner} className='mt-2' />
       </div>
+      <div
+        className='flex flex-col lg:flex-row gap-4 mt-4'
+      >
+        <div style={{ backgroundColor: '#fff' }} className='flex-1 px-4' >
+          <h3>ระยราเอียด</h3>
+          <div
+            id='ck-editor'
+            className='mt-4 mb-20 relative'
+            dangerouslySetInnerHTML={{ __html: partner.content }}
+          />
+        </div>
+
+        <div style={{ backgroundColor: '#fff' }} className='card w-full lg:w-80'>
+          <h3>แผนที่</h3>
+          {partner.embed_map && (
+            <div
+              id='embed-map'
+              className='aspect-square'
+              dangerouslySetInnerHTML={{
+                __html: partner.embed_map,
+              }}
+            />
+          )}
+          <div className='mt-4 ml-10 relative' >
+            <h4>กลุ่มชุมชน</h4>
+            <span> - {partner.community.name}</span>
+          </div>
+        </div>
+      </div>
+
       <div className='px-4'>
         <div className='flex-1'>
           <h3>แพ็กเกจทัวร์</h3>

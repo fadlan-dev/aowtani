@@ -20,6 +20,7 @@ import {
   SouvenirIcon,
   MarketIcon,
   LinkOutIcon,
+  TransportIcon
 } from "./Icons";
 
 type Props = {};
@@ -87,6 +88,14 @@ const SideBar = ({}: Props) => {
       color: "#E1E3F4",
       active: "#FFF4E6",
       slug: "?t=market",
+    },
+    {
+      key: "transport",
+      title: "ขนส่งสาธารณะ",
+      icon: <TransportIcon />,
+      color: "#E0FFFF",
+      active: "#FFF4E6",
+      slug: "?t=transport",
     },
     {
       key: "linkout1",

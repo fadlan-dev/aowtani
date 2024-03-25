@@ -41,6 +41,9 @@ module.exports = {
           // 900: '#00474f',
           // 950: '#002329',
         },
+        secondary: {
+          DEFAULT: '#D3D3D3',
+        },
       },
     },
   },
