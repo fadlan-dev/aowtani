@@ -17,7 +17,8 @@ export type ValidPartnerType =
   | 'Hotel'
   | 'Restaurant'
   | 'TourActivity'
-  | 'Shop';
+  | 'Shop'
+  | 'Other';
 
 const page = async ({ searchParams }: Props) => {
   const type = (searchParams.type as ValidPartnerType) || '';
@@ -35,7 +36,7 @@ const page = async ({ searchParams }: Props) => {
       </center>
       <BasciSearch placeholder='ค้นหาสถานทที่ต้องการ' />
       <PartnerFilter />
-      <PartnerList data={partners.data} total={partners.total} />
+      <PartnerList data={partners.data} total={partners.total} showPagination={true} />
     </div>
   );
 };

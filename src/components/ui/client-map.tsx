@@ -81,7 +81,7 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
       marker.name.toLowerCase().includes(query.toLowerCase())
     );
   };
-
+  
   const filteredMarkers = useMemo(
     () => filterMarkers(Markers, searchQuery),
     [Markers, searchQuery]
@@ -128,10 +128,10 @@ const ClientMap: FunctionComponent<ClientMapProps> = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {(filteredMarkers || [])?.map((marker) =>
-          marker.lat && marker.long ? (
+          marker.lat  && marker.long ? (
             <Marker
               key={marker.id}
-              position={[Number(marker.lat), Number(marker.long)]}
+              position={[Number(parseFloat(marker.lat)), Number(parseFloat(marker.long))]}
               icon={CustomMarker({
                 id: `${marker.id}`,
                 image:

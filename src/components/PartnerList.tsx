@@ -50,7 +50,7 @@ const PartnerList = ({
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
         {showPagination && total > 6 && (
           <Pagination
-            total={total}
+            total={total % 6 === 0 ? total / 6 : Math.floor(total / 6) + 1}
             value={Number(searchParams.get('page')) || 1}
             size='sm'
             className='w-fit m-auto'

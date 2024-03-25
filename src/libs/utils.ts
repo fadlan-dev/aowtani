@@ -120,6 +120,8 @@ export function getPartnerType(value: string): string{
       return 'ทัวร์ท่องเที่ยว'
     case 'Shop':
       return 'ของฝาก'
+    case 'Other':
+      return 'อื่น ๆ'
     default:
       return '';
   }

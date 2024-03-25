@@ -1,6 +1,6 @@
 import { cn } from '@/libs/utils';
 import { IPartner } from '@/types';
-import { Button } from '@mantine/core';
+import { Pagination } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { FunctionComponent } from 'react';
 import Empty from './Empty';
@@ -11,6 +11,8 @@ interface RestaurantListProps {
   data: IPartner[];
   total: number;
   showMore?: boolean;
+  handleChange?: any
+  value:number
 }
 
 const RestaurantList: FunctionComponent<RestaurantListProps> = ({
@@ -18,6 +20,8 @@ const RestaurantList: FunctionComponent<RestaurantListProps> = ({
   total,
   className,
   showMore,
+  handleChange,
+  value
 }) => {
   const router = useRouter();
 
@@ -33,14 +37,14 @@ const RestaurantList: FunctionComponent<RestaurantListProps> = ({
         ))}
       </div>
       <div className={cn('px-4 mt-4', showMore ? 'text-center' : 'text-end')}>
-        {showMore && (
-          <Button
-            variant='subtle'
-            onClick={() => router.push(`/partner?type=Restaurant`)}
-          >
-            ดูเพิ่มเติม
-          </Button>
-        )}
+        
+      <Pagination
+          total={Math.ceil(total / 6)}
+          value={value || 1}
+          size='sm'
+          className='w-fit m-auto'
+          onChange={(page) => handleChange(page)}
+        />
       </div>
     </>
   );
