@@ -515,7 +515,7 @@ const TransportItem = () => {
 
   useEffect(() => {
     if (hotel) {
-      setHotels(hotel.data.filter(item => item.type_details === "ขนส่งขนสาธารณะ"));
+      setHotels(hotel.data.filter(item => item.type_details === "ขนส่งสาธารณะ"));
       setTotalPages(hotel.total);
     }
   }, [hotel]);
@@ -523,7 +523,7 @@ const TransportItem = () => {
   const fetchHotels = async (page: number) => {
     try {
       const response = await getPartners({ type: "Other", page, per_page: 6, search: "" });
-      setHotels(response.data.filter(item => item.type_details === "ขนส่งขนสาธารระ"));
+      setHotels(response.data.filter(item => item.type_details === "ขนส่งสาธารระ"));
       setTotalPages(response.total);
       setvaluePages(page)
     } catch (error) {

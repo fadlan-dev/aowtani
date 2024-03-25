@@ -27,6 +27,7 @@ type Props = {
 const LocalGuideItem = ({ className, data }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
+  console.log(data)
   return (
     <Card
       padding='md'
@@ -43,7 +44,7 @@ const LocalGuideItem = ({ className, data }: Props) => {
             {data.name}
           </Text>
         </Group>
-        <IconDiscountCheckFilled className='text-primary' />
+        <IconDiscountCheckFilled className={data.status === "approved" ? "text-primary" : "text-secondary" } />
       </Flex>
       <Group align='baseline' spacing={4} className='text-primary'>
         <IconMapPin size={12} />
