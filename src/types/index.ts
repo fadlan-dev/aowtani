@@ -180,6 +180,7 @@ export interface ILocalGuide {
   phone: string;
   facebook: string;
   detail?: string | null;
+  content?: string | null;
   address: string;
   status: string;
   created_at: string;

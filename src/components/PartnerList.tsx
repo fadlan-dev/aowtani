@@ -13,6 +13,8 @@ type Props = {
   showMore?: boolean;
   showMoreType?: string;
   className?: string;
+  handleChange?: any;
+  value?:number;
 };
 
 const PartnerList = ({
@@ -22,6 +24,8 @@ const PartnerList = ({
   showPagination,
   showMore,
   showMoreType,
+  handleChange,
+  value
 }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
@@ -30,6 +34,7 @@ const PartnerList = ({
   const handleRoute = ({ page = '1' }: { page?: string }) => {
     const newParams = new URLSearchParams(searchParams.toString());
     if (page) {
+      handleChange(page)
       newParams.set('page', `${page}`);
     }
 
@@ -51,7 +56,7 @@ const PartnerList = ({
         {showPagination && total > 6 && (
           <Pagination
             total={total % 6 === 0 ? total / 6 : Math.floor(total / 6) + 1}
-            value={Number(searchParams.get('page')) || 1}
+            value={Number(searchParams.get('page')) || value || 1}
             size='sm'
             className='w-fit m-auto'
             onChange={(page) => handleRoute({ page: `${page}` })}

@@ -27,7 +27,7 @@ type Props = {
 const LocalGuideItem = ({ className, data }: Props) => {
   const router = useRouter();
   const theme = useMantineTheme();
-  console.log(data)
+  // console.log(data)
   return (
     <Card
       padding='md'
@@ -50,7 +50,7 @@ const LocalGuideItem = ({ className, data }: Props) => {
         <IconMapPin size={12} />
         <Text size='sm'>{data.address}</Text>
       </Group>
-      <Text lineClamp={3}>{data.detail}</Text>
+      {/* <Text lineClamp={3}>{data.detail}</Text> */}
       <Group className='text-primary'>
         <Text>{data.experience}</Text>
       </Group>
