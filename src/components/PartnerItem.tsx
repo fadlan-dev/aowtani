@@ -50,7 +50,7 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
             />
             <Text>{partner.name}</Text>
           </Group>
-          <IconDiscountCheckFilled className={partner.status === "approved" ? "text-primary" : "text-secondary" } />
+          <IconDiscountCheckFilled className={partner.status === "approved" ? "text-primary" : "text-secondary"} />
         </Group>
         <Flex align="center" gap={4} mt={4} className="text-primary">
           <IconBriefcase size={14} />
@@ -64,9 +64,11 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
             </Text>
           </Flex>
         )}
-        <Text lineClamp={3} mt={4}>
-          {partner.detail}
-        </Text>
+        {partner.detail && (
+          <Text lineClamp={3} mt={4}>
+            {partner.detail}
+          </Text>
+        )}
       </Card.Section>
       <Flex gap={8} mt={8} direction="column" className="text-primary">
         {partner.facebook && (

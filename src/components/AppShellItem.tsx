@@ -25,6 +25,7 @@ import { getPartners } from "@/libs/services/getPartners";
 import { useQuery } from "@tanstack/react-query";
 import HotelList from "./HotelList";
 import RestaurantList from "./RestaurantList";
+import PartnerList from "./PartnerList";
 import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
@@ -504,35 +505,35 @@ const MarketItem = () => {
 };
 
 const TransportItem = () => {
-  const [hotels, setHotels] = useState<IPartner[]>([]);
+  const [transports, setTransports] = useState<IPartner[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [valuePages, setvaluePages] = useState(1);
 
-  const { data: hotel, isLoading } = useQuery({
+  const { data: transport, isLoading } = useQuery({
     queryKey: ["others"],
     queryFn: () => getPartners({ type: "Other", page: 1, per_page: 6, search: "" }),
   });
 
   useEffect(() => {
-    if (hotel) {
-      setHotels(hotel.data.filter(item => item.type_details === "ขนส่งสาธารณะ"));
-      setTotalPages(hotel.total);
+    if (transport) {
+      setTransports(transport.data.filter(item => item.type_details === "ขนส่งสาธารณะ"));
+      setTotalPages(transport.total);
     }
-  }, [hotel]);
+  }, [transport]);
 
-  const fetchHotels = async (page: number) => {
+  const fetchTransports = async (page: number) => {
     try {
       const response = await getPartners({ type: "Other", page, per_page: 6, search: "" });
-      setHotels(response.data.filter(item => item.type_details === "ขนส่งสาธารระ"));
+      setTransports(response.data.filter(item => item.type_details === "ขนส่งสาธารณะ"));
       setTotalPages(response.total);
       setvaluePages(page)
     } catch (error) {
-      console.error("Error fetching hotels:", error);
+      console.error("Error fetching Transports:", error);
     }
   };
 
   const parentHandleChange = (page: number) => {
-    fetchHotels(page);
+    fetchTransports(page);
   };
 
   return (
@@ -544,11 +545,10 @@ const TransportItem = () => {
       {isLoading ? (
         <LoaderItem />
       ) : (
-        <HotelList
-          data={(hotels || []) as IPartner[]}
+        <PartnerList
+          data={(transports || []) as IPartner[]}
           total={Number(totalPages)}
           handleChange={parentHandleChange}
-          showMore
           value={valuePages}
         />
       )}

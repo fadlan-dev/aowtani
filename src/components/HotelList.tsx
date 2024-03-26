@@ -27,9 +27,10 @@ const HotelList: FunctionComponent<HotelListProps> = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleRoute = ({ page = '1' }: { page?: string }) => {
+  const handleRoute = ({ page = 1 }: { page?: number }) => {
     const newParams = new URLSearchParams(searchParams.toString());
     if (page) {
+      handleChange(page)
       newParams.set('page', `${page}`);
     }
 
@@ -54,7 +55,7 @@ const HotelList: FunctionComponent<HotelListProps> = ({
           value={value || 1}
           size='sm'
           className='w-fit m-auto'
-          onChange={(page) => handleChange(page)}
+          onChange={(page) => handleRoute({page: page})}
         />
 
       </div>

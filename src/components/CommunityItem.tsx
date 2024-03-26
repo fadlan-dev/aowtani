@@ -15,6 +15,7 @@ const CommunityItem: FunctionComponent<CommunityItemProps> = ({
   className,
   community,
 }) => {
+  // console.log(community)
   return (
     <Link href={`community/${community.id}`}>
       <Card
