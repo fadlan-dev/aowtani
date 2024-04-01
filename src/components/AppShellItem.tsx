@@ -158,7 +158,7 @@ const DestinationItem = () => {
     queryKey: ["destination"],
     queryFn: () =>
       getDestinations({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
@@ -167,7 +167,7 @@ const DestinationItem = () => {
     queryKey: ["packages"],
     queryFn: () =>
       getPackages({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
@@ -176,7 +176,7 @@ const DestinationItem = () => {
     queryKey: ["products"],
     queryFn: () =>
       getProducts({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
