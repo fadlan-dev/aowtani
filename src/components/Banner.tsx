@@ -11,7 +11,7 @@ interface IndicatorProps {
 }
 
 function Banner() {
-  const images = ["/banner/1.png", "/banner/2.png", "/banner/3.png"];
+  const images = ["/banner/1.png", "/banner/2.png", "/banner/3.png", "/banner/4.png"];
 
   const Indicator = ({ clickHandler, isSelected, index, label }: any) => {
     console.log({ isSelected });
