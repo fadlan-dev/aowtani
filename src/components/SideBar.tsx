@@ -117,11 +117,20 @@ const SideBar = ({}: Props) => {
     },
     {
       key: "linkout3",
+      title: "คู่มือการใช้งาน",
+      icon: <LinkOutIcon />,
+      color: "#ffffff",
+      active: "#FFF4E6",
+      slug: "https://drive.google.com/drive/folders/13aU9SRaktYV7FS56h7rrF0GgtO2ts6gU?usp=sharing",
+      target: "_blank",
+    },
+    {
+      key: "linkout4",
       title: "ประเมินการใช้งานจากผู้ใช้ระบบ",
       icon: <LinkOutIcon />,
       color: "#ffffff",
       active: "#FFF4E6",
-      slug: "https://docs.google.com/forms/d/e/1FAIpQLSeud6zvw2Y0WrGvxCr8I08aEVwAIXDnOqyVKARp5JyboEI4TQ/viewform",
+      slug: "https://forms.gle/aoMAaoVm5gBUuYhJA",
       target: "_blank",
     },
   ];

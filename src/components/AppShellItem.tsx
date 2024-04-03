@@ -10,7 +10,7 @@ import {
   Pagination
 } from "@mantine/core";
 import DestinationList from "./DestinationList";
-import { CalendarIcon, FoodIcon, LinkOutIcon, MarketIcon, MosqueIcon, MuseumIcon, ResortIcon, SouvenirIcon, TravelIcon } from "./Icons";
+import { CalendarIcon, FoodIcon, LinkOutIcon, MarketIcon, MosqueIcon, MuseumIcon, ResortIcon, SouvenirIcon, TravelIcon, TransportIcon } from "./Icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/libs/utils";
 import { IDestination, IPackage, IPartner, IProduct } from "@/types";
@@ -94,6 +94,14 @@ export const APP_SHELL_MENUS = [
     slug: "?t=market",
   },
   {
+    key: "transport",
+    title: "ขนส่งสาธารณะ",
+    icon: <TransportIcon />,
+    color: "#E0FFFF",
+    active: "#FFF4E6",
+    slug: "?t=transport",
+  },
+  {
     key: "linkout1",
     title: "สมัครเป็นผู้ประกอบการ",
     icon: <LinkOutIcon />,
@@ -109,6 +117,24 @@ export const APP_SHELL_MENUS = [
     color: "#ffffff",
     active: "#FFF4E6",
     slug: "https://localguide.admin.aowtani.com/login",
+    target: "_blank",
+  },
+  {
+    key: "linkout3",
+    title: "คู่มือการใช้งาน",
+    icon: <LinkOutIcon />,
+    color: "#ffffff",
+    active: "#FFF4E6",
+    slug: "https://drive.google.com/drive/folders/13aU9SRaktYV7FS56h7rrF0GgtO2ts6gU?usp=sharing",
+    target: "_blank",
+  },
+  {
+    key: "linkout4",
+    title: "ประเมินการใช้งานจากผู้ใช้ระบบ",
+    icon: <LinkOutIcon />,
+    color: "#ffffff",
+    active: "#FFF4E6",
+    slug: "https://forms.gle/aoMAaoVm5gBUuYhJA",
     target: "_blank",
   },
 ];
@@ -158,7 +184,7 @@ const DestinationItem = () => {
     queryKey: ["destination"],
     queryFn: () =>
       getDestinations({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
@@ -167,7 +193,7 @@ const DestinationItem = () => {
     queryKey: ["packages"],
     queryFn: () =>
       getPackages({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
@@ -176,7 +202,7 @@ const DestinationItem = () => {
     queryKey: ["products"],
     queryFn: () =>
       getProducts({
-        per_page: 3,
+        per_page: 4,
         search: "",
       }),
   });
