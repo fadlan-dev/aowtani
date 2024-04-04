@@ -36,7 +36,7 @@ const CommunityList = ({ data, total, className }: Props) => {
         {data.map((commu: ICommunity) => {
           return <CommunityItem key={commu.id} community={commu} />;
         })}
-      </div>
+      </div> 
       <div className='px-4 mt-4 text-end'>
         {total > 6 && (
           <Pagination
