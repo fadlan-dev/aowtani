@@ -77,6 +77,9 @@ const Page = async ({ params }: Props) => {
                   width="100%"
                 />
               )}
+              <div>
+                <a href={process.env.NEXT_IMAGE_HOST + localGuide.certificate_pdf?.asset} target="_blank">คลิกลิงค์</a>
+              </div>
             </div>
           )}
         </div>
