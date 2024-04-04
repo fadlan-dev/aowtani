@@ -41,6 +41,7 @@ const CommunityList = ({ data, total, className }: Props) => {
         {total > 6 && (
           <Pagination
             total={total % 6 === 0 ? total / 6 : Math.floor(total / 6) + 1}
+            value={Number(searchParams.get('page')) || 1}
             size='sm'
             className='w-fit m-auto'
             onChange={(page) => handleRoute({ page: `${page}` })}
