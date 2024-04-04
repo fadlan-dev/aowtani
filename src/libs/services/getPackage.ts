@@ -2,7 +2,7 @@ import { IPackage } from '@/types';
 
 export const getPackage = async (id: string): Promise<IPackage> => {
   const res = await fetch(`${process.env.NEXT_API_HOST}/packages/${id}.json`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 1000 },
   });
 
   if (!res.ok) {
