@@ -3,7 +3,7 @@ import { IPartner } from '@/types';
 export const getPartner = async (id: string): Promise<IPartner> => {
     const res = await fetch(
       `${process.env.NEXT_API_HOST}/business_partners/${id}.json`,
-      { next: { revalidate: 3600 } } // revalidate at most every hour
+      { next: { revalidate: 1000 } } // revalidate at most every hour
     );
 
     if (!res.ok) {

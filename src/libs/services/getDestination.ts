@@ -3,7 +3,7 @@ import { IDestination } from '@/types';
 export const getDestination = async (id: string): Promise<IDestination> => {
   const res = await fetch(
     `${process.env.NEXT_API_HOST}/destination_visits/${id}.json`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 1000 } }
   );
 
   if (!res.ok) {

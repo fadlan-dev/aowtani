@@ -40,7 +40,7 @@ const CommunityList = ({ data, total, className }: Props) => {
       <div className='px-4 mt-4 text-end'>
         {total > 6 && (
           <Pagination
-            total={total}
+            total={total % 6 === 0 ? total / 6 : Math.floor(total / 6) + 1}
             size='sm'
             className='w-fit m-auto'
             onChange={(page) => handleRoute({ page: `${page}` })}
