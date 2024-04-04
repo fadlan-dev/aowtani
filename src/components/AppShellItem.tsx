@@ -128,15 +128,15 @@ export const APP_SHELL_MENUS = [
     slug: "https://drive.google.com/drive/folders/13aU9SRaktYV7FS56h7rrF0GgtO2ts6gU?usp=sharing",
     target: "_blank",
   },
-  {
-    key: "linkout4",
-    title: "ประเมินการใช้งานจากผู้ใช้ระบบ",
-    icon: <LinkOutIcon />,
-    color: "#ffffff",
-    active: "#FFF4E6",
-    slug: "https://forms.gle/aoMAaoVm5gBUuYhJA",
-    target: "_blank",
-  },
+  // {
+  //   key: "linkout4",
+  //   title: "ประเมินการใช้งานจากผู้ใช้ระบบ",
+  //   icon: <LinkOutIcon />,
+  //   color: "#ffffff",
+  //   active: "#FFF4E6",
+  //   slug: "https://forms.gle/aoMAaoVm5gBUuYhJA",
+  //   target: "_blank",
+  // },
 ];
 
 const Index = ({ }: Props) => {
