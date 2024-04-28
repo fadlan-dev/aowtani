@@ -13,14 +13,14 @@ interface HeroProps {
 }
 
 const Hero: FunctionComponent<HeroProps> = ({ images, name }) => {
-  const getImage = useCallback(() => images[0].asset, [images]);
+  const getImage = useCallback(() => images[0]?.asset, [images]);
   return (
     <div className='h-96 overflow-hidden relative bg-white'>
       <Image
         fill
         className='object-cover w-full h-full'
-        src={`${process.env.NEXT_IMAGE_HOST}${getImage()}`}
-        alt={name}
+        src={ images ? `${process.env.NEXT_IMAGE_HOST}${getImage()}` : './image.svg'}
+        alt={images ? name : "ไม่มีรูปภาพ"}
       />
       <div className='absolute bottom-2 right-2'>
         <Button
@@ -37,7 +37,7 @@ const Hero: FunctionComponent<HeroProps> = ({ images, name }) => {
             });
           }}
         >
-          Show all photos ({images.length})
+          Show all photos ({images?.length})
         </Button>
       </div>
     </div>

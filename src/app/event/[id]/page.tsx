@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props) {
     title: event.name,
     description: event.address,
     openGraph: {
-      images: [`${process.env.NEXT_PUBLIC_URL}${event.banners[0]}`],
+      images: event.banners ? [`${process.env.NEXT_PUBLIC_URL}${event.banners[0]}`] : [],
     },
   };
 }
@@ -28,7 +28,7 @@ const Page = async ({ params }: Props) => {
     dayjs.locale('th');
     return dayjs(date).format('YYYY MMMM DD');
   };
-
+  
   return (
     <div className='mt-[60px] lg:mt-20 mb-24'>
       <div className='lg:container lg:w-full px-0 lg:px-4'>
