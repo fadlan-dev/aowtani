@@ -19,26 +19,28 @@ const Hero: FunctionComponent<HeroProps> = ({ images, name }) => {
       <Image
         fill
         className='object-cover w-full h-full'
-        src={ images ? `${process.env.NEXT_IMAGE_HOST}${getImage()}` : './image.svg'}
+        src={images ? `${process.env.NEXT_IMAGE_HOST}${getImage()}` : './image.svg'}
         alt={images ? name : "ไม่มีรูปภาพ"}
       />
       <div className='absolute bottom-2 right-2'>
-        <Button
-          size='xs'
-          variant='default'
-          onClick={() => {
-            modals.open({
-              ...MODALS_CONFIG,
-              children: (
-                <>
-                  <ImagesCarousel images={images} />
-                </>
-              ),
-            });
-          }}
-        >
-          Show all photos ({images?.length})
-        </Button>
+        {images && (
+          <Button
+            size='xs'
+            variant='default'
+            onClick={() => {
+              modals.open({
+                ...MODALS_CONFIG,
+                children: (
+                  <>
+                    <ImagesCarousel images={images} />
+                  </>
+                ),
+              });
+            }}
+          >
+            Show all photos ({images?.length})
+          </Button>
+        )}
       </div>
     </div>
   );
