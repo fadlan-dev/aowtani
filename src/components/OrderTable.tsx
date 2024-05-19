@@ -130,7 +130,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
               </Text>
               <Text fw={500} size="lg" mt="md" className="flex items-center">
                 <StatusItem text={order.status} />
-                &nbsp;{order.tracking_code && order.tracking_code}
+                &nbsp;
+                <Text size="xs">เลขติดตามพัสดุ</Text>
+                <Text fw={500}>{order.tracking_code && order.tracking_code}</Text>
               </Text>
             </Card.Section>
             <ScrollArea>

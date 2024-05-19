@@ -28,9 +28,11 @@ const HotelItem: FunctionComponent<HotelItemProps> = ({ partner }) => {
             <Image
               className="bg-zinc-200 object-cover"
               src={
+                partner.images ?
                 partner.images[0]?.asset
                   ? `${process.env.NEXT_IMAGE_HOST}${partner.images[0]?.asset}`
                   : "./image.svg"
+                : "./image.svg"
               }
               alt={partner.name}
               fill
