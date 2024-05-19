@@ -363,7 +363,7 @@ const RestaurantItem = () => {
     }
 
   }
-  console.log(filterValue)
+
   return (
     <>
       <center>
