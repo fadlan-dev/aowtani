@@ -222,12 +222,14 @@ const RegisterForm = ({ p }: Props) => {
             <PasswordInput
               label='รหัสผ่าน'
               placeholder='กรอกรหัสผ่าน'
+              description="รหัสผ่านต้องมีความยาวมากกว่า 6 ตัวอักษร"
               mt='md'
               {...form.getInputProps('password')}
             />
             <PasswordInput
               label='ยืนยันรหัสผ่าน'
               placeholder='กรอกรหัสผ่านอีกครั้ง'
+              description="รหัสผ่านต้องมีความยาวมากกว่า 6 ตัวอักษร"
               mt='md'
               {...form.getInputProps('confirm')}
             />

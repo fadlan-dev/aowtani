@@ -39,11 +39,17 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
       );
 
       const response = data.map((item: IEvent) => {
+        let startDate = dayjs(item.start_date).format("YYYY-MM-DD");
+        let endDate = dayjs(item.end_date).format("YYYY-MM-DD");
+        if(startDate !== endDate){
+          startDate = dayjs(item.start_date).format("YYYY-MM-DD HH:mm:ss")
+          endDate = dayjs(item.end_date).format("YYYY-MM-DD HH:mm:ss")
+        }
         return {
           id: item.id,
           title: item.name,
-          start: item.start_date,
-          end: item.end_date,
+          start: startDate,
+          end: endDate,
         };
       });
 
@@ -51,12 +57,14 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
     },
   });
 
+  console.log(events)
+
   return (
     <div className={cn("w-full", className)}>
       <FullCalendar
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
-        weekends={false}
+        // weekends={false}
         events={events}
         eventContent={renderEventContent}
         locale={thLocale}

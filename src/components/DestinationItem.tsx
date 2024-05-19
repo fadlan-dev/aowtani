@@ -20,9 +20,11 @@ const DestinationItem: FunctionComponent<DestinationItemProps> = ({
             <Image
               className='bg-zinc-200 object-cover'
               src={
+                destination.banners ? 
                 destination.banners[0]?.asset
                   ? `${process.env.NEXT_IMAGE_HOST}${destination.banners[0]?.asset}`
                   : './image.svg'
+                : './image.svg'
               }
               alt={destination.name}
               fill
