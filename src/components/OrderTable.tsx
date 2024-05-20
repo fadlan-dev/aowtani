@@ -91,7 +91,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
   const ths = (
     <tr className="text-black">
       <th className="whitespace-nowrap min-w-[112px]">ชื่อสินค้า</th>
-      <th className="whitespace-nowrap">SKU</th>
+      {/* <th className="whitespace-nowrap">SKU</th> */}
       <th className="whitespace-nowrap text-end">จำนวน (ต่อชิ้น)</th>
       <th className="whitespace-nowrap text-end">ชำระเงิน</th>
     </tr>
@@ -101,8 +101,10 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     console.log(order_items);
     return order_items.map((order) => (
       <tr key={order.id}>
-        <td className="min-w-[240px]">{order.product.name}</td>
-        <td className="whitespace-nowrap">{order.product.sku}</td>
+        {/* <td className="min-w-[240px]">{order.product.name}</td>
+        <td className="whitespace-nowrap">{order.product.sku}</td> */}
+        <td className="min-w-[240px]">{order.name}</td>
+        {/* <td className="whitespace-nowrap">{order.product.sku}</td> */}
         <td className="text-end">{numberFormat(order.price)}</td>
         <td className="text-end">
           {numberFormat(order.price * order.quantity)}
