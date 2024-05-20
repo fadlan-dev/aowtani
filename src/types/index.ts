@@ -333,6 +333,7 @@ export interface IOrderItem{
   price: number;
   tracking_code: any;
   status: string;
+  name?: string;
   product: {
     id: number;
     name: string;

@@ -57,7 +57,6 @@ const Calendar: React.FC<CalendarProps> = ({ className, onDateClick }) => {
     },
   });
 
-  console.log(events)
 
   return (
     <div className={cn("w-full", className)}>
