@@ -135,9 +135,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
               <Text fw={500} size="lg" mt="md" className="flex items-center">
                 <StatusItem text={order.status} />
                 &nbsp;
-                <Text size="xs"> { order.tracking_code && "เลขติดตามพัสดุ"} </Text>
+                <Text size="xs"> { /* order.tracking_code &&  */"เลขติดตามพัสดุ"} </Text>
                 &nbsp;
-                <Text fw={500}>{order.tracking_code && order.tracking_code}</Text>
+                <Text fw={500}>{order.tracking_code ? order.tracking_code : "-"}</Text>
               </Text>
             </Card.Section>
             <ScrollArea>
