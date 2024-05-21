@@ -27,9 +27,11 @@ const CommunityItem: FunctionComponent<CommunityItemProps> = ({
             <Image
               className='bg-zinc-200 object-cover'
               src={
+                community.images ?
                 community.images[0]?.asset
                   ? `${process.env.NEXT_IMAGE_HOST}${community.images[0].asset}`
                   : './image.svg'
+                : './image.svg'
               }
               sizes='(max-width: 640px) 100vw,
             (max-width: 1280px) 50vw,

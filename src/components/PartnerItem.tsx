@@ -43,8 +43,10 @@ const PartnerCard: FunctionComponent<PartnerCardProps> = ({
             <Avatar
               radius="xl"
               src={
-                `${process.env.NEXT_IMAGE_HOST}${partner.images[0]?.asset}` ||
-                "/image.svg"
+                partner.images ?
+                  `${process.env.NEXT_IMAGE_HOST}${partner.images[0]?.asset}` ||
+                  "/image.svg"
+                : "/image.svg"
               }
               alt={partner.name}
             />

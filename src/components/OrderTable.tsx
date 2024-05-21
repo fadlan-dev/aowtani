@@ -92,7 +92,8 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
     <tr className="text-black">
       <th className="whitespace-nowrap min-w-[112px]">ชื่อสินค้า</th>
       {/* <th className="whitespace-nowrap">SKU</th> */}
-      <th className="whitespace-nowrap text-end">จำนวน (ต่อชิ้น)</th>
+      <th className="whitespace-nowrap text-end">จำนวน</th>
+      <th className="whitespace-nowrap text-end">ราคา (ต่อชิ้น)</th>
       <th className="whitespace-nowrap text-end">ชำระเงิน</th>
     </tr>
   );
@@ -105,6 +106,7 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
         <td className="whitespace-nowrap">{order.product.sku}</td> */}
         <td className="min-w-[240px]">{order.name}</td>
         {/* <td className="whitespace-nowrap">{order.product.sku}</td> */}
+        <td className="text-end">{numberFormat(order.quantity)}</td>
         <td className="text-end">{numberFormat(order.price)}</td>
         <td className="text-end">
           {numberFormat(order.price * order.quantity)}
@@ -133,8 +135,9 @@ const OrderTable: FunctionComponent<OrderTableProps> = ({ className }) => {
               <Text fw={500} size="lg" mt="md" className="flex items-center">
                 <StatusItem text={order.status} />
                 &nbsp;
-                <Text size="xs">เลขติดตามพัสดุ</Text>
-                <Text fw={500}>{order.tracking_code && order.tracking_code}</Text>
+                <Text size="xs"> { /* order.tracking_code &&  */"เลขติดตามพัสดุ"} </Text>
+                &nbsp;
+                <Text fw={500}>{order.tracking_code ? order.tracking_code : "-"}</Text>
               </Text>
             </Card.Section>
             <ScrollArea>

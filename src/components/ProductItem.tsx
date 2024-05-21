@@ -19,9 +19,11 @@ const ProductItem: FunctionComponent<ProductItemProps> = ({ product }) => {
             <Image
               className='bg-zinc-200 object-cover'
               src={
+                product.images ? 
                 product.images[0].asset
                   ? `${process.env.NEXT_IMAGE_HOST}${product.images[0].asset}`
                   : './image.svg'
+                : './image.svg'
               }
               alt={product.name}
               fill
