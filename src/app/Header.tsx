@@ -112,7 +112,8 @@ const Index = () => {
               className={cn(`p-2 cursor-pointer`)}
               bg={variant === menu.key ? menu.active : ""}
               onClick={() => {
-                menu.key !== variant && router.push(`?t=${menu.key}`);
+                // menu.key !== variant && router.push(`?t=${menu.key}`);
+                menu.key !== variant && router.push(`${menu.slug}`);
                 closeCollapsed();
               }}
             >
