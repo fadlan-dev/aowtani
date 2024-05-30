@@ -17,7 +17,7 @@ const DestinationVisit: FunctionComponent<DestinationVisitProps> = ({
     <ul className={cn(className)}>
       <li className='flex gap-1 items-center text-primary'>
         <IconMapPin size={14} />
-        <span>{destination.name}</span>
+        <span>{destination ? destination.name : ""}</span>
       </li>
     </ul>
   );
