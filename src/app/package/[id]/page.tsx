@@ -16,12 +16,15 @@ interface pageProps {
 export async function generateMetadata({ params }: pageProps) {
   const pkg = await getPackage(params.id);
   return {
-    title: pkg.name,
+    title: pkg.name ? pkg.name : '',
     description: pkg.desciption,
     openGraph: {
       images: [
-        `${process.env.NEXT_IMAGE_HOST}${pkg.images[0]?.asset}`,
+        pkg.images ?
+        `${process.env.NEXT_IMAGE_HOST}${pkg.images[0]?.asset}`
+        : './image.svg',
         'https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80',
+        
       ],
     },
   };
@@ -33,13 +36,13 @@ async function page({ params }: pageProps) {
   return (
     <div className='mt-[60px] lg:mt-20 mb-24'>
       <div className='lg:container lg:w-full px-0 lg:px-4'>
-        <Hero images={pkg.images} name={pkg.name} />
+        <Hero images={pkg.images} name={pkg.name ? pkg.name : ''} />
       </div>
       <div className='container'>
         <div className='flex flex-col lg:flex-row gap-4 mt-4'>
           <div className='flex-1'>
             <div className='flex flex-col sm:flex-row items-baseline justify-between'>
-              <h1 className='capitalize flex-1'>{pkg.name}</h1>
+              <h1 className='capitalize flex-1'>{pkg.name  ? pkg.name : ''}</h1>
               <div className='flex flex-row items-baseline gap-1'>
                 {pkg.price_before_discount && (
                   <span className={cn('text-slate-400 line-through text-md')}>
