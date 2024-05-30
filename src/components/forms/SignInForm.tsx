@@ -89,7 +89,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <AdminMasterIcon />
               </div>
-              <span className="text-sm hidden md:block">แอดมิน</span>
+              <span className="text-sm md:block">แอดมิน</span>
             </a>
           </li>
           <li>
@@ -102,7 +102,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <OrganizationIcon />
               </div>
-              <span className="text-sm hidden md:block">องค์กร</span>
+              <span className="text-sm md:block">องค์กร</span>
             </a>
           </li>
           <li>
@@ -115,7 +115,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <PartnerIcon />
               </div>
-              <span className="text-sm hidden md:block">ผู้ประกอบการ</span>
+              <span className="text-sm md:block">ผู้ประกอบการ</span>
             </a>
           </li>
           <li>
@@ -128,7 +128,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <GuideIcon />
               </div>
-              <span className="text-sm hidden md:block">ไกด์ท้องถิ่น</span>
+              <span className="text-sm md:block">ไกด์ท้องถิ่น</span>
             </a>
           </li>
           <li>
@@ -139,7 +139,7 @@ const SignInForm = ({ p }: Props) => {
               <div className="w-[46px] h-[46px] bg-[#D9D9D9] rounded-full flex items-center justify-center">
                 <UserIcon />
               </div>
-              <span className="text-sm hidden md:block">ผู้ใช้ทั่วไป</span>
+              <span className="text-sm md:block">ผู้ใช้ทั่วไป</span>
             </a>
           </li>
         </ul>

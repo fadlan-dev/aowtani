@@ -17,8 +17,10 @@ const PackageItem = ({ data }: Props) => {
             <Image
               className='bg-zinc-200 object-cover'
               src={
-                `${process.env.NEXT_IMAGE_HOST}${data.images[0].asset}` ||
-                './image.svg'
+                data.images ?
+                  `${process.env.NEXT_IMAGE_HOST}${data.images[0].asset}` ||
+                  './image.svg'
+                :'./image.svg'
               }
               alt={data.name}
               fill
